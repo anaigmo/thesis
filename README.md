@@ -1,5 +1,3 @@
-# Devising an interoperable and governable
-environment of mapping languages for
-Knowledge Graph construction
+# Devising an interoperable and governable environment of mapping languages for Knowledge Graph construction
 
 Starting...
