@@ -1,0 +1,97 @@
+\section{Comparison framework}
+\label{sec:chp4_framework}
+
+\textit{RAW TEXT from paper ahead. cref changed to ref!! no listings, no tables}
+
+This section presents a comparison framework that collects and analyzes the main features included in mapping language descriptions. It aims to fill the aforementioned gap on language comparison. The diversity of the languages that have been analyzed is crucial for extracting relevant features and requirements. For this reason, the framework analyzes languages from the three categories identified in \ref{sec:rel-work}. 
+
+The selected languages fulfill the following requirements: (1) widely used, relevant and/or include novel or unique features; (2) currently maintained, and not deprecated; (3) not a serialization or a user-friendly representation of another language. For instance, D2RQ~\cite{bizer2004d2rq} and R$_2$O~\cite{barrasa2004r2o} were superseded by R2RML, which is included in the comparison. XRM~\cite{xrm} is not included either, due to the fact that it provides a syntax for CSVW, RML and R2RML, which are also included.
+
+%We decided not to include serializations, superseded and deprecated or no longer maintained languages that do not add any novel characteristic to the framework. For instance,  D2RQ~\cite{bizer2004d2rq} and R$_2$O~\cite{barrasa2004r2o} were superseded by R2RML, which is included in the comparison. XRM~\cite{xrm} is not included either due to the fact that it provides a syntax for CSVW, RML and R2RML, which are also included.
+
+The following RDF-based languages are included: R2RML~\cite{das2012r2rml}, RML~\cite{Dimou2014rml}, KR2RML~\cite{slepicka2015kr2rml}, xR2RML~\cite{michel2015xr2rml}, R2RML-F~\cite{debruyne2016r2rmlf}, FunUL~\cite{junior2016funul},  XLWrap~\cite{langegger2009xlwrap}, WoT mappings~\cite{cimmino2020ewot}, CSVW~\cite{Tennison2015csvw}, and D2\-RML~\cite{chortaras2018d2rml}. The SPARQL-based languages that were analyzed are: XSPARQL~\cite{Bischof2012xsparql}, TARQL~\cite{tarql},  SPARQL-Gene\-rate~\cite{Lefrancois2017sparqlgenerate}, Facade-X~\cite{daga2021facade} and SMS2~\cite{sms2}. Finally, we selected the following languages based on other formats: ShExML \cite{Garcia-Gonzalez2020shexml}, Helio Mappings~\cite{helio_mappings} and D-REPR~\cite{Vu2019d-repr}.  
+
+These languages have been analyzed based on their official specification, documentation, or reference paper (listed in \ref{tab:languages_summary}). Specific implementations and extensions that are not included in the official documentation are not considered in this framework. The cells (i.e. language feature) marked "*"  in the framework tables indicate that there are non-official implementations or extensions that include the feature.
+
+The framework has been built as a result of analyzing the common features of the aforementioned mapping languages, and also the specific features that make them unique and suitable for some scenarios. It includes information on data sources, general features for the construction of RDF graphs, and features related to the creation of subjects, predicates, and objects. In the following subsections, the features of each part of the framework are explained in detail. The language comparison for data sources is provided in Table~\ref{tab:sources}, for triples creation in Table~\ref{tab:spo}, and for general features in Table~\ref{tab:metarules}. All these tables are presented in Appendix \ref{appendix1}.
+
+Throughout the section, there are examples showing how different languages use the analyzed features. The example is built upon two input sources: an online JSON file, "coordinates.json", with geographical coordinates (\ref{fig:ex_json}); and a table from a MySQL database, "cities" (\ref{fig:ex_rdb}). The reference ontology is depicted in \ref{fig:ex_onto}. It represents information about cities and their locations. The expected RDF output of the data transformation is shown in \ref{lst:output}. Each mapping represents only the relevant rules that the subsection describes. The entire mapping can be found in the examples section of the ontology documentation\ref{foot:cmlink}. 
+
+
+
+
+\subsubsection{Data Sources Description}
+
+
+\ref{tab:sources} shows the ability of each mapping language to describe a data source in terms of retrieval, features, security, data format and protocol. 
+
+
+\noindent\paragraph{\textbf{Data Retrieval.}} Data from data sources may be retrieved in a continuous manner (e.g., \textit{Streams}),  periodically (e.g., \textit{Asynchronous sources}), or just once, when the mapping is executed (e.g., \textit{Synchronous sources}). As shown in \ref{tab:sources}, all mapping languages are able to represent synchronous data sources. Additionally, SPARQL-Generate and Helio are able to represent periodical data sources, and SPARQL-Generate also represents continuous data sources (e.g. \texttt{it:WebSocket()} in SPARQL-Generate). Other languages do not explicitly express that feature in the language, but a compliant engine may implement it.
+
+\noindent\paragraph{\textbf{Representing Data Sources.}} Extracting and retrieving heterogeneous data involves several elements that mapping languages need to consider: \textit{Security terms} to describe access (e.g., relational databases (RDB), API Key, OAuth2, etc); \textit{Retrieval protocol} such as local files, HTTP(S), JDBC, etc; \textit{Features that describe the data} to define particular characteristics of the source data (e.g. queries, regex, iterator, delimiter, etc); \textit{Data formats} such as CSV, RDB, and JSON; \textit{Encoding} and content negotiation (i.e. \textit{MIME Type}). 
+
+Half of the languages do not allow the definition of security terms. Some languages are specific for RDB terms (R2RML and extensions, with \texttt{rr:logical\-Table}), and only two, Helio and WoT, can define security terms. These two languages are also the only ones that allow the specification of MIME Types, and can also specify the encoding along with TARQL and CSVW (e.g. \texttt{csvw:encoding} attribute of \texttt{csvw:Dialect} in CSVW). 
+
+Regarding protocols, all languages consider local files, except WoT mappings, which are specific for HTTP(s). It is highly usual to consider HTTP(s) and database access (especially with the ODBC and JDBC protocols). Only XSPARQL, TARQL, D-REPR, and XLWrap describe exclusively local files. 
+
+The features provided by each language are closely related to the data formats that are covered. Queries are usual for relational databases and NoSQL document stores and iterators for tree-like formats. Some languages also enable the description of delimiters and separators for tabular formats (e.g., CSVW defines the class \texttt{Dialect} to describe these features; this class is reused by RML), and finally, less common Regular Expressions can be defined to match specific parts of the data in languages such as CSVW, SPARQL-Generate, Helio, D-REPR, and D2RML (e.g., \texttt{RegexHandler} in Helio, \texttt{format} in CSVW). 
+
+The most used format is tabular (RDB and CSV). Some languages can also process RDF graphs such as SMS2, ShExML, RML, SPARQL-Generate, Helio, and D2RML (e.g. \texttt{QUERY} in ShExML,  SPARQL service description\footnote{\url{http://www.w3.org/ns/sparql-service-description\#}} in RML), and the last three languages can also process plain text.
+
+
+\noindent\paragraph{\textbf{Data Sources Example.}} This example shows how ShExML and R2RML describe heterogeneous data sources. The sources are a table called "cities" (\ref{fig:ex_rdb}) that belongs to a relational database that stores information about cities: name, population, zipcode and year in which the data was updated; and a JSON file "coordinates.json" (\ref{fig:ex_json}) available online that contains the latitude and longitude of the central point of each city. R2RML is only able to describe the database table (\ref{lst:shexml_source}); instead ShExML is able to describe both the RDB and the online JSON file (\ref{lst:shexml_source}).
+
+
+
+
+
+\subsubsection{Triples Generation}
+\ref{tab:spo} represents how different languages describe the generation of triples. We assess whether they generate the \textit{Subject}, \textit{Predicate}, and \textit{Object}: in (1) a \textit{Constant} manner, i.e. non-dependant on the data field to be created; or in (2) a \textit{Dynamic} manner, i.e. changing its value with each data field iteration. For \textit{Objects}, the possibility of adding \textit{Datatype and Language} tags is also considered; this feature assesses whether they can be added, and if they are added in a dynamic (changes with the data) or static (constant) manner. This table also analyzes the use and cardinality of transformation functions and the possibility of iterating over different nested level arrays (i.e., in tree-like formats).
+
+The categories \textit{Constant} and \textit{RDF Resource} (the latter within \textit{Dynamic}) show which kind of resources can be generated by the language (i.e., IRI, Blank Node, Literal, List and/or Container). The \textit{Dynamic} category also considers: the \textit{Data References} (i.e. fields from the data source) that can appear with single of mixed formats; from how many \textit{Data Sources} (e.g. "1:1" when only data from one file can be used) the term is generated; if \textit{Hierarchy Iteration} over different nested levels in tree-like formats is allowed; and if \textit{Functions} can be used to perform transformations on the data to create the term (e.g. lowercase, toDate, etc.).
+
+\noindent\paragraph{\textbf{Subject Generation.}} Subjects can be IRIs or Blank Nodes (BN). This is well reflected in the languages, since, with a few exceptions that do not consider Blank Nodes, all languages are able to generate these two types of RDF resources, both constant and dynamically. The WoT mappings can only generate constant subjects, so the dynamic dimensions do not apply to this language. The rest of the languages can generate a subject with one or more data references (e.g., in RML \texttt{rr:template "http://ex.org/\{id\}\-\{name\}"}), ShExML, xR2R\-ML, SPARQL-Generate, Facade-X, and Helio with different formats. For example, in xR2RML a CSV field that contains an array can be expressed as: \texttt{xrr:reference "Column(Mo\-vies)/JSONPath(\$.*)}. Part of the languages even allow generating subjects with more than one data source, this is the case of ShExML, XSPARQL, KR2RML, SPARQL-Generate, Facade-X, Helio and xR2RML. About a third of the languages allow hierarchy iterations (ShExML, XSPARQL, KR2RML, SPARQL-Generate, D-REPR, Facade-X, SMS2, and D2RML), and more than a half use functions with N:1 cardinality. Additionally, some of them even allow functions that can output more than one parameter (i.e., 1:N or N:M), but it is less usual.
+
+
+
+\noindent\paragraph{\textbf{Predicate Generation.}} All languages can generate constant predicates as IRIs. Only four languages do not allow dynamic predicates (WoT mappings, SMS2, ShExML, and XLWrap). For those that do, they also allow more than one data reference. The languages that allow subject generation using multiple formats, data sources, functions, and hierarchy iterations, provide the same features for predicate generation.
+
+\noindent\paragraph{\textbf{Object Generation.}} %There is a wider variety of RDF resources that the considered languages can generate,
+Generally, languages can generate a wider range of resources for objects, since they can be IRIs, blank nodes, literals, lists, or containers. All of them can generate constant and dynamic literals and IRIs. Those languages that allow blank nodes in the subject also allow them in the object. Additionally, ShExML, KR2RML, SPARQL-Generate, Facade-X, xR2RML, and WoT mappings consider lists, and the last two languages also consider containers (e.g. \texttt{rr:termType xrr:RdfBag} in xR2RML). Data references, sources, hierarchy iterations, and functions remain the same as in subject generation, with the addition of WoT mappings that allow dynamic objects. Lastly, datatype and language tags are not allowed in KR2RML and XLWrap; they are defined as constants in the rest of the languages, and dynamically in ShExML, XSPARQL, TARQL, RML, and Helio (e.g., \texttt{rml:languageMap} for dynamic language tags in RML).
+
+\noindent\paragraph{\textbf{Triples Generation Example.}} Assuming the description of the data sources shown in \ref{fig:ex_json} and \ref{fig:ex_rdb}, this example illustrates how xR2RML and RML+FnO describe the rules to generate triples according to the ontology depicted in \ref{fig:ex_onto}. Instances of the classes \texttt{eg:City} and \texttt{eg:Location} have to be created, along with values for the attributes \texttt{eg:lat}, \texttt{eg:long} and \texttt{eg:zipcode}. A function is required to remove the spaces in the field "city" from the database table (\ref{fig:ex_rdb}) in order to create the URI of the instances correctly. In addition, the field "zipcodes" has to be separated to retrieve each of its values (see expected output in \ref{lst:output}). xR2RML is capable of correctly generating zip codes (\ref{lst:xr2rml_spo}), but it lacks the ability to correctly generate URI without spaces. RML+FnO is capable of doing the opposite (\ref{lst:rml_spo}). 
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{General Features for Graph Construction}
+
+\ref{tab:metarules} shows the features of mapping languages regarding the %generation of triples  
+construction of RDF graphs such as \textit{linking rules}, \textit{metadata} or \textit{conditions}, assignment to \textit{named graphs}, and declaration of \textit{transformation functions} within the mapping. 
+
+\noindent\paragraph{\textbf{Statements.}} General features that apply to statements are described in this section: the capability of a language to assign statements to \textit{named graphs}, to \textit{retrieve data from only one source} or \textit{more than one source}, and to apply \textit{conditions} that have to be met in order to create the statement (e.g. if the value of a field called "required" is \texttt{TRUE}, the triple is generated).
+
+Most RDF-based languages allow static assignment to named graphs. R2RML, RML, R2RML-F, FunUL, and D2RML enable also dynamic definitions (e.g., \texttt{rr:graphMap} in R2RML and in its extensions mentioned above). Theoretically, the rest of R2RML extensions should also implement this feature; however, to the best of our knowledge, it is not mentioned in their respective specifications. 
+
+Allowing conditional statements is not usual; it is only considered in the SPARQL-based languages (with the exception of SMS2), XLWrap and D2RML (e.g. \texttt{xl:breakCondition} in XLWrap). Regarding data sources, all languages allow data retrieval from at least one source; ShExML, XSPARQL, CSVW, SPARQL-Generate, Facade-X, Helio, D-REPR and D2RML enable more sources. That is, using data in the same statement from, e.g., one CSV file and one JSON file.
+
+
+\noindent\paragraph{\textbf{Linking Rules.}} Linking rules refer to linking resources that are being created in the mapping. For instance, having as object of a statement a resource that is the subject of another statement. These links are implemented in most languages by joining one or more data fields. Six languages do not allow these links: TARQL, CSVW, KR2RML, WoT, SMS2, and XLWrap. The rest is able to perform linking with at least one data reference and one or no condition. Fewer enable more data references and more conditions (e.g. in R2RML and most extensions allow the application of a \texttt{rr:joinCondition} over several fields). 
+
+Linking rules using join conditions imply evaluating if the fields selected are equal. Since the join condition is the most common, applying the equal logical operator is the preferred choice. Only a few languages consider other similarity functions to perform link discovery, such as the Levenshtein distance and Jaro-Winkler, e.g., Helio. %Finally, it may be highlighted the ability for some languages to perform other logical operators appart from join, such as union (e.g. ShExML, KR2RML).
+
+
+
+
+\noindent\paragraph{\textbf{Transformation functions.}} Applying functions in mappings allows practitioners transforming data before it is translated. For instance, to generate a label with an initial capital letter (\texttt{ex:ID001 rdfs:label "Emily"}) that was originally in lower case ("emily"), a function may be applied (e.g. GREL function \texttt{toTi\-tleCase()}). Only four of the analyzed languages do not allow the use of these functions: CSVW, R2RML, xR2RML, and  WoT mappings. Of those that do, some use functions that belong to a specification (e.g. RML+FnO uses GREL functions\footnote{\url{https://docs.openrefine.org/manual/grelfunctions}}). All of them consider functions with cardinalities 1:1 and N:1; and half of them also include 1:N and N:M (i.e., output more than one value), for instance, a regular expression that matches and returns more than one value.  Nesting functions (i.e. calling a function inside another function) is not unusual; this is the case of SPARQL-based languages, the R2RML extensions that implement functions (except K2RML), Helio, D-REPR, and XLWrap. Finally, some languages even enable extending functions depending on specific user needs, such as XSPARQL, RML+FnO, SPARQL-Generate, Facade-X, R2RML-F, FunUL, XLWrap and D2RML.
+
+\noindent\paragraph{\textbf{Graph Construction Example.}} Assuming the description of data sources shown in \ref{fig:ex_json} and \ref{fig:ex_rdb} and the regular triples, this example shows how Helio and SPARQL-Generate describe conditional statements and linking rules. To generate the \texttt{eg:pop\-ulation} attribute (\ref{fig:ex_onto}), the record must have been updated after 2020. In addition, instances of the classes \texttt{eg:City} and \texttt{eg:Location} can be joined using the city name, present in both data sources. However, the names do not exactly match ("Almería" and "Almeria"; "A Coruña" and "La Coru\-ña"), which is why a distance metric is required to match the cities with a threshold of 0.75. The Helio mapping is not capable of describing the condition of the population, but instead it is able to use the Levenshtein distance function and link the sources (\ref{lst:helio_general}). SPARQL-Generate can describe the condition statement thanks to the SPARQL construct \texttt{FILTER}, but does not implement the distance metric function (\ref{lst:sg_general}). However, both Helio and SPARQL-Generate allow the removal of spaces in the subject URIs. 
+
+
