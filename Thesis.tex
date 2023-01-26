@@ -14,9 +14,222 @@
 % In this template package, it can be found in ./Latex/Classes/
 \documentclass[twoside,11pt,table,xcdraw]{Latex/Classes/PhDthesisPSnPDF}
 
+\newcommand{\ana}[2][inline]{\color{red} [AI]: #2\color{black}}
+
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{lipsum}  
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage{hvfloat}
+%\usepackage[table,xcdraw]{xcolor}
+\usepackage{multirow}
+\usepackage{balance}
+
+\usepackage{listings}
+\def\dollar{\$}
+\lstset{mathescape=true}
+\lstset{%
+	basicstyle=\scriptsize\ttfamily,%
+	basewidth=.5em,%
+	captionpos=b,
+	frame=single,
+	tabsize=4,
+	numbers=left}%
+\lstset{
+	escapechar={(@}{^)}
+}
+\lstset{
+   literate=
+        {í}{{\'i}}1
+        {ñ}{{\~n}}1
+}
+%% -- Listings
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+\lstdefinelanguage{json}{
+	keywords=[1]{},
+	keywordstyle=[1]\color{teal}\bfseries,
+	keywords=[2]{resource_rules, id, datasource_ids, subject, properties, predicate, object, is_literal, link_rules, condition, source, target},	% types; money and time units
+	keywordstyle=[2]\color{burgundy}\bfseries,
+    basicstyle=\footnotesize\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    identifierstyle=\color{black},
+    breaklines=true,
+    backgroundcolor=\color{verylightgray},
+    literate=
+     *{:}{{{\color{black}{:}}}}{1}
+      {\$}{{{\color{punct}{\$}}}}{1}
+      {,}{{{\color{red}{,}}}}{1}
+      {\{}{{{\color{red}{\{}}}}{1}
+      {\}}{{{\color{red}{\}}}}}{1}
+      {[}{{{\color{red}{[}}}}{1}
+      {]}{{{\color{red}{]}}}}{1},
+}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\lstdefinelanguage{Shex}{
+	keywords=[1]{},
+	keywordstyle=[1]\color{teal}\bfseries,
+	keywords=[2]{SOURCE, ITERATOR, FIELD},	% types; money and time units
+	keywordstyle=[2]\color{bittersweet}\bfseries,
+	keywords=[3]{c_city, cities_rdb, coord_json, it_cities, population, year, zipcode, it_coord, lat, long, loc_city, long},
+	keywordstyle=[3]\color{teal}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=true,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{black}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+	literate=
+     *{\{}{{{\color{bittersweet}{\{}}}}{1}
+      {\}}{{{\color{bittersweet}{\}}}}}{1}
+      {<}{{{\color{bittersweet}{<}}}}{1}
+      {>}{{{\color{bittersweet}{>}}}}{1},
+}
+
+\lstdefinelanguage{yarrrml}{
+	keywords=[1]{},
+	keywordstyle=[1]\color{teal}\bfseries,
+	keywords=[2]{mappings, sources, s, po, function, parameters, value, parameter},	% types; money and time units
+	keywordstyle=[2]\color{violet}\bfseries,
+	keywords=[3]{Locations, Cities},
+	keywordstyle=[3]\color{teal}\bfseries,	
+	keywords=[4]{xsd, double, integer, boolean, decimal, string},
+	keywordstyle=[4]\color{applegreen}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=true,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{black}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+	literate=
+     *{[}{{{\color{violet}{[}}}}{1}
+      {]}{{{\color{violet}{]}}}}{1}
+       {-}{{{\color{violet}\bfseries{-}}}}{1},
+}
+
+\lstdefinelanguage{sparql}{
+	keywords=[1]{} % generic keywords including crypto operations
+	keywordstyle=[1]\color{blue}\bfseries,
+	keywords=[2]{},	% types; money and time units
+	keywordstyle=[2]\color{teal}\bfseries,
+	keywords=[3]{block, blockhash, coinbase, difficulty, gaslimit, number, timestamp, msg, data, gas, sender, sig, value, now, tx, gasprice, origin},	% environment variables
+	keywordstyle=[3]\color{violet}\bfseries,
+	keywords=[4]{xsd, double, integer, boolean, decimal, string},
+	keywordstyle=[4]\color{applegreen}\bfseries,
+	keywordstyle=[5]\color{iris}\bfseries,
+	keywords=[5]{GENERATE, REPLACE, WHERE, FILTER},
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstdefinelanguage{concm}{
+	keywords=[1]{} % generic keywords including crypto operations
+	keywordstyle=[1]\color{blue}\bfseries,
+	keywords=[2]{Locations, Cities, Sources, Rules},	% types; money and time units
+	keywordstyle=[2]\color{violet}\bfseries,
+	keywords=[3]{cm, dcat, expression, hasField, hasDataSource, mediaType, SourceFrame, accessService, hasProtocol, endpointURL, hasSecurityScheme, DataField, field, hasNestedFrame, ReferenceNodeMap, hasEvaluableExpression, hasFunctionName, hasInput, subject, predicate, hasFrame, constantValue, Literal, object, FunctionExpression, functionName, hasBooleanCondition, hasDatatype, source, target, property, LinkingExpression, ConditionalStatementMap, SynchronousSource, StatementMap, JoinCombination, datatype, language, combinesFrame, joinsBy, ListMap, hasLanguage},	% environment variables
+	keywordstyle=[3]\color{steelblue}\bfseries,
+	keywords=[4]{xsd, double, integer, boolean, decimal, string, time},
+	keywordstyle=[4]\color{applegreen}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+}
+
+\definecolor{verylightgray}{rgb}{.97,.97,.97}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{iris}{rgb}{0.35, 0.31, 0.81}
+\definecolor{richelectricblue}{rgb}{0.03, 0.57, 0.82}
+\definecolor{shamrockgreen}{rgb}{0.0, 0.62, 0.38}
+\definecolor{fulvous}{rgb}{0.86, 0.52, 0.0}
+\definecolor{steelblue}{rgb}{0.27, 0.51, 0.71}
+
+\lstdefinelanguage{Solidity}{
+	keywords=[1]{} % generic keywords including crypto operations
+	keywordstyle=[1]\color{blue}\bfseries,
+	keywords=[2]{CitiesSource, LocationSource, Locations, Cities},	% types; money and time units
+	keywordstyle=[2]\color{richelectricblue}\bfseries,
+	keywords=[3]{rr, xrr, logicalSource, subjectMap, predicateObjectMap, tableName, predicate, objectMap, template, reference, class, datatype, TriplesMap, LogicalTable},	% environment variables
+	keywordstyle=[3]\color{shamrockgreen}\bfseries,
+	keywords=[4]{xsd, double, integer, boolean, decimal, string, time},
+	keywordstyle=[4]\color{applegreen}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+}
+
+\lstset{
+	language=Solidity,
+	backgroundcolor=\color{verylightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b
+}
+
+%% --
+
+\usepackage{xparse}
+\newcounter{captionedlistingcounter}
+\NewDocumentEnvironment{captionedlisting}{mmm}{
+	\refstepcounter{captionedlistingcounter}
+	% commented out the figure part bc we don't need it and they couldn't be used in minipages
+	% not sure if this is actually different from using the default listing captions/labels now
+	%\begin{figure}[#3]
+	{\centering\label{#1}}
+
+}{
+
+	\vspace{0.5\baselineskip}
+	Listing \thecaptionedlistingcounter: #2
+	\\%\end{figure}
+}
+
+\usepackage[capitalize,nameinlink]{cleveref}
+\crefname{line}{line}{lines}
+\Crefname{Line}{Line}{Lines}
+\crefname{captionedlistingcounter}{Listing}{Listings}
+\Crefname{captionedlistingcounter}{Listing}{Listings}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
 
 %: Macro file for Latex
 % Macros help you summarise frequently repeated Latex commands.
@@ -94,258 +307,10 @@
 %\emergencystretch=\maxdimen
 %\hyphenpenalty=10000
 
-\hbadness=10000
-\hfuzz=50pt
-
-\usepackage{enumitem}
-\usepackage[table,xcdraw]{xcolor}
-\usepackage{floatrow}
-\usepackage{mathptmx}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
-\usepackage{listings}
-\usepackage{tikz}
-%\usepackage{paralist} 
-\usepackage{import}
-
-\usepackage{array}
-\usepackage{color}
-\usepackage{pgfplots}
-\usepackage{amsmath}
-\usepackage{xspace}
-\usepackage{amssymb}
-%\usepackage{enumerate}
-%\usepackage{float}
-%\usepackage{algpseudocode}
-%\usepackage{algorithm}
-\usepackage{verbatim}
-\usepackage{multirow}
-\usepackage{siunitx}
-\usepackage{url}
-\usepackage{chngcntr}
-\usepackage{amsthm}
-\usepackage{latexsym}
-\usepackage{subfig}
-\usepackage{pifont}
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{adjustbox} 
-\usepackage{rotating}
-%\usepackage{subcaption}
-%\captionsetup{compatibility=false}
-\usepackage{bibentry}
-\usepackage{mathtools}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-
-\usepackage{ctable}
-
-\usepackage[htt]{hyphenat}
-\usetikzlibrary{patterns}
-\counterwithout{footnote}{chapter}
-
-
-%%<ALVARO>
-
-\newcommand*\rot{\rotatebox{75}}
-\newcommand*\OK{\ding{51}}
-\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\,\operatorname{max}}\;}
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-
-\newcounter{groupcount}
-\pgfplotsset{
-    draw group line/.style n args={5}{
-        after end axis/.append code={
-            \setcounter{groupcount}{0}
-            \pgfplotstableforeachcolumnelement{#1}\of\datatable\as\cell{%
-                \def\temp{#2}
-                \ifx\temp\cell
-                    \ifnum\thegroupcount=0
-                        \stepcounter{groupcount}
-                        \pgfplotstablegetelem{\pgfplotstablerow}{[index]0}\of\datatable
-                        \coordinate [yshift=#4] (startgroup) at (axis cs:\pgfplotsretval,0);
-                    \else
-                        \pgfplotstablegetelem{\pgfplotstablerow}{[index]0}\of\datatable
-                        \coordinate [yshift=#4] (endgroup) at (axis cs:\pgfplotsretval,0);
-                    \fi
-                \else
-                    \ifnum\thegroupcount=1
-                        \setcounter{groupcount}{0}
-                        \draw [
-                            shorten >=-#5,
-                            shorten <=-#5
-                        ] (startgroup) -- node [anchor=north] {#3} (endgroup);
-                    \fi
-                \fi
-            }
-            \ifnum\thegroupcount=1
-                        \setcounter{groupcount}{0}
-                        \draw [
-                            shorten >=-#5,
-                            shorten <=-#5
-                        ] (startgroup) -- node [anchor=north] {#3} (endgroup);
-            \fi
-        }
-    }
-}
 
 
 
 
-%%<IDAFEN>
-\usepackage{xcolor}
-\usepackage{color}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\newcommand{\dfp}{dispel4py}
-
-%\lstset{
-%	basicstyle=\footnotesize,
-%	breakatwhitespace=true,
-%	breaklines=true,
-%	numberstyle=\tiny\color{mygray},
-%	numbers=left,
-%	xleftmargin=1.5em,
-%	frame=single,
-%	framexleftmargin=1em,
-%	frame=bt,
-%}
-
-%%subindex
-
-
-\usepackage{multirow}
-
-%%highlighting package
-\usepackage{color}\newcommand{\mynote}[2][inline]{\color{red} [PENDING]: #2\color{black}}
-
-%\newcommand{\mymark}[1]{\colorbox{orange}{#1}}
-\newcommand{\mymark}[2][inline]{\color{orange}#2\color{black}}
-\newcommand{\new}[2][inline]{\color{black}#2\color{black}}
-\newcommand{\newtwo}[2][inline]{\color{black}#2\color{black}}
-%\newcommand{\mynote}[2][inline]{\color{red} [PENDING]: #2\color{black}}
-\usepackage{epigraph}
-%%adding subsubsections
-%\setcounter{secnumdepth}{3}
-
-%%</IDAFEN>
-
-\DeclareCaptionFormat{algor}{%
-  \hrulefill\par\offinterlineskip\vskip1pt%
-    \textbf{#1#2}#3\offinterlineskip\hrulefill}
-\DeclareCaptionStyle{algori}{singlelinecheck=off,format=algor,labelsep=space}
-%\captionsetup[algorithm]{style=algori}
-
-\pdfoptionpdfminorversion 6
-
-%% PIERRE
-
-\definecolor{s1}{RGB}{228, 26, 28}
-\definecolor{s2}{RGB}{55, 126, 184}
-\definecolor{s3}{RGB}{77, 175, 74}
-\definecolor{s4}{RGB}{152, 78, 163}
-\definecolor{s5}{RGB}{255, 127, 0}
-\definecolor{s6}{RGB}{160, 82, 45}
-
-\pgfplotscreateplotcyclelist{tyr}{%
-    s1,every mark/.append style={fill=white},mark=*\\%
-    s2,every mark/.append style={fill=white},mark=square*\\%
-    s3,every mark/.append style={fill=white},mark=diamond*\\%
-    s4,every mark/.append style={fill=white},mark=triangle*\\%
-    s5,every mark/.append style={fill=white},mark=pentagon*\\%
-    s6,every mark/.append style={fill=white},mark=otimes*\\%
-}
-
-\pgfplotsset{compat=1.11,
-    /pgfplots/ybar legend/.style={
-    /pgfplots/legend image code/.code={%
-       \draw[##1,/tikz/.cd,yshift=-0.25em]
-        (0cm,0cm) rectangle (6.5pt,0.7em);},
-   },
-}
-
-\pgfplotsset{
-    grid=major,
-    width=9cm,
-    height=6cm,
-    compat=1.9
-}
-
-\makeatletter
-\g@addto@macro\@floatboxreset\centering
-\makeatother
-
-\pgfplotsset{plot coordinates/math parser=false}
-
-
-\makeatletter
-\pgfplotsset{
-    groupplot xlabel/.initial={},
-    every groupplot x label/.style={
-        at={($({group c1r\pgfplots@group@rows.west}|-{group c1r\pgfplots@group@rows.outer south})!0.5!({group c\pgfplots@group@columns r\pgfplots@group@rows.east}|-{group c\pgfplots@group@columns r\pgfplots@group@rows.outer south})$)},
-        anchor=north,
-    },
-    groupplot ylabel/.initial={},
-    every groupplot y label/.style={
-            rotate=90,
-        at={($({group c1r1.north}-|{group c1r1.outer
-west})!0.5!({group c1r\pgfplots@group@rows.south}-|{group c1r\pgfplots@group@rows.outer west})$)},
-        anchor=south
-    },
-    execute at end groupplot/.code={%
-      \node [/pgfplots/every groupplot x label]
-{\pgfkeysvalueof{/pgfplots/groupplot xlabel}};  
-      \node [/pgfplots/every groupplot y label] 
-{\pgfkeysvalueof{/pgfplots/groupplot ylabel}};  
-    },
-    group/only outer labels/.style =
-{
-group/every plot/.code = {%
-    \ifnum\pgfplots@group@current@row=\pgfplots@group@rows\else%
-        \pgfkeys{xticklabels = {}, xlabel = {}}\fi%
-    \ifnum\pgfplots@group@current@column=1\else%
-        \pgfkeys{yticklabels = {}, ylabel = {}}\fi%
-}
-}
-}
-
-\def\endpgfplots@environment@groupplot{%
-    \endpgfplots@environment@opt%
-    \pgfkeys{/pgfplots/execute at end groupplot}%
-    \endgroup%
-}
-\makeatother
-
-\definecolor{gray}{rgb}{0.95,0.95,0.95}
-
-\usetikzlibrary{arrows, positioning, shapes.multipart, calc, fit, patterns, decorations.text,
-decorations.pathreplacing, shapes.symbols}
-\usepgfplotslibrary{groupplots}
-
-%% Tables
-
-\newcommand{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-  
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
-\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
-\newcolumntype{N}{@{}m{0pt}@{}}
-
-%% Algo
-
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-\let\oldReturn\Return
-%\renewcommand{\Return}{\State\oldReturn}
-%\renewcommand{\algorithmicforall}{\textbf{for each}}
-
-%\algnewcommand{\LineComment}[1]{\State{\textit{\textcolor{black!60}{\(\triangleright\) #1}}}}
-
-%% PGF
-
-\pgfdeclarelayer{bg}
-\pgfdeclarelayer{mbg}
-\pgfsetlayers{bg,mbg,main}
 
 %% Sections
 
@@ -393,12 +358,12 @@ decorations.pathreplacing, shapes.symbols}
 \renewcommand\baselinestretch{1.2}
 \baselineskip=18pt plus1pt
 
-\theoremstyle{plain}
-\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
+%\theoremstyle{plain}
+%\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
 
 
-\theoremstyle{definition}
-\newtheorem{definition}[thm]{Definition} % definition numbers are dependent on theorem numbers
+%\theoremstyle{definition}
+%\newtheorem{definition}[thm]{Definition} % definition numbers are dependent on theorem numbers
 
 \newcommand{\attention}[1]{{\color{red}\textbf{#1}}}
 
@@ -499,7 +464,7 @@ EL PRESIDENTE \hspace{30mm} VOCAL 1 \hspace{30mm} VOCAL 2
 
 \listoftables  % print list of tables
 
-\listofalgorithms % Print list of algorithms
+%\listofalgorithms % Print list of algorithms
 
 
 %: ----------------------- glossary ------------------------
