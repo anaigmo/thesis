@@ -1,23 +1,20 @@
 \section{Mapping Rules for RDF-star: RML-star}
 \label{sec:chp4_rml_star}
 
-\ana{RAW TEXT FROM PAPER AHEAD}
+In the late years, the RDF-star~(\cite{hartig2017foundations}) approach for reification has gained popularity. Along with its expansions, different semantic web technologies have been updated to include this new syntax\footnote{\url{https://w3c.github.io/rdf-star/implementations}}. This section describes one of these updates related to building RDF-star graphs: RML-star. \ana{esto no liga del todo bien con lo anterior}
+
 
 \subsection{Statements about statements in mapping rules}
 \label{sec:chp4_reif_mappings}
 
-Making statements about statements in RDF
+Making statements about statements in RDF has
 posed a challenge almost since the inception of RDF.
 Indeed, the W3C RDF Primer~(\cite{manola2004rdf}) already included a description of the standard reification approach.
 Other alternatives were proposed over the years,
-such as singleton properties~(\cite{nguyen2014don}), RDF$^+$~(\cite{schueler2008querying}), and more recently, \mbox{RDF-star}~(\cite{hartig2017foundations}). 
+such as named graphs~\ana{cita?}, n-ary relationships~\ana{cita?}, singleton properties~(\cite{nguyen2014don}), RDF$^+$~(\cite{schueler2008querying}), and more recently, \mbox{RDF-star}~(\cite{hartig2017foundations}). This section describes popular reification approaches and shows how they can be used in RML and RML-star with a running example. 
+%Standard reification and singleton properties are considered in Section \ref{sec:chp4_validation}, showing that \mbox{Morph-KGC$^{star}$} does not add any overhead in the time required to generate the \mbox{RDF-star} triples compared to them.
 
-This section describes popular reification approaches and shows how they can be used in RML and RML-star with a running example. 
-Standard reification and singleton properties are considered in Section \ref{sec:chp4_validation}, showing that
-\mbox{Morph-KGC$^{star}$} does not add any overhead in the time required to generate the \mbox{RDF-star} 
-triples compared to them.
-
-We illustrate each reification alternative with a running example that uses the data shown in Listing \ref{lst:csv}.
+We illustrate each reification alternative with a running example that uses the data shown in \cref{lst:chp4_csv_star}.
 It contains CSV data related to pole vault:
 the vaulter (\texttt{PERSON}),
 the height of the jump (\texttt{MARK}),
@@ -27,13 +24,13 @@ The running example represents
 that a person jumped some height on a specific date, i.e., it adds the metadata about ``date''
 to the statement ``a person jumped some height''.
 
-\noindent\hspace{0.19\linewidth}\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:csv}{Contents of the logical source \texttt{:marks} in CSV format.}
+\noindent\hspace{0.15\linewidth}\begin{minipage}{\linewidth}
+\begin{captionedlisting}{lst:chp4_csv_star}{Contents of the logical source \texttt{:marks} in CSV format.}
 \centering
 \begin{tabular}{c}
 \hspace{3em}
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-ID , DATE            , MARK ,   PERSON
+ID  , DATE       , MARK ,   PERSON
 1   , 2022-03-21 , 4.80 ,   Angelica
 2   , 2022-03-19 , 4.85 ,   Katerina
 \end{lstlisting}}
@@ -43,24 +40,26 @@ ID , DATE            , MARK ,   PERSON
 
 \subsubsection{Reification with RML}
 
-Two popular reification approaches exist: standard reification and singleton properties. 
+There are several reification approaches for RDF as presented in \ana{section in RelWork when done}, such as standard reification, singleton properties, n-ary relationships or named graphs. 
 These approaches use strategies that add metadata to triples
-without additional constructs (e.g., named graphs~(\cite{hernandez2015reifying})).
-They can be used with RML without any further modification. RML mapping rules enable the generation of blank nodes (required for standard reification) and dynamically generated predicates (required for singleton properties). 
+without modifying the original RDF syntax.
+Thus, they can be used with RML without any further modification. RML mapping rules enable the generation of blank nodes (required for the standard reification approach), dynamically generated predicates (required for the singleton properties approach) and named graphs (required for the named graphs approach). \ana{si voy con todos, influye en el ejemplo de aquí abajo y en los use cases. En ese caso, quitar somef (demasiado grande el mapping, con semmeddb es suficiente)}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=1\linewidth]{figures/rml-star_diagram.pdf}
+\caption{The \mbox{RML-star} extension (represented using the Chowlk notation~(\cite{feria2022chowlk})) with additions and modifications over the RML ontology.}
+\label{fig:rml-star}
+\end{figure*}
 
 \noindent\textbf{\textit{Standard Reification}}~(\cite{manola2004rdf}) was proposed in the W3C RDF Primer~(\cite{manola2004rdf}).
 It assigns statements to unique identifiers (typically blank nodes) typed with \texttt{rdf:Statement} and described using the properties \texttt{rdf:subject}, \texttt{rdf:predicate} and \texttt{rdf:object}.
-This way, the unique identifier representing the statement can be further annotated with additional statements. Listing \ref{lst:res-std-reif} shows an example of standard reification for the data in Listing \ref{lst:csv}, created with the RML mapping rules in Listing \ref{lst:std-reif}. 
-This mapping creates blank nodes in the subject with the \texttt{ID} data field, typed with \texttt{rdf:Statement}; and has three predicate object maps to generate the \texttt{rdf:subject}, \texttt{rdf:predicate}, \texttt{rdf:object} of the triples and a predicate object map to annotate the statements with \texttt{:date}.
-
-\noindent\textbf{\textit{Singleton Properties}}~(\cite{nguyen2014don}). This approach uses unique predicates linked with \texttt{rdf:singletonPropertyOf} to the original predicate. 
-This unique predicate can then be annotated as the subject of additional statements. 
-Listing \ref{lst:res-sp-reif} shows the reified triples for the data in Listing \ref{lst:csv} created with the RML mapping rules in Listing \ref{lst:sp-reif}. 
-It uses a singleton property dynamically generated with the \texttt{ID} data field for the property \texttt{:jumps}, annotated with \texttt{:date}.
+This way, the unique identifier representing the statement can be further annotated with additional statements. \cref{lst:chp4_res-std-reif} shows an example of standard reification for the data in \cref{lst:chp4_csv_star}, created with the RML mapping rules in \cref{lst:chp4_std-reif}. 
+This mapping creates blank nodes in the subject with the \texttt{ID} data field, typed with \texttt{rdf:Statement}; and has three predicate object maps to generate the \texttt{rdf:subject}, \texttt{rdf:predicate}, \texttt{rdf:object} of the triples (\textit{An athlete jumps certain height}) and a predicate object map to annotate the statements with \texttt{:date} (\textit{in a specific date}).
 
 
 \begin{minipage}{0.45\linewidth}
-\begin{captionedlisting}{lst:std-reif}{Example RML mapping using standard reification that transforms data in Listing \ref{lst:csv}.}
+\begin{captionedlisting}{lst:chp4_std-reif}{Example RML mapping using standard reification that transforms data in \cref{lst:chp4_csv_star}.}
 \centering
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 <#TM> a rr:TriplesMap ;
@@ -91,7 +90,7 @@ It uses a singleton property dynamically generated with the \texttt{ID} data fie
 \end{minipage}
 \,\,\,\,\hfill
 \begin{minipage}{0.45\linewidth}
-\begin{captionedlisting}{lst:sp-reif}{Example RML mapping using a singleton property that transforms data in Listing \ref{lst:csv}.}
+\begin{captionedlisting}{lst:chp4_sp-reif}{Example RML mapping using a singleton property that transforms data in \cref{lst:chp4_csv_star}.}
 \centering
 {{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 <#TM> a rr:TriplesMap ;
@@ -123,7 +122,7 @@ It uses a singleton property dynamically generated with the \texttt{ID} data fie
 
 
 \begin{minipage}{0.42\linewidth}
-\begin{captionedlisting}{lst:res-std-reif}{RDF triples generated by the mapping in Listing \ref{lst:std-reif}.}
+\begin{captionedlisting}{lst:chp4_res-std-reif}{RDF triples generated by the mapping in \cref{lst:chp4_std-reif}.}
 \centering
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 _:1 rdf:type      rdf:Statement .
@@ -141,87 +140,82 @@ _:2 :date         "2022-03-19" .
 \end{minipage}
 \,\,\,\,
 \begin{minipage}{0.5\linewidth}
-\begin{captionedlisting}{lst:res-sp-reif}{RDF triples generated by the mapping in Listing \ref{lst:sp-reif}.}
+\begin{captionedlisting}{lst:chp4_res-sp-reif}{RDF triples generated by the mapping in \cref{lst:chp4_sp-reif}.}
 \centering
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-
-:Angelica   :jumps#1            "4.80" .
-:jumps#1    :date               "2022-03-21" .
+:Angelica   :jumps#1  "4.80" .
+:jumps#1    :date     "2022-03-21" .
 :jumps#1    rdf:singletonPropertyOf :jumps .
-:Katerina   :jumps#2            "4.85" .
-:jumps#2    :date               "2022-03-19" .
+:Katerina   :jumps#2  "4.85" .
+:jumps#2    :date     "2022-03-19" .
 :jumps#2    rdf:singletonPropertyOf :jumps .
-
 \end{lstlisting}}
 \end{captionedlisting}
 \end{minipage}
 
+\noindent\textbf{\textit{Singleton Properties}}~(\cite{nguyen2014don}). This approach uses unique predicates linked with \texttt{rdf:singletonPropertyOf} to the original predicate. 
+This unique predicate can then be annotated as the subject of additional statements. 
+\cref{lst:chp4_res-sp-reif} shows the reified triples for the data in \cref{lst:chp4_csv_star} created with the RML mapping rules in \cref{lst:chp4_sp-reif}. 
+It uses a singleton property dynamically generated with the \texttt{ID} data field for the property \texttt{:jumps} (\textit{An athlete jumps certain height}), annotated with \texttt{:date} (\textit{in a specific date}).
 
 
 
 
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=1\linewidth]{figures/rml-star_diagram.pdf}
-\caption{The \mbox{RML-star} extension (represented using the Chowlk notation~(\cite{feria2022chowlk})). Orange classes and dark orange object properties show the additions to the RML ontology, light orange object properties represent extensions (i.e., modifications in the domain and/or range).}
-\label{fig:rml-star}
-\end{figure*}
+
 
 
 
 \subsubsection{Reification with RML-star}
 
-In a previous work~(\cite{delva2021rml-star}), we proposed \mbox{RML-star} (Figure \ref{fig:rml-star}) as an extension of RML to generate \mbox{RDF-star} graphs. 
-\mbox{RML-star} adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. Following the \mbox{RDF-star} data model, star maps can only be used in subject and object maps. Star maps use the property \texttt{rml:quotedTriplesMap} to refer to the triples map that generates the quoted triples. This referenced triples map will also generate asserted triples, since it is a \texttt{rr:TriplesMap}. To enable the generation of quoted triples without asserting them, RML-star introduces \texttt{rml:NonAssertedTriplesMap} as a subclass of \texttt{rr:TriplesMap}. Non-asserted triples maps can be referred by \texttt{rml:quotedTriplesMap} to generate quoted triples, but they will be ignored when generating asserted triples.
+We propose RML-star as an extension of RML to generate \mbox{RDF-star} graphs (\cref{fig:rml-star}). 
+\mbox{RML-star} adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. Following the \mbox{RDF-star} data model, star maps can only be used in subject and object maps. Star maps use the property \texttt{rml:quotedTri\-plesMap} to refer to the triples map that generates the quoted triples. This referenced triples map will also generate asserted triples, since it is a \texttt{rr:TriplesMap}. To enable the generation of quoted triples without asserting them, RML-star introduces \texttt{rml:NonAssertedTriplesMap} as a subclass of \texttt{rr:TriplesMap}. Non-asserted triples maps can be referred by \texttt{rml:quotedTriplesMap} to generate quoted triples, but they will be ignored when generating asserted triples.
 
-The \mbox{RML-star} specification~(\cite{iglesias2022rmlstar}) provides a complete description of the language, it is published as a W3C Draft Community Report, and it is maintained by the W3C Knowledge Graph Construction Community Group\footnote{\url{https://www.w3.org/community/kg-construct/}}.
+The \mbox{RML-star} specification~(\cite{iglesias2022rmlstar}) provides a complete description of the language, it is published as a W3C Draft Community Report, and it is maintained by the W3C Knowledge Graph Construction Community Group\cref{foot:kgc}.
 Both, the language and the specification are kept up to date reflecting the modifications in \mbox{RDF-star}.
 For instance, the latest \mbox{RML-star} releases update the term ``embedded'' to ``quoted'',
 according to the modifications in \mbox{RDF-star}.
-%that occurred after the first release of RML-star~\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}}. 
-This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:quotedTriplesMap}.
-An example of an \mbox{RML-star} mapping rule for the data in Listing \ref{lst:csv} is in Listing \ref{lst:rml-star} which generates the \mbox{RDF-star} triples in Listing \ref{lst:res-rml-star}. 
-The mapping rules use a non-asserted triples map (\texttt{<\#innerTM>}) within the subject map of a triples map (\texttt{<\#outerTM>}) which annotates quoted triples with \texttt{:date}.
+This update renamed the property \texttt{rml:embeddedTriplesMap} 
+%from a previous version\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}} to \texttt{rml:quotedTriplesMap}.
+An example of an \mbox{RML-star} mapping rule for the data in \cref{lst:chp4_csv_star} is in \cref{lst:chp4_rml-star} which generates the \mbox{RDF-star} triples in \cref{lst:chp4_res-rml-star}. 
+The mapping rules use a non-asserted triples map (\texttt{<\#jumpTM>}) within the subject map of a triples map (\texttt{<\#dateTM>}) which annotates quoted triples (\textit{An athlete jumps certain height}) with \texttt{:date} (\textit{in a specific date}).
 
 
-\noindent\hspace{0.19\linewidth}\begin{minipage}{1\linewidth}
-\begin{captionedlisting}{lst:rml-star}{Example RML-star mapping that transforms data in Listing \ref{lst:csv}.}
+
+\begin{minipage}{\linewidth}
 \centering
-\begin{tabular}{cc}
-\hspace{-7em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<#innerTM> 
-  a rml:NonAssertedTriplesMap ;
-  rml:logicalSource :marks ;
-  rml:subjectMap [ 
-    rr:template ":{PERSON}" ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate :jumps ;
-    rml:objectMap [
-      rml:reference "MARK" ] ] .
+\begin{captionedlisting}{lst:chp4_rml-star}{Example RML-star mapping that transforms data in \cref{lst:chp4_csv_star}.}
+\centering
+\begin{multicols}{2}
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,label={list:example1},columns=flexible,]
+<#jumpTM> 
+ a rml:NonAssertedTriplesMap ;
+ rml:logicalSource :marks ;
+ rml:subjectMap [ 
+  rr:template ":{PERSON}" ] ;
+ rr:predicateObjectMap [ 
+  rr:predicate :jumps ;
+  rml:objectMap [
+   rml:reference "MARK" ] ] .
+<#dateTM> 
+ a rr:TriplesMap ;
+ rml:logicalSource :marks ;
+ rml:subjectMap [ 
+  rml:quotedTriplesMap <#innerTM>];
+ rr:predicateObjectMap [ 
+  rr:predicate :date ;
+  rml:objectMap [
+   rml:reference "DATE" ] ] .
 \end{lstlisting}}
-&
-\hspace{2em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<#outerTM> 
-  a rr:TriplesMap ;
-  rml:logicalSource :marks ;
-  rml:subjectMap [ 
-    rml:quotedTriplesMap <#innerTM> ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate :date ;
-    rml:objectMap [
-      rml:reference "DATE" ] ] .
-\end{lstlisting}}
-\end{tabular}
+
+\end{multicols}
 \end{captionedlisting}
 \end{minipage}
 
-
-
-\noindent\hspace{0.19\linewidth}\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:res-rml-star}{RDF-star triples generated by the mapping in Listing \ref{lst:rml-star}.}
+\noindent\hspace{0.1\linewidth}\begin{minipage}{\linewidth}
+\begin{captionedlisting}{lst:chp4_res-rml-star}{RDF-star triples generated by the mapping in \cref{lst:chp4_rml-star}.}
 \centering
 \begin{tabular}{c}
-\hspace{-1em}
+\hspace{2em}
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 << :Angelica :jumps "4.80" >> :date "2022-03-21" .
 << :Katerina :jumps "4.85" >> :date "2022-03-19" .
@@ -239,39 +233,36 @@ The mapping rules use a non-asserted triples map (\texttt{<\#innerTM>}) within t
 \subsection{Validation}
 \label{sec:chp4_validation}
 
-We validate \mbox{Morph-KGC$^{star}$} by assessing
-1) the engine's conformance with respect to the \mbox{RML-star} specification using \mbox{RML-star} test cases derived from the N-Triples-star syntax tests (Section~\ref{subsec:testcases});
-2) its feasibility by applying it in two real-world use cases for software metadata extraction~(\cite{kelley2021framework} (SoMEF)) and biomedical research literature~(\cite{SemMedDB}) (SemMedDB). 
-For each use case, we evaluate
-a) the generation of triples with \mbox{Morph-KGC$^{star}$} for different reification approaches (Section~\ref{subsubsec:self-comparison}), and 
-b) the time performance of \mbox{Morph-KGC$^{star}$} in comparison with the SPARQL-Anything engine~(\cite{daga2021facade,sparql-anything}) to assess our RML-based solution against a SPARQL-based solution (Section~\ref{subsubsec:comparison}).
-To the best of our knowledge, SPARQL-Anything is the only open source knowledge graph construction engine able to generate \mbox{RDF-star} datasets apart from \mbox{Morph-KGC$^{star}$}. \ana{revisar este párrafo de intro, porque lo más probable es que elimine toda la parte de sparql-anything, y no haya tantas referencias a morph}
+We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}) for software metadata extraction~(\cite{kelley2021framework} (SoMEF)) and biomedical research literature~(\cite{SemMedDB}) (SemMedDB). We use for both cases \mbox{Morph-KGC$^{star}$}, the first implementation of RML-star.
+
+
 
 
 \subsubsection{RML-star Test Cases}
+\label{sec:chp4_star_testcases}
 
 Test cases are commonly used %in standardization processes 
 to evaluate the conformance of an engine with respect to a language specification (e.g., RML test cases~(\cite{heyvaert2019conformance})). 
 A set of \mbox{RDF-star} test cases was proposed
 covering the syntax of various of its serializations\footnote{\url{https://w3c.github.io/rdf-star/tests/}}.
-We adapted these test cases
-to evaluate the conformance of \mbox{Morph-KGC$^{star}$}
+We adapted these test cases to create the RML-star test cases and evaluate the conformance of \mbox{Morph-KGC$^{star}$}
 with respect to \mbox{RML-star}.
 
-To create a representative set of test cases for \mbox{RML-star}, we selected the N-Triples-star syntax tests\footnote{\url{https://w3c.github.io/rdf-star/tests/nt/syntax}}, given that \mbox{Morph-KGC$^{star}$} generates the output RDF-star graph in this serialization.  %;and follow a reverse engineering process. 
+To create a representative set of test cases for \mbox{RML-star}, we selected the N-Triples-star syntax tests\footnote{\url{https://w3c.github.io/rdf-star/tests/nt/syntax}}.  %;and follow a reverse engineering process. 
 For each \mbox{RDF-star} test case, we created two associated \mbox{RML-star} test cases that generate the original \mbox{RDF-star} dataset: one test case with a single input data source (i.e., the mapping does not include joins) and another with two input data sources (i.e., the mapping includes joins among triple maps).
 For each test case, we manually created the input source(s) in the CSV format and the corresponding \mbox{RML-star} mapping rules to generate the output \mbox{RDF-star} datasets.
 Following this approach, we obtained 16 \mbox{RML-star} test cases.
-The test cases are openly available at the W3C Community Group on Knowledge Graph Construction~(\cite{david_chaves_2022_6518802}),
+The test cases are openly available at the W3C Community Group on Knowledge Graph Construction~(\footnote{\url{https://github.com/kg-construct/rml-star-test-cases}}),
 and can be reused by any engine to test its conformance with respect to \mbox{RML-star}.
-\mbox{Morph-KGC$^{star}$} passes all test cases successfully. As stated in Section \ref{sec:system}, all \mbox{RML-star}, R2RML and RML test cases were added to the continuous integration pipeline of our engine, following best practices in software development.
 
 
 \subsubsection{Use Cases}
+\label{sec:chp4_star_usecases}
 
-We applied \mbox{Morph-KGC$^{star}$} in two real-world use cases. 
+We create RML-star mappings for in two real-world use cases. 
 The first generates \mbox{RDF-star} graphs from scientific software documentation, 
-and the second annotates statements extracted from biomedical research publications.
+and the second annotates statements extracted from biomedical research publications. 
+For both use cases, we use the tool \mbox{Morph-KGC$^{star}$}.
 
 
 
@@ -293,12 +284,12 @@ and the second annotates statements extracted from biomedical research publicati
 \noindent\textbf{\textit{Scientific Software Metadata Extraction.}}
 Scientific software has become a crucial asset to deliver and reproduce the results described in research publications~(\cite{chue_hong_fair_2021}). However, scientific software is often time consuming to understand and reuse due to incomplete and heterogeneous documentation, available only in a human-readable manner.
 The Software Metadata Extraction Framework (SoMEF)~(\cite{somef}) proposes an approach to automatically extract relevant metadata (description, installation instructions, citation, etc.) from code repositories and their documentation. SoMEF includes different text extraction techniques (e.g., supervised classification, regular expressions, etc.) that yield results with different confidence values.
-For example, Listing \ref{lst:JSONsnippet} shows a JSON snippet with the description that SoMEF obtained from a software repository (Widoco) using the GitHub API.
+For example, \cref{lst:JSONsnippet} shows a JSON snippet with the description that SoMEF obtained from a software repository (Widoco) using the GitHub API.
 The confidence in this case is high as the extracted description was manually curated by the creators of the code repository.
 SoMEF extracts more than 30 different metadata fields about 
 software, its source code, its released versions, and their corresponding authors. For transforming the output of SoMEF into RDF-star, we used a total of 35 triples maps to annotate software metadata fields and an additional triples map to annotate source code descriptions. All reified triples follow the same structure (Listings \ref{lst:JSONsnippet} \& \ref{lst:TTLsnippet}), i.e. the standard RDF triple contains the excerpt of the extracted feature, and it is annotated
 with the \emph{technique} used and the \emph{confidence} value. 
-The complete mapping and all input examples and results are available online~(\cite{david_chaves_2022_6919707}).
+The complete mapping and all input examples and results are available online\footnote{\url{https://github.com/oeg-upm/rdf-star-generation}}.
  
 \noindent\hspace{0.1\linewidth}\begin{minipage}{0.8\linewidth}
 \begin{captionedlisting}{lst:JSONsnippet}{JSON snippet showing the description metadata field extracted by SoMEF on a code repository using the GitHub API as extraction technique.}
@@ -308,23 +299,23 @@ The complete mapping and all input examples and results are available online~(\c
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 "codeRepository": "https://github.com/oeg-upm/Widoco",
 "description": [ 
-    {
-      "confidence": [
-        1.0
-      ],
-      "excerpt": "Wizard for documenting ontologies. WIDOCO is ...",
-      "technique": "GitHub API"
-    }
-  ]  
+  {
+    "confidence": [
+      1.0
+    ],
+    "excerpt": "Wizard for documenting ontologies. WIDOCO is ...",
+    "technique": "GitHub API"
+  }
+]  
 \end{lstlisting}
 }
 \end{captionedlisting}
 \end{minipage}
 
-Capturing the technique used and the confidence obtained for each extracted metadata field is key for obtaining an accurate representation of the result. Hence, the \mbox{RDF-star} representation corresponding to the JSON in Listing \ref{lst:JSONsnippet} includes this information, as depicted in Listing \ref{lst:TTLsnippet}.
+Capturing the technique used and the confidence obtained for each extracted metadata field is key for obtaining an accurate representation of the result. Hence, the \mbox{RDF-star} representation corresponding to the JSON in \cref{lst:JSONsnippet} includes this information, as depicted in \cref{lst:TTLsnippet}.
 
 %\begin{minipage}{0.9\linewidth}
-%\begin{captionedlisting}{lst:TTLsnippet}{N-Triples-star snippet showing the results generated for the %description field shown in Listing \ref{lst:JSONsnippet}. Each asserted triple is annotated with its %corresponding confidence and technique.}
+%\begin{captionedlisting}{lst:TTLsnippet}{N-Triples-star snippet showing the results generated for the %description field shown in \cref{lst:JSONsnippet}. Each asserted triple is annotated with its %corresponding confidence and technique.}
 %\centering
 %\begin{tabular}{c}
 %\hspace{1.4em}
@@ -345,7 +336,7 @@ Capturing the technique used and the confidence obtained for each extracted meta
 %\end{minipage}        
 
 
-\begin{captionedlisting}{lst:TTLsnippet}{RDF-star triples snippet showing the results generated for the description field in Listing \ref{lst:JSONsnippet}. Each asserted triple is annotated with its corresponding confidence and technique.}
+\begin{captionedlisting}{lst:TTLsnippet}{RDF-star triples snippet showing the results generated for the description field in \cref{lst:JSONsnippet}. Each asserted triple is annotated with its corresponding confidence and technique.}
 \centering
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
@@ -373,7 +364,7 @@ from biomedical texts (titles and abstracts from PubMed citations).
 %a set of data sources with automatic semantic annotations from titles and abstracts of citations available in PubMed.
 The tables comprising SemMedDB are available for download as a relational database or CSV files\footnote{ \url{https://lhncbc.nlm.nih.gov/ii/tools/SemRep_SemMedDB_SKR/SemMedDB_download.html}}.
 We downloaded the MySQL files for (1)~predication predictions (PREDICATION and PREDICATION\_AUX tables), containing more than 117 million annotations; and (2)~entity predictions (ENTITY table), which include more than 410 million annotations.
-Listings \ref{lst:semmeddb_entity}, \ref{lst:semmeddb_pred} and \ref{lst:semmeddb_predaux} illustrate the columns used from the tables with synthetic data. 
+Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{lst:chp4_semmeddb_predaux} illustrate the columns used from the tables with synthetic data. 
 For predications, only data for subjects is shown; the missing columns regarding objects follow the same structure as subjects.
 %This data contains information on predicted entities and predicted subject-predicate-object predications.
 Subjects and objects, from predications, and entities are assigned a semantic type 
@@ -385,14 +376,14 @@ We created an RML-star mapping with 5 triples maps quoting triples:
 the remaining 2 provide the timestamps for the extraction of subjects and objects. 
 
 \begin{minipage}{0.38\linewidth}
-\begin{captionedlisting}{lst:semmeddb_entity}{ENTITY table snippet.}
+\begin{captionedlisting}{lst:chp4_semmeddb_entity}{ENTITY table snippet.}
 \centering
 \begin{tabular}{c}
 \hspace{-1em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 ENTITY_ID , SEMTYPE , SCORE
-12345        , orga        , 790
+12345     , orga    , 790
 \end{lstlisting}
 }
 \end{tabular}
@@ -400,14 +391,14 @@ ENTITY_ID , SEMTYPE , SCORE
 \end{minipage}
 \,\,\,\,\hfill
 \begin{minipage}{0.6\linewidth}
-\begin{captionedlisting}{lst:semmeddb_pred}{PREDICATION table snippet.}
+\begin{captionedlisting}{lst:chp4_semmeddb_pred}{PREDICATION table snippet.}
 \centering
 \begin{tabular}{c}
 \hspace{-1em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 PREDICATION_ID , SUBJECT_SEMTYPE , SUBJECT_NAME
-13579               , Semtype               , SubjName
+13579          , Semtype         , SubjName
 \end{lstlisting}
 }
 \end{tabular}
@@ -415,14 +406,14 @@ PREDICATION_ID , SUBJECT_SEMTYPE , SUBJECT_NAME
 \end{minipage}
 
 \noindent\hspace{0.23\linewidth}\begin{minipage}{0.8\linewidth}
-\begin{captionedlisting}{lst:semmeddb_predaux}{PREDICATION\_AUX table snippet.}
+\begin{captionedlisting}{lst:chp4_semmeddb_predaux}{PREDICATION\_AUX table snippet.}
 \centering
 \begin{tabular}{c}
 \hspace{-7em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 PREDICATION_AUX_ID, PREDICATION_ID, SUBJECT_SCORE, TIMESTAMP
-67890                   , 13579              , 800               , 1651740766
+67890             , 13579         , 800          , 1651740766
 \end{lstlisting}
 }
 \end{tabular}
@@ -430,7 +421,7 @@ PREDICATION_AUX_ID, PREDICATION_ID, SUBJECT_SCORE, TIMESTAMP
 \end{minipage}
 
 \noindent\hspace{0.1\linewidth}\begin{minipage}{0.78\linewidth}
-\begin{captionedlisting}{lst:semmeddb_triples}{RDF-star triples generated from data in Listings \ref{lst:semmeddb_entity}, \ref{lst:semmeddb_pred} and \ref{lst:semmeddb_predaux}.}
+\begin{captionedlisting}{lst:chp4_semmeddb_triples}{RDF-star triples generated from data in Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{lst:chp4_semmeddb_predaux}.}
 \centering
 \begin{tabular}{c}
 \hspace{-1.5em}

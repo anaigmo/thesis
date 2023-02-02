@@ -50,8 +50,8 @@
 %% -- Listings
 
 \colorlet{punct}{red!60!black}
-\definecolor{background}{HTML}{EEEEEE}
-\definecolor{delim}{RGB}{20,105,176}
+%\definecolor{background}{HTML}{EEEEEE}
+%\definecolor{delim}{RGB}{20,105,176}
 \colorlet{numb}{magenta!60!black}
 \definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
 \lstdefinelanguage{json}{
@@ -67,7 +67,7 @@
     showstringspaces=false,
     identifierstyle=\color{black},
     breaklines=true,
-    backgroundcolor=\color{verylightgray},
+    %backgroundcolor=\color{verylightgray},
     literate=
      *{:}{{{\color{black}{:}}}}{1}
       {\$}{{{\color{punct}{\$}}}}{1}
@@ -176,7 +176,7 @@
 	keywordstyle=[1]\color{blue}\bfseries,
 	keywords=[2]{CitiesSource, LocationSource, Locations, Cities},	% types; money and time units
 	keywordstyle=[2]\color{richelectricblue}\bfseries,
-	keywords=[3]{rr, xrr, logicalSource, subjectMap, predicateObjectMap, tableName, predicate, objectMap, template, reference, class, datatype, TriplesMap, LogicalTable},	% environment variables
+	keywords=[3]{rr, xrr, logicalSource, subjectMap, predicateObjectMap, tableName, predicate, object, objectMap, template, reference, class, datatype, TriplesMap, LogicalTable, termType, rml, BlankNode,  predicateMap, NonAssertedTriplesMap, quotedTriplesMap},	% environment variables
 	keywordstyle=[3]\color{shamrockgreen}\bfseries,
 	keywords=[4]{xsd, double, integer, boolean, decimal, string, time},
 	keywordstyle=[4]\color{applegreen}\bfseries,
@@ -192,7 +192,7 @@
 
 \lstset{
 	language=Solidity,
-	backgroundcolor=\color{verylightgray},
+	%backgroundcolor=\color{verylightgray},
 	extendedchars=true,
 	basicstyle=\footnotesize\ttfamily,
 	showstringspaces=false,
@@ -203,7 +203,8 @@
 	tabsize=2,
 	breaklines=true,
 	showtabs=false,
-	captionpos=b
+	captionpos=b,
+	frame=none
 }
 
 %% --
