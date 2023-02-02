@@ -1,0 +1,68 @@
+\section{Mapping languages}
+\label{sec:chp2_mappings}
+
+\begin{table}[t]
+\caption{Analyzed mapping languages and their corresponding references. \ana{pensar en eliminar helio, la versión nueva igual no entra dentro de esto y puede que cuadre quitar SMS2 y ponerlo luego con el análisis de las sintaxis}}
+\label{tab:chp2_languages_summary}
+\begin{tabular}{c|c|c}
+\hline
+%\rowcolor[HTML]{EFEFEF} 
+Classification                 & Language        & Reference(s) \\ \hline
+\multirow{11}{*}{RDF-based}   & D2RQ            & \cite{bizer2004d2rq,d2rq}\\ \cline{2-3} 
+                              & R$_2$O          & \cite{barrasa2004r2o}\\ \cline{2-3} 
+                              & R2RML           & \cite{das2012r2rml}\\ \cline{2-3} 
+                              & xR2RML          & \cite{michel2015xr2rml,xr2rml}\\ \cline{2-3} 
+                              & RML             & \cite{Dimou2014rml,rml}\\ \cline{2-3} 
+                              & KR2RML          & \cite{slepicka2015kr2rml}\\ \cline{2-3} 
+                              & FunUL           & \cite{junior2016funul}\\ \cline{2-3} 
+                              & R2RML-f         & \cite{debruyne2016r2rmlf}\\ \cline{2-3} 
+                              & D2RML           & \cite{chortaras2018d2rml}\\ \cline{2-3}  
+                              & WoT mappings    & \cite{cimmino2020ewot}\\ \cline{2-3} 
+                              & XLWrap          & \cite{langegger2009xlwrap,xlwrap}\\ \cline{2-3} 
+                              & CSVW            & \cite{Tennison2015csvw}\\ \hline
+\multirow{4}{*}{SPARQL-based} & SPARQL-Generate &     
+                              \cite{Lefrancois2017sparqlgenerate,sparqlgenerate}\\ \cline{2-3} 
+                              & XSPARQL         & \cite{Bischof2012xsparql,xsparql}\\ \cline{2-3} 
+                              & TARQL           & \cite{tarql}\\ \cline{2-3}
+                              & Facade-X        & \cite{daga2021facade,sparqlanything}\\ \cline{2-3}
+                              & SMS2            & \cite{sms2}\\ \hline
+\multirow{3}{*}{Others}       & Helio mappings  & \cite{cimmino2022helio}\\ \cline{2-3} 
+                              & D-REPR          & \cite{Vu2019d-repr}\\ \cline{2-3} 
+                              & ShExML          & \cite{Garcia-Gonzalez2020shexml,shexml}\\ \cline{2-3}
+                              & XRM             & \cite{xrm}\\ \hline
+\end{tabular}
+\end{table}
+
+In this section, the current scene of mapping languages is described first, regardless of the approach they follow, i.e., RDF materialization or virtualization. Then, previous works comparing mapping languages are surveyed. 
+
+
+
+
+
+
+
+
+\subsection{Mapping languages}
+The different scenarios in which mapping languages are used and their specific requirements have led to the creation of several mapping languages and tailored to specific domain extensions. This section presents and describes existing mapping languages, listed in \cref{tab:chp2_languages_summary}. Depending on their syntax, they can be classified into the following: RDF-based, SPARQL-based, and based on other schema. It is worth mentioning that some mapping languages have become W3C recommendations, namely R2RML~\cite{das2012r2rml} and CSVW~\cite{Tennison2015csvw}. The surveyed languages include the ones considered relevant because of their widespread use, unique features, and current maintenance. Deprecated or obsolete languages are not included.
+
+\begin{figure*}[]
+\centering
+\includegraphics[width=0.95\linewidth]{figures/mapping_languages}
+\caption{Existing mapping languages and their relationships.}
+\label{fig:mapping_languages}
+\end{figure*}
+
+\noindent\paragraph{\textbf{RDF-based mapping languages.}} Similarly to Conceptual Mappings, these are mapping languages specified as ontologies. They are used as RDF documents that are processed by compliant tools for performing the translations. The evolution, extensions and influences on one another are depicted in \cref{fig:mapping_languages}. The most well-known language in this category is R2RML~\cite{das2012r2rml}, which allows mapping of data stored in relational databases to RDF. This language is heavily influenced by previous languages (R$_2$O~\cite{barrasa2004r2o} and D2RQ~\cite{bizer2004d2rq}). Some serializations (e.g. SML~\cite{Stadler2015sml}, OBDA mappings from Ontop~\cite{rodriguez2015efficient}) and several extensions of R2RML were developed in the following years after its release: R2RML-f~\cite{debruyne2016r2rmlf} extends R2RML to include functions to be applied over the data; RML~\cite{Dimou2014rml} and its user-friendly compact syntax YARRRML~\cite{Heyvaert2018yarrrml} provide the possibility of covering additional data formats (CSV, XML and JSON); this language also considers the use of functions for data transformation (e.g. lowercase, replace, trim) by using the Function Ontology (FnO)\footnote{\url{https://fno.io/rml/}}~\cite{DeMeester2017fno_dbpedia}; FunUL~\cite{junior2016funul} proposes an extension to also incorporate functions, but focusing on the CSV format; KR2RML~\cite{slepicka2015kr2rml} is also an extension for CSV, XML and JSON, with the addition of representing all sources with the Nested Relational Model as an intermediate model and the possibility of cleaning data with Python functions; xR2RML~\cite{michel2015xr2rml} extends R2RML and RML to include NoSQL databases and incorporates more features to handle tree-like data; D2RML~\cite{chortaras2018d2rml}, also based on R2RML and RML, is able to transform data from XML, JSON, CSVs and REST/SPARQL endpoints, and enables functions and conditions to create triples. 
+
+In this category, we can also find more languages not related to R2RML. XLWrap~\cite{langegger2009xlwrap} is focused on transforming spreadsheets into different formats. CSVW~\cite{Tennison2015csvw} enables tabular data annotation on the Web with metadata, but also supports the generation of RDF. Finally, WoT Mappings~\cite{cimmino2020ewot} are oriented to be used in the context of the Web of Things.
+
+\noindent\paragraph{\textbf{SPARQL-based mapping languages.}} The specification of this type of languages is usually based on, or is an extension of, the SPARQL query language~\cite{harris2013sparql}. XSPARQL~\cite{Bischof2012xsparql} merges SPARQL and XQuery to transform XML into RDF. TARQL~\cite{tarql} uses the SPARQL syntax to generate RDF from CSV files. SPARQL-Generate~\cite{Lefrancois2017sparqlgenerate} is capable of generating RDF and document streams from a wide variety of data formats and access protocols. Most recently, Facade-X has been developed, not as a new language, but as a "\textit{facade} to wrap the original resource and to make it queryable as if it was RDF"~\cite{daga2021facade}. It does not extend the SPARQL language, instead it overrides the SERVICE operator. Lastly, authors would like to highlight a loosely SPARQL-based language, Stardog Mapping Syntax 2 (SMS2)~\cite{sms2}, which represents virtual Stardog graphs and is able to support sources such as JSON, CSV, RDB, MongoDB and Elasticsearch.
+
+\noindent\paragraph{\textbf{Other mapping languages.}} This group gathers other mapping languages implemented without relying on ontologies or SPARQL extensions. ShExML~\cite{Garcia-Gonzalez2020shexml,garcia2021shexml-challenges} uses Shape Expressions (ShEx)~\cite{prud2014shex} to map data sources in RDBs, CSV, JSON, XML and RDF using SPARQL queries. The Helio mapping language~\cite{cimmino2022helio} is based on JSON and provides the capability of using functions for data transformation and data linking~\cite{cimmino2018hybrid}. D-REPR~\cite{Vu2019d-repr} focuses on describing heterogeneous data with JSONPath and allows the use of data transformation functions. XRM (Expressive RDF Mapper)~\cite{xrm} is a commercial language that provides a unique user-friendly syntax to create mappings in R2RML, CSVW and RML.
+
+
+\subsection{Language comparison}
+As the number of mapping languages increased and their adoption grew wider, comparisons between these languages inevitably occurred. This is the case of, for instance, SPARQL-Generate~\cite{Lefrancois2017sparqlgenerate}, which is compared to RML in terms of query/mapping complexity; and ShExML~\cite{Garcia-Gonzalez2020shexml}, which is compared to SPARQL-Generate and YARRRML from a usability perspective.
+
+Some studies dig deeper, providing qualitative complex comparison frameworks. Hert et al.~\cite{hert2011comparison} provide a comparison framework for mapping languages focused on transforming relational databases to RDF. The framework is composed of 15 features, and the languages are evaluated based on the presence or absence of these features.% (Logical table to class, M:N relationships, project attributes, select conditions, user-defined instance URIs, literal to URIs, vocabulary reuse, transformation functions, datatypes, named graphs, blank nodes, integrity constraints, static metadata, one table to \textit{n} classes, and write support). 
+The results lead authors to divide the mappings into four categories (direct mapping, read-only general-purpose mapping, read-write general-purpose mapping, and special-purpose mapping), and ponder on the heavy reliance of most languages on SQL to implement the mapping, and the usefulness of read-write mappings (i.e., mappings able to write data in the database). De Meester et al.~\cite{DeMeester2019comparison} show an initial analysis of 5 similar languages (RML+FnO, xR2RML, FunUL, SPARQL-Generate, YARRRML) discussing their characteristics, according to three categories: non-functional, functional and data source support. The study concludes by remarking on the need to build a more complete and precise comparative framework and asking for a more active participation from the community to build it. To the best of our knowledge, there is no comprehensive work in the literature comparing all existing languages. \ana{ojo con esto que con el survey de ghent ya no es del todo cierto :(} 
