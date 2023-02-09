@@ -1,9 +1,9 @@
 \section{Mapping Rules for RDF: Conceptual Mapping}
 \label{sec:chp4_cm_ontology}
 
-Based on the analysis performed in \cref{sec:chp4_framework}, we abstract the features and limitations present in current mapping languages to represent them in an ontology. This ontology aims at gathering the expressiveness of current mapping languages, and is called the Conceptual Mapping. The methodology followed to build this ontology is first presented, and then each step of its construction is described in detail.
+Based on the analysis performed in \cref{sec:chp4_framework}, we abstract the features and limitations present in current mapping languages to represent them in an ontology. This ontology aims at gathering the expressiveness of current mapping languages, and is called the Conceptual Mapping\footnote{\label{foot:cmportal}\url{https://w3id.org/conceptual-mapping/portal}}. The methodology followed to build this ontology is first presented, and then each step of its construction is described in detail.
 
-\subsection{Methodology.}
+\subsection{Methodology}
 The Conceptual Mapping ontology was developed following the guidelines provided by the Linked Open Terms (LOT) methodology. LOT is a well-known and mature lightweight methodology for the development of ontologies and vocabularies that has been widely adopted in academic and industrial projects~(\cite{poveda2022lot}). It is based on the previous NeOn methodology (\cite{suarez2015neon}) and includes four major stages: Requirements Specification, Implementation, Publication, and Maintenance (\cref{fig:lot}). In this section, we describe these stages and how they have been applied and adapted to the development of the Conceptual Mapping ontology.
 
 \noindent\textbf{Requirements specification}
@@ -137,22 +137,6 @@ The ontology, implemented in OWL with Protégé, has been evaluated in different
 
 With these evaluations, we can conclude that the ontology is correctly encoded and implemented, and that it meets the requirements specified in \cref{sec:chp4_requirements}. 
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=0.5\linewidth]{figures/CSV-extension.pdf}
-\caption{CSV extension conceptualization.}
-\label{fig:csv-ext}
-\end{figure}
-
-
-\subsubsection{Extensibility}
-
-The Conceptual Mapping ontology has been designed as a core ontology. However, as time passes, new requirements may emerge. In order to include these new requirements, new modules of the Conceptual Mapping ontology shall be developed. It is worth mentioning that this is a common practice for ontologies, which is highly suitable for adapting an existing ontology to new scenarios, by ontology modules specialized for a specific set of requirements. A clear example of this is the SAREF ontology\footnote{\url{https://saref.etsi.org/}}, that has a core module\footnote{\url{https://saref.etsi.org/core/v3.1.1/}} and then specific extensions\footnote{\url{https://saref.etsi.org/extensions.html}} for certain domains, such as energy (SAREF4ENER) or buildings (SAREF4BLDG) among others.
-
-In the case of the Conceptual Mappings a sample extension\footnote{\url{http://vocab.linkeddata.es/def/conceptual-mapping-csv}} is provided to showcase this feature. The extension focuses on describing CSV, a detailed feature present in some languages but not included in the core specification presented in previous sections. To this end, the CSVW proposal has been blended as an ontology module linked to the core Conceptual Mapping ontology. This module is depicted in \cref{fig:csv-ext}.
-
-\ana{extensión para RDF-star???}
-
 
 
 \subsection{Publication and Maintenance}
@@ -166,6 +150,25 @@ The maintenance is supported by the Issue Tracker\footnote{\url{https://github.c
 
 
 
+
+\subsection{Extensions}
+
+The Conceptual Mapping ontology has been designed as a core ontology. However, as time passes, new requirements may emerge. In order to include these new requirements, new modules of the Conceptual Mapping ontology shall be developed. It is worth mentioning that this is a common practice for ontologies, which is highly suitable for adapting an existing ontology to new scenarios, by ontology modules specialized for a specific set of requirements. A clear example of this is the SAREF ontology\footnote{\url{https://saref.etsi.org/}}, that has a core module\footnote{\url{https://saref.etsi.org/core/v3.1.1/}} and then specific extensions\footnote{\url{https://saref.etsi.org/extensions.html}} for certain domains, such as energy (SAREF4ENER) or buildings (SAREF4BLDG) among others. For the Conceptual Mapping we present two extensions: for allowing a more detailed CSV description and for generating RDF-star.
+
+\subsubsection{CSV description: CM-CSV}
+The core if the Conceptual Mapping includes limited posibilities for describing CSV files in depth. The extension CM-CSV\footnote{\url{http://vocab.linkeddata.es/def/conceptual-mapping-csv}} provides this possibility. The CSVW proposal has been blended as an ontology module linked to the core Conceptual Mapping ontology. The class \texttt{CSVSourceFrame} is created as a subclass of \texttt{SourceFrame} and \texttt{csvw:Dialect} to inherit their characteristics. This module is depicted in \cref{fig:csv-ext}. Thus, this extension allows to describe CSV characteristics such as if the file contains headers (\texttt{csvw:header}), its delimiter (\texttt{csvw:delimiter}), separator (\texttt{csvw:separator}), etc. 
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=0.5\linewidth]{figures/CSV-extension.pdf}
+\caption{CSV extension conceptualization.}
+\label{fig:csv-ext}
+\end{figure}
+
+\subsubsection{RDF-star generation: CM-star}
+
+RDF-star was recently proposed as an alternative for reification in RDF. It extends the RDF syntax introducing the notion of quoted triples, i.e. triples that can be placed in the position of objects and/or subjects. Since its proposal, it has been increasingly adopted by different semantic technologies. Among them, RML was extended to be able to generate RDF-star graphs~(\cite{iglesias2022rmlstar}) (further details in \cref{sec:chp4_rml_star}). 
 
 
 
@@ -199,10 +202,11 @@ The maintenance is supported by the Issue Tracker\footnote{\url{https://github.c
 
 
 
-\ana{no sé si dejar esto o rehacer y poner de drugs4covid, para que no sean datos de juguete. O si acaso poner que sea un use case, eso requeriría de hacer el mapping también en otros lenguajes. Por ahora dejar como está}
+%\ana{no sé si dejar esto o rehacer y poner de drugs4covid, para que no sean datos de juguete. O si acaso poner que sea un use case, eso requeriría de hacer el mapping también en otros lenguajes. Por ahora dejar como está}
 
 
-This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_sources}, triples in \cref{lst:chp4_cm_spo} and special statements in \cref{lst:chp4_cm_general}) to represent how the proposed language can describe data with different features. The mapping uses the data sources ``coordinates.json" (\cref{fig:chp4_ex_json}) and ``cities" (\cref{fig:chp4_ex_rdb}) as input and the ontology depicted in  \cref{fig:chp4_ex_onto} as reference, to create the output RDF shown in \cref{lst:chp4_output}. Additionally, \cref{appendix2}\ana{APENDIX!!} contains a second example to illustrate different features than the ones represented in the example of this section, to provide more insights about the expressiveness of this language.
+This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_sources}, triples in \cref{lst:chp4_cm_spo} and special statements in \cref{lst:chp4_cm_general}) to represent how the proposed language can describe data with different features. The mapping uses the data sources ``coordinates.json" (\cref{fig:chp4_ex_json}) and ``cities" (\cref{fig:chp4_ex_rdb}) as input and the ontology depicted in  \cref{fig:chp4_ex_onto} as reference, to create the output RDF shown in \cref{lst:chp4_output}. 
+%Additionally, \cref{appendix2}\ana{APENDIX!!} contains a second example to illustrate different features than the ones represented in the example of this section, to provide more insights about the expressiveness of this language.
 
 \begin{captionedlisting}{lst:chp4_output}{Expected RDF output for the data sources and the ontology in \cref{fig:chp4_ex_input}.}
 \centering
