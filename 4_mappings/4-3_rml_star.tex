@@ -4,17 +4,25 @@
 %In the late years, the RDF-star~(\cite{hartig2017foundations}) approach for reification has gained popularity. Along with its expansions, different semantic web technologies have been updated to include this new syntax\footnote{\url{https://w3c.github.io/rdf-star/implementations}}. This section describes one of these updates related to building RDF-star graphs: RML-star. \ana{esto no liga del todo bien con lo anterior}
 
 
-%\subsection{Statements about statements in mapping rules}
-%\label{sec:chp4_reif_mappings}
 
 Making statements about statements in RDF has
 posed a challenge almost since the inception of RDF.
-The W3C RDF Primer~(\cite{manola2004rdf}) already included a description of the standard reification approach.
+The W3C RDF Primer~(\cite{manola2004rdf}) already included a description of the standard reification approach to tackle this issue.
 Other alternatives were proposed over the years,
-such as named graphs~\ana{cita?}, n-ary relationships~\ana{cita?}, singleton properties~(\cite{nguyen2014don}), RDF$^+$~(\cite{schueler2008querying}), and more recently, \mbox{RDF-star}~(\cite{hartig2017foundations}). This section describes popular reification approaches and shows how they can be used in RML and RML-star with a running example. 
+such as named graphs~(\cite{carroll2005namedgraphs}), N-ary relationships~(\cite{naryw3c2006}), singleton properties~(\cite{nguyen2014don}), RDF$^+$~(\cite{schueler2008querying}), and more recently, \mbox{RDF-star}~(\cite{hartig2017foundations}). 
+
+RDF-star does not leverage the characteristics of RDF as the others proposals. Instead it extends the RDF syntax to introduce the notion of \texttt{embedded triples}. This approach is currently under development to become a W3C standard\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. 
+As a consequence, an increasing number of semantic technologies are supporting this proposal\footnote{\url{https://w3c.github.io/rdf-star/implementations}}, which include triplestores (e.g. GraphDB, AnzoGraph) and programming libraries (e.g. Apache Jena, Oxigraph).
+
+It is possible to construct reified RDF graphs using mappings with the reification approaches abovementioned, except for RDF-star. As this proposal extends the original RDF syntax, it requires mapping languages to adapt and evolve in order to construct RDF-star graphs. This chapter presents the extension of the RML language to enable the construction of RDF-star graphs, RML-star. We first introduce how reified RDF graphs can be constructed using RML with different reification approaches, and then we present RML-star. This proposal is validated with \mbox{Morph-KGC$^{star}$}, a KG construction engine that implements our proposal.
+
+%This section describes popular reification approaches and shows how they can be used in RML and RML-star with a running example. 
 %Standard reification and singleton properties are considered in Section \ref{sec:chp4_validation}, showing that \mbox{Morph-KGC$^{star}$} does not add any overhead in the time required to generate the \mbox{RDF-star} triples compared to them.
 
-We illustrate each reification alternative with a running example that uses the data shown in \cref{lst:chp4_csv_star}.
+\subsection{Statements about statements in mapping rules}
+\label{sec:chp4_reif_mappings}
+
+We illustrate each reification alternative presented throughout this section with a running example that uses the data shown in \cref{lst:chp4_csv_star}.
 It contains CSV data related to pole vault:
 the vaulter (\texttt{PERSON}),
 the height of the jump (\texttt{MARK}),
@@ -40,17 +48,13 @@ ID  , DATE       , MARK ,   PERSON
 
 \subsubsection{Reification with RML}
 
-There are several reification approaches for RDF as presented in \ana{section in RelWork when done}, such as standard reification, singleton properties, n-ary relationships or named graphs. 
+There are several reification approaches for RDF as presented in \cref{chp2_reification}, such as standard reification, singleton properties, N-ary relationships or named graphs. 
 These approaches use strategies that add metadata to triples
 without modifying the original RDF syntax.
-Thus, they can be used with RML without any further modification. RML mapping rules enable the generation of blank nodes (required for the standard reification approach), dynamically generated predicates (required for the singleton properties approach) and named graphs (required for the named graphs approach). \ana{si voy con todos, influye en el ejemplo de aquí abajo y en los use cases. En ese caso, quitar somef (demasiado grande el mapping, con semmeddb es suficiente)}
+Thus, they can be used with RML without any further modification. RML mapping rules enable the generation of blank nodes (required for the standard reification approach), dynamically generated predicates (required for the singleton properties approach) and named graphs (required for the named graphs approach). %\ana{si voy con todos, influye en el ejemplo de aquí abajo y en los use cases. En ese caso, quitar somef (demasiado grande el mapping, con semmeddb es suficiente)}
 
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=1\linewidth]{figures/rml-star_diagram.pdf}
-\caption{The \mbox{RML-star} extension (represented using the Chowlk notation~(\cite{feria2022chowlk})) with additions and modifications over the RML ontology.}
-\label{fig:rml-star}
-\end{figure*}
+\ana{probablemente en sota estarán explicados cada uno de los modelos, probablemente no haga falta ponerlos aquí también.}
+
 
 \noindent\textbf{\textit{Standard Reification}}~(\cite{manola2004rdf}) was proposed in the W3C RDF Primer~(\cite{manola2004rdf}).
 It assigns statements to unique identifiers (typically blank nodes) typed with \texttt{rdf:Statement} and described using the properties \texttt{rdf:subject}, \texttt{rdf:predicate} and \texttt{rdf:object}.
@@ -58,9 +62,12 @@ This way, the unique identifier representing the statement can be further annota
 This mapping creates blank nodes in the subject with the \texttt{ID} data field, typed with \texttt{rdf:Statement}; and has three predicate object maps to generate the \texttt{rdf:subject}, \texttt{rdf:predicate}, \texttt{rdf:object} of the triples (\textit{An athlete jumps certain height}) and a predicate object map to annotate the statements with \texttt{:date} (\textit{in a specific date}).
 
 
-\begin{minipage}{0.45\linewidth}
+
+
+\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_std-reif}{Example RML mapping using standard reification that transforms data in \cref{lst:chp4_csv_star}.}
 \centering
+\begin{multicols}{2}
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 <#TM> a rr:TriplesMap ;
   rml:logicalSource :marks ;
@@ -83,16 +90,44 @@ This mapping creates blank nodes in the subject with the \texttt{ID} data field,
     rr:predicate :date ;
     rr:objectMap [
       rml:reference "DATE" ] ] .
-  
 \end{lstlisting}}
-
+\end{multicols}
 \end{captionedlisting}
 \end{minipage}
-\,\,\,\,\hfill
-\begin{minipage}{0.45\linewidth}
+
+\begin{minipage}{\linewidth}
+\begin{captionedlisting}{lst:chp4_res-std-reif}{RDF triples generated by the mapping in \cref{lst:chp4_std-reif}.}
+\centering
+\begin{multicols}{2}
+{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
+_:1 rdf:type      rdf:Statement .
+_:1 rdf:subject   :Angelica .
+_:1 rdf:predicate :jumps .
+_:1 rdf:object    "4.80" .
+_:1 :date         "2022-03-21" .
+_:2 rdf:type      rdf:Statement .
+_:2 rdf:subject   :Katerina .
+_:2 rdf:predicate :jumps .
+_:2 rdf:object    "4.85" .
+_:2 :date         "2022-03-19" .
+\end{lstlisting}}
+\end{multicols}
+\end{captionedlisting}
+\end{minipage}
+
+
+
+\noindent\textbf{\textit{Singleton Properties}}~(\cite{nguyen2014don}). This approach uses unique predicates linked with \texttt{rdf:singletonPropertyOf} to the original predicate. 
+This unique predicate can then be annotated as the subject of additional statements. 
+\cref{lst:chp4_res-sp-reif} shows the reified triples for the data in \cref{lst:chp4_csv_star} created with the RML mapping rules in \cref{lst:chp4_sp-reif}. 
+It uses a singleton property dynamically generated with the \texttt{ID} data field for the property \texttt{:jumps} (\textit{An athlete jumps certain height}), annotated with \texttt{:date} (\textit{in a specific date}).
+
+
+\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_sp-reif}{Example RML mapping using a singleton property that transforms data in \cref{lst:chp4_csv_star}.}
 \centering
-{{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
+\begin{multicols}{2}
+{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 <#TM> a rr:TriplesMap ;
   rml:logicalSource :marks ;
   rr:subjectMap [ 
@@ -114,34 +149,17 @@ This mapping creates blank nodes in the subject with the \texttt{ID} data field,
     rr:predicate :date ;
     rr:objectMap [
       rml:reference "DATE" ] ] .
-\end{lstlisting}}}
-\end{captionedlisting}
-\end{minipage}
-
-
-
-
-\begin{minipage}{0.42\linewidth}
-\begin{captionedlisting}{lst:chp4_res-std-reif}{RDF triples generated by the mapping in \cref{lst:chp4_std-reif}.}
-\centering
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-_:1 rdf:type      rdf:Statement .
-_:1 rdf:subject   :Angelica .
-_:1 rdf:predicate :jumps .
-_:1 rdf:object    "4.80" .
-_:1 :date         "2022-03-21" .
-_:2 rdf:type      rdf:Statement .
-_:2 rdf:subject   :Katerina .
-_:2 rdf:predicate :jumps .
-_:2 rdf:object    "4.85" .
-_:2 :date         "2022-03-19" .
 \end{lstlisting}}
+\end{multicols}
 \end{captionedlisting}
 \end{minipage}
-\,\,\,\,
-\begin{minipage}{0.5\linewidth}
+
+
+
+\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_res-sp-reif}{RDF triples generated by the mapping in \cref{lst:chp4_sp-reif}.}
 \centering
+\begin{multicols}{2}
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 :Angelica   :jumps#1  "4.80" .
 :jumps#1    :date     "2022-03-21" .
@@ -150,25 +168,81 @@ _:2 :date         "2022-03-19" .
 :jumps#2    :date     "2022-03-19" .
 :jumps#2    rdf:singletonPropertyOf :jumps .
 \end{lstlisting}}
+\end{multicols}
 \end{captionedlisting}
 \end{minipage}
 
-\noindent\textbf{\textit{Singleton Properties}}~(\cite{nguyen2014don}). This approach uses unique predicates linked with \texttt{rdf:singletonPropertyOf} to the original predicate. 
-This unique predicate can then be annotated as the subject of additional statements. 
-\cref{lst:chp4_res-sp-reif} shows the reified triples for the data in \cref{lst:chp4_csv_star} created with the RML mapping rules in \cref{lst:chp4_sp-reif}. 
-It uses a singleton property dynamically generated with the \texttt{ID} data field for the property \texttt{:jumps} (\textit{An athlete jumps certain height}), annotated with \texttt{:date} (\textit{in a specific date}).
 
 
+\textit{\textbf{Named Graphs}}~(\cite{carroll2005namedgraphs}). This approach encloses each reified triple inside a unique named graph. This named graph can then be annotated with an additional triple. 
 
+\textit{\textbf{N-Ary Relationships}}~(\cite{naryw3c2006}). This approach  converts a relationship into an instance that describes the relation, which can have attached both the main object and additional statements. The mapping shown in \cref{lst:chp4_nary_reif} creates instances of the relationship ``jump" with the field \texttt{ID}, which contain the date and height of the jump. The resulting RDF triples are shown in \cref{lst:chp4_res-nary}.
 
+\begin{minipage}{\linewidth}
+\begin{captionedlisting}{lst:chp4_nary_reif}{Example RML mapping using a N-ary relationship that transforms data in \cref{lst:chp4_csv_star}.}
+\centering
+\begin{multicols}{2}
+{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
+<#TM> a rr:TriplesMap ;
+  rml:logicalSource :marks ;
+  rr:subjectMap [ 
+    rr:template ":{PERSON}" ] ;
+  rr:predicateObjectMap [ 
+    rr:predicateMap [
+     rr:template ":jumps" ] ;
+    rr:objectMap [
+      rr:template ":Jump{ID}";
+      rr:termType rr:IRI] ] .
+      
+<#TM-JUMP> a rr:TriplesMap ;
+  rr:logicalSource :marks ;
+  rr:subjectMap [ 
+    rr:template ":Jump{ID}" ] ;
+  rr:predicateObjectMap [ 
+    rr:predicate :height ;
+    rr:objectMap [
+      rml:reference "MARK" ] ] ;
+  rr:predicateObjectMap [ 
+    rr:predicate :date ;
+    rr:objectMap [
+      rml:reference "DATE" ] ] .
+\end{lstlisting}}
+\end{multicols}
+\end{captionedlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{captionedlisting}{lst:chp4_res-nary}{RDF triples generated by the mapping in \cref{lst:chp4_nary_reif}.}
+\centering
+\begin{multicols}{2}
+{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
+:Angelica  :jumps   :Jump1 .
+:Jump1     :date    "2022-03-21" .
+:Jump1     :height  "4.80" .
+:Katerina  :jumps   :Jump2 .
+:Jump2     :date    "2022-03-19" .
+:Jump2     :height  "4.85" .
+\end{lstlisting}}
+\end{multicols}
+\end{captionedlisting}
+\end{minipage}
 
 
 
 
 \subsubsection{Reification with RML-star}
 
+
+
 We propose RML-star as an extension of RML to generate \mbox{RDF-star} graphs (\cref{fig:rml-star}). 
 \mbox{RML-star} adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. Following the \mbox{RDF-star} data model, star maps can only be used in subject and object maps. Star maps use the property \texttt{rml:quotedTri\-plesMap} to refer to the triples map that generates the quoted triples. This referenced triples map will also generate asserted triples, since it is a \texttt{rr:TriplesMap}. To enable the generation of quoted triples without asserting them, RML-star introduces \texttt{rml:NonAssertedTriplesMap} as a subclass of \texttt{rr:TriplesMap}. Non-asserted triples maps can be referred by \texttt{rml:quotedTriplesMap} to generate quoted triples, but they will be ignored when generating asserted triples.
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=1\linewidth]{figures/rml-star_diagram.pdf}
+\caption{The \mbox{RML-star} extension (represented using the Chowlk notation~(\cite{feria2022chowlk})) with additions and modifications over the RML ontology.}
+\label{fig:rml-star}
+\end{figure*}
 
 The \mbox{RML-star} specification~(\cite{iglesias2022rmlstar}) provides a complete description of the language, it is published as a W3C Draft Community Report, and it is maintained by the W3C Knowledge Graph Construction Community Group\cref{foot:kgc}.
 Both, the language and the specification are kept up to date reflecting the modifications in \mbox{RDF-star}.
