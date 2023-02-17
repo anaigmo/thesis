@@ -4,10 +4,14 @@
 
 Mappings are the key element for the Knowledge Graph construction process to enhance maintainability, understandability and reproducibility. This chapter first presents an extensive analysis of current mapping languages in the form of a comparison framework. Based on this comparison, a set of requirements are extracted and used for building an ontology that aims at gathering the expressiveness of current mapping languages. Finally, the evolution of a well-known mapping language is presented for adopting RDF-star.
 
-\ana{al igual esta intro se puede extender más, explicando un poco más cada parte y situandola en su contexto, que no sea una enumeración de las subsecciones.}
+%\ana{al igual esta intro se puede extender más, explicando un poco más cada parte y situandola en su contexto, que no sea una enumeración de las subsecciones.}
 
 \input{4_mappings/4-1_framework}
 
 \input{4_mappings/4-2_cm_ontology}
 
 \input{4_mappings/4-3_rml_star}
+
+\section{Conclusions}
+
+In this chapter, we performed an in-depth analysis of the features of the current mapping languages: from the description of input data sources, to how the triples are generated and data transformations. This analysis and the challenges proposed by the Knowledge Graph Construction W3C Community Group are gathered as requirements for a mapping language to be able to address the complexity of use cases for KG construction. Then, we presented the Conceptual Mapping, an ontology that, based on the abovementioned requirements, gathers the expressiveness of current mapping languages. This ontology was developed following the LOT methodology, and each step of the process and how if was addressed when building the ontology is explained. Finally, we show of mapping languages evolve as the semantic technologies advance, in this case with the adoption of RDF-star. To that purpose, we extend one of the most used mapping languages to create RDF-star graphs, RML-star. Accordingly, we add an extension to the Conceptual Mapping to include this new feature. Our ambition with this contribution is to enhance the understanding of the capabilities of mapping languages and what they need to implement in order to cover the necessities for constructing knowledge graphs, and at the same time be able to evolve as the technologies evolve.
