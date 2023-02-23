@@ -1,10 +1,142 @@
 \section{Mapping rules in spreadsheets: Mapeathor}
 \label{sec:chp5_mapeathor}
 
+\ana{no sé muy bien qué poner por aquí, si ampliar la motivación antes de esta sección, poner algo de related work o solo referenciar, mirar otras tesis a ver}
+
 \subsection{Spreadsheet design}
 
-\subsection{Implementation}
+%The rules required to generate a knowledge graph can be specified in multiple languages. The language is chosen by the user depending on the specific use case. However, the rules themselves are equivalent across languages, so they can be written in a language-independent way, in this case, we chose a spreadsheet for rule specification. 
 
-\subsection{Evaluation}
+In this section we present the design of the spreadsheet template to write the mapping rules. 
+These mapping rules are specified in the spreadsheets following a provided structure to only write the essential information, forgetting about the syntax peculiarities of each languages (e.g. keywords, semicolons, brackets, etc.).
+This design is devised to contain the rules in a compact and understandable way using format widely used by the scientific community (i.e. Google spreadsheets, MS Excel). 
+Using these spreadsheets along with their corresponding editors allow users to leverage their native advantages.
+The mapping rules are specified in the spreadsheet across five different sheets, which are described in detail below: \textit{Prefix sheet}, \textit{Source sheet}, \textit{Subject sheet}, \textit{Predicate\_Object sheet} and \textit{Function sheet}. To illustrate this section we use the files in \ana{listing con ejemplo } as input data source.
 
-\textit{Aquí por una parte va a estar el estudio de usuario (JE JE)}
+\ana{poner al final de la sección como traduce o sección a sección; a RML}
+
+\subsubsection{Prefix sheet} 
+This sheet contains the namespaces and corresponding prefixes used when declaring the transformation rules. 
+It is composed of two columns: \texttt{Prefix} for the prefix and \texttt{URI} for the corresponding namespace. The base namespace can be specified writing ``@base" in the \texttt{Prefix} column.The namespaces used by the target mapping language are automatically added in the translation (e.g. \texttt{rr}\footnote{\url{http://www.w3.org/ns/r2rml\#}}, \texttt{rml}\footnote{\url{http://semweb.mmlab.be/ns/rml\#}}).
+The example shown in \cref{tab:prefix_sheet} presents how three namespaces and the base namespace are written in the sheet. 
+
+\begin{table}[h!]
+\caption{Prefix sheet.}
+\label{tab:prefix_sheet}
+\centering
+\begin{tabular}{c|c}
+\midrule
+\textbf{Prefix} & \textbf{URI}                                 \\ \midrule
+@base           & http://example.com/                          \\
+rdf             & http://www.w3.org/1999/02/22-rdf-syntax-ns\# \\
+ex              & http://ex.com/                               \\ 
+grel            & http://semweb.datasciencelab.be/ns/grel\#     \\
+\midrule
+\end{tabular}
+\end{table}
+
+\ana{si tal poner que sin prefijo se genera ":", e implementar equisdé}
+
+\subsubsection{Subject sheet} 
+This sheet defines the subjects to be generated and their corresponding identifier (\texttt{ID}) that groups the mapping rules for each subject. It is organized in four columns: \texttt{ID}, \texttt{URI}, \texttt{Class} and \texttt{Graph}. \texttt{ID} contains a unique identifier for each subject's set of rules in order to relate to information on these rules in the remaining sheets.
+\texttt{URI} defines the subject URI of the resources that are generated in the mapping. 
+\texttt{Class} allows the assignation of the subject to a class with \texttt{rdf:type}. A subject may be type of one class, more than one or none at all. 
+Finally, \texttt{Graph} is an optional column that enables the assignation of a named graph to the triples generated for a subject.
+
+The example shown in \cref{tab:subject_sheet} shows how to write two subjects, each with a different identifier and base URI. The instances of the subject with the \texttt{PERSON} ID is type of two classes, (\texttt{ex:Person} and \texttt{ex:Athlete}), while all the triples of the instances of the subject identified with the \texttt{SPORT} ID are assigned to a named graph (\texttt{ex:SportsGraph}). 
+
+
+\begin{table}[h!]
+\caption{Subject sheet.}
+\label{tab:subject_sheet}
+\centering
+\begin{tabular}{c|c|c|c}
+\midrule
+\textbf{ID} & \textbf{URI} & \textbf{Class} & \textbf{Graph} \\ \midrule
+PERSON & http://ex.com/Person/\{name\} & ex:Person &  \\
+PERSON & http://ex.com/Person/\{name\} & ex:Athlete &  \\
+SPORT & http://ex.com/Sport/\{sport\} & ex:Sport & ex:SportsGraph \\ \midrule
+\end{tabular}
+\end{table}
+
+\ana{release porque lo de los graphs no aparece en la demo}
+
+\subsubsection{Source sheet} 
+
+This sheets describes where the data for each ID is retrieved from. The information is organized in three columns: \texttt{ID}, \texttt{Feature} and \texttt{Value}. 
+\texttt{ID} makes reference to the IDs declared in the \textit{Subject sheet}. 
+\texttt{Feature} declares the type of information provided in \texttt{Value}. The allowed keywords in this column are: \texttt{source} for the path and name of the source, \texttt{format} for the data source format, \texttt{iterator} for hierarchical data (e.g. JSON, XML), \texttt{table} for the table names of RDBs, \texttt{query} for SQL queries and \texttt{SQLVersion} for the SQL version. Each ID must have at least the \texttt{source} and \texttt{format} written; the rest of the features are optional. 
+Then, in \texttt{Value} the corresponding values of the \texttt{Feature} specified are written. 
+
+\cref{tab:source_sheet} shows the data source description for the \texttt{PERSON} and \texttt{SPORT} IDs. The former corresponds to a CSV file, while the latter to a JSON file, for which the iterator is also written (\texttt{\$.sport}). 
+
+\begin{table}[h!]
+\caption{Source sheet.}
+\label{tab:source_sheet}
+\centering
+\begin{tabular}{c|c|c}
+\midrule
+\textbf{ID} & \textbf{Feature} & \textbf{Value}              \\ \midrule
+PERSON    & source          & /home/user/data/people.csv  \\
+PERSON    & format          & CSV                         \\
+SPORT     & source          & /home/user/data/sports.json \\
+SPORT     & format          & JSON                        \\  
+SPORT     & iterator        & \$.sport                    \\ \midrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Predicate\_Object sheet} In this sheet users can specify how to generate the triples, that is, predicate-object pairs for the subjects defined in the \textit{Subject sheet}. This sheet contains up to 8 columns: \texttt{ID}, \texttt{Predicate}, \texttt{Object}, \texttt{DataType}, \texttt{Language}, \texttt{ReferenceID}, \texttt{InnerRef} and \texttt{OuterRef}.
+
+The column \texttt{ID} indicates the subject to which the triples belong.
+The columns \texttt{Predicate} and \texttt{Object} specify the predicate and object of the triple respectively. 
+The XSD datatype of \texttt{Object} is defined in \texttt{DataType}, and the language tag in \texttt{Language}. Both these columns are optional. 
+When the object refers to a subject defined in another mapping rule, the rule is written as follows. 
+There are three fields that allow the specification of the linking condition between the object of the current triple and the referenced subject. 
+They specify which is the ID of the referred subject  (\texttt{ReferenceID}), and the ''join'' fields in the source data (\texttt{InnerRef} for the field of the object of the current triple, and \texttt{OuterRef} for the field of the referred subject).  
+
+\cref{tab:po_sheet} shows an example of the \textit{Predicate\_Object sheet}. For each ID three predicate-object pairs are specified, both containing literals with different datatypes and some with language tags. The rule set identified as \texttt{PERSON} generates a link to the subject of the \texttt{SPORT} rule set using the predicate \texttt{ex:name}, and joining by equal values of the field \texttt{sport\_id} from \texttt{PERSON} and the field \texttt{id} from \texttt{SPORT}. Finally, one object of the \texttt{SPORT} id is created using a function, which is identified by being enclosed by ``\textless{}\textgreater{}".
+
+\begin{table}[h!]
+\caption{Predicate\_Object sheet.}
+\label{tab:po_sheet}
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{c|c|c|c|c|c|c|c}
+\midrule
+\textbf{ID} &\textbf{Predicate} & \textbf{Object}               & \textbf{DataType} & \textbf{Language} & \textbf{ReferenceID} & \textbf{InnerRef} & \textbf{OuterRef} \\ \midrule
+PERSON & ex:name & \{name\} & string & en & & &  \\
+PERSON & ex:birthdate & \{birthdate\} & date & & & & \\
+PERSON & ex:sport & & & & SPORT& sport\_id & id \\
+SPORT & ex:name & \{sport\} & string & en & & & \\
+SPORT & ex:code & \{id\} & integer & & & & \\
+SPORT & ex:comment & \textless{}Fun1\textgreater{} & & & & & \\ \midrule
+\end{tabular}
+}
+\end{table}
+
+\subsubsection{Function sheet} Some languages are able to process data transformation functions (e.g. FnO+RML), which can be detailed in this sheet. Some well known options are the SQL and GREL functions. The functions are referred in the Predicate\_Object sheet or in other function rows with the identifier specified in \texttt{FunctionID}. The column \texttt{Feature} is used to specify the type of information provided in \texttt{Value}, where the name of the function and the value of the parameters are written. The example shown in \cref{tab:function_sheet} uses the function \texttt{grel:toLowerCase} taking one data field as input parameter.
+
+\begin{table}[h!]
+\caption{Function sheet.}
+\label{tab:function_sheet}
+\centering
+\begin{tabular}{c|c|c}
+\midrule
+\textbf{FunctionID} & \textbf{Feature} & \textbf{Value} \\ \midrule
+\textless{}Fun1\textgreater{} & fno:executes & grel:toLowerCase \\  
+\textless{}Fun1\textgreater{} & grel:valueParam & \{comment\} \\
+\midrule
+\end{tabular}
+\end{table}
+
+\ana{pensar fuertemente si incluir esto o dejarlo fuera, está completamente orientado a FnO. Si se deja, hay que modificarlo para que sea más general, tipo 'function' para el nombre de la función, y el resto de parámetros que se quede así.}
+
+%\textit{hablar aquí del diseño de la spreadsheet, que puede ser google o excel, y cada una de las pestañas poquito a poquito con sus tablas de ejemplo}
+
+\subsection{Experimental evaluation}
+
+\textit{empezar hablando un poco de la herramienta y el setup de los experimentos}
+
+\textit{Aquí por una parte va a estar el estudio de usuario (JE JE), incluyendo las encuestas. También se puede meter la conformance con los lenguajes, a ver si no sale muy mal eso}
+
+\textit{y es que igual debería poner que nos limitamos a otras herramientas pero no a syntaxis, para que luego tenga más sentido al poner yarrrml después}
