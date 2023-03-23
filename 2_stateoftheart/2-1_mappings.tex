@@ -52,7 +52,7 @@ Classification                 & Language        & Reference(s) \\ \hline
 \subsection{Mapping languages}
 The different scenarios in which mapping languages are used and their specific requirements have led to the creation of several mapping languages and tailored to specific domain extensions. This section presents and describes existing mapping languages, listed in \cref{tab:chp2_languages_summary}. Depending on their syntax, they can be classified into the following: RDF-based, SPARQL-based, and based on other schema. It is worth mentioning that some mapping languages have become W3C recommendations, namely R2RML~\cite{das2012r2rml} and CSVW~\cite{Tennison2015csvw}. The surveyed languages include the ones considered relevant because of their widespread use, unique features, and current maintenance. Deprecated or obsolete languages are not included.
 
-\begin{figure*}[]
+\begin{figure*}[h]
 \centering
 \includegraphics[width=0.95\linewidth]{figures/mapping_languages}
 \caption{Existing mapping languages and their relationships.}
@@ -68,7 +68,15 @@ In this category, we can also find more languages not related to R2RML. XLWrap~\
 \noindent\paragraph{\textbf{Other mapping languages.}} This group gathers other mapping languages implemented without relying on ontologies or SPARQL extensions. ShExML~\cite{Garcia-Gonzalez2020shexml,garcia2021shexml-challenges} uses Shape Expressions (ShEx)~\cite{prud2014shex} to map data sources in RDBs, CSV, JSON, XML and RDF using SPARQL queries. The Helio mapping language~\cite{cimmino2022helio} is based on JSON and provides the capability of using functions for data transformation and data linking~\cite{cimmino2018hybrid}. D-REPR~\cite{Vu2019d-repr} focuses on describing heterogeneous data with JSONPath and allows the use of data transformation functions. XRM (Expressive RDF Mapper)~\cite{xrm} is a commercial language that provides a unique user-friendly syntax to create mappings in R2RML, CSVW and RML.
 
 
-\subsection{Language comparison}
+\subsection{Mapping serialisations}
+
+
+
+\subsection{Mapping editors}
+
+
+
+\subsection{Mapping language comparison}
 As the number of mapping languages increased and their adoption grew wider, comparisons between these languages inevitably occurred. This is the case of, for instance, SPARQL-Generate~\cite{Lefrancois2017sparqlgenerate}, which is compared to RML in terms of query/mapping complexity; and ShExML~\cite{Garcia-Gonzalez2020shexml}, which is compared to SPARQL-Generate and YARRRML from a usability perspective.
 
 Some studies dig deeper, providing qualitative complex comparison frameworks. Hert et al.~\cite{hert2011comparison} provide a comparison framework for mapping languages focused on transforming relational databases to RDF. The framework is composed of 15 features, and the languages are evaluated based on the presence or absence of these features.% (Logical table to class, M:N relationships, project attributes, select conditions, user-defined instance URIs, literal to URIs, vocabulary reuse, transformation functions, datatypes, named graphs, blank nodes, integrity constraints, static metadata, one table to \textit{n} classes, and write support). 

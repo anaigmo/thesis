@@ -40,7 +40,7 @@ The most used format is tabular (RDB and CSV). Some languages can also process R
 %\noindent\paragraph{\textbf{Data Sources Example.}} This example shows how ShExML and R2RML describe heterogeneous data sources. The sources are a table called "cities" (\ref{fig:ex_rdb}) that belongs to a relational database that stores information about cities: name, population, zipcode and year in which the data was updated; and a JSON file "coordinates.json" (\ref{fig:ex_json}) available online that contains the latitude and longitude of the central point of each city. R2RML is only able to describe the database table (\ref{lst:shexml_source}); instead ShExML is able to describe both the RDB and the online JSON file (\ref{lst:shexml_source}).
 
 
-\begin{sidewaystable}[]
+\begin{sidewaystable}[h]
 \centering
 \caption{Data retrieval and data source expression for the analysed mapping languages from the references stated in \cref{tab:chp2_languages_summary}. (*) indicates features not explicitly declared in the language, but that are implemented by compliant tools.}
 \label{tab:chp4_sources}
@@ -83,7 +83,7 @@ Generally, languages can generate a wider range of resources for objects, since 
 
 %
 
-\begin{sidewaystable}[]
+\begin{sidewaystable}[h]
 \centering
 \caption{Features for subject, predicate, and object generation of the studied mapping languages from the references stated in \cref{tab:chp2_languages_summary}.}
 \label{tab:chp4_spo}
@@ -147,7 +147,7 @@ Linking rules using join conditions imply evaluating if the fields selected are 
 
 %\noindent\paragraph{\textbf{Graph Construction Example.}} Assuming the description of data sources shown in \ref{fig:ex_json} and \ref{fig:ex_rdb} and the regular triples, this example shows how Helio and SPARQL-Generate describe conditional statements and linking rules. To generate the \texttt{eg:pop\-ulation} attribute (\ref{fig:ex_onto}), the record must have been updated after 2020. In addition, instances of the classes \texttt{eg:City} and \texttt{eg:Location} can be joined using the city name, present in both data sources. However, the names do not exactly match ("Almería" and "Almeria"; "A Coruña" and "La Coru\-ña"), which is why a distance metric is required to match the cities with a threshold of 0.75. The Helio mapping is not capable of describing the condition of the population, but instead it is able to use the Levenshtein distance function and link the sources (\ref{lst:helio_general}). SPARQL-Generate can describe the condition statement thanks to the SPARQL construct \texttt{FILTER}, but does not implement the distance metric function (\ref{lst:sg_general}). However, both Helio and SPARQL-Generate allow the removal of spaces in the subject URIs. 
 
-\begin{sidewaystable}[]
+\begin{sidewaystable}[h]
 \centering
 %\rotatebox{180}{
 \begin{minipage}{21.5cm}

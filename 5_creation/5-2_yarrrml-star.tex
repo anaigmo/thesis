@@ -1,2 +1,502 @@
 \section{User-friendly creation of RDF-star with YARRRML}
 \label{sec:chp5_yarrrml_star}
+
+Along with mapping editors described before, human-friendly serialisations emerged 
+to ease the definition of mapping rules. Focusing on R2RML and RML, we highlight the following serialisations that have been more widely adopted recently.
+YARRRML~(\cite{Heyvaert2018yarrrml}) leverages YAML
+to offer a user-friendly representation to define mapping rules, while
+ShExML~(\cite{Garcia-Gonzalez2020shexml}) extends the syntax of the ShEx constraint language~(\cite{prud2014shape}).
+XRM~\cite{xrm}
+provides an abstract syntax that simulates programming languages and 
+SMS2~(\cite{sms2}), proposed by Stardog,\footnote{\label{foot:stardog}\url{https://www.stardog.com/}} is loosely based on the SPARQL query language and extends the features of R2RML to create virtual KGs.
+Each serialisation is accompanied by a system that translates their rules into mapping languages, such as RML or R2RML (henceforth abbreviated as [R2]RML). 
+%These serialisations and translators were not compared with each other in terms of serialisations' features and system's characteristics, even though it would help to decide which serialisation fits each use case.
+
+This section describes YARRRML-star, the extension of YARRRML to support RML-star~(\cite{delva2021rml-star}) to construct RDF-star graphs.
+We also improve the serialisation it to adhere with the latest RML updates
+(e.g., datatypes, joins, etc.), and develope a translator system --Yatter-- that implements the new features, and validate our proposal with test cases and compared it to other user-friendly serializations.
+
+\subsection{Extending YARRRML}
+\label{sec:chp5_yarrrml-desc}
+We extend the YARRRML serialisation to support the RDF-star construction and two updates: the dynamic datatypes and language tags, and a shortcut for join conditions. These are recent features in RML that so far were not considered in YARRRML.
+To illustrate the extensions,
+we use a CSV file as input (\cref{lst:chp5_csv}) with information about pole vaulters: an identifier, name, language of the country, height of the jump, date when the jump takes place, and type of date format specified.
+
+\noindent\begin{minipage}{\linewidth}
+\centering
+\begin{captionedlisting}{lst:chp5_csv}{Contents of the \texttt{jump-source} logical source.}
+\centering
+\begin{tabular}{c}
+{\begin{lstlisting}[basicstyle=\ttfamily\small,columns=flexible]
+ID , PERSON         , COUNTRY , MARK , DATE                       , DATE-TYPE
+1  , Lisa Ryzih     , de       , 4.40 , 2022-03-21                , date
+2  , Xu Huiqin      , zh       , 4.55 , 2022-03-19T17:23:37       , dateTime
+\end{lstlisting}}
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
+
+\subsubsection{YARRRML-star} %Ana
+
+ %\ana{ojo con repetir de qué va RDF-star, que en relwork y RML-star ya se dirá también)
+
+RDF-star introduces the notion of RDF-star triples, i.e. triples that are subjects or objects of another triple. These triples are enclosed using ``\texttt{<<}'' and ``\texttt{>>}'', and can be (1) quoted, if they only appear in a graph embedded by another triple (List~\ref{lst:chp5_res-rdf-star} lines 2,4); or (2) asserted, if the quoted triple is also generated outside the triple where it is quoted (lines 1-4).
+We extend YARRRML to specify how we can construct RDF-star graphs, aligned with the RML-star specification~\cite{iglesias2022rmlstar}.
+
+\begin{minipage}{\linewidth}
+\centering
+\begin{captionedlisting}{lst:chp5_res-rdf-star}{RDF-star triples.}
+\centering
+\begin{tabular}{c}
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+:1 :jumps 4.40 .
+<< :1 :jumps 4.80 >> :date "2022-03-21" .
+:2 :jumps 4.55 .
+<< :2 :jumps 4.85 >> :date "2022-03-19T17:23:37" .
+\end{lstlisting}}
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
+
+RDF-star triples can be created in YARRRML-star (\cref{lst:chp5_mapping-star}) by referencing existing Triples Maps with the tags (1) \texttt{quoted} for quoted asserted triples (line 10) and (2) \texttt{quotedNonAss\-erted} for quoted non-asserted triples.  
+% (see further examples in the specification\footnote{\url{https://dachafra.github.io/yarrrml-spec/#rdf-star}}. 
+%Listing \ref{lst:chp5_mapping-star} shows an example of a YARRRML mapping that creates a quoted asserted triple from data in Listing \ref{lst:chp5_csv}. 
+The triple that the rule set \texttt{jumpTM} creates is used as subject in the rule set \texttt{dateTM}, creating RDF-star triples (\cref{lst:chp5_res-rdf-star}). The equivalent mapping rules in RML are shown in \cref{lst:chp5_mapping-rml-star}.  
+
+\begin{minipage}{\linewidth}
+\centering
+\begin{captionedlisting}{lst:chp5_mapping-star}{YARRRML-star mapping rules. }
+\centering
+\begin{multicols}{2}
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,]
+mappings:
+ jumpTM:
+  sources: jump-source
+  subjects: :$\dollar$(ID)
+  predicateobjects:
+   - [:jumps, $\dollar$(MARK)]
+ dateTM:
+  sources: jump-source
+  subjects:
+   quoted: jumpTM
+  predicateobjects:
+   - [:date, $\dollar$(DATE)]
+\end{lstlisting}}
+
+\end{multicols}
+\end{captionedlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\centering
+\begin{captionedlisting}{lst:chp5_mapping-rml-star}{RML-star mapping rules translated from \cref{lst:chp5_mapping-star}. }
+\centering
+\begin{multicols}{2}
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,]
+<#jumpTM> 
+  a rr:TriplesMap ;
+  rml:logicalSource :jump-source;
+  rml:subjectMap [ 
+    rr:template ":{ID}" ] ;
+  rr:predicateObjectMap [ 
+    rr:predicate :jumps ;
+    rml:objectMap [
+      rml:reference "MARK" ] ] .
+<#dateTM> 
+  a rr:TriplesMap ;
+  rml:logicalSource :jump-source ;
+  rml:subjectMap [ 
+    rml:quotedTriplesMap <#jumpTM> ];
+  rr:predicateObjectMap [ 
+    rr:predicate :date ;
+    rml:objectMap [
+      rml:reference "DATE" ] ] .
+\end{lstlisting}}
+
+\end{multicols}
+\end{captionedlisting}
+\end{minipage}
+
+
+
+
+
+\subsubsection{Additional updates} %Ana
+%The resulting triples (Listing \ref{lst:chp5_res-lang}) present a different language tag and datatype according to the input data source (Listing \ref{lst:chp5_csv}). The equivalent mapping in RML is presented in Listing \ref{lst:chp5_mapping-lang-rml}.
+%We add a new feature to comment terms in the mapping. These comments can be added to sources, subjects and predicate-object maps. 
+%Comments start with ``\texttt{\#}" and contain a \texttt{TITLE} and \texttt{COMMENT} separated by ``\texttt{|}" (Listing \ref{lst:chp5_mapping-comment}). 
+%They are translated into RML to two properties: \texttt{rdfs:label} for \texttt{TITLE} and \texttt{rdfs:comment}  for \texttt{COMMENT} (Listing \ref{lst:chp5_rml-comment}).
+We enable YARRRML-star with other new features that have been incorporated into RML in the last years. 
+%Listing \ref{lst:chp5_yarrrml-updates} shows the updates and the translation to RML is shown in Listing \ref{lst:chp5_rml-updates}. 
+%The first additional update we highlight is the possibility of 
+We extend YARRRML to assign datatypes and language tags dynamically to objects. 
+They are generated with the data values, in the following examples the datatype is generated dynamically with the data field \texttt{DATA-TYPE} (\cref{lst:chp5_dyn_datatype}), and the language tag with \texttt{COUNTRY} (\cref{lst:chp5_dyn_lang}). They translates into RML as Lists \ref{lst:chp5_dyn_datatype_rml} and \ref{lst:chp5_dyn_lang_rml} show.
+
+
+
+
+\begin{minipage}{0.45\linewidth}
+\begin{captionedlisting}{lst:chp5_dyn_datatype}{Dynamic datatype.}
+\centering
+\begin{tabular}{c}
+\hspace{-3em}
+{
+\begin{lstlisting}[basicstyle=\ttfamily\small,columns=flexible]
+  - [:date, $\dollar$(DATE), xsd:$\dollar$(DATE-TYPE)]
+\end{lstlisting}
+}
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
+\,\,\,\,\hfill
+\begin{minipage}{0.45\linewidth}
+\begin{captionedlisting}{lst:chp5_dyn_lang}{Dynamic language tag.}
+\centering
+\begin{tabular}{c}
+\hspace{-2.5em}
+{
+\begin{lstlisting}[basicstyle=\ttfamily\small,columns=flexible]
+ - [:name, $\dollar$(PERSON), $\dollar$(COUNTRY)~lang]
+\end{lstlisting}
+}
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
+
+
+
+
+
+
+
+
+\begin{minipage}{0.45\linewidth}
+\begin{captionedlisting}{lst:chp5_dyn_datatype_rml}{Dynamic datatype in RML translated from \cref{lst:chp5_dyn_datatype}.}
+\centering
+\begin{tabular}{c}
+\hspace{-1em}
+{
+\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+rr:predicateObjectMap [ 
+ rr:predicate :jumpsOnDate ;
+ rml:objectMap [
+  rml:reference "DATE";
+  rml:datatypeMap [
+   rr:template "xsd:{DATE-TYPE}"]]];
+\end{lstlisting}
+}
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
+\,\,\,\,\hfill
+\begin{minipage}{0.45\linewidth}
+\begin{captionedlisting}{lst:chp5_dyn_lang_rml}{Dynamic language tag in RML translated from \cref{lst:chp5_dyn_lang}.}
+\centering
+\begin{tabular}{c}
+\hspace{0.5em}
+{
+\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+rr:predicateObjectMap [ 
+ rr:predicate :name ;
+ rml:objectMap [
+  rml:reference "PERSON";
+  rml:languageMap [
+   rml:reference "COUNTRY"]]];
+\end{lstlisting}
+}
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
+
+
+We also incorporate a shortcut for specifying join conditions (\cref{lst:chp5_join}). This shortcut follows the functions' syntax\footnote{\url{https://rml.io/yarrrml/spec/\#functions}}. %, and translates to normal join conditions in RML (\cref{lst:chp5_rml-mapping} lines 16-22)
+It is specified as the function \texttt{join} that takes as parameters the mapping identifier (with the \texttt{mapping=} parameter key) and the similarity function to perform the join. 
+This function can, in turn, take as parameters data values. 
+Quoted and non-asserted triples can also be generated within join conditions by using the parameter keys \texttt{quoted=} and \texttt{quotedNonAsserted=} respectively.
+In the example, the join condition is performed using the \texttt{equal} function to create as objects the subjects of the mapping set \texttt{jumpTM} if the values of the fields \texttt{ID} from source and \texttt{ID} from target mapping set are the same.
+
+All the described updates have been proposed for the YARRRML specification and is currently under review by the KG Construction Community Group\footnote{\url{https://github.com/kg-construct/yarrrml-spec/pull/4}}.
+
+\begin{minipage}{\linewidth}
+\centering
+\begin{captionedlisting}{lst:chp5_join}{Abbreviated syntax for join conditions.}
+\centering
+%\begin{multicols}{2}
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+- predicates: :jumps
+  objects:
+   - function: join(mapping=jumpTM, equal(str1=$\dollar$(ID), str2=$\dollar$(ID)))
+\end{lstlisting}}
+%\end{multicols}
+\end{captionedlisting}
+\end{minipage}
+
+
+
+
+
+\subsection{Yatter}
+
+%In this section, we describe 
+Yatter\footnote{\label{foot:yatter}\url{https://github.com/oeg-upm/yatter/}} is a new open-source bi-directional YARRRML translator that supports the aforementioned new features. 
+Yatter receives as input a mapping document in the YARRRML serialisation and the desirable output format (R2RML or RML), or the other way around.
+
+%\input{algorithms/algorithm_yatter}
+
+
+\cref{algorithm-yatter} presents the procedure implemented by the system to translate an input YARRRML mapping document into [R2]RML. 
+First, %prefixes are added (
+the namespaces defined in YARRRML are added together with a set of predefined ones (e.g., \texttt{foaf\footnote{\url{http://xmlns.com/foaf/0.1/}}, rml\footnote{\url{http://semweb.mmlab.be/ns/rml\#}}, rdf\footnote{\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}}}) that are used in by [R2]RML. 
+Second, functions, targets, and databases are identified in the entire YARRRML document and translated into RML. Each of them generates a global identifier mapped into a hash table that can be used by any \texttt{rr:TermMap}. For external source declaration, their identifiers are also mapped into a hash table for the next steps.
+Regarding the RDF-star support, the mapping rules are parsed to identify if it contains \texttt{quoted} or \texttt{quotedNonAsserted} keys.
+This determines if the translation requires producing RML-star mapping rules.
+If true, a hash table is also created for the mapping instances of \texttt{rml:NonAssertedTriplesMap}.
+
+
+In YARRRML, lists of sources and subjects maps can be defined within the same triples map, but [R2]RML triples maps may contain only one source and one subject. 
+Hence, for each mapping document, a list of sources and subjects is first collected and then translated depending on the desirable output format ([R2]RML[-star]). 
+Nevertheless, multiple predicate maps and object maps are allowed within the same triples map, and they are directly translated to RML.
+Finally, the cartesian product of sources and subject maps together with the predicate object maps is combined to generate the desirable triples map.
+Before returning the mapping rules, Yatter validates that the generated output is a valid RDF graph.
+
+Although YARRRML leaves the RDF-based syntax of the mapping rules to be processed only by the knowledge graph construction systems, we also provide a human-readable output considering previous experiences~(\cite{chaves2022systematic,corcho2021high,chaves2020bench}).
+This helps knowledge engineers in complex data integration contexts to easier understand if the mapping document in YARRRML represents the desirable rules of [R2]RML and, hence, if the constructed knowledge graph will be correct or not. 
+Thus, the output mapping follows a Turtle-based syntax, using predicate object lists within blank node properties\footnote{\url{https://www.w3.org/TR/turtle/\#unlabeled-bnodes}}, as recommended by the [R2]RML specifications.
+We also ensure the same mapping rules' order as they are defined in YARRRML. 
+Functions, targets, and databases appear first, while for each \texttt{rr:TriplesMap}, the sequence is: source, subject map, and the set of predicate object maps.
+
+The source code of Yatter is openly available under Apache 2.0 license\cref{foot:yatter}.
+Following open science best practices, each release automatically generates a dedicated DOI to ensure reproducibility in any experimental evaluation\footnote{\url{https://doi.org/10.5281/zenodo.7024500}}. 
+The development is under continuous integration using GitHub Actions and the YARRRML test-cases (Section \ref{sec:validation}) have more than 80\% code coverage. 
+Yatter is available through PyPi as a module\footnote{\url{https://pypi.org/project/yatter/}} to be easily integrated in any Python development. % (e.g., providing RML to a KG construction system implemented in this language).
+%such as SDM-RDFizer~\cite{iglesias2020sdm} or Morph-KGC~\cite{arenas2022morph}.
+
+
+
+\subsection{Validation}
+\label{sec:chp5_yarrrml-validation}
+We validate the extensions to YARRRML and the developed implementation by 
+proposing and testing a set of test cases, and comparing to other proposed user-friendly serialisations and corresponding systems.
+
+\subsubsection{YARRRML Test Cases} %David
+Test cases are a common method to evaluate the conformance of a system~\cite{arenas2023morph,heyvaert2019conformance}. 
+%with respect to a language/syntax specification 
+%(see for example). 
+To the best of our knowledge, previous R2RML~\cite{boris2012r2rml} and RML~\cite{heyvaert2019conformance} test cases were not translated to any human-friendly serialisation (e.g., YARRRML).
+Relying on [R2]RML test cases, we propose a set of representative test cases (including also the new features presented in this work) to assess the conformance of any YARRRML translator system.
+%In this way, practitioners can easier understand the coverage of these systems with respect to the proposed language/syntax and select the one that fits better to their own use cases.
+The proposed test cases require to be two-fold defined: to cover the complete vocabulary of the serialisation, and also have the flexibility to declare the rules (e.g., shortcuts or location of the keys). 
+%To avoid starting from scratch, we rely on the test cases proposed by R2RML~\cite{R2RML_test_cases} first, that were also extended for RML~\cite{heyvaert2019conformance}. 
+
+We follow a systematic methodology for creating the YARRRML test cases. 
+We analyzed the [R2]RML test cases and observed that several assess correct data generation.
+Since YARRRML serves as user-friendly serialisation for another mapping language, the focus of its test cases is not on assessing data correctness, but on covering the language expressiveness.
+Hence, we select 15 R2RML test cases that cover the R2RML features and manually translate them into YARRRML. 
+%the flexiblity in rules declaration in YARRRML (i.e., to test proper manage of shortcuts).
+Since RML is a superset of R2RML, it introduces modifications with respect to R2RML to include the definition of heterogenous datasets (e.g., \texttt{rr:LogicalTable} is superseded by \texttt{rml:LogicalSource}). % with their associated properties (e.g., \texttt{rml:source}), and \texttt{rr:column} by \texttt{rml:reference}.
+We propose 8 new test cases to cover these features. 
+
+For features not covered by the RML test cases, we follow a similar procedure. 
+We inspected the RML-star test cases~\cite{david_chaves_2022_6518802}, and translated to YARRRML the ones that provide a complete coverage of this extension. 
+From the 16 test cases proposed to assess the conformance of RML-star, we adapt 6. 
+Finally, as there are still no test cases proposed for RML-Target, RML-FNML, RML dynamic language tags and datatypes, we 
+%analyze both of each specifications (RML and YARRRML) and 
+proposed another 21 test cases to cover them.
+
+In total, we defined 50 YARRRML test cases and their corresponding translation to RML or R2RML. 
+They are openly available\footnote{\label{foot:resources}\url{https://github.com/oeg-upm/yarrrml-validation}} to be used by any YARRRML-compliant system.
+Yatter passes all test cases successfully. %Following good software development practices, we integrate the test cases in the continuous integration pipeline of our system as unit tests.
+
+
+\subsubsection{Serialisations Comparison} %Ana
+
+%YARRRML was developed to be a user-friendly syntax for the RML mapping language~\cite{heyvaert2018yarrrml}. There have been proposed more syntaxes with the same purpose, such as Stardog's SMS2 for R2RML and Zazuko's XRM for [R2]RML and CSVW.
+
+
+
+
+We compare a set of user-friendly serialisations and languages, namely SMS2~\cite{sms2}, XRM~\cite{xrm}, ShExML~\cite{Garcia-Gonzalez2020shexml} and YARRRML~\cite{Heyvaert2018yarrrml} incorporating the updates described in \cref{sec:chp5_yarrrml-desc}, regarding their expressiveness. 
+To that end, we study 15 features that tackle usual characteristics and functionalities in mapping languages.
+We describe each and discuss how each serialisation addresses it (\cref{tab:chp5_lang-comparison}). 
+
+\textbf{LF1. Subject Term Type.} 
+This feature indicates what kind of RDF[-star] term the language can generate as subject.
+In RDF, subjects can be IRIs or blank nodes, while in RDF-star they can also be RDF-star triples.
+All serialisations enable the creation of subjects at least as IRIs, SMS2 and YARRRML additionally implement RDF-star triples and, along with ShExML, blank nodes.
+
+\textbf{LF2. Subject Generation.} 
+This feature indicates if subjects can be generated as constant or dynamic values; and how many subject declarations are allowed at a time. In dynamically generated values, the subject value changes with a field in the data source. In our example, the subject uses the field ``\texttt{ID}" to generate different subject for each row of input data. %(\cref{lst:chp5_yarrrml-mapping} line 6) . Esto viene de la sección de background, que por ahora no voy a incluir
+All serialisations can generate constant and dynamic subjects. For each set of rules, exactly one subject declaration is expected, i.e. one subject for predicate-object pairs. YARRRML can also accept no subject declaration, producing a blank node. % as default behavior.
+%whose default behavior generates a blank node when a subject is not described.
+
+
+\begin{table}[h!]
+\caption{Features of user-friendly serialisations. BN stands for blank node, L for literal, ST for RDF-star triple, C for constant and D for dynamic. \underline{Underlined} features indicate the updates of YARRRML-star, while
+``*" indicates that a feature is possible with the implementation but not explicit in the serialisation.}
+\label{tab:chp5_lang-comparison}
+%\def\arraystretch{1.25}
+\centering
+%\resizebox{\columnwidth}{!}{
+\begin{tabular}{r|cccccc}
+ & \textbf{ShExML} & & \textbf{SMS2} & & \textbf{XRM} & \textbf{YARRRML-star} \\ \midrule
+\textbf{LF1}& BN, IRI & & BN, IRI, ST & & IRI& BN, IRI, \underline{ST}\\ \midrule
+\textbf{LF2}& C, D (1..1) & & C, D, (1..1) & & C, D, (1..1) & C, D (0..1)\\ \midrule
+\textbf{LF3}& IRI & & IRI & & IRI & IRI\\ \midrule
+\textbf{LF4}& C (1..1) & & C, D (1..1) & & C (1..1) & C, D (1..N)\\ \midrule
+\textbf{LF5} & BN, IRI, L & & BN, IRI, L, ST & & IRI, L & BN, IRI, L, \underline{ST} \\ \midrule
+\textbf{LF6} & C, D (1..1) & & C, D (1..N) & & C, D (1..1) & C, D (1..N)\\ \midrule
+\textbf{LF7} & C, D (0..1) & & C (0..1) & & C (0..1) & C, \underline{D} (0..1)\\ \midrule
+\textbf{LF8}& C, D (0..1) & & C, D (0..1) & & C (0..1) & C, \underline{D} (0..1)\\ \midrule
+\textbf{LF9}& C (0..1) & & C (0..1) & & C, D (0..N) & C, D (0..N)\\ \midrule
+\textbf{LF10} & (1..N) & & (1..N) & & (1..N) & (1..N)\\ \midrule
+\textbf{LF11} & Input & & Input & & Input & Input, output\\ \midrule
+\textbf{LF12} & Yes & & No* & & No* & Yes\\ \midrule
+\textbf{LF13}& Yes & & No & & No & No \\ \midrule
+\textbf{LF14} & Yes & & Yes & & No & Yes\\ \midrule
+\textbf{LF15}& Yes & & No & & No & Yes\\ \midrule
+\end{tabular}
+%}
+\end{table}
+
+
+\textbf{LF3. Predicate Term Type.} 
+This feature indicates if the serialisation is able to generate an IRI for a predicate and all serialisations do so.
+
+\textbf{LF4. Predicate Generation.}
+This feature indicates if predicates can be generated as constant or dynamic values; and how many predicate declarations are allowed at a time. In dynamically generated values, the subject value changes with a field in the data source. 
+%can be generated as constant values or change dynamically with the data iteration; and how many predicates declarations are allowed at a time. 
+SMS2 and YARRRML enable dynamic predicates, and YARRRML is also able to handle more than one predicate, which avoids repeating the same object for different predicates.
+
+\textbf{LF5. Object Term Type.} 
+This feature indicates what kind of RDF[-star] term the serialisation is able to generate as object. The serialisations can generate the same kinds of terms as in subjects (LF1), with the addition of literals. 
+
+\textbf{LF6. Object Generation.}
+This feature indicates if objects can be generated as constant or dynamic values; and how many predicate declarations are allowed at a time.
+%can be generated as constant values or change dynamically with the data iteration; and how many objects declarations are allowed at a time. 
+As for subjects, all serialisations can generate constant and dynamic objects. In addition, SMS2 and YARRRML allow more than one at a time, which avoids repeating the same predicate for different objects.
+
+\textbf{LF7. Datatype.}
+This feature indicates if datatypes can be specified constant or dynamically.
+All serialisations enable the optional declaration of constant datatypes, but ShExML and YARRRML also enable dynamic datatypes.
+
+\textbf{LF8. Language Tag.}
+This feature indicates if language tags can be constant or dynamic. Just as for datatypes, all serialisations enable the optional declaration of constant language tags, XRM is the only not allowing dynamic.
+
+\textbf{LF9. Named Graph.} 
+This feature indicates if named graphs can be assigned to the generated statements and how (constant or dynamically). 
+All serialisations enable their optional declaration as constant IRI. XRM and YARRRML also enable more than one graph assignation, and allow dynamic values. 
+
+\textbf{LF10. Data references.} 
+This features indicates how many data references a term can contain when generated dynamically (i.e. when its value changes with the input data). It applies to subjects, predicates, objects, datatypes, language tags and named graphs when the serialisation allows dynamic generation. All serialisations allow more than one data reference for dynamic generation.
+
+\textbf{LF11. Data Description.}
+This feature indicates if the input or output data (e.g., format, iteration, name, path, etc.) can be described. All serialisations can describe input data source, and YARRRML also provides the output data source.
+
+\textbf{LF12. Data Linking.}
+This feature indicates if explicit data linking (e.g. join, fuzzy linking, etc) can be performed with mapping rules. ShExML and YARRRML provide specific features for this end; in XRM and SMS2, however, it is not explicit, but it is possible by using SQL queries. 
+
+\textbf{LF13. Nested Hierarchies.}
+This feature indicates if different levels of a hierarchy source can be accessed in the same data iteration. ShExML is the only language that implements this feature. It is not implemented in YARRRML since is not supported in RML either as a language feature in the time of writing. 
+
+\textbf{LF14. Functions.}
+This indicates if data transformations are applicable to input data (e.g. lowercase). XRM is the only serialisation not supporting it. 
+
+\textbf{LF15. Conditions.}
+This feature indicates if a statement is generated or not depending on a condition. Only ShExML and YARRRML implement this.
+
+\textit{Discussion.} 
+All serialisations offer a rich variety of mapping features, but ShExML and YARRRML have a richer selection. SMS2 leverages the SPARQL syntax, lowering the learning curve for SPARQL users. At the same time, data processing is limited to basic SPARQL functions and the user is unable to integrate custom ones. 
+XRM is designed to mimic natural language and adds minimal overhead with its own syntax keywords, which also makes it easy-to-learn, but provides a more limited variety of features.
+
+
+\subsubsection{Systems Comparison} 
+
+
+\begin{table}[h!]
+\caption{Features of the systems that support the different languages.}
+\label{tab:chp5_eng-comparison}
+\footnotesize
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{r|ccccc}
+ & \begin{tabular}[c]{@{}c@{}}\textbf{ShExML}\\\textbf{translator}\end{tabular} & \textbf{Stardog} & \begin{tabular}[c]{@{}c@{}}\textbf{XRM}\\\textbf{translator}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{YARRRML}\\\textbf{parser}\end{tabular} & \textbf{Yatter} \\ \midrule
+\textbf{SF1} & Open Source & Closed source & Closed source & Open Source & Open Source\\ \midrule
+\textbf{SF2} & Java & Java & Java & Javascript & Python\\ \midrule
+\textbf{SF3} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\JSON, XML,\\RDF\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\GraphQL\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML\end{tabular} \\ \midrule
+\textbf{SF4} & ShExML & \begin{tabular}[c]{@{}c@{}}R2RML,\\SMS, SMS2\end{tabular} & XRM & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular} & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular}\\ \midrule
+\textbf{SF5} & \begin{tabular}[c]{@{}c@{}}RML,\\RDF \end{tabular}& RDF & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\CSVW, CARML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} \\ \midrule
+\textbf{SF6} & N/A & Yes & N/A & No & Yes\\ \midrule
+\textbf{SF7} & Yes & Yes & N/A & No & Yes\\ \midrule
+\textbf{SF8} & Yes & N/A & N/A & No & Yes\\ \midrule
+\end{tabular}
+}
+\end{table}
+
+%Can be added to the table: Mapping merging support, Named graph construction support, Transformations support
+
+We also compare the systems that support the aforementioned serialisations: 
+ShExML translator\footnote{\label{foot:shexml}\url{https://github.com/herminiogg/ShExML}}, %uses mappings written in the ShExML syntax to produce both RML mappings and the RDF graph.
+Stardog\cref{foot:stardog} %is a cloud-native enterprise knowledge graph platform that offers many different features for linked data management. 
+(with focus on how Stardog maps data sources to RDF graphs, using R2RML or SMS2),
+XRM translator~\cite{xrm}, and
+%is a user-friendly java API that translates XRM mapping language syntax to [R2]RML, CARML or CSVW format. 
+YARRRML-parser\footnote{\label{foot:yarrrml-p}\url{https://github.com/RMLio/yarrrml-parser}} and our system, Yatter\cref{foot:yatter}. 
+%is an open source Jvascript library that translates the YARRRML syntax to [R2]RML.
+%\Cref{tab:chp5_eng-comparison} shows how the different systems compare to YARRRML-translator~\cite{chaves2023translator}. 
+We study 8 system features to draw conclusions about them including:
+
+\textbf{SF1. Availability.}
+%This feature indicates if the implementation of the system is open source.
+Stardog and XRM are commercial systems and their implementation is not available. ShExML Java library\cref{foot:shexml}, YARRRML-parser\cref{foot:yarrrml-p} and Yatter\cref{foot:yatter} are all available as GitHub repositories. 
+
+\textbf{SF2. Programming Language.} ShExML, XRM and Stardog are built in Java, YARRRML-parser in Javascript and Yatter in Python.
+
+\textbf{SF3. Input Data Sources.} This feature indicates the data source formats that the system can translate, given the corresponding mapping rules. 
+All systems support relational databases and CSV files as input data sources. Only Stardog and Yatter support NoSQL data sources.
+
+
+\textbf{SF4. Input Serialisation.}
+This feature indicates the input mapping serialisation. 
+All systems support their corresponding mapping serialisation. 
+Additionally, Stardog can transform R2RML mapping rules to RDF graphs, whereas both YARRRML systems can translate R2RML or RML files into YARRRML.
+
+\textbf{SF5. Output Serialisation.} 
+This indicates the output mapping serialisation. 
+XRM and YARRRML systems translate their mapping rules to [R2]RML, while XRM also supports CARML and CSVW. 
+Stardog directly constructs the RDF graph. 
+ShExML generates both RML mapping rules and RDF graphs.
+
+\textbf{SF6. RDF-star Support.}
+%This feature indicates if the system supports the generation of RDF-star statements.
+Only Stardog and Yatter support this feature. 
+Stardog added RDF-star statement support in one of their latest releases using the ``Edge Properties" configuration.
+%\footnote{https://docs.stardog.com/virtual-graphs/mapping-data-sources\#edge-properties-in-sms2}. 
+Yatter improves upon YARRRML-parser by also enabling the construction of RDF-star graphs.
+
+\textbf{SF7. Dynamic Language Tag Support.} %This feature indicates if the system supports the generation of dynamic language tags. 
+ShExML, Yatter and Stardog 
+ provide support for this feature. 
+
+\textbf{SF8. Dynamic Datatype Tag Support.} %This feature indicates if the system supports the generation of dynamic datatype tags. 
+Yatter and ShExML are the only systems that enable the reference of datatypes dynamically. 
+
+Additionally, based on the YARRRML test cases, we develop the corresponding test cases for the other analyzed serialisations. The results of the conformance test of the analysed systems are presented online\cref{foot:resources}.
+
+\textit{Discussion.}
+All systems provide a solid user experience and are -mostly- highly conformant with their corresponding serialisation. ShExML is especially useful for integrating different data sources and formats, but lacks RDF-star support, writing functions results cumbersome and the translation to RML is incomplete. Stardog works smoothly with its proprietary Stardog databases, but managing several different sources becomes complex as a different mapping rule set is required per source. 
+XRM is installed within a coding editor, and helps actively the writing process with suggestions and warnings. YARRRML-parser supports most of the functionalities that are also implemented in Yatter but still it does not support the latest RML features. YARRRML-parser translates functions to non-standard set of RML rules, while our implementation supports the specification proposed by the W3C CG on Knowledge Graph Construction\footnote{\url{https://w3id.org/kg-construct/rml-fnml}}.
+
+
+\subsubsection{Use Cases}
+
+\ana{Igual quitar esto, salen recursos de David nada más}
+
+We present two use cases with YARRRML-star and Yatter:% the construction of KGs for research performing organizations, and the support of mapping process for each EU member state in the Public Procurement Data Space (PPDS).
+
+\noindent\textbf{Constructing KGs for Research-Performing Organizations.} In a previous work~\cite{chaves2022systematic} we use YARRRML-star and Yatter to support the creation of KGs for research supporting organizations with R2RML. 
+Thanks to Yatter, we were able to create a fluent and iterative pipeline for testing and debugging the created mapping rules in a complex environment, where almost 2000 tables had to be mapped into RDF. 
+Additionally, the easy-to-read RML outcome helped the knowledge engineer to easily identify and fix errors during the construction of the knowledge graphs.      %David
+
+\noindent\textbf{The EU Public Procurement Data Space (PPDS).} The EU PPDS aims to construct a decentralized knowledge graph, declaratively mapping the procurement data from each EU member state into the e-Procurement Ontology (ePO)\footnote{\url{https://docs.ted.europa.eu/EPO/latest/}}. 
+YARRRML-star is the selected serialisation to ensure the maintainability of the KG construction, and it is currently used together with Yatter to develop the initial pilots. 
+In one of the latest pilots, Spanish public procurement open data extracted from the national platform was mapped into the ePO ontology, where the mapping rules\footnote{\url{https://github.com/oeg-upm/yatter/tree/main/test/projects/PPDSTC}} contain dynamic language tags and complex XPath expression to extract the desirable data.

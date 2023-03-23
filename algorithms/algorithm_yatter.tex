@@ -1,0 +1,33 @@
+
+
+\begin{algorithm}[t]
+\SetAlgoLined
+\KwResult{[R2]RML mapping document}
+ $input\_m \longleftarrow yarrrml\_rules$\;
+ $format \longleftarrow output\_format$\;
+ $output\_m \longleftarrow \emptyset$\;
+ 
+ $output\_m.add(translate\_prefixes(input\_m))$\;
+ \If{$format == RML$}{
+    $output\_m.add(translate\_functions(input\_m))$\;
+    $output\_m.add(translate\_targets(input\_m))$\;
+    $is\_star, non\_asserted\_maps \leftarrow analyze\_rml\_star(input\_m)$\;
+ }   
+ $output\_m.add(translate\_databases\_access(input\_m))$\;
+ $ext\_sources \leftarrow get\_external\_sources(input\_m)$;
+ 
+ \For{$tm \in M.get\_triples\_map()$}{
+    $source\_list \leftarrow translate\_source(format, get\_source\_list(ext\_sources, tm))$\;
+    $subject\_list \leftarrow translate\_subject(is\_star, format, get\_subject\_list(tm))$\;
+    $predicates\_objects \leftarrow translate\_predicates\_objects(is\_star, format, tm)$\;
+    \For{$s \in source\_list$}{
+        \For{$subj \in subject\_list$}{
+            $m \leftarrow combine(s, subj, predicates\_objects, non\_asserted\_maps))$\;
+            $output\_m.add(m)$\;
+        }
+    }
+ }
+ \Return{$validate(output\_m)$}\;
+\caption{YARRRML-star translation algorithm}
+\label{algorithm-yatter}
+\end{algorithm}
