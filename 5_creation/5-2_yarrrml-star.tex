@@ -241,12 +241,15 @@ All the described updates have been proposed for the YARRRML specification and i
 Yatter\footnote{\label{foot:yatter}\url{https://github.com/oeg-upm/yatter/}} is a new open-source bi-directional YARRRML translator that supports the aforementioned new features. 
 Yatter receives as input a mapping document in the YARRRML serialisation and the desirable output format (R2RML or RML), or the other way around.
 
-%\input{algorithms/algorithm_yatter}
+
 
 
 \cref{algorithm-yatter} presents the procedure implemented by the system to translate an input YARRRML mapping document into [R2]RML. 
 First, %prefixes are added (
 the namespaces defined in YARRRML are added together with a set of predefined ones (e.g., \texttt{foaf\footnote{\url{http://xmlns.com/foaf/0.1/}}, rml\footnote{\url{http://semweb.mmlab.be/ns/rml\#}}, rdf\footnote{\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}}}) that are used in by [R2]RML. 
+
+\input{algorithms/algorithm_yatter}
+
 Second, functions, targets, and databases are identified in the entire YARRRML document and translated into RML. Each of them generates a global identifier mapped into a hash table that can be used by any \texttt{rr:TermMap}. For external source declaration, their identifiers are also mapped into a hash table for the next steps.
 Regarding the RDF-star support, the mapping rules are parsed to identify if it contains \texttt{quoted} or \texttt{quotedNonAsserted} keys.
 This determines if the translation requires producing RML-star mapping rules.
@@ -304,7 +307,7 @@ Finally, as there are still no test cases proposed for RML-Target, RML-FNML, RML
 proposed another 21 test cases to cover them.
 
 In total, we defined 50 YARRRML test cases and their corresponding translation to RML or R2RML. 
-They are openly available\footnote{\label{foot:resources}\url{https://github.com/oeg-upm/yarrrml-validation}} to be used by any YARRRML-compliant system.
+They are openly available\footnote{\label{foot:yarrrml-resources}\url{https://github.com/oeg-upm/yarrrml-validation}} to be used by any YARRRML-compliant system.
 Yatter passes all test cases successfully. %Following good software development practices, we integrate the test cases in the continuous integration pipeline of our system as unit tests.
 
 
@@ -330,7 +333,7 @@ All serialisations can generate constant and dynamic subjects. For each set of r
 %whose default behavior generates a blank node when a subject is not described.
 
 
-\begin{table}[h!]
+\begin{table}[t!]
 \caption{Features of user-friendly serialisations. BN stands for blank node, L for literal, ST for RDF-star triple, C for constant and D for dynamic. \underline{Underlined} features indicate the updates of YARRRML-star, while
 ``*" indicates that a feature is possible with the implementation but not explicit in the serialisation.}
 \label{tab:chp5_lang-comparison}
@@ -412,25 +415,6 @@ XRM is designed to mimic natural language and adds minimal overhead with its own
 \subsubsection{Systems Comparison} 
 
 
-\begin{table}[h!]
-\caption{Features of the systems that support the different languages.}
-\label{tab:chp5_eng-comparison}
-\footnotesize
-\centering
-\resizebox{\columnwidth}{!}{
-\begin{tabular}{r|ccccc}
- & \begin{tabular}[c]{@{}c@{}}\textbf{ShExML}\\\textbf{translator}\end{tabular} & \textbf{Stardog} & \begin{tabular}[c]{@{}c@{}}\textbf{XRM}\\\textbf{translator}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{YARRRML}\\\textbf{parser}\end{tabular} & \textbf{Yatter} \\ \midrule
-\textbf{SF1} & Open Source & Closed source & Closed source & Open Source & Open Source\\ \midrule
-\textbf{SF2} & Java & Java & Java & Javascript & Python\\ \midrule
-\textbf{SF3} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\JSON, XML,\\RDF\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\GraphQL\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML\end{tabular} \\ \midrule
-\textbf{SF4} & ShExML & \begin{tabular}[c]{@{}c@{}}R2RML,\\SMS, SMS2\end{tabular} & XRM & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular} & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular}\\ \midrule
-\textbf{SF5} & \begin{tabular}[c]{@{}c@{}}RML,\\RDF \end{tabular}& RDF & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\CSVW, CARML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} \\ \midrule
-\textbf{SF6} & N/A & Yes & N/A & No & Yes\\ \midrule
-\textbf{SF7} & Yes & Yes & N/A & No & Yes\\ \midrule
-\textbf{SF8} & Yes & N/A & N/A & No & Yes\\ \midrule
-\end{tabular}
-}
-\end{table}
 
 %Can be added to the table: Mapping merging support, Named graph construction support, Transformations support
 
@@ -480,7 +464,31 @@ ShExML, Yatter and Stardog
 \textbf{SF8. Dynamic Datatype Tag Support.} %This feature indicates if the system supports the generation of dynamic datatype tags. 
 Yatter and ShExML are the only systems that enable the reference of datatypes dynamically. 
 
-Additionally, based on the YARRRML test cases, we develop the corresponding test cases for the other analyzed serialisations. The results of the conformance test of the analysed systems are presented online\cref{foot:resources}.
+Additionally, based on the YARRRML test cases, we develop the corresponding test cases for the other analyzed serialisations. The results of the conformance test of the analysed systems are presented online\cref{foot:yarrrml-resources}.
+
+
+\begin{table}[t!]
+\caption{Features of the systems that support the different languages.}
+\label{tab:chp5_eng-comparison}
+\footnotesize
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{r|ccccc}
+ & \begin{tabular}[c]{@{}c@{}}\textbf{ShExML}\\\textbf{translator}\end{tabular} & \textbf{Stardog} & \begin{tabular}[c]{@{}c@{}}\textbf{XRM}\\\textbf{translator}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{YARRRML}\\\textbf{parser}\end{tabular} & \textbf{Yatter} \\ \midrule
+\textbf{SF1} & Open Source & Closed source & Closed source & Open Source & Open Source\\ \midrule
+\textbf{SF2} & Java & Java & Java & Javascript & Python\\ \midrule
+\textbf{SF3} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\JSON, XML,\\RDF\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\GraphQL\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML\end{tabular} \\ \midrule
+\textbf{SF4} & ShExML & \begin{tabular}[c]{@{}c@{}}R2RML,\\SMS, SMS2\end{tabular} & XRM & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular} & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular}\\ \midrule
+\textbf{SF5} & \begin{tabular}[c]{@{}c@{}}RML,\\RDF \end{tabular}& RDF & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\CSVW, CARML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} \\ \midrule
+\textbf{SF6} & N/A & Yes & N/A & No & Yes\\ \midrule
+\textbf{SF7} & Yes & Yes & N/A & No & Yes\\ \midrule
+\textbf{SF8} & Yes & N/A & N/A & No & Yes\\ \midrule
+\end{tabular}
+}
+\end{table}
+
+
+
 
 \textit{Discussion.}
 All systems provide a solid user experience and are -mostly- highly conformant with their corresponding serialisation. ShExML is especially useful for integrating different data sources and formats, but lacks RDF-star support, writing functions results cumbersome and the translation to RML is incomplete. Stardog works smoothly with its proprietary Stardog databases, but managing several different sources becomes complex as a different mapping rule set is required per source. 
