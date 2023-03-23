@@ -1,9 +1,13 @@
 \section{Mapping rules in spreadsheets: Mapeathor}
 \label{sec:chp5_mapeathor}
 
-\ana{no sé muy bien qué poner por aquí, si ampliar la motivación antes de esta sección, poner algo de related work o solo referenciar, mirar otras tesis a ver}
+Since mapping languages started to be used by the community, there have been multiple approaches for the development of editors to ease their specification. Most of them enable editing through graphical visualization \cite{heyvaert2016rmleditor,sicilia2017map}, others provide a writing environment (e.g. the Protégé extension OntopPro). These editors are language-oriented, they help to create one kind of mapping, not taking into account the wide variety of mapping languages that currently exist. Moreover, when managing large amounts of mapping rules, graphical interfaces become cumbersome. %With our approach we aim at easing the writing process using a common tool such as spreadsheets, as well as enabling the generation of mapping files in more than one mapping language.
+
+%In our work we focus on facilitating the transformation rule specification using declarative mapping rules. 
+This section presents a straightforward approach to create these mapping documents, leveraging the  specification of mapping rules in spreadsheets. These spreadsheets are then later translated into one a mapping document. The purpose of this proposal is to increase the interoperability between these languages~(\cite{corcho2020towards}) as well as to ease the creation process. To perform the mapping rules translation we developed Mapeathor\footnote{\label{foot:mapeathor}\url{https://morph.oeg.fi.upm.es/demo/mapeathor}}, a tool able to parse the spreadsheets and generate the corresponding mappings in R2RML, RML and YARRRML. We present the structure of the spreadsheet to write the mapping rules, the implementation and a evaluation with users to validate our approach.
 
 \subsection{Spreadsheet design}
+\label{sec:chp5_spreadsheet_design}
 
 %The rules required to generate a knowledge graph can be specified in multiple languages. The language is chosen by the user depending on the specific use case. However, the rules themselves are equivalent across languages, so they can be written in a language-independent way, in this case, we chose a spreadsheet for rule specification. 
 
@@ -17,8 +21,8 @@ The mapping rules are specified in the spreadsheet across five different sheets,
 
 \subsubsection{Prefix sheet} 
 This sheet contains the namespaces and corresponding prefixes used when declaring the transformation rules. 
-It is composed of two columns: \texttt{Prefix} for the prefix and \texttt{URI} for the corresponding namespace. The base namespace can be specified writing ``@base" in the \texttt{Prefix} column.The namespaces used by the target mapping language are automatically added in the translation (e.g. \texttt{rr}\footnote{\url{http://www.w3.org/ns/r2rml\#}}, \texttt{rml}\footnote{\url{http://semweb.mmlab.be/ns/rml\#}}).
-The example shown in \cref{tab:prefix_sheet} presents how three namespaces and the base namespace are written in the sheet. 
+It is composed of two columns: \texttt{Prefix} for the prefix and \texttt{URI} for the corresponding namespace. The base namespace can be specified writing ``@base" in the \texttt{Prefix} column. The namespaces used by the target mapping language are automatically added in the translation (e.g. \texttt{rr}\footnote{\url{http://www.w3.org/ns/r2rml\#}}, \texttt{rml}\footnote{\url{http://semweb.mmlab.be/ns/rml\#}}).
+The example shown in \cref{tab:prefix_sheet} presents how three namespaces and the base namespace are written in this sheet. 
 
 \begin{table}[h!]
 \caption{Prefix sheet.}
@@ -35,7 +39,6 @@ grel            & http://semweb.datasciencelab.be/ns/grel\#     \\
 \end{tabular}
 \end{table}
 
-\ana{si tal poner que sin prefijo se genera ":", e implementar equisdé}
 
 \subsubsection{Subject sheet} 
 This sheet defines the subjects to be generated and their corresponding identifier (\texttt{ID}) that groups the mapping rules for each subject. It is organized in four columns: \texttt{ID}, \texttt{URI}, \texttt{Class} and \texttt{Graph}. \texttt{ID} contains a unique identifier for each subject's set of rules in order to relate to information on these rules in the remaining sheets.
@@ -59,11 +62,12 @@ SPORT & http://ex.com/Sport/\{sport\} & ex:Sport & ex:SportsGraph \\ \midrule
 \end{tabular}
 \end{table}
 
-\ana{release porque lo de los graphs no aparece en la demo}
+\ana{no class}
+
 
 \subsubsection{Source sheet} 
 
-This sheets describes where the data for each ID is retrieved from. The information is organized in three columns: \texttt{ID}, \texttt{Feature} and \texttt{Value}. 
+This sheets describes where the data for each set of rules per ID is retrieved from. The information is organized in three columns: \texttt{ID}, \texttt{Feature} and \texttt{Value}. 
 \texttt{ID} makes reference to the IDs declared in the \textit{Subject sheet}. 
 \texttt{Feature} declares the type of information provided in \texttt{Value}. The allowed keywords in this column are: \texttt{source} for the path and name of the source, \texttt{format} for the data source format, \texttt{iterator} for hierarchical data (e.g. JSON, XML), \texttt{table} for the table names of RDBs, \texttt{query} for SQL queries and \texttt{SQLVersion} for the SQL version. Each ID must have at least the \texttt{source} and \texttt{format} written; the rest of the features are optional. 
 Then, in \texttt{Value} the corresponding values of the \texttt{Feature} specified are written. 
@@ -114,7 +118,9 @@ SPORT & ex:comment & \textless{}Fun1\textgreater{} & & & & & \\ \midrule
 }
 \end{table}
 
-\subsubsection{Function sheet} Some languages are able to process data transformation functions (e.g. FnO+RML), which can be detailed in this sheet. Some well known options are the SQL and GREL functions. The functions are referred in the Predicate\_Object sheet or in other function rows with the identifier specified in \texttt{FunctionID}. The column \texttt{Feature} is used to specify the type of information provided in \texttt{Value}, where the name of the function and the value of the parameters are written. The example shown in \cref{tab:function_sheet} uses the function \texttt{grel:toLowerCase} taking one data field as input parameter.
+\subsubsection{Function sheet} Some languages are able to process data transformation functions  (e.g. FnO+RML), which can be detailed in this sheet. Mapeathor implements the last release of the FNML specification, that describes how to incorporate functions in RML mappings\footnote{\url{https://w3id.org/kg-construct/rml-fnml}}. The functions are referred in the Predicate\_Object sheet or in other function rows with the identifier specified in \texttt{FunctionID}. The column \texttt{Feature} is used to specify the type of information provided in \texttt{Value}, where the name of the function, what it returns and the value of the parameters are written. The column \texttt{Feature} requires two mandatory values (\texttt{executes} for the function IRI and \texttt{returns} for the type of output of the function) and any amount of input parameters for the function. 
+
+The example shown in \cref{tab:function_sheet} uses the function \texttt{grel:toLowerCase},  takes one data field as input parameter (\texttt{grel:valueParam}) and returns a string (\texttt{grel:stringOut}).
 
 \begin{table}[h!]
 \caption{Function sheet.}
@@ -123,20 +129,34 @@ SPORT & ex:comment & \textless{}Fun1\textgreater{} & & & & & \\ \midrule
 \begin{tabular}{c|c|c}
 \midrule
 \textbf{FunctionID} & \textbf{Feature} & \textbf{Value} \\ \midrule
-\textless{}Fun1\textgreater{} & fno:executes & grel:toLowerCase \\  
+\textless{}Fun1\textgreater{} & executes & grel:toLowerCase \\  
+\textless{}Fun1\textgreater{} & returns & grel:stringOut \\  
 \textless{}Fun1\textgreater{} & grel:valueParam & \{comment\} \\
 \midrule
 \end{tabular}
 \end{table}
 
-\ana{pensar fuertemente si incluir esto o dejarlo fuera, está completamente orientado a FnO. Si se deja, hay que modificarlo para que sea más general, tipo 'function' para el nombre de la función, y el resto de parámetros que se quede así.}
 
-%\textit{hablar aquí del diseño de la spreadsheet, que puede ser google o excel, y cada una de las pestañas poquito a poquito con sus tablas de ejemplo}
+\subsection{Mapeathor}
+
+Mapeathor\cref{foot:mapeathor} is a open-source implementation to generate mappings from the spreadsheets described in \cref{sec:chp5_spreadsheet_design}. It is able to process MS Excel and Google Spreadsheets, generating human-readable mappings in either R2RML, RML or YARRRML. 
+
+\textit{descripción de la herramienta, aunque sea de forma sencilla (y se puede poner el diagrama de github)}
+
+The source code of Mapeathor is openly available under Apache 2.0 license\footnote{\url{https://github.com/oeg-upm/mapeathor}}. It can be run as a CLI using the Pypi package\footnote{\url{https://pypi.org/project/mapeathor/}} or as an online service\cref{foot:mapeathor}, where a visual interface is provided. With each release, a new version in Pypi is created and a dedicated DOI in Zenodo. 
+
 
 \subsection{Experimental evaluation}
 
-\textit{empezar hablando un poco de la herramienta y el setup de los experimentos}
+\textit{motivación: qué queremos comprobar, que si facilita la creación de mapping rules para experts y no experts. Para eso llevamos a cabo dos evaluaciones con usuarios, subjectiva y objetiva. En la subjectiva usuarios que han probado el software cuentan su experiencia y opiniones. En la objetiva, cogemos a usuarios y los dividimos en 3 grupos, para que generen mappings con rml, rmleditor y mapeathor. Así vemos si 1) mapeathor mejora RML y si 2) funciona mejor que una herramienta visual. Describir background, que no hay bias porque se puso a gente que nos había utilizado esa tech antes. y resultados}
 
-\textit{Aquí por una parte va a estar el estudio de usuario (JE JE), incluyendo las encuestas. También se puede meter la conformance con los lenguajes, a ver si no sale muy mal eso}
+\subsubsection{Methodology}
 
-\textit{y es que igual debería poner que nos limitamos a otras herramientas pero no a syntaxis, para que luego tenga más sentido al poner yarrrml después}
+\subsubsection{Subjective evaluation}
+
+\subsubsection{Objective evaluation}
+
+
+
+\subsection{Use cases}
+Ciudades abiertas, EBOCA, photocatalisis ontology
