@@ -501,10 +501,10 @@ XRM is installed within a coding editor, and helps actively the writing process 
 
 We present two use cases with YARRRML-star and Yatter:% the construction of KGs for research performing organizations, and the support of mapping process for each EU member state in the Public Procurement Data Space (PPDS).
 
-\noindent\textbf{Constructing KGs for Research-Performing Organizations.} In a previous work~\cite{chaves2022systematic} we use YARRRML-star and Yatter to support the creation of KGs for research supporting organizations with R2RML. 
-Thanks to Yatter, we were able to create a fluent and iterative pipeline for testing and debugging the created mapping rules in a complex environment, where almost 2000 tables had to be mapped into RDF. 
-Additionally, the easy-to-read RML outcome helped the knowledge engineer to easily identify and fix errors during the construction of the knowledge graphs.      %David
+\noindent\textbf{Constructing KGs for Research-Performing Organizations.} In a previous work~\cite{chaves2022systematic} we used YARRRML-star and Yatter to support the creation of KGs for research supporting organizations with R2RML. 
+Thanks to this setup, we created a fluent and iterative pipeline for testing and debugging the created mapping rules in a complex environment, where almost 2000 tables were mapped into RDF. 
+Additionally, the easy-to-read RML outcome helped the knowledge engineer to easily identify and fix errors during the construction of the KGs.  
 
-\noindent\textbf{The EU Public Procurement Data Space (PPDS).} The EU PPDS aims to construct a decentralized knowledge graph, declaratively mapping the procurement data from each EU member state into the e-Procurement Ontology (ePO)\footnote{\url{https://docs.ted.europa.eu/EPO/latest/}}. 
+\noindent\textbf{The EU Public Procurement Data Space (PPDS).} The EU PPDS aims to construct a decentralized KG\footnote{\url{https://europa.eu/!qx9WxQ}}, declaratively mapping the procurement data from each EU member state into the e-Procurement Ontology (ePO)\footnote{\url{https://docs.ted.europa.eu/EPO/latest/}}. 
 YARRRML-star is the selected serialisation to ensure the maintainability of the KG construction, and it is currently used together with Yatter to develop the initial pilots. 
-In one of the latest pilots, Spanish public procurement open data extracted from the national platform was mapped into the ePO ontology, where the mapping rules\footnote{\url{https://github.com/oeg-upm/yatter/tree/main/test/projects/PPDSTC}} contain dynamic language tags and complex XPath expression to extract the desirable data.
+In the latest pilots, open Spanish public procurement data extracted from their national platform was mapped, where the mapping rules\footnote{\url{https://github.com/oeg-upm/yatter/tree/main/test/projects/PPDSTC}} contain dynamic language tags and complex XPath expressions to extract the desirable data.
