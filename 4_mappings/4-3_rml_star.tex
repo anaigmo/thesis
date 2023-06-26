@@ -494,11 +494,11 @@ We created an RML-star mapping with 5 triples maps quoting triples:
 3 of them are used to annotate the assignation of semantic types to entities, subjects, and objects with confidence scores;
 the remaining 2 provide the timestamps for the extraction of subjects and objects. 
 
-\begin{minipage}{0.38\linewidth}
+\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_semmeddb_entity}{ENTITY table snippet.}
 \centering
 \begin{tabular}{c}
-\hspace{-1em}
+%\hspace{5em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 ENTITY_ID , SEMTYPE , SCORE
@@ -508,12 +508,12 @@ ENTITY_ID , SEMTYPE , SCORE
 \end{tabular}
 \end{captionedlisting}
 \end{minipage}
-\,\,\,\,\hfill
-\begin{minipage}{0.6\linewidth}
+
+\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_semmeddb_pred}{PREDICATION table snippet.}
 \centering
 \begin{tabular}{c}
-\hspace{-1em}
+%\hspace{-1em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 PREDICATION_ID , SUBJECT_SEMTYPE , SUBJECT_NAME
@@ -524,11 +524,11 @@ PREDICATION_ID , SUBJECT_SEMTYPE , SUBJECT_NAME
 \end{captionedlisting}
 \end{minipage}
 
-\noindent\hspace{0.23\linewidth}\begin{minipage}{0.8\linewidth}
+\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_semmeddb_predaux}{PREDICATION\_AUX table snippet.}
 \centering
 \begin{tabular}{c}
-\hspace{-7em}
+%\hspace{-7em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 PREDICATION_AUX_ID, PREDICATION_ID, SUBJECT_SCORE, TIMESTAMP
@@ -539,16 +539,16 @@ PREDICATION_AUX_ID, PREDICATION_ID, SUBJECT_SCORE, TIMESTAMP
 \end{captionedlisting}
 \end{minipage}
 
-\noindent\hspace{0.1\linewidth}\begin{minipage}{0.78\linewidth}
+\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_semmeddb_triples}{RDF-star triples generated from data in Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{lst:chp4_semmeddb_predaux}.}
 \centering
 \begin{tabular}{c}
-\hspace{-1.5em}
+%\hspace{-1.5em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<<ex:12345 sem:semanticType "orga">> sem:score "790" .
-<<ex:13579 sem:subject ex:SubjName>> sem:timestamp "1651740766" .
-<<ex:SubjName sem:semanticType "Semtype">> sem:score "800" .
+<< ex:12345 sem:semanticType "orga" >> sem:score "790" .
+<< ex:13579 sem:subject ex:SubjName >> sem:timestamp "1651740766" .
+<< ex:SubjName sem:semanticType "Semtype" >> sem:score "800" .
 \end{lstlisting}
 }
 \end{tabular}
