@@ -1,3 +1,3 @@
-# Devising an interoperable and governable environment of mapping languages for Knowledge Graph construction
+# Knowledge Graph Construction and Evolution using Declarative Mapping Languages
 
 Starting...
