@@ -200,6 +200,41 @@ The source code of Mapeathor is openly available under Apache 2.0 license\footno
 \subsubsection{Objective evaluation}
 
 
+\begin{table}[t]
+\caption{Summary of results.}
+\label{tab:chp5_summary_mapeathor}
+\centering
+\resizebox{\columnwidth}{!}
+{\begin{tabular}{ccc|cc|cc|cc|cc}
+    \cmidrule{2-11}
+    & \multicolumn{2}{c|}{\textbf{Subject}} & \multicolumn{2}{c|}{\textbf{Source}} & \multicolumn{2}{c|}{\textbf{POM}} & \multicolumn{2}{c|}{\textbf{Join}} & \multicolumn{2}{c}{\textbf{Total}} \\ \cmidrule{2-11}
+    & LA & TA & LA & TA & LA & TA & LA & TA & LA & TA \\ \midrule
+    \textbf{\makecell{RML}} & 0.617 & 0.457 & 0.927 & 0.570 & \underline{0.684} & 0.458 & \underline{0.133} & \underline{0.150} & \underline{0.693} & 0.410  \\ \midrule
+    \textbf{\makecell{RMLEditor}} & \underline{0.465} & \underline{0.360} & \underline{0.860} & \underline{0.560} & 0.705 & \underline{0.363} & 0.233 & 0.217 & 0.705 & \underline{0.340}  \\ \midrule
+    \textbf{Mapeathor} & \textbf{0.858} & \textbf{0.620} & \textbf{0.960} & \textbf{0.620} & \textbf{0.795} & \textbf{0.581} & \textbf{0.250} & \textbf{0.225} & \textbf{0.831} & \textbf{0.547}  \\\midrule \midrule
+    \textbf{p-value} &  &  &  &  &  &  &  &  &  &   \\ \bottomrule
+\end{tabular}}
+\end{table}
+
+
+
+\begin{figure}[t!]
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+    	\includegraphics[width=\linewidth]{figures/mapeathor_rel-acc.pdf}
+    	\caption{Relative accuracy.}
+    	\label{fig:chp5_mapeathor_relacc}
+    \end{subfigure}
+    %\hspace{0.05\textwidth}
+    \begin{subfigure}[b]{\linewidth}
+    	\includegraphics[width=\linewidth]{figures/mapeathor_total-acc.pdf}
+    	\caption{Total accuracy.}
+    	\label{fig:chp5_mapeathor_totacc}
+    \end{subfigure}
+    \caption{Accuracy results.}
+    \label{fig:reification-app}
+\end{figure}
+
 
 \subsection{Use cases}
 Ciudades abiertas, EBOCA, photocatalisis ontology
