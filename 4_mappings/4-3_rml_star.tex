@@ -6,10 +6,10 @@
 
 
 Making statements about statements in RDF has
-posed a challenge almost since the inception of RDF.
-The W3C RDF Primer~(\cite{manola2004rdf}) already included a description of the standard reification approach to tackle this issue.
+posed a challenge since the inception of RDF.
+The first W3C Recommendation of RDF~\cite{lassila1999rdf} already included a description of the standard reification approach to tackle this issue.
 Other alternatives were proposed over the years,
-such as named graphs~(\cite{carroll2005namedgraphs}), N-ary relationships~(\cite{naryw3c2006}), singleton properties~(\cite{nguyen2014don}), RDF$^+$~(\cite{schueler2008querying}), and more recently, \mbox{RDF-star}~(\cite{hartig2017foundations}). 
+such as named graphs~(\cite{carroll2005namedgraphs}), N-ary relationships~(\cite{naryw3c2006}), singleton properties~(\cite{nguyen2014don}), RDF$^+$~(\cite{schueler2008querying}), and more recently, \mbox{RDF-star}~(\cite{hartig2017foundations}), which is currently being incorporated in the RDF 1.2 specification~(\cite{hartig2023rdf}). 
 
 RDF-star does not leverage the characteristics of RDF as the others proposals. Instead it extends the RDF syntax to introduce the notion of \texttt{embedded triples}. This approach is currently under development to become a W3C standard\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. 
 As a consequence, an increasing number of semantic technologies are supporting this proposal\footnote{\url{https://w3c.github.io/rdf-star/implementations}}, which include triplestores (e.g. GraphDB, AnzoGraph) and programming libraries (e.g. Apache Jena, Oxigraph).
@@ -25,7 +25,7 @@ It is possible to construct reified RDF graphs using mappings with the reificati
 We illustrate each reification alternative presented throughout this section with a running example that uses the data shown in \cref{lst:chp4_csv_star}.
 It contains CSV data related to pole vault:
 the vaulter (\texttt{PERSON}),
-the height of the jump (\texttt{MARK}),
+the height of the jump (\texttt{MARK}) and its score (\texttt{SCORE}),
 the date when the jump was performed (\texttt{DATE}) and
 an identifier of the jump (\texttt{ID}).
 The running example represents
@@ -38,9 +38,9 @@ to the statement ``a person jumped some height''.
 \begin{tabular}{c}
 \hspace{3em}
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-ID  , DATE       , MARK ,   PERSON
-1   , 2022-03-21 , 4.80 ,   Angelica
-2   , 2022-03-19 , 4.85 ,   Katerina
+ID  , DATE       , MARK ,   PERSON   , SCORE
+1   , 2022-03-21 , 4.80 ,   Angelica , 1211
+2   , 2022-03-19 , 4.85 ,   Katerina , 1224
 \end{lstlisting}}
 \end{tabular}
 \end{captionedlisting}
@@ -56,7 +56,7 @@ Thus, they can be used with RML without any further modification. RML mapping ru
 %\ana{probablemente en sota estarán explicados cada uno de los modelos, probablemente no haga falta ponerlos aquí también.}
 
 
-\noindent\textbf{\textit{Standard Reification}}~(\cite{manola2004rdf}) was proposed in the W3C RDF Primer~(\cite{manola2004rdf}).
+\noindent\textbf{\textit{Standard Reification}}~(\cite{lassila1999rdf}) was proposed in the first W3C Recommendation of RDF.
 It assigns statements to unique identifiers (typically blank nodes) typed with \texttt{rdf:Statement} and described using the properties \texttt{rdf:subject}, \texttt{rdf:predicate} and \texttt{rdf:object}.
 This way, the unique identifier representing the statement can be further annotated with additional statements. \cref{lst:chp4_res-std-reif} shows an example of standard reification for the data in \cref{lst:chp4_csv_star}, created with the RML mapping rules in \cref{lst:chp4_std-reif}. 
 This mapping creates blank nodes in the subject with the \texttt{ID} data field, typed with \texttt{rdf:Statement}; and has three predicate object maps to generate the \texttt{rdf:subject}, \texttt{rdf:predicate}, \texttt{rdf:object} of the triples (\textit{An athlete jumps certain height}) and a predicate object map to annotate the statements with \texttt{:date} (\textit{in a specific date}).
@@ -281,69 +281,99 @@ The resulting RDF triples are shown in \cref{lst:chp4_res-nary-reif}.
 
 
 
-We propose RML-star as an extension of RML to generate \mbox{RDF-star} graphs (\cref{fig:rml-star}). 
-\mbox{RML-star} adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. Following the \mbox{RDF-star} data model, star maps can only be used in subject and object maps. Star maps use the property \texttt{rml:quotedTri\-plesMap} to refer to the triples map that generates the quoted triples. This referenced triples map will also generate asserted triples, since it is a \texttt{rr:TriplesMap}. To enable the generation of quoted triples without asserting them, RML-star introduces \texttt{rml:NonAssertedTriplesMap} as a subclass of \texttt{rr:TriplesMap}. Non-asserted triples maps can be referred by \texttt{rml:quotedTriplesMap} to generate quoted triples, but they will be ignored when generating asserted triples.
-
-The \mbox{RML-star} specification~(\cite{iglesias2022rmlstar}) provides a complete description of the language, it is published as a W3C Draft Community Report, and it is maintained by the W3C Knowledge Graph Construction Community Group\cref{foot:kgc}.
-Both, the language and the specification are kept up to date reflecting the modifications in \mbox{RDF-star}.
-For instance, the latest \mbox{RML-star} releases update the term ``embedded'' to ``quoted'',
-according to the modifications in \mbox{RDF-star}.
-This update renamed the property \texttt{rml:embeddedTriplesMap} 
-%from a previous version\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}} to \texttt{rml:quotedTriplesMap}.
-An example of an \mbox{RML-star} mapping rule for the data in \cref{lst:chp4_csv_star} is in \cref{lst:chp4_rml-star} which generates the \mbox{RDF-star} triples in \cref{lst:chp4_res-rml-star}. 
-The mapping rules use a non-asserted triples map (\texttt{<\#jumpTM>}) within the subject map of a triples map (\texttt{<\#dateTM>}) which annotates quoted triples (\textit{An athlete jumps certain height}) with \texttt{:date} (\textit{in a specific date}).
+We propose RML-star as an extension of RML to generate \mbox{RDF-star} graphs (\cref{fig:chp4_rml-star}). 
+\mbox{RML-star} adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. 
+Following the \mbox{RDF-star} data model,
+a quoted triple may appear only in the subject or object of a triple.
+Thus, star maps can only be used in subject and object maps.
+Star maps use the property \texttt{rml:quotedTriplesMap} to refer to the triples map that generates the quoted triples. 
+The referenced triples map can only be one of the following: (i) \texttt{rml:AssertedTriplesMap} to be asserted in the output graph, or (ii) \texttt{rml:NonAssertedTriplesMap} to not be asserted. A quoted triples map can specify \texttt{rml:class} in the subject map or have multiple predicate-object maps.
+Thus, several triples sharing the same subject map and logical source can be quoted by the same star map.
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=1\linewidth]{figures/rml-star_diagram.pdf}
-\caption{The \mbox{RML-star} extension (represented using the Chowlk notation~(\cite{feria2022chowlk})) with additions and modifications over the RML ontology.}
-\label{fig:rml-star}
+\caption{The \mbox{RML-star} module (represented using the Chowlk notation~(\cite{feria2022chowlk})). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
+\label{fig:chp4_rml-star}
 \end{figure*}
 
-\begin{minipage}{\linewidth}
+
+
+An example of an \mbox{RML-star} mapping rule is shown in \cref{lst:chp4_rml-star}, which generates the \mbox{RDF-star} triples in \cref{lst:chp4_res-rml-star} from data in \cref{lst:chp4_csv_star}. 
+The mapping rules use an asserted triples map (\texttt{<\#jumpTM>}) within the subject map of a triples map (\texttt{<\#dateTM>}). The quoted triples map \texttt{<\#jumpTM>} contains two predicate-object maps that produce triples annotated with \texttt{:date}. The first predicate-object map (\textit{lines 6-9}) produces the triples for the height of the jump, the same as the examples presented previously for the other reification approaches. We extend the RML-star example with a second predicate-object map to also represent the score of the jump within the same quoted triples map (\textit{lines 10-13}). To produce this triple in the other reification approaches an additional triples map for each case would be required.
+
+
+Currently, the \mbox{RML-star} specification~\cite{iglesias2022rmlstar} provides a complete description of the language, is published as a W3C Draft Community Group Report, and is maintained by the W3C Knowledge Graph Construction Community Group.\cref{foot:kgc} 
+This extension belongs to the modules that comprise the new RML specification\footnote{\label{foot:rml-portal}\url{http://w3id.org/rml/portal/}} that is currently under development by the aforementioned Community Group. The semantics of the relationships between the old and this new specification are defined and available online~\footnote{\url{https://w3id.org/rml/portal/backwards-compatibility}} to facilitate backwards compatibility.
+Both the language and the specification are kept up-to-date reflecting the modifications in \mbox{RDF-star}.
+For instance, the latest \mbox{RML-star} releases update the term ``embedded'' to ``quoted'',
+according to the modifications in \mbox{RDF-star}.
+%that occurred after the first release of RML-star~\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}}. 
+This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:quotedTriplesMap}.
+
+
+
+\noindent\hspace{0.06\linewidth}\begin{minipage}{1\linewidth}
+\begin{captionedlisting}{lst:chp4_rml-star}{Example RML-star mapping that transforms data in Listing~\ref{lst:chp4_csv_star}.}
 \centering
-\begin{captionedlisting}{lst:chp4_rml-star}{Example RML-star mapping that transforms data in \cref{lst:chp4_csv_star}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,label={list:example1},columns=flexible,]
+\begin{tabular}{cc}
+\hspace{-2em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1}]
 <#jumpTM> 
- a rml:NonAssertedTriplesMap ;
- rml:logicalSource :marks ;
- rml:subjectMap [ 
-  rr:template ":{PERSON}" ] ;
- rr:predicateObjectMap [ 
-  rr:predicate :jumps ;
-  rml:objectMap [
-   rml:reference "MARK" ] ] .
+  a rml:AssertedTriplesMap ;
+  rml:logicalSource :marks ;
+  rml:subjectMap [ 
+    rml:template ":{PERSON}" ] ;
+  rml:predicateObjectMap [ 
+    rml:predicate :jumps ;
+    rml:objectMap [
+      rml:reference "MARK" ] ] ;
+\end{lstlisting}}
+&
+\hspace{3em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},firstnumber=14]
 <#dateTM> 
- a rr:TriplesMap ;
- rml:logicalSource :marks ;
- rml:subjectMap [ 
-  rml:quotedTriplesMap <#jumpTM>];
- rr:predicateObjectMap [ 
-  rr:predicate :date ;
-  rml:objectMap [
-   rml:reference "DATE" ] ] .
+  a rml:TriplesMap ;
+  rml:logicalSource :marks ;
+  rml:subjectMap [ 
+    rml:quotedTriplesMap <#jumpTM> ] ;
+  rml:predicateObjectMap [ 
+    rml:predicate :date ;
+    rml:objectMap [
+      rml:reference "DATE" ] ] .
+\end{lstlisting}}\\
+\hspace{-2em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},frame=l,rulecolor=\color{red},framerule=0.75pt,firstnumber=10]
+  rml:predicateObjectMap [ 
+    rml:predicate :score ;
+    rml:objectMap [
+      rml:reference "SCORE" ] ] .
 \end{lstlisting}}
 
-\end{multicols}
-\end{captionedlisting}
-\end{minipage}
-
-\noindent\hspace{0.1\linewidth}\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_res-rml-star}{RDF-star triples generated by the mapping in \cref{lst:chp4_rml-star}.}
-\centering
-\begin{tabular}{c}
-\hspace{2em}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<< :Angelica :jumps "4.80" >> :date "2022-03-21" .
-<< :Katerina :jumps "4.85" >> :date "2022-03-19" .
-\end{lstlisting}}
 \end{tabular}
 \end{captionedlisting}
 \end{minipage}
 
 
+\noindent\hspace{0.1\linewidth}\begin{minipage}{\linewidth}
+\begin{captionedlisting}{lst:chp4_res-rml-star}{RDF-star triples generated by the mapping in Listing~\ref{lst:chp4_rml-star}.}
+\centering
+\begin{tabular}{c}
+\hspace{2em}
+{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
+:Angelica :jumps "4.80" .
+<< :Angelica :jumps "4.80" >> :date "2022-03-21" .
+:Katerina :jumps "4.85" .
+<< :Katerina :jumps "4.85" >> :date "2022-03-19" .
+\end{lstlisting}}\\
+\hspace{2em}
+{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible,frame=l,rulecolor=\color{red},framerule=0.75pt,firstnumber=5]
+:Angelica :score "1211" .
+<< :Angelica :score "1211" >> :date "2022-03-21" .
+:Katerina :score "1224" .
+<< :Katerina :score "1224" >> :date "2022-03-19" .
+\end{lstlisting}}
+
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
 
 
 
@@ -371,7 +401,7 @@ To create a representative set of test cases for \mbox{RML-star}, we selected th
 For each \mbox{RDF-star} test case, we created two associated \mbox{RML-star} test cases that generate the original \mbox{RDF-star} dataset: one test case with a single input data source (i.e., the mapping does not include joins) and another with two input data sources (i.e., the mapping includes joins among triple maps).
 For each test case, we manually created the input source(s) in the CSV format and the corresponding \mbox{RML-star} mapping rules to generate the output \mbox{RDF-star} datasets.
 Following this approach, we obtained 16 \mbox{RML-star} test cases.
-The test cases are openly available at the W3C Community Group on Knowledge Graph Construction~(\footnote{\url{https://github.com/kg-construct/rml-star-test-cases}}),
+The test cases are openly available at the W3C Community Group on Knowledge Graph Construction~(\footnote{\url{https://github.com/kg-construct/rml-star/tree/main/test-cases}}),
 and can be reused by any engine to test its conformance with respect to \mbox{RML-star}.
 
 
