@@ -193,22 +193,42 @@ The source code of Mapeathor is openly available under Apache 2.0 license\footno
 \subsection{Methodology}
 \label{sec:chp5_mapeathor_eval_method}
 
-We carry a user study with two dimensions to test the usability of Mapeathor and evaluate if the spreadsheet-based approach can improve the mapping writing process for users of different expertise. We first carry out a \textit{subjective evaluation} in order to gather opinions and feedback about the spreadsheet template and usability of the tool in order to improve the user experience. We then perform a \textit{objective evaluation} to find out if our approach improves the mapping writing process w.r.t. writing directly the mapping in a target language (i.e. RML) and w.r.t. another mapping editor with a visual interface (i.e. RMLEditor). This section first describes the methodology followed for the performed evaluations.
+We carry a user study with two dimensions to test the usability of Mapeathor and evaluate if the spreadsheet-based approach can improve the mapping writing process for users of different expertise. We first carry out a \textit{subjective evaluation} in order to gather opinions and feedback about the spreadsheet template and usability of the tool in order to improve the user experience. We then perform a \textit{objective evaluation} to find out if our approach improves the mapping writing process w.r.t. writing directly the mapping in a target language (i.e. RML) and w.r.t. another mapping editor with a visual interface (i.e. RMLEditor). This section describes the methodology followed for the performed evaluations.
 
 %\textit{motivación: qué queremos comprobar, que si facilita la creación de mapping rules para experts y no experts. Para eso llevamos a cabo dos evaluaciones con usuarios, subjectiva y objetiva. En la subjectiva usuarios que han probado el software cuentan su experiencia y opiniones. En la objetiva, cogemos a usuarios y los dividimos en 3 grupos, para que generen mappings con rml, rmleditor y mapeathor. Así vemos si 1) mapeathor mejora RML y si 2) funciona mejor que una herramienta visual. Describir background, que no hay bias porque se puso a gente que nos había utilizado esa tech antes. y resultados}
 
 
-\noindent\textit{\textbf{Procedure}}
+\noindent\textit{\textbf{Procedure}} The evaluation took place in two steps. The first step, correspondent to the \textit{subjective evaluation}, took place during the Knowledge Graph Construction Tutorial co-located with the 19th edition of the Extended Semantic Web Conference (2022)\footnote{\url{https://kg-construct.github.io/eswc-dkg-tutorial-2022/}}. This tutorial hosted a slot for presenting Mapeathor and the spreadsheet design, allowing time for a hands-on exercise at the end of the explanation. At the end of the slot, participants were asked to fill a questionnaire to assess the usability of the approach and gather some feedback for improvements. The questionnaire followed the SUS template (\ana{table with questions}), and asked participants to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and inquired about the participant's opinions on the approach and feedback for improvement.
+
+The second step of the evaluation that comprises the \textit{objective evaluation} took place in May 2023, once the improvements gathered from the previous step were implemented. In this step, the spreadsheet-based approach proposed in this work was compared with the widely used RML mapping language~\cite{Dimou2014rml}, and with a visual editor, RMLEditor~\cite{heyvaert2016rmleditor}. A group of 30 participants was divided into three groups of 10. Each group had to carry out the same task, to create a mapping from a given dataset and ontology with the assigned tool. All groups were introduced to the needed concepts about mapping languages and specific guidelines with examples of the assigned tool. The groups performed the given task in separated sessions, i.e. one session per tool was carried out, to ensure that all participants were given the same level of assistance independently of the tool. Participants were asked to carry out the proposed task in 30 minutes, after that they were asked to submit the mapping they have created so far. In addition, likewise as in the first step, participants were asked to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and to write their personal opinion on the assigned tool.
+
+
 
 \noindent\textit{\textbf{Dataset}}
 
-\noindent\textit{\textbf{Participants}}
+\noindent\textit{\textbf{Participants}} 
+In the \textit{subjective evaluation}, 17 attendants submitted answers to the questionnaire provided during the session. Most of the participants were knowledgeable in linked data, while less than half had already used mappings before. 
+In the \textit{objective evaluation}, 30 participants were sampled from the Ontology Engineering Group, ranging from MSc students to full professors. Their background ranged from having basic knowledge about linked data and mappings, to being knowledgeable practitioners, including participants that were experts in linked data but had no knowledge about mappings. Participants were pseudo-randomly divided into three groups, one per tool. Prior to this assignation, participants were asked to provide information about whether they had prior knowledge of any of the tools, so that no participant would use a tool which they were already familiar with. Each group was balanced w.r.t. the heterogeneity in background. 
 
-\noindent\textit{\textbf{Metrics}}
+\noindent\textit{\textbf{Metrics}} 
+The \textit{subjective evaluation} measured the responses to the SUS questionnaire on a 5-point Likert scale. 
+For the \textit{objective evaluation} the accuracy of the mapping submitted was calculated. All participants had 30 minutes to perform the task and upload the resulting mapping, thus two kinds of accuracies are calculated. 
+primero, se divide el mapping en 4 partes: sujeto, source, predicate-object y join, que son los 4 componentes principales de un mapping, y que se requerían para el ejercicio propuesto. El accuracy total se refiere cuántas de esas partes tienen bien con respecto al mapping de referencia. El accuracy local se refiere a qué partes están bien con respecto a lo que han escrito. Dado que el tiempo era el mismo, el accuracy total se puede entender como una medida de la que se intuye el completeness, mientras que el local se enfoca en ver que, independientemente de cómo de completo esté el mapping, si las reglas escritas son correctas, y solo fue cuestión de tiempo que hubiese llegado a la solución correcta completa. Se calcula el accuracy local y total para cada subgrupo de componentes del mapping, y el total de componentes. Se ejecuta un t-test para ver si las diferencias de accuracy entre herramientas es significativa. 
 
-\noindent\textit{\textbf{Threats to validity}} (\cite{creswell2017research})
+\noindent\textit{\textbf{Threats to validity}} (\cite{creswell2017research}) We identify the following internal and external threats to the validity of our experiment.
 
+\textbf{Internal validity threats} concern the experimental setup or experience of participants which threaten the ability to draw correct conclusions about the population in the experiment. We identify three internal threats: \textit{tool familiarity bias}, \textit{selection bias} and \textit{instruction bias}.
+\begin{itemize}
+    \item \textbf{Tool familiarity bias.} Practitioners tend to be more expert in some specific technologies and languages that they use more frequently. Thus, in the sample there it is possible to have participants that have used any of the tested approaches, which in turn can influence the results. For creating the groups, participants' experience was inquired to avoid assigning them a tool that they had previously used.
+    \item \textbf{Selection bias.} The sample includes participants with different range on skills and previous knowledge about linked data and mappings. We mitigate this threat by defining groups that were  homogeneous w.r.t. range of expertise in mappings and linked data, considering also the mitigation measures for the \textit{tool familiarity} threat. That is to say, all groups included from beginner users to knowledgeable practitioners. 
+    \item \textbf{Instruction bias.} One of the evaluated approaches is designed by the conductors of the user study. This situation could incur in bias on information delivery. To mitigate this threat, we provided participants with the same instruction guidelines for each tool. Three sessions were conducted subsequently to provide the same explanations and attention to each tool. During each sessions, all questions were answered with equal level of detail and guidance for all tools and participants.
+\end{itemize}
 
+\textbf{External validity threats} occur when wrong inferences from sample data are made beyond the studied sample or experimental setup. We identify two external threats: \textit{background of participants sample} and \textit{environment}.
+\begin{itemize}
+    \item \textbf{Background of participants sample.} This threat concerns the generalization to individuals outside the study. The sample of participants include a wide range in the variety of backgrounds, from not very familiar with linked data and mappings, to experts. We deliberately choose to have this variety for each group so that the results can be generalized to a broader sample, while mitigating the risks of internal threats described above that this choice poses. 
+    \item \textbf{Environment.} This threat concerns the generalization to individuals outside the experiment’s setting. Participants were free to use a computer, browser and tools of their choice. Thus, they could perform the tasks required for the study in a well-known environment. No specific experimental setup prevents generalizations to individuals outside our study.
+\end{itemize}
 
 
 
@@ -221,7 +241,7 @@ We carry a user study with two dimensions to test the usability of Mapeathor and
 \noindent\textit{\textbf{Objective evaluation results}}
 
 \ana{gráficas background per group and general}
-\begin{table}[t]
+\begin{table}[h]
 \caption{Results of the user study, showing the mean of the local accuracy (LA), total accuracy (TA) and p-value of the submitted responses per mapping feature and tool.}
 \label{tab:chp5_summary_mapeathor}
 \centering
