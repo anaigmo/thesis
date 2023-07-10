@@ -181,6 +181,7 @@ $<$Fun-date$>$ & grel:valueParam3 & yyyy-MM-dd \\
 
 
 \subsection{Mapeathor}
+\label{sec:chp5_mapeathor_tool}
 
 Mapeathor~(\cite{iglesias-molina_2023_5973906}) is a open-source implementation to generate mappings from the spreadsheets described in \cref{sec:chp5_spreadsheet_design}. It is able to process MS Excel and Google Spreadsheets, generating human-readable mappings in either R2RML, RML or YARRRML. 
 
@@ -189,19 +190,39 @@ Mapeathor~(\cite{iglesias-molina_2023_5973906}) is a open-source implementation 
 The source code of Mapeathor is openly available under Apache 2.0 license\footnote{\url{https://github.com/oeg-upm/mapeathor}}. It can be run as a CLI using the Pypi package\footnote{\url{https://pypi.org/project/mapeathor/}} or as an online service\footnote{\url{https://morph.oeg.fi.upm.es/demo/mapeathor}}, where a visual interface is provided. With each release, a new version in Pypi is created and a dedicated DOI archived in Zenodo~(\cite{iglesias-molina_2023_5973906}). 
 
 
-\subsection{Experimental evaluation}
+\subsection{Methodology}
+\label{sec:chp5_mapeathor_eval_method}
 
-\textit{motivación: qué queremos comprobar, que si facilita la creación de mapping rules para experts y no experts. Para eso llevamos a cabo dos evaluaciones con usuarios, subjectiva y objetiva. En la subjectiva usuarios que han probado el software cuentan su experiencia y opiniones. En la objetiva, cogemos a usuarios y los dividimos en 3 grupos, para que generen mappings con rml, rmleditor y mapeathor. Así vemos si 1) mapeathor mejora RML y si 2) funciona mejor que una herramienta visual. Describir background, que no hay bias porque se puso a gente que nos había utilizado esa tech antes. y resultados}
+We carry a user study with two dimensions to test the usability of Mapeathor and evaluate if the spreadsheet-based approach can improve the mapping writing process for users of different expertise. We first carry out a \textit{subjective evaluation} in order to gather opinions and feedback about the spreadsheet template and usability of the tool in order to improve the user experience. We then perform a \textit{objective evaluation} to find out if our approach improves the mapping writing process w.r.t. writing directly the mapping in a target language (i.e. RML) and w.r.t. another mapping editor with a visual interface (i.e. RMLEditor). This section first describes the methodology followed for the performed evaluations.
 
-\subsubsection{Methodology}
-
-\subsubsection{Subjective evaluation}
-
-\subsubsection{Objective evaluation}
+%\textit{motivación: qué queremos comprobar, que si facilita la creación de mapping rules para experts y no experts. Para eso llevamos a cabo dos evaluaciones con usuarios, subjectiva y objetiva. En la subjectiva usuarios que han probado el software cuentan su experiencia y opiniones. En la objetiva, cogemos a usuarios y los dividimos en 3 grupos, para que generen mappings con rml, rmleditor y mapeathor. Así vemos si 1) mapeathor mejora RML y si 2) funciona mejor que una herramienta visual. Describir background, que no hay bias porque se puso a gente que nos había utilizado esa tech antes. y resultados}
 
 
+\noindent\textit{\textbf{Procedure}}
+
+\noindent\textit{\textbf{Dataset}}
+
+\noindent\textit{\textbf{Participants}}
+
+\noindent\textit{\textbf{Metrics}}
+
+\noindent\textit{\textbf{Threats to validity}} (\cite{creswell2017research})
+
+
+
+
+
+
+\subsection{Results}
+\label{sec:chp5_mapeathor_results}
+
+\noindent\textit{\textbf{Subjective evaluation results}}
+
+\noindent\textit{\textbf{Objective evaluation results}}
+
+\ana{gráficas background per group and general}
 \begin{table}[t]
-\caption{Summary of results.}
+\caption{Results of the user study, showing the mean of the local accuracy (LA), total accuracy (TA) and p-value of the submitted responses per mapping feature and tool.}
 \label{tab:chp5_summary_mapeathor}
 \centering
 \resizebox{\columnwidth}{!}
@@ -212,7 +233,7 @@ The source code of Mapeathor is openly available under Apache 2.0 license\footno
     \textbf{\makecell{RML}} & 0.617 & 0.457 & 0.927 & 0.570 & \underline{0.684} & 0.458 & \underline{0.133} & \underline{0.150} & \underline{0.693} & 0.410  \\ \midrule
     \textbf{\makecell{RMLEditor}} & \underline{0.465} & \underline{0.360} & \underline{0.860} & \underline{0.560} & 0.705 & \underline{0.363} & 0.233 & 0.217 & 0.705 & \underline{0.340}  \\ \midrule
     \textbf{Mapeathor} & \textbf{0.858} & \textbf{0.620} & \textbf{0.960} & \textbf{0.620} & \textbf{0.795} & \textbf{0.581} & \textbf{0.250} & \textbf{0.225} & \textbf{0.831} & \textbf{0.547}  \\\midrule \midrule
-    \textbf{p-value} &  &  &  &  &  &  &  &  &  &   \\ \bottomrule
+    \textbf{p-value} & 0.090 & 0.295 & 0.596 & 0.890 & 0.777 & 0.337 & 0.746 & 0.881 & 0.476 &  0.264 \\ \bottomrule
 \end{tabular}}
 \end{table}
 
@@ -222,7 +243,7 @@ The source code of Mapeathor is openly available under Apache 2.0 license\footno
     \centering
     \begin{subfigure}[b]{\linewidth}
     	\includegraphics[width=\linewidth]{figures/mapeathor_rel-acc.pdf}
-    	\caption{Relative accuracy.}
+    	\caption{Local accuracy.}
     	\label{fig:chp5_mapeathor_relacc}
     \end{subfigure}
     %\hspace{0.05\textwidth}
@@ -238,3 +259,12 @@ The source code of Mapeathor is openly available under Apache 2.0 license\footno
 
 \subsection{Use cases}
 Ciudades abiertas, EBOCA, photocatalisis ontology
+\ana{bueno ya veremos}
+
+
+
+\subsection{Discussion}
+\label{sec:chp5_mapeathor_discussion}
+
+\ana{newpage hasta que la seccióne esté entera, borrar después}
+\newpage
