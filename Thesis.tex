@@ -37,7 +37,7 @@
 \usepackage{tabu, booktabs}
 
 
-\usepackage{listings}
+\usepackage{listings,chngcntr}
 \def\dollar{\$}
 \lstset{mathescape=true}
 \lstset{%
@@ -141,7 +141,7 @@
 	keywords=[4]{xsd, double, integer, boolean, decimal, string},
 	keywordstyle=[4]\color{applegreen}\bfseries,
 	keywordstyle=[5]\color{iris}\bfseries,
-	keywords=[5]{GENERATE, REPLACE, WHERE, FILTER},
+	keywords=[5]{GENERATE, REPLACE, WHERE, FILTER, BIND, CONSTRUCT, GRAPH},
 	identifierstyle=\color{black},
 	sensitive=false,
 	comment=[l]{//},
@@ -364,6 +364,7 @@
 % --------------------------------------------------------------
 
 \begin{document}
+%\counterwithin{lstlisting}{chapter}
 
 %\language{english}
 
@@ -477,7 +478,7 @@ EL PRESIDENTE \hspace{30mm} VOCAL 1 \hspace{30mm} VOCAL 2
 
 \listoftables  % print list of tables
 
-%\listofalgorithms % Print list of algorithms
+\listofalgorithms % Print list of algorithms
 
 
 %: ----------------------- glossary ------------------------
