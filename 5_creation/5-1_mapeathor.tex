@@ -198,13 +198,54 @@ We carry a user study with two dimensions to test the usability of Mapeathor and
 %\textit{motivación: qué queremos comprobar, que si facilita la creación de mapping rules para experts y no experts. Para eso llevamos a cabo dos evaluaciones con usuarios, subjectiva y objetiva. En la subjectiva usuarios que han probado el software cuentan su experiencia y opiniones. En la objetiva, cogemos a usuarios y los dividimos en 3 grupos, para que generen mappings con rml, rmleditor y mapeathor. Así vemos si 1) mapeathor mejora RML y si 2) funciona mejor que una herramienta visual. Describir background, que no hay bias porque se puso a gente que nos había utilizado esa tech antes. y resultados}
 
 
-\noindent\textit{\textbf{Procedure}} The evaluation took place in two steps. The first step, correspondent to the \textit{subjective evaluation}, took place during the Knowledge Graph Construction Tutorial co-located with the 19th edition of the Extended Semantic Web Conference (2022)\footnote{\url{https://kg-construct.github.io/eswc-dkg-tutorial-2022/}}. This tutorial hosted a slot for presenting Mapeathor and the spreadsheet design, allowing time for a hands-on exercise at the end of the explanation. At the end of the slot, participants were asked to fill a questionnaire to assess the usability of the approach and gather some feedback for improvements. The questionnaire followed the SUS template (\ana{table with questions}), and asked participants to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and inquired about the participant's opinions on the approach and feedback for improvement.
+\noindent\textit{\textbf{Procedure}} The evaluation is comprised of two steps. The first step, correspondent to the \textit{subjective evaluation}, took place during the Knowledge Graph Construction Tutorial co-located with the 19th edition of the Extended Semantic Web Conference (2022)\footnote{\url{https://kg-construct.github.io/eswc-dkg-tutorial-2022/}}. This tutorial hosted a slot for presenting Mapeathor and the spreadsheet design, allowing time for a hands-on exercise at the end of the explanation. At the end of the slot, participants were asked to fill a questionnaire to assess the usability of the approach and gather some feedback for improvements. The questionnaire first inquired about the background of the participants, asking them to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools. Then, it assessed the usability of the approach with 10 questions that follow the SUS template, with also a 5-point Likert scale rating; and an additional optional question to gather feedback for improvement (\cref{tab:chp5_sub_questionnaire}).
+
+
+\begin{table}[t!]
+\caption{Questionnaire for subjective assessment of the usability of the spreadsheet design and Mapeathor. }
+\centering
+\label{tab:chp5_sub_questionnaire}
+\resizebox{\columnwidth}{!}
+{\begin{tabular}{cl}
+\multicolumn{2}{c}{\textbf{Questions}} \\ \midrule
+1. & I think that I would like to use this tool frequently\\ \midrule
+2. & I found the tool unnecessarily complex\\ \midrule
+3. & I thought the spreadsheet template was easy to use\\ \midrule
+4. & I think that I would need the support of a technical person to be able to use the spreadsheet template\\ \midrule
+5. & I found the different facets in this spreadsheet template were well integrated\\ \midrule
+6. & I thought there was too much inconsistency in this tool\\ \midrule
+7. & I think that most people would learn how to write the spreadsheet template very quickly\\ \midrule
+8. & I found the tool unmanageable to use\\ \midrule
+9. & I felt very confident using the spreadsheet template\\ \midrule
+10. & I needed to learn a lot of things before I could get going with this tool\\ \midrule
+11. & Optional comments (feedback to improve) \\ \bottomrule
+\end{tabular}}
+\end{table}
+
+
+
+
 
 The second step of the evaluation that comprises the \textit{objective evaluation} took place in May 2023, once the improvements gathered from the previous step were implemented. In this step, the spreadsheet-based approach proposed in this work was compared with the widely used RML mapping language~\cite{Dimou2014rml}, and with a visual editor, RMLEditor~\cite{heyvaert2016rmleditor}. A group of 30 participants was divided into three groups of 10. Each group had to carry out the same task, to create a mapping from a given dataset and ontology with the assigned tool. All groups were introduced to the needed concepts about mapping languages and specific guidelines with examples of the assigned tool. The groups performed the given task in separated sessions, i.e. one session per tool was carried out, to ensure that all participants were given the same level of assistance independently of the tool. Participants were asked to carry out the proposed task in 30 minutes, after that they were asked to submit the mapping they have created so far. In addition, likewise as in the first step, participants were asked to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and to write their personal opinion on the assigned tool.
 
 
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/mapeathor_us_onto.png}
+\caption[Ontology diagram for the user study exercise of Mapeathor]{Ontology diagram representing a subset of the Vocabulary for data representation of the local business census and activities licenses.}
+\label{fig:chp5_us_onto}
+\end{figure*}
 
-\noindent\textit{\textbf{Dataset}}
+\noindent\textit{\textbf{Resources}}
+The same data and ontology was used for both evaluations. We use a subset of the \textit{Vocabulary for data representation of the local business census and activities licenses}\footnote{\url{http://vocab.ciudadesabiertas.es/def/comercio/tejido-comercial/index-en.html}} that represents local businesses, their postal address and geolocalization (\cref{fig:chp5_us_onto}). 
+We chose this dataset, that belongs to the common-knowledge domain, to avoid heterogeneous prior domain knowledge influence on the results of the study.
+
+We provided participants with the subset ontology description and associated data, that is comprised of three CSV files: \texttt{bar.csv}, \texttt{restaurant.csv} and \texttt{address.csv}. Information about bars, restaurants and their geolocalization is represented in the files \texttt{bar.csv}, \texttt{restaurant.csv} respectively. 
+These files contain the same columns, but different data. The file \texttt{address.csv} represent the postal address of the businesses present in the other two files. 
+The original data is available in GitHub\footnote{\url{https://github.com/CiudadesAbiertas/vocab-comercio-censo-locales/}}. 
+To facilitate the exercise for participants, some data cleaning was performed over the original files, as well as translation to all columns form spanish to english~(\cite{iglesias-molina_2022_8154522}).
+
+
 
 \noindent\textit{\textbf{Participants}} 
 In the \textit{subjective evaluation}, 17 attendants submitted answers to the questionnaire provided during the session. Most of the participants were knowledgeable in linked data, while less than half had already used mappings before. 
@@ -213,6 +254,9 @@ In the \textit{objective evaluation}, 30 participants were sampled from the Onto
 \noindent\textit{\textbf{Metrics}} 
 The \textit{subjective evaluation} measured the responses to the SUS questionnaire on a 5-point Likert scale. 
 For the \textit{objective evaluation} the accuracy of the mapping submitted was calculated. All participants had 30 minutes to perform the task and upload the resulting mapping, thus two kinds of accuracies are calculated. 
+
+% We divide the mapping in four components: 
+
 primero, se divide el mapping en 4 partes: sujeto, source, predicate-object y join, que son los 4 componentes principales de un mapping, y que se requerían para el ejercicio propuesto. El accuracy total se refiere cuántas de esas partes tienen bien con respecto al mapping de referencia. El accuracy local se refiere a qué partes están bien con respecto a lo que han escrito. Dado que el tiempo era el mismo, el accuracy total se puede entender como una medida de la que se intuye el completeness, mientras que el local se enfoca en ver que, independientemente de cómo de completo esté el mapping, si las reglas escritas son correctas, y solo fue cuestión de tiempo que hubiese llegado a la solución correcta completa. Se calcula el accuracy local y total para cada subgrupo de componentes del mapping, y el total de componentes. Se ejecuta un t-test para ver si las diferencias de accuracy entre herramientas es significativa. 
 
 \noindent\textit{\textbf{Threats to validity}} (\cite{creswell2017research}) We identify the following internal and external threats to the validity of our experiment.
