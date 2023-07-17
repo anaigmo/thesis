@@ -1,15 +1,15 @@
 \section{Mapping Rules for RDF-star: RML-star}
 \label{sec:chp4_rml_star}
 
-%In the late years, the RDF-star~(\cite{hartig2017foundations}) approach for reification has gained popularity. Along with its expansions, different semantic web technologies have been updated to include this new syntax\footnote{\url{https://w3c.github.io/rdf-star/implementations}}. This section describes one of these updates related to building RDF-star graphs: RML-star. \ana{esto no liga del todo bien con lo anterior}
+%In the late years, the RDF-star~\citep{hartig2017foundations} approach for reification has gained popularity. Along with its expansions, different semantic web technologies have been updated to include this new syntax\footnote{\url{https://w3c.github.io/rdf-star/implementations}}. This section describes one of these updates related to building RDF-star graphs: RML-star. \ana{esto no liga del todo bien con lo anterior}
 
 
 
 Making statements about statements in RDF has
 posed a challenge since the inception of RDF.
-The first W3C Recommendation of RDF~\cite{lassila1999rdf} already included a description of the standard reification approach to tackle this issue.
+The first W3C Recommendation of RDF~\citep{lassila1999rdf} already included a description of the standard reification approach to tackle this issue.
 Other alternatives were proposed over the years,
-such as named graphs~(\cite{carroll2005namedgraphs}), N-ary relationships~(\cite{naryw3c2006}), singleton properties~(\cite{nguyen2014don}), RDF$^+$~(\cite{schueler2008querying}), and more recently, \mbox{RDF-star}~(\cite{hartig2017foundations}), which is currently being incorporated in the RDF 1.2 specification~(\cite{hartig2023rdf}). 
+such as named graphs~\citep{carroll2005namedgraphs}, N-ary relationships~\citep{naryw3c2006}, singleton properties~\citep{nguyen2014don}, RDF$^+$~\citep{schueler2008querying}, and more recently, \mbox{RDF-star}~\citep{hartig2017foundations}, which is currently being incorporated in the RDF 1.2 specification~\citep{hartig2023rdf}. 
 
 RDF-star does not leverage the characteristics of RDF as the others proposals. Instead it extends the RDF syntax to introduce the notion of \texttt{embedded triples}. This approach is currently under development to become a W3C standard\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. 
 As a consequence, an increasing number of semantic technologies are supporting this proposal\footnote{\url{https://w3c.github.io/rdf-star/implementations}}, which include triplestores (e.g. GraphDB, AnzoGraph) and programming libraries (e.g. Apache Jena, Oxigraph).
@@ -56,7 +56,7 @@ Thus, they can be used with RML without any further modification. RML mapping ru
 %\ana{probablemente en sota estarán explicados cada uno de los modelos, probablemente no haga falta ponerlos aquí también.}
 
 
-\noindent\textbf{\textit{Standard Reification}}~(\cite{lassila1999rdf}) was proposed in the first W3C Recommendation of RDF.
+\noindent\textbf{\textit{Standard Reification}}~\citep{lassila1999rdf} was proposed in the first W3C Recommendation of RDF.
 It assigns statements to unique identifiers (typically blank nodes) typed with \texttt{rdf:Statement} and described using the properties \texttt{rdf:subject}, \texttt{rdf:predicate} and \texttt{rdf:object}.
 This way, the unique identifier representing the statement can be further annotated with additional statements. \cref{lst:chp4_res-std-reif} shows an example of standard reification for the data in \cref{lst:chp4_csv_star}, created with the RML mapping rules in \cref{lst:chp4_std-reif}. 
 This mapping creates blank nodes in the subject with the \texttt{ID} data field, typed with \texttt{rdf:Statement}; and has three predicate object maps to generate the \texttt{rdf:subject}, \texttt{rdf:predicate}, \texttt{rdf:object} of the triples (\textit{An athlete jumps certain height}) and a predicate object map to annotate the statements with \texttt{:date} (\textit{in a specific date}).
@@ -117,7 +117,7 @@ _:2 :date         "2022-03-19" .
 
 
 
-\noindent\textbf{\textit{Singleton Properties}}~(\cite{nguyen2014don}). This approach uses unique predicates linked with \texttt{rdf:singletonPropertyOf} to the original predicate. 
+\noindent\textbf{\textit{Singleton Properties}}~\citep{nguyen2014don}. This approach uses unique predicates linked with \texttt{rdf:singletonPropertyOf} to the original predicate. 
 This unique predicate can then be annotated as the subject of additional statements. 
 \cref{lst:chp4_res-sp-reif} shows the reified triples for the data in \cref{lst:chp4_csv_star} created with the RML mapping rules in \cref{lst:chp4_sp-reif}. 
 It uses a singleton property dynamically generated with the \texttt{ID} data field for the property \texttt{:jumps} (\textit{An athlete jumps certain height}), annotated with \texttt{:date} (\textit{in a specific date}).
@@ -174,7 +174,7 @@ It uses a singleton property dynamically generated with the \texttt{ID} data fie
 
 
 
-\textit{\textbf{Named Graphs}}~(\cite{carroll2005namedgraphs}). This approach encloses each reified triple inside a unique named graph. This named graph can then be annotated with an additional triple. In \cref{lst:chp4_graph-reif} a graph is created for the triples that state the height of the jump (\texttt{:G} with the field \texttt{ID}) (\textit{An athlete jumps certain height}). A second graph contains the annotated triple and references the first graph (\texttt{:GA} with the field \texttt{ID}) (\textit{in a specific date}). The resulting RDF triples in TriG syntax\footnote{\url{https://www.w3.org/TR/trig/}} are shown in \cref{lst:chp4_res-graph-reif}.
+\textit{\textbf{Named Graphs}}~\citep{carroll2005namedgraphs}. This approach encloses each reified triple inside a unique named graph. This named graph can then be annotated with an additional triple. In \cref{lst:chp4_graph-reif} a graph is created for the triples that state the height of the jump (\texttt{:G} with the field \texttt{ID}) (\textit{An athlete jumps certain height}). A second graph contains the annotated triple and references the first graph (\texttt{:GA} with the field \texttt{ID}) (\textit{in a specific date}). The resulting RDF triples in TriG syntax\footnote{\url{https://www.w3.org/TR/trig/}} are shown in \cref{lst:chp4_res-graph-reif}.
 
 \begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_graph-reif}{Example RML mapping using named graphs that transforms data in \cref{lst:chp4_csv_star}.}
@@ -223,7 +223,7 @@ It uses a singleton property dynamically generated with the \texttt{ID} data fie
 \end{minipage}
 
 
-\textit{\textbf{N-Ary Relationships}}~(\cite{naryw3c2006}). This approach  converts a relationship into an instance that describes the relation, which can have attached both the main object and additional statements. The mapping shown in \cref{lst:chp4_nary-reif} creates instances of the relationship ``jump" with the field \texttt{ID}, which contain the date and height of the jump.  (\textit{An athlete jumps a jump with certain height and in a specific date}). 
+\textit{\textbf{N-Ary Relationships}}~\citep{naryw3c2006}. This approach  converts a relationship into an instance that describes the relation, which can have attached both the main object and additional statements. The mapping shown in \cref{lst:chp4_nary-reif} creates instances of the relationship ``jump" with the field \texttt{ID}, which contain the date and height of the jump.  (\textit{An athlete jumps a jump with certain height and in a specific date}). 
 The resulting RDF triples are shown in \cref{lst:chp4_res-nary-reif}.
 
 \begin{minipage}{\linewidth}
@@ -293,7 +293,7 @@ Thus, several triples sharing the same subject map and logical source can be quo
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=1\linewidth]{figures/rml-star_diagram.pdf}
-\caption[The RML-star module]{The \mbox{RML-star} module (represented using the Chowlk notation~(\cite{feria2022chowlk})). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
+\caption[The RML-star module]{The \mbox{RML-star} module (represented using the Chowlk notation~\citep{feria2022chowlk}). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
 \label{fig:chp4_rml-star}
 \end{figure*}
 
@@ -303,7 +303,7 @@ An example of an \mbox{RML-star} mapping rule is shown in \cref{lst:chp4_rml-sta
 The mapping rules use an asserted triples map (\texttt{<\#jumpTM>}) within the subject map of a triples map (\texttt{<\#dateTM>}). The quoted triples map \texttt{<\#jumpTM>} contains two predicate-object maps that produce triples annotated with \texttt{:date}. The first predicate-object map (\textit{lines 6-9}) produces the triples for the height of the jump, the same as the examples presented previously for the other reification approaches. We extend the RML-star example with a second predicate-object map to also represent the score of the jump within the same quoted triples map (\textit{lines 10-13}). To produce this triple in the other reification approaches an additional triples map for each case would be required.
 
 
-Currently, the \mbox{RML-star} specification~\cite{iglesias2022rmlstar} provides a complete description of the language, is published as a W3C Draft Community Group Report, and is maintained by the W3C Knowledge Graph Construction Community Group.\cref{foot:kgc} 
+Currently, the \mbox{RML-star} specification~\citep{iglesias2022rmlstar} provides a complete description of the language, is published as a W3C Draft Community Group Report, and is maintained by the W3C Knowledge Graph Construction Community Group.\cref{foot:kgc} 
 This extension belongs to the modules that comprise the new RML specification\footnote{\label{foot:rml-portal}\url{http://w3id.org/rml/portal/}} that is currently under development by the aforementioned Community Group. The semantics of the relationships between the old and this new specification are defined and available online~\footnote{\url{https://w3id.org/rml/portal/backwards-compatibility}} to facilitate backwards compatibility.
 Both the language and the specification are kept up-to-date reflecting the modifications in \mbox{RDF-star}.
 For instance, the latest \mbox{RML-star} releases update the term ``embedded'' to ``quoted'',
@@ -382,7 +382,7 @@ This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:
 \subsection{Validation}
 \label{sec:chp4_validation}
 
-We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}): software metadata extraction~(\citep{kelley2021framework} (SoMEF)) and biomedical research literature~(\cite{SemMedDB}) (SemMedDB). We use for both cases \mbox{Morph-KGC$^{star}$}, an implementation of RML-star.
+We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}): software metadata extraction~\citep{kelley2021framework} (SoMEF) and biomedical research literature~\citep{SemMedDB} (SemMedDB). We use for both cases \mbox{Morph-KGC$^{star}$}, an implementation of RML-star.
 
 
 
@@ -391,7 +391,7 @@ We present the development of the RML star test-cases (\cref{sec:chp4_star_testc
 \label{sec:chp4_star_testcases}
 
 Test cases are commonly used %in standardization processes 
-to evaluate the conformance of an engine with respect to a language specification (e.g., RML test cases~(\cite{heyvaert2019conformance})). 
+to evaluate the conformance of an engine with respect to a language specification (e.g., RML test cases~\citep{heyvaert2019conformance}). 
 A set of \mbox{RDF-star} test cases was proposed
 covering the syntax of various of its serializations\footnote{\url{https://w3c.github.io/rdf-star/tests/}}.
 We adapted these test cases to create the RML-star test cases and evaluate the conformance of \mbox{Morph-KGC$^{star}$}
@@ -431,8 +431,8 @@ For both use cases, we use the tool \mbox{Morph-KGC$^{star}$}.
 %In summary, our test and use cases show that \mbox{Morph-KGC$^{star}$} generates valid RDF triples and does not add an overhead in the generation time of reified triples. However, a more thorough analysis (out of the scope of this paper) is required to describe the behaviour of each mapping approach.
 
 \noindent\textbf{\textit{Scientific Software Metadata Extraction.}}
-Scientific software has become a crucial asset to deliver and reproduce the results described in research publications~(\cite{chue_hong_fair_2021}). However, scientific software is often time consuming to understand and reuse due to incomplete and heterogeneous documentation, available only in a human-readable manner.
-The Software Metadata Extraction Framework (SoMEF)~(\cite{somef}) proposes an approach to automatically extract relevant metadata (description, installation instructions, citation, etc.) from code repositories and their documentation. SoMEF includes different text extraction techniques (e.g., supervised classification, regular expressions, etc.) that yield results with different confidence values.
+Scientific software has become a crucial asset to deliver and reproduce the results described in research publications~\citep{chue_hong_fair_2021}. However, scientific software is often time consuming to understand and reuse due to incomplete and heterogeneous documentation, available only in a human-readable manner.
+The Software Metadata Extraction Framework (SoMEF)~\citep{somef} proposes an approach to automatically extract relevant metadata (description, installation instructions, citation, etc.) from code repositories and their documentation. SoMEF includes different text extraction techniques (e.g., supervised classification, regular expressions, etc.) that yield results with different confidence values.
 For example, \cref{lst:JSONsnippet} shows a JSON snippet with the description that SoMEF obtained from a software repository (Widoco) using the GitHub API.
 The confidence in this case is high as the extracted description was manually curated by the creators of the code repository.
 SoMEF extracts more than 30 different metadata fields about 
@@ -505,7 +505,7 @@ ex:oeg-upm/Widoco :description "Wizard for documenting ontologies. WIDOCO is ...
 
 
 \noindent\textbf{\textit{Biomedical Research Literature.}} 
-SemMedDB~(\cite{SemMedDB}), the Semantic MEDLINE Database, is a repository 
+SemMedDB~\citep{SemMedDB}, the Semantic MEDLINE Database, is a repository 
 that contains information on extracted biomedical entities 
 and predications (subject-predicate-object triples) 
 from biomedical texts (titles and abstracts from PubMed citations). 

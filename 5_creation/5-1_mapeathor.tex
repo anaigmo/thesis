@@ -1,12 +1,12 @@
 \section{Mapping rules in spreadsheets: Mapeathor}
 \label{sec:chp5_mapeathor}
 
-Since mapping languages started to be used more broadly, there have been multiple approaches for the development of editors to ease their specification. Some of them enable editing through graphical visualization \cite{heyvaert2016rmleditor,sicilia2017map}, while others provide a writing environment (e.g. the Protégé extension OntopPro~\ana{ref}). Thus, these editors are language-oriented, as they help to create mappings in a specific language. However, use cases require different features and implementations, and as a result, several different mapping languages are used currently. Moreover, graphical interfaces may hinder the mapping management and creation when a large number of mapping rules is required. 
+Since mapping languages started to be used more broadly, there have been multiple approaches for the development of editors to ease their specification. Some of them enable editing through graphical visualization~\citep{heyvaert2016rmleditor,sicilia2017map}, while others provide a writing environment (e.g. the Protégé extension OntopPro~\ana{ref}). Thus, these editors are language-oriented, as they help to create mappings in a specific language. However, use cases require different features and implementations, and as a result, several different mapping languages are used currently. Moreover, graphical interfaces may hinder the mapping management and creation when a large number of mapping rules is required. 
 
 %Moreover, when managing large amounts of mapping rules, graphical interfaces become cumbersome. %With our approach we aim at easing the writing process using a common tool such as spreadsheets, as well as enabling the generation of mapping files in more than one mapping language.
 
 %In our work we focus on facilitating the transformation rule specification using declarative mapping rules. 
-This section presents a straightforward approach to create these mapping documents, leveraging the  specification of mapping rules in spreadsheets. These spreadsheets contain the essential elements of the mapping rules without any additional syntax element, and are later translated into one a mapping document. The purpose of this proposal is to increase the interoperability between these languages~(\cite{corcho2020towards, iglesias2022devising}) as well as to ease the creation process. To perform the mapping rules translation we developed Mapeathor~(\cite{iglesias-molina_2023_5973906}), a tool able to parse the spreadsheets and generate the corresponding mappings in R2RML, RML and YARRRML. Following, we present the structure of the spreadsheet to write the mapping rules, the implementation and a evaluation with a user study to validate our approach.
+This section presents a straightforward approach to create these mapping documents, leveraging the  specification of mapping rules in spreadsheets. These spreadsheets contain the essential elements of the mapping rules without any additional syntax element, and are later translated into one a mapping document. The purpose of this proposal is to increase the interoperability between these languages~\citep{corcho2020towards, iglesias2022devising} as well as to ease the creation process. To perform the mapping rules translation we developed Mapeathor~\citep{iglesias-molina_2023_5973906}, a tool able to parse the spreadsheets and generate the corresponding mappings in R2RML, RML and YARRRML. Following, we present the structure of the spreadsheet to write the mapping rules, the implementation and a evaluation with a user study to validate our approach.
 
 \subsection{Spreadsheet design}
 \label{sec:chp5_spreadsheet_design}
@@ -183,11 +183,11 @@ $<$Fun-date$>$ & grel:valueParam3 & yyyy-MM-dd \\
 \subsection{Mapeathor}
 \label{sec:chp5_mapeathor_tool}
 
-Mapeathor~(\cite{iglesias-molina_2023_5973906}) is a open-source implementation to generate mappings from the spreadsheets described in \cref{sec:chp5_spreadsheet_design}. It is able to process MS Excel and Google Spreadsheets, generating human-readable mappings in either R2RML, RML or YARRRML. 
+Mapeathor~\citep{iglesias-molina_2023_5973906} is a open-source implementation to generate mappings from the spreadsheets described in \cref{sec:chp5_spreadsheet_design}. It is able to process MS Excel and Google Spreadsheets, generating human-readable mappings in either R2RML, RML or YARRRML. 
 
 \textit{descripción de la herramienta, aunque sea de forma sencilla (y se puede poner el diagrama de github). Va a haber que hacer pseudocódigo :)))))}
 
-The source code of Mapeathor is openly available under Apache 2.0 license\footnote{\url{https://github.com/oeg-upm/mapeathor}}. It can be run as a CLI using the Pypi package\footnote{\url{https://pypi.org/project/mapeathor/}} or as an online service\footnote{\url{https://morph.oeg.fi.upm.es/demo/mapeathor}}, where a visual interface is provided. With each release, a new version in Pypi is created and a dedicated DOI archived in Zenodo~(\cite{iglesias-molina_2023_5973906}). 
+The source code of Mapeathor is openly available under Apache 2.0 license\footnote{\url{https://github.com/oeg-upm/mapeathor}}. It can be run as a CLI using the Pypi package\footnote{\url{https://pypi.org/project/mapeathor/}} or as an online service\footnote{\url{https://morph.oeg.fi.upm.es/demo/mapeathor}}, where a visual interface is provided. With each release, a new version in Pypi is created and a dedicated DOI archived in Zenodo~\citep{iglesias-molina_2023_5973906}. 
 
 
 \subsection{Methodology}
@@ -226,7 +226,7 @@ We carry a user study with two dimensions to test the usability of Mapeathor and
 
 
 
-The second step of the evaluation that comprises the \textit{objective evaluation} took place in May 2023, once the improvements gathered from the previous step were implemented. In this step, the spreadsheet-based approach proposed in this work was compared with the widely used RML mapping language~\cite{Dimou2014rml}, and with a visual editor, RMLEditor~\cite{heyvaert2016rmleditor}. A group of 30 participants was divided into three groups of 10. Each group had to carry out the same task, to create a mapping from a given dataset and ontology with the assigned tool. All groups were introduced to the needed concepts about mapping languages and specific guidelines with examples of the assigned tool. The groups performed the given task in separated sessions, i.e. one session per tool was carried out, to ensure that all participants were given the same level of assistance independently of the tool. Participants were asked to carry out the proposed task in 30 minutes, after that they were asked to submit the mapping they have created so far. In addition, likewise as in the first step, participants were asked to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and to write their personal opinion on the assigned tool.
+The second step of the evaluation that comprises the \textit{objective evaluation} took place in May 2023, once the improvements gathered from the previous step were implemented. In this step, the spreadsheet-based approach proposed in this work was compared with the widely used RML mapping language~\citep{Dimou2014rml}, and with a visual editor, RMLEditor~\citep{heyvaert2016rmleditor}. A group of 30 participants was divided into three groups of 10. Each group had to carry out the same task, to create a mapping from a given dataset and ontology with the assigned tool. All groups were introduced to the needed concepts about mapping languages and specific guidelines with examples of the assigned tool. The groups performed the given task in separated sessions, i.e. one session per tool was carried out, to ensure that all participants were given the same level of assistance independently of the tool. Participants were asked to carry out the proposed task in 30 minutes, after that they were asked to submit the mapping they have created so far. In addition, likewise as in the first step, participants were asked to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and to write their personal opinion on the assigned tool.
 
 
 \begin{figure*}[!t]
@@ -243,7 +243,7 @@ We chose this dataset, that belongs to the common-knowledge domain, to avoid het
 We provided participants with the subset ontology description and associated data, that is comprised of three CSV files: \texttt{bar.csv}, \texttt{restaurant.csv} and \texttt{address.csv}. Information about bars, restaurants and their geolocalization is represented in the files \texttt{bar.csv}, \texttt{restaurant.csv} respectively. 
 These files contain the same columns, but different data. The file \texttt{address.csv} represent the postal address of the businesses present in the other two files. 
 The original data is available in GitHub\footnote{\url{https://github.com/CiudadesAbiertas/vocab-comercio-censo-locales/}}. 
-To facilitate the exercise for participants, some data cleaning was performed over the original files, as well as translation to all columns form spanish to english~(\cite{iglesias-molina_2022_8154522}).
+To facilitate the exercise for participants, some data cleaning was performed over the original files, as well as translation to all columns form spanish to english~\citep{iglesias-molina_2022_8154522}.
 
 
 
@@ -259,7 +259,7 @@ we calculate two kinds of accuracies: (i)~\textit{Total Accuracy} (TA) for the n
 We divide the mapping in four components: \textit{Subject}, \textit{Source}, \textit{Predicate-Object (PO)} and \textit{Join}, and calculate the accuracy for each component and the totality of the mapping. Then a T-Test is performed to look for significant differences of accuracy among the tools. 
 
 
-\noindent\textit{\textbf{Threats to validity}} (\cite{creswell2017research}) We identify the following internal and external threats to the validity of our experiment.
+\noindent\textit{\textbf{Threats to validity}}~\citep{creswell2017research} We identify the following internal and external threats to the validity of our experiment.
 
 \textbf{Internal validity threats} concern the experimental setup or experience of participants which threaten the ability to draw correct conclusions about the population in the experiment. We identify three internal threats: \textit{tool familiarity bias}, \textit{selection bias} and \textit{instruction bias}.
 \begin{itemize}
