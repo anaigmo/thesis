@@ -3,8 +3,20 @@
 \chapter{Mappings in Knowledge Graph Evolution}
 \label{chapter:reframing}
 
-\textit{Aquí va a ir primero el motivating example, que será el paper de ISI, para decir por qué surge la pregunta. Después, lo siguiente, de creacion vs construct, con su propia evaluación y demás.}
+\ana{ajustar para meter iswc}
+
+Knowledge graphs are not immutable, as they along with the ontology or network of ontologies that defines their schema are subject to modifications. This need for evolution may triggered by changes in the domain of knowledge or on the graph consumption requirements in downstream tasks. 
+An example is the need to add information about a triple, thus making statements about statements (i.e. statement reification).
+%Reification is usually used to incorporate metadata and provenance to existing triples~\citep{frey2019evaluation}.
+%Throughout the years, different representations have been proposed for reifying statements in RDF 
+%, such as Named Graphs~\citep{carroll2005namedgraphs}, N-Ary Relationships~\citep{naryw3c2006} or RDF-star~\citep{hartig2017foundations}. 
+For instance, Nanopublications~\citep{groth2010nanopubs} adopt a Named Graph-based~\citep{carroll2005namedgraphs} model to publish minimal scientific statements along with their provenance and associated context. Meanwhile, in ontology engineering, N-Ary Relationships~\citep{naryw3c2006} are widely used as an ontology design pattern~\citep{gangemi2013multi}. It is not uncommon for an existing KG to strive for adopting one of these representations, such as the publication of the DisGeNet KG as Nanopublications~\citep{queralt2016disgenet} or introducing RDF-star in the European Agency of Railway  KG.\footnote{\url{https://data-interop.era.europa.eu/}}
+
+When the situation comes that a re-structuration of the knowledge graph is needed, the following question arises: Which is more convenient, to construct the graph from the original input data sources again, or to re-construct it within the triplestore? This section analyses which of these approaches reports better performance and the parameters that influence the choice. 
+To this end, we perform a comprehensive empirical study of this transformation in four representations (Standard Reification, N-Ary Relationships, Named Graphs and RDF-star) using (i) declarative mapping languages to construct each representation with KG construction engines and (ii) transformation per peers of representations with SPARQL \texttt{CONSTRUCT} queries in different triplestores. This section aims to unravel the aspects to consider when re-constructing a knowledge graph, to help in the decision on how to perform it. We also raise awareness of recently overlooked aspects of \texttt{CONSTRUCT} queries, while contributing to research on the impact of RDF reification to enhance KG management.
 
 \input{6_reframing/6-1_re-construction}
 
 \section{Conclusions}
+
+\ana{mix concluiones de coopis adornadas con las otras}

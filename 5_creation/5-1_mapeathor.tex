@@ -1,7 +1,7 @@
 \section{Mapping rules in spreadsheets: Mapeathor}
 \label{sec:chp5_mapeathor}
 
-Since mapping languages started to be used more broadly, there have been multiple approaches for the development of editors to ease their specification. Some of them enable editing through graphical visualization~\citep{heyvaert2016rmleditor,sicilia2017map}, while others provide a writing environment (e.g. the Protégé extension OntopPro~\ana{ref}). Thus, these editors are language-oriented, as they help to create mappings in a specific language. However, use cases require different features and implementations, and as a result, several different mapping languages are used currently. Moreover, graphical interfaces may hinder the mapping management and creation when a large number of mapping rules is required. 
+Since mapping languages started to be used more broadly, there have been multiple approaches for the development of editors to ease their specification. Some of them enable editing through graphical visualization~\citep{heyvaert2016rmleditor,sicilia2017map}, while others provide a writing environment (e.g. the Protégé extension OntopPro~\ana{ref}). These editors are language-oriented, as they help to create mappings in a specific language. However, use cases require different features and implementations, and as a result, several different mapping languages are used currently. Moreover, graphical interfaces may hinder the mapping management and creation when a large number of mapping rules is required. 
 
 %Moreover, when managing large amounts of mapping rules, graphical interfaces become cumbersome. %With our approach we aim at easing the writing process using a common tool such as spreadsheets, as well as enabling the generation of mapping files in more than one mapping language.
 
@@ -17,6 +17,7 @@ In this section we present the design of the spreadsheet template to write the m
 These mapping rules are specified in the spreadsheets following a provided structure to only write the essential information. Thus, this approach prevents the user from learning the syntax peculiarities of each languages (e.g. keywords, semicolons, brackets, etc.).
 This design is devised to represent the rules in a compact and understandable manner, using a format widely used by the scientific community (i.e. Google spreadsheets, MS Excel). 
 Using these spreadsheets along with their corresponding editors allow users to leverage their native advantages.
+
 The mapping rules are specified in the spreadsheet across five different sheets, which are described below: \textit{Prefix sheet}, \textit{Source sheet}, \textit{Subject sheet}, \textit{Predicate\_Object sheet} and \textit{Function sheet}. We illustrate this section with a running example to describe in detail the expressiveness capabilities of each spreadsheet. This example uses the data represented in the CSV file \texttt{people.csv}(\cref{lst:chp5_mapeathor_input_people}) and the JSON file \texttt{sport.json} (\cref{lst:chp5_mapeathor_input_sport}). 
 
 \begin{minipage}{0.48\linewidth}
@@ -107,7 +108,7 @@ SPORT & http://ex.com/Sport/\{sport\} & ex:Sport & ex:SportsGraph \\ \midrule
 
 \subsubsection{Source sheet} 
 
-This sheets describes the source input data for each set of rules, identified with the identifier previously created in the \textit{Subject sheet} (\texttt{ID}). The information is organized in three columns: \texttt{ID}, \texttt{Feature} and \texttt{Value}. 
+This sheet describes the source input data for each set of rules, identified with the identifier previously created in the \textit{Subject sheet} (\texttt{ID}). The information is organized in three columns: \texttt{ID}, \texttt{Feature} and \texttt{Value}. 
 \texttt{ID} makes reference to the identifier that gathers the mapping rules in the sheets, which was introduced in the \textit{Subject sheet}. 
 \texttt{Feature} declares the type of information provided in \texttt{Value}. The allowed keywords in this column are: \texttt{source} for the path and name of the file, \texttt{format} for the data source format, \texttt{iterator} for hierarchical data (e.g. JSON, XML), \texttt{table} for name of tables from Relational Data Bases (RDBs), \texttt{query} for SQL queries and \texttt{SQLVersion} for the version of SQL used. Each ID must have at least the \texttt{source} and \texttt{format} features specified, the rest of the features are optional. 
 Then, in the \texttt{Value} column, the corresponding values of each \texttt{Feature} specified are written. 
@@ -138,7 +139,7 @@ The XSD datatype of \texttt{Object} is defined in \texttt{DataType}, and the lan
 
 When the object refers to a subject defined in another mapping rule, the rule is written as follows. 
 There are three columns that allow the specification of the linking condition between the object of the current triple and the referenced subject. 
-They specify which is the ID of the referred subject  (\texttt{ReferenceID}), and the ''join'' fields in the source data: (i) \texttt{InnerRef} for the field of the object of the current triple, and (ii) \texttt{OuterRef} for the field of the referred subject. These three fields can be blank when a regular triple is produced. 
+They specify which is the ID of the referred subject  (\texttt{ReferenceID}), and the ``join'' fields in the source data: (i) \texttt{InnerRef} for the field of the object of the current triple, and (ii) \texttt{OuterRef} for the field of the referred subject. These three fields can be blank when a regular triple is produced. 
 
 \cref{tab:po_sheet} shows five predicate-object pairs created for both sets of rules (\texttt{PERSON} and \texttt{SPORT}. Three of these rules produce literals with datatypes and two additionally specify a language tag. The rule set identified as \texttt{PERSON} generates a link to the subject of the \texttt{SPORT} rule set using the predicate \texttt{ex:name}, and joining by equal values of the field \texttt{sport\_id} from \texttt{people.csv} and the field \texttt{id} from \texttt{sport.json}. This rule set also calls a function for generating the object for the predicate \texttt{ex:birthdate}, which is identified by being enclosed by ``$<>$".
 
@@ -159,7 +160,7 @@ SPORT & ex:code & \{id\} & integer & & & & \\ \midrule
 }
 \end{table}
 
-\subsubsection{Function sheet} Some languages are able to process data transformation functions, which can be detailed in this sheet. Mapeathor implements the last release of the RML-FNML specification, that describes how to incorporate functions in RML mappings\footnote{\url{https://w3id.org/rml/fnml/spec}}. The functions are referred in the Predicate\_Object sheet or in other function rows with the identifier specified in \texttt{FunctionID}. The column \texttt{Feature} is used to specify the type of information provided in \texttt{Value}. The features admitted in the \texttt{Feature} column are \texttt{executes} for the name of the function, and \texttt{returns} for the expected output type of the function. In addition, this column admits any number of function parameter names. Then, the value of the name of the function, return type and values of the parameters are written correspondingly in the \texttt{Value} column.
+\subsubsection{Function sheet} Some languages are able to process data transformation functions, which can be detailed in this sheet. Mapeathor implements the last release of the RML-FNML specification, that describes how to incorporate functions in RML mappings\footnote{\url{https://w3id.org/rml/fnml/spec}}. The functions are referred in the \textit{Predicate\_Object sheet} or in other function rows with the identifier specified in \texttt{FunctionID}. The column \texttt{Feature} is used to specify the type of information provided in \texttt{Value}. The features admitted in the \texttt{Feature} column are \texttt{executes} for the name of the function, and \texttt{returns} for the expected output type of the function. In addition, this column admits any number of function parameter names. Then, the value of the name of the function, return type and values of the parameters are written correspondingly in the \texttt{Value} column.
 
 The example shown in \cref{tab:function_sheet} uses the function \texttt{grel:toDate}, to change the formatting of a date. It returns a date as output (\texttt{grel:dateOut}) and takes three parameters: the data field to be converted (\texttt{grel:valueParam1}), the input data format (\texttt{grel:valueParam2}) and the output data format (\texttt{grel:valueParam3}).
 
@@ -189,8 +190,9 @@ Mapeathor~\citep{iglesias-molina_2023_5973906} is a open-source implementation t
 
 The source code of Mapeathor is openly available under Apache 2.0 license\footnote{\url{https://github.com/oeg-upm/mapeathor}}. It can be run as a CLI using the Pypi package\footnote{\url{https://pypi.org/project/mapeathor/}} or as an online service\footnote{\url{https://morph.oeg.fi.upm.es/demo/mapeathor}}, where a visual interface is provided. With each release, a new version in Pypi is created and a dedicated DOI archived in Zenodo~\citep{iglesias-molina_2023_5973906}. 
 
+\subsection{Evaluation}
 
-\subsection{Methodology}
+\subsubsection{Methodology}
 \label{sec:chp5_mapeathor_eval_method}
 
 We carry a user study with two dimensions to test the usability of Mapeathor and evaluate if the spreadsheet-based approach can improve the mapping writing process for users of different expertise. We first carry out a \textit{subjective evaluation} in order to gather opinions and feedback about the spreadsheet template and usability of the tool in order to improve the user experience. We then perform a \textit{objective evaluation} to find out if our approach improves the mapping writing process w.r.t. writing directly the mapping in a target language (i.e. RML) and w.r.t. another mapping editor with a visual interface (i.e. RMLEditor). This section describes the methodology followed for the performed evaluations.
@@ -277,7 +279,7 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 
 
 
-\subsection{Results}
+\subsubsection{Results}
 \label{sec:chp5_mapeathor_results}
 
 \noindent\textit{\textbf{Subjective evaluation results}}
@@ -321,14 +323,14 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 \end{figure}
 
 
-\subsection{Use cases}
-Ciudades abiertas, EBOCA, photocatalisis ontology
-\ana{bueno ya veremos}
+%\subsection{Use cases}
+%Ciudades abiertas, EBOCA, photocatalisis ontology
+%\ana{bueno ya veremos}
 
 
 
 \subsection{Discussion}
 \label{sec:chp5_mapeathor_discussion}
-
+\ana{discusión de resultados, y use cases también se pueden comentar}
 \ana{newpage hasta que la seccióne esté entera, borrar después}
 \newpage

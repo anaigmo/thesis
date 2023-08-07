@@ -1,20 +1,8 @@
 
-
-\section{Mappings in the re-construction of Knowledge Graphs from a reification perspective}
-\label{sec:chp6-1_re-construction}
-
-Knowledge graphs are not immutable, as they along with the ontology or network of ontologies that defines their schema are subject to modifications. This need for evolution may triggered by changes in the domain of knowledge or on the graph consumption requirements in downstream tasks. 
-An example is the need to add information about a triple, thus making statements about statements (i.e. statement reification).
-%Reification is usually used to incorporate metadata and provenance to existing triples~\citep{frey2019evaluation}.
-%Throughout the years, different representations have been proposed for reifying statements in RDF 
-%, such as Named Graphs~\citep{carroll2005named}, N-Ary Relationships~\citep{naryw3c2006} or RDF-star~\citep{hartig2017foundations}. 
-For instance, Nanopublications~\citep{groth2010nanopubs} adopt a Named Graph-based~\citep{carroll2005named} model to publish minimal scientific statements along with their provenance and associated context. Meanwhile, in ontology engineering, N-Ary Relationships~\citep{naryw3c2006} are widely used as an ontology design pattern~\citep{gangemi2013multi}. It is not uncommon for an existing KG to strive for adopting one of these representations, such as the publication of the DisGeNet KG as Nanopublications~\citep{queralt2016disgenet} or introducing RDF-star in the European Agency of Railway  KG.\footnote{\url{https://data-interop.era.europa.eu/}}
-
-When the situation comes that a re-structuration of the knowledge graph is needed, the following question arises: Which is more convenient, to construct the graph from the original input data sources again, or to re-construct it within the triplestore? This section analyses which of these approaches reports better performance and the parameters that influence the choice. 
-To this end, we perform a comprehensive empirical study of this transformation in four representations (Standard Reification, N-Ary Relationships, Named Graphs and RDF-star) using (i) declarative mapping languages to construct each representation with KG construction engines and (ii) transformation per peers of representations with SPARQL \texttt{CONSTRUCT} queries in different triplestores. This section aims to unravel the aspects to consider when re-constructing a knowledge graph, to help in the decision on how to perform it. We also raise awareness of recently overlooked aspects of \texttt{CONSTRUCT} queries, while contributing to research on the impact of RDF reification to enhance KG management.
-
-\subsection{Motivating Example}
+\section{Motivating Example}
 \label{sec:chp6-1_mot-example}
+
+\ana{alinear con paper ISWC y ajustar título}
 
 \begin{figure}[t!]
     \centering
@@ -28,10 +16,10 @@ Consider the SemMedDB dataset, that contains entities extracted from biomedical 
 The graph maintainers have access to the original source data, so they can change the original KG construction pipeline, that uses declarative mappings to construct the graph. However, since this graph is not going to be updated with new data, it is also possible to change the structure of the graph with queries within the triplestore where it is maintained. They know the time it takes to generate the graph in its original representation. However, they are not certain whether generating the graph in the new representation using this pipeline will take more time, or if with queries the transformation could be performed faster (\cref{fig:chp6-1_mot-example}). Hence, the objective of this work consist of assessing the aspects that influence this situation to help in making an informed decision.
 
 
-\subsection{Methodology}
+\section{Methodology}
 \label{sec:chp6-1_methodology}
 
-In this section we present the methodology followed to analyze the impact of different approaches for re-constructing knowledge graphs from a reification perspective. More in detail, we compare two ways of re-structuring a KG to change its reification approach, (i) with declarative mapping technologies from scratch (e.g., RML~\citep{iglesias2023rml}) and (ii) with \texttt{CONSTRUCT} queries in a triplestore from the previous version of the graph. We aim to answer the following research questions: 
+In this section we present the methodology followed to analyze the impact of different approaches for re-constructing knowledge graphs from a reification perspective. More in detail, we compare two ways of re-structuring a KG to change its reification approach, (i) with declarative mapping technologies from scratch (e.g., RML~\citep{Dimou2014rml,iglesias2023rml}) and (ii) with \texttt{CONSTRUCT} queries in a triplestore from the previous version of the graph. We aim to answer the following research questions: \ana{ojo a esto para cuando estén los objetivos y demás escritos }
 \textbf{(RQ1)} In which cases is it more efficient in terms of time to either construct a reified knowledge graph from the original data sources or to re-construct it within a triplestore?
 \textbf{(RQ2)} Which of these two approaches is more scalable as the size of the data increases?
 \textbf{(RQ3)} What is the impact of the different reification representations on triplestores and mapping processors?
@@ -40,12 +28,12 @@ All resources to reproduce the experiments are available on GitHub.\footnote{\ur
 
 
 
-\subsubsection{Dataset}
+\subsection{Dataset}
 \label{sec:chp6-1_dataset}
 
 \ana{ojo que esta sección es como para la de rml-star}
 
-We use the Semantic MEDLINE Database (SemMedDB)~\citep{SemMedDB2012} in the experimental evaluation. This database consists of a repository with biomedical entities and relationships (subject-predicate-object) extracted from biomedical texts.
+We use the Semantic MEDLINE Database (SemMedDB)~\citep{SemMedDB} in the experimental evaluation. This database consists of a repository with biomedical entities and relationships (subject-predicate-object) extracted from biomedical texts.
 %, mainly titles and abstracts from PubMed citations. 
 This dataset is available as a relational database and CSV files.\footnote{\url{https://lhncbc.nlm.nih.gov/ii/tools/SemRep\_SemMedDB\_SKR/SemMedDB\_down\-load.html}}
 It is licensed under the UMLS - Metathesaurus License Agreement,\footnote{\url{https://www.nlm.nih.gov/research/umls/knowledge\_sources/metathesaurus/release\-/license\_agreement.html}} which does not allow its distribution, but it may be accessed with an account with the UMLS license.\footnote{An account with the UMLS license can be requested at \url{https://www.nlm.nih.gov/databases/umls.html}.}
@@ -128,7 +116,7 @@ To test the scalability of the evaluated approaches, we subset this dataset into
 
 
 
-\subsubsection{Mappings and Queries}
+\subsection{Mappings and Queries}
 \label{sec:chp6-1_map-queries}
 The following resources are used: 
 (i)~a set of declarative mappings that are used for constructing the knowledge graph from the SemMedDB tabular files in the four selected reification representations; and (ii)~a set of SPARQL queries that are used for re-constructing the graph within different triplestores. A summary of their characteristics is shown in \cref{tab:chp6-1_mapping-char}.
@@ -136,7 +124,7 @@ The following resources are used:
 We use two sets of mappings, one set written in the RML mapping language~\citep{iglesias2023rml}, and the other in SPARQL-Anything~\citep{asprino2023sparql-anything}. These languages allow describing transformation of heterogeneous data sources into RDF following the schema provided by an ontology or vocabulary, and are processed by different engines (see \cref{sec:chp6-1_engines}). Each set of mappings is comprised of four mappings, to construct the knowledge graphs in the four representations selected (i.e. Standard Reification, N-Ary Relationships, Named Graphs and RDF-star).
 
 
-RML extends the R2RML Recommendation~\citep{R2RML} to describe more data sources besides Relational Databases. RML rules are grouped within \textit{Triples Maps}, which contain one \textit{Logical Source}, one \textit{Subject Map} and zero to multiple \textit{Predicate Object Maps}. \textit{Logical Sources} describe the input data to be transformed. \textit{Subject Maps} indicates how the subjects of the triples are created, while \textit{Predicate Object Maps} specify how the predicates and objects of the triples are created. \cref{lst:chp6-1_rml-star} shows an example of a mapping that generates in RDF-star the annotation of the semantic types of \textit{entities} with a score from the CSV file shown in \cref{lst:chp6-1_semmeddb_entity}. This mapping uses the RML-star module~\citep{delva2021rml-star,iglesias2023rml} to generate RDF-star graphs, which allows RML to quote \textit{Triples Map} with the \texttt{rml:quotedTriplesMap} property. For these mappings, we show the number of sets of rules (i.e. \textit{Triples Map}) and  \textit{Predicate Object Maps} specified (\cref{tab:chp6-1_mapping-char}).
+RML extends the R2RML Recommendation~\citep{das2012r2rml} to describe more data sources besides Relational Databases. RML rules are grouped within \textit{Triples Maps}, which contain one \textit{Logical Source}, one \textit{Subject Map} and zero to multiple \textit{Predicate Object Maps}. \textit{Logical Sources} describe the input data to be transformed. \textit{Subject Maps} indicates how the subjects of the triples are created, while \textit{Predicate Object Maps} specify how the predicates and objects of the triples are created. \cref{lst:chp6-1_rml-star} shows an example of a mapping that generates in RDF-star the annotation of the semantic types of \textit{entities} with a score from the CSV file shown in \cref{lst:chp6-1_semmeddb_entity}. This mapping uses the RML-star module~\citep{delva2021rml-star,iglesias2023rml} to generate RDF-star graphs, which allows RML to quote \textit{Triples Map} with the \texttt{rml:quotedTriplesMap} property. For these mappings, we show the number of sets of rules (i.e. \textit{Triples Map}) and  \textit{Predicate Object Maps} specified (\cref{tab:chp6-1_mapping-char}).
 
 \noindent\begin{minipage}{1\linewidth}
 \begin{captionedlisting}{lst:chp6-1_rml-star}{RML-star mapping snippet to create the RDF-star graph for \textit{entity} from data in \cref{lst:chp6-1_semmeddb_entity}. }
@@ -269,9 +257,9 @@ CONSTRUCT  {
 
 
 
-\subsubsection{Engines}
+\subsection{Engines}
 \label{sec:chp6-1_engines}
-We choose a set of 2 mapping processors and 3 triplestores to be representative in our evaluation, while focusing on open-source tools. The selected mapping processors, Morph-KGC (v2.5.0)~\citep{arenas2022morph} and SPARQL-Anything (v0.8.1)~\citep{asprino2023sparql-anything} are the systems with a stable version capable of producing RDF-star at the time of writing this paper. The SDM-RDFizer~\citep{iglesias2020rdfizer} is in the process of implementing this feature, but no stable version has been released yet. Regarding triplestores, we use the free version of GraphDB (v10.2.1), and the open-source Jena Fuseki (v4.8.0) and Oxigraph (v0.3.16). While GraphDB and Jena Fuseki store the graph in physical memory, Oxigraph performs the queries in memory. All engines perform duplicate removal in the results by default, with the exception of Oxigraph. For this triplestore, we add and measure a second step of duplicate removal with BASH commands.
+We choose a set of 2 mapping processors and 3 triplestores to be representative in our evaluation, while focusing on open-source tools. The selected mapping processors, Morph-KGC (v2.5.0)~\citep{arenas2022morphkgc} and SPARQL-Anything (v0.8.1)~\citep{asprino2023sparql-anything} are the systems with a stable version capable of producing RDF-star at the time of writing this paper. The SDM-RDFizer~\citep{iglesias2020rdfizer} is in the process of implementing this feature, but no stable version has been released yet. Regarding triplestores, we use the free version of GraphDB (v10.2.1), and the open-source Jena Fuseki (v4.8.0) and Oxigraph (v0.3.16). While GraphDB and Jena Fuseki store the graph in physical memory, Oxigraph performs the queries in memory. All engines perform duplicate removal in the results by default, with the exception of Oxigraph. For this triplestore, we add and measure a second step of duplicate removal with BASH commands.
 
 
 We did attempts to include Virtuoso in the evaluation; however, several issues raised. The number of queries this triplestore can perform is very limited in this evaluation (only 4 from 12): This triplestore
@@ -280,7 +268,7 @@ does not implement RDF-star yet, and cannot produce named graphs declared inside
 
 
 
-\subsubsection{Experimental setup and Metrics}
+\subsection{Experimental setup and Metrics}
 \label{sec:chp6-1_exp-setup}
 We perform the evaluation in two steps. First, the KG construction system evaluation is run, taking as input the SemMedDb dataset in CSV format and the mappings, and producing the corresponding RDF datasets in the four selected representations. Then, the triplestore evaluation is carried out, taking as input the produced datasets in the KG construction system evaluation, and producing RDF datasets in another representation.
 
@@ -300,7 +288,7 @@ We run all experiments over an Ubuntu 20.04 server with
 
 
 
-\subsection{Results}
+\section{Results}
 \label{sec:chp6-1_results}
 
 
@@ -386,7 +374,7 @@ Only in GraphDB, Q9 reports less time to produce N-Ary Relationship than Standar
 
 
 
-\subsection{Discussion}
+\section{Discussion}
 \label{sec:chp6-1_discussion}
 
 This section addresses the following question: given a knowledge graph where reificaiton is needed, is it faster to construct it from the original data sources with the new representation, or to re-construct it within a triplestore?\ana{ojo esta frase, cuadrar con objetivos/RQ cuando estén } To answer this question, we perform an empirical analysis using two KG construction engines and three triplestores, performing the re-construction with four data sizes in four different reification models: RDF-star, Standard Reification, N-Ary Relationships and Named Graphs. Our results show that KG construction engines in general are more scalable, almost independently of the kind of reification. Triplestores perform best for small data sizes. However, their performance is highly dependent on the source representation (in the \texttt{WHERE} clause) and the target representation (in the \texttt{CONSTRUCT} clause). The time for producing RDF-star and Named Graphs is competitive with the KG construction approach. Yet, this approach becomes inefficient for producing N-Ary Relationships due to the need of introducing more joins in the \texttt{CONSTRUCT} clause; and when RDF-star is the source model, since most triplestores are not optimized for its new syntax. 
@@ -401,10 +389,10 @@ The setup of the evaluation shows us the importance of optimizing SPARQL queries
 In addition, this evaluation brings to light that the behavior of the \texttt{CONSTRUCT} clause is not as studied as other SPARQL operators. SPARQL benchmarks often overlook this clause, as it is considered as an extension of \texttt{SELECT}~\citep{schmidt2009sp}. Hence, it is assumed that their performance is comparable and not affected by the change of clause. However, we encountered \texttt{SELECT} queries that returned results in miliseconds, while taking several minutes with \texttt{CONSTRUCT}. 
 %% support of GRAPH within CONSTRUCT
 %https://stackoverflow.com/questions/59397371/sparql-converting-construct-query-w-named-graph-to-select-query 
-This clause also limits the kinds of transformations. For instance, SPARQL 1.1 does not implement generating named graphs (with \texttt{GRAPH}) in \texttt{CONSTRUCT}~\citep{SPARQL}.
+This clause also limits the kinds of transformations. For instance, SPARQL 1.1 does not implement generating named graphs (with \texttt{GRAPH}) in \texttt{CONSTRUCT}~\citep{harris2013sparql}.
 %\footnote{\url{https://stackoverflow.com/questions/59397371/sparql-converting-construct-query-w-named-graph-to-select-query}}
 
 
 %%%%%%%%%%% LIMITS OF THE ENGINES %%%%%%%%%%%%
-The reported results also open up new challenges for improvement. From the triplestores, only GraphDB could perform reasonably well when re-constructing from RDF-star. This highlights the need to continue to improve the processing of this new representation, as it is currently being included in the future RDF 1.2 specification~\citep{hartig2023rdf12}. Yet, this representation obtains overall better results when it comes to constructing it. This will facilitate its adoption, since evolving current KGs into this representation would not suppose an obstacle in terms of performance. 
+The reported results also open up new challenges for improvement. From the triplestores, only GraphDB could perform reasonably well when re-constructing from RDF-star. This highlights the need to continue to improve the processing of this new representation, as it is currently being included in the future RDF 1.2 specification~\citep{hartig2023rdf}. Yet, this representation obtains overall better results when it comes to constructing it. This will facilitate its adoption, since evolving current KGs into this representation would not suppose an obstacle in terms of performance. 
 In addition, all triplestores struggle when the \texttt{CONSTRUCT} clause includes several joins. This fact does not only affect the pairs of transformations studied in this paper, but all potential transformations for evolving knowledge graphs. Regarding KG construction systems, the main challenge still consists of their adoption, as the learning curve for mapping languages is still steep despite efforts to lower it (see \cref{chapter:creation}).
