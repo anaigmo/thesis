@@ -1,0 +1,26 @@
+
+\begin{minipage}{0.95\linewidth}
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwResult{Mapping document in [R2]RML/YARRRML}
+ $language \longleftarrow output\_language$\;
+ $spreadsheet \longleftarrow input\_spreadsheet$\;
+ $output\_m \longleftarrow \emptyset$\;
+ $rules \longleftarrow extract\_rules(spreadsheet)$\;
+ $output\_m.add(translate\_prefixes(rules))$\;
+  
+ \For{$ruleset \in rules$}{
+    $rules.add(enrich\_ruleset(ruleset))$\;
+    $output\_m.add(translate\_subject, language)$\;
+    $output\_m.add(translate\_source, language)$\;
+    $output\_m.add(translate\_predicate\_object, language)$\;
+    \If{$language == RML$}{
+        $output\_m.add(translate\_functions)$\;
+        }
+    }
+ 
+ \Return{$validate(write\_m)$}\;
+\caption{Mapeathor translation algorithm}
+\label{alg:mapeathor}
+\end{algorithm}
+\end{minipage}

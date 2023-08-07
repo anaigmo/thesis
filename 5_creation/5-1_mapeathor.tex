@@ -186,7 +186,10 @@ $<$Fun-date$>$ & grel:valueParam3 & yyyy-MM-dd \\
 
 Mapeathor~\citep{iglesias-molina_2023_5973906} is a open-source implementation to generate mappings from the spreadsheets described in \cref{sec:chp5_spreadsheet_design}. It is able to process MS Excel and Google Spreadsheets, generating human-readable mappings in either R2RML, RML or YARRRML. 
 
-\textit{descripción de la herramienta, aunque sea de forma sencilla (y se puede poner el diagrama de github). Va a haber que hacer pseudocódigo :)))))}
+\input{algorithms/algorithm_mapeathor}
+
+\cref{alg:mapeathor} presents the procedure implemented by Mapeathor to translate an input spreadsheet into a formatted mapping document. First, the rules written in the spreadsheet template are extracted and stored in a JSON file. This step also validates that the spreadsheet follows correctly the template. The prefixes are then added to the output mapping document, along with other prefixes that are used nativetly in the target language (e.g. \texttt{r2rml}, \texttt{rml} \ana{prefijo rml}). Then, the rules are translated by grouping them into rulesets with the same \texttt{ID} expressed in the spreadsheet (see \ana{previous section with template and subject)}. The extracted rules are enriched with implicit information needed to write the mapping (e.g. to look for \textit{rr:TermTypes} and IRIs). Next, the subject, source and predicate-object pairs in each ruleset are translated. In the case of RML, the system also looks for referencing functions to translate them as well. Finally, the translated rules are written into a final file, which is returned as output. The mapping documents are written by the system in a human-readable manner. \ana{ojo que esto se parece a yatter}
+
 
 The source code of Mapeathor is openly available under Apache 2.0 license\footnote{\url{https://github.com/oeg-upm/mapeathor}}. It can be run as a CLI using the Pypi package\footnote{\url{https://pypi.org/project/mapeathor/}} or as an online service\footnote{\url{https://morph.oeg.fi.upm.es/demo/mapeathor}}, where a visual interface is provided. With each release, a new version in Pypi is created and a dedicated DOI archived in Zenodo~\citep{iglesias-molina_2023_5973906}. 
 
