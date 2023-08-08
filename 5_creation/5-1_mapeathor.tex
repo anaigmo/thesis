@@ -57,17 +57,14 @@ id , name  , birthdate , sport_id
 \end{minipage}
 
 
-
-\ana{poner al final de la sección como traduce o sección a sección; a RML. --$>>$ mejor al final cuando se presente la herramienta, en la siguiente subsección}
-
 \subsubsection{Prefix sheet} 
 This sheet contains the namespaces and corresponding prefixes used in the creation of the transformation rules. 
 It is composed of two columns: \texttt{Prefix} for the prefix and \texttt{URI} for the corresponding namespace. The base namespace can be specified writing ``@base" in the \texttt{Prefix} column. The namespaces used by the target mapping language are automatically added in the translation (e.g. \texttt{rr}\footnote{\url{http://www.w3.org/ns/r2rml\#}}, \texttt{rml}\footnote{\url{http://semweb.mmlab.be/ns/rml\#}}).
-The example shown in \cref{tab:prefix_sheet} presents how three namespaces and the base namespace are written in this template. 
+The example shown in \cref{tab:chp5_prefix_sheet} presents how three namespaces and the base namespace are written in this template. 
 
 \begin{table}[h!]
 \caption{Prefix sheet.}
-\label{tab:prefix_sheet}
+\label{tab:chp5_prefix_sheet}
 \centering
 \begin{tabular}{c|c}
 \midrule
@@ -87,12 +84,12 @@ This sheet defines how to generate the subjects and a corresponding identifier (
 \texttt{Class} allows the assignation of the subject to a class with \texttt{rdf:type}. A subject may be type of one class, more than one or none at all. 
 Finally, \texttt{Graph} is an optional column that enables the assignation of a named graph to the triples generated for a subject.
 
-The example shown in \cref{tab:subject_sheet} presents how to write two subjects, each with a different identifier and URI for the instances. Within the \texttt{URI} field, what is written between ``\{" and ``\}" references a field in the source data. The instances of the subject with the \texttt{PERSON} ID are type of two classes, (\texttt{ex:Person} and \texttt{ex:Athlete}), while all the triples of the instances of the subject identified with the \texttt{SPORT} ID are assigned to a named graph (\texttt{ex:SportsGraph}). 
+The example shown in \cref{tab:chp5_subject_sheet} presents how to write two subjects, each with a different identifier and URI for the instances. Within the \texttt{URI} field, what is written between ``\{" and ``\}" references a field in the source data. The instances of the subject with the \texttt{PERSON} ID are type of two classes, (\texttt{ex:Person} and \texttt{ex:Athlete}), while all the triples of the instances of the subject identified with the \texttt{SPORT} ID are assigned to a named graph (\texttt{ex:SportsGraph}). 
 
 
 \begin{table}[h!]
 \caption{Subject sheet.}
-\label{tab:subject_sheet}
+\label{tab:chp5_subject_sheet}
 \centering
 \begin{tabular}{c|c|c|c}
 \midrule
@@ -113,11 +110,11 @@ This sheet describes the source input data for each set of rules, identified wit
 \texttt{Feature} declares the type of information provided in \texttt{Value}. The allowed keywords in this column are: \texttt{source} for the path and name of the file, \texttt{format} for the data source format, \texttt{iterator} for hierarchical data (e.g. JSON, XML), \texttt{table} for name of tables from Relational Data Bases (RDBs), \texttt{query} for SQL queries and \texttt{SQLVersion} for the version of SQL used. Each ID must have at least the \texttt{source} and \texttt{format} features specified, the rest of the features are optional. 
 Then, in the \texttt{Value} column, the corresponding values of each \texttt{Feature} specified are written. 
 
-\cref{tab:source_sheet} shows the data source description for the \texttt{PERSON} and \texttt{SPORT} IDs. The former corresponds to the CSV file shown in \cref{lst:chp5_mapeathor_input_people}, while the latter to the JSON file in \cref{lst:chp5_mapeathor_input_sport}, for which the iterator is also written (\texttt{\$.*}). 
+\cref{tab:chp5_source_sheet} shows the data source description for the \texttt{PERSON} and \texttt{SPORT} IDs. The former corresponds to the CSV file shown in \cref{lst:chp5_mapeathor_input_people}, while the latter to the JSON file in \cref{lst:chp5_mapeathor_input_sport}, for which the iterator is also written (\texttt{\$.*}). 
 
 \begin{table}[h!]
 \caption{Source sheet.}
-\label{tab:source_sheet}
+\label{tab:chp5_source_sheet}
 \centering
 \begin{tabular}{c|c|c}
 \midrule
@@ -141,11 +138,11 @@ When the object refers to a subject defined in another mapping rule, the rule is
 There are three columns that allow the specification of the linking condition between the object of the current triple and the referenced subject. 
 They specify which is the ID of the referred subject  (\texttt{ReferenceID}), and the ``join'' fields in the source data: (i) \texttt{InnerRef} for the field of the object of the current triple, and (ii) \texttt{OuterRef} for the field of the referred subject. These three fields can be blank when a regular triple is produced. 
 
-\cref{tab:po_sheet} shows five predicate-object pairs created for both sets of rules (\texttt{PERSON} and \texttt{SPORT}. Three of these rules produce literals with datatypes and two additionally specify a language tag. The rule set identified as \texttt{PERSON} generates a link to the subject of the \texttt{SPORT} rule set using the predicate \texttt{ex:name}, and joining by equal values of the field \texttt{sport\_id} from \texttt{people.csv} and the field \texttt{id} from \texttt{sport.json}. This rule set also calls a function for generating the object for the predicate \texttt{ex:birthdate}, which is identified by being enclosed by ``$<>$".
+\cref{tab:chp5_po_sheet} shows five predicate-object pairs created for both sets of rules (\texttt{PERSON} and \texttt{SPORT}. Three of these rules produce literals with datatypes and two additionally specify a language tag. The rule set identified as \texttt{PERSON} generates a link to the subject of the \texttt{SPORT} rule set using the predicate \texttt{ex:name}, and joining by equal values of the field \texttt{sport\_id} from \texttt{people.csv} and the field \texttt{id} from \texttt{sport.json}. This rule set also calls a function for generating the object for the predicate \texttt{ex:birthdate}, which is identified by being enclosed by ``$<>$".
 
 \begin{table}[h!]
 \caption{Predicate\_Object sheet.}
-\label{tab:po_sheet}
+\label{tab:chp5_po_sheet}
 \centering
 \resizebox{\columnwidth}{!}{
 \begin{tabular}{c|c|c|c|c|c|c|c}
@@ -162,11 +159,11 @@ SPORT & ex:code & \{id\} & integer & & & & \\ \midrule
 
 \subsubsection{Function sheet} Some languages are able to process data transformation functions, which can be detailed in this sheet. Mapeathor implements the last release of the RML-FNML specification, that describes how to incorporate functions in RML mappings\footnote{\url{https://w3id.org/rml/fnml/spec}}. The functions are referred in the \textit{Predicate\_Object sheet} or in other function rows with the identifier specified in \texttt{FunctionID}. The column \texttt{Feature} is used to specify the type of information provided in \texttt{Value}. The features admitted in the \texttt{Feature} column are \texttt{executes} for the name of the function, and \texttt{returns} for the expected output type of the function. In addition, this column admits any number of function parameter names. Then, the value of the name of the function, return type and values of the parameters are written correspondingly in the \texttt{Value} column.
 
-The example shown in \cref{tab:function_sheet} uses the function \texttt{grel:toDate}, to change the formatting of a date. It returns a date as output (\texttt{grel:dateOut}) and takes three parameters: the data field to be converted (\texttt{grel:valueParam1}), the input data format (\texttt{grel:valueParam2}) and the output data format (\texttt{grel:valueParam3}).
+The example shown in \cref{tab:chp5_function_sheet} uses the function \texttt{grel:toDate}, to change the formatting of a date. It returns a date as output (\texttt{grel:dateOut}) and takes three parameters: the data field to be converted (\texttt{grel:valueParam1}), the input data format (\texttt{grel:valueParam2}) and the output data format (\texttt{grel:valueParam3}).
 
 \begin{table}[h!]
 \caption{Function sheet.}
-\label{tab:function_sheet}
+\label{tab:chp5_function_sheet}
 \centering
 \begin{tabular}{c|c|c}
 \midrule
@@ -186,25 +183,113 @@ $<$Fun-date$>$ & grel:valueParam3 & yyyy-MM-dd \\
 
 Mapeathor~\citep{iglesias-molina_2023_5973906} is a open-source implementation to generate mappings from the spreadsheets described in \cref{sec:chp5_spreadsheet_design}. It is able to process MS Excel and Google Spreadsheets, generating human-readable mappings in either R2RML, RML or YARRRML. 
 
-\input{algorithms/algorithm_mapeathor}
-
-\cref{alg:mapeathor} presents the procedure implemented by Mapeathor to translate an input spreadsheet into a formatted mapping document. First, the rules written in the spreadsheet template are extracted and stored in a JSON file. This step also validates that the spreadsheet follows correctly the template. The prefixes are then added to the output mapping document, along with other prefixes that are used nativetly in the target language (e.g. \texttt{r2rml}, \texttt{rml} \ana{prefijo rml}). Then, the rules are translated by grouping them into rulesets with the same \texttt{ID} expressed in the spreadsheet (see \ana{previous section with template and subject)}. The extracted rules are enriched with implicit information needed to write the mapping (e.g. to look for \textit{rr:TermTypes} and IRIs). Next, the subject, source and predicate-object pairs in each ruleset are translated. In the case of RML, the system also looks for referencing functions to translate them as well. Finally, the translated rules are written into a final file, which is returned as output. The mapping documents are written by the system in a human-readable manner. \ana{ojo que esto se parece a yatter}
+\cref{alg:mapeathor} presents the procedure implemented by Mapeathor to translate an input spreadsheet into a formatted mapping document. First, the rules written in the spreadsheet template are extracted and stored in a JSON file. This step also validates that the spreadsheet follows correctly the template. The prefixes are then added to the output mapping document, along with other prefixes that are used nativetly in the target language (e.g. \texttt{r2rml}, \texttt{rml} \ana{prefijo rml}). Then, the rules are translated by grouping them into rulesets with the same \texttt{ID} expressed in the spreadsheet (see \ana{previous section with template and subject)}. The extracted rules are enriched with implicit information needed to write the mapping (e.g. to look for \textit{rr:TermTypes} and IRIs). Next, the subject, source and predicate-object pairs in each ruleset are translated. In the case of RML, the system also looks for referencing functions to translate them as well. Finally, the translated rules are written into a final file, which is returned as output. The mapping documents are written by the system in a human-readable manner. \ana{ojo que esto se parece a yatter } \ana{listing whatever } shows the output RML mapping that Mapeathor produces after processing the rules written in the spreadsheet shown in Tables \ref{tab:chp5_prefix_sheet}, \ref{tab:chp5_subject_sheet}, \ref{tab:chp5_source_sheet}, \ref{tab:chp5_po_sheet} and \ref{tab:chp5_function_sheet}. 
 
 
 The source code of Mapeathor is openly available under Apache 2.0 license\footnote{\url{https://github.com/oeg-upm/mapeathor}}. It can be run as a CLI using the Pypi package\footnote{\url{https://pypi.org/project/mapeathor/}} or as an online service\footnote{\url{https://morph.oeg.fi.upm.es/demo/mapeathor}}, where a visual interface is provided. With each release, a new version in Pypi is created and a dedicated DOI archived in Zenodo~\citep{iglesias-molina_2023_5973906}. 
 
+\input{algorithms/algorithm_mapeathor}
+
+\begin{captionedlisting}{lst:chp5-1_rml-output}{RML mapping generated with Mapeathor with the spreadsheet shown in Tables \ref{tab:chp5_prefix_sheet}, \ref{tab:chp5_subject_sheet}, \ref{tab:chp5_source_sheet}, \ref{tab:chp5_po_sheet} and \ref{tab:chp5_function_sheet}. }
+\centering
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix ex: <http://ex.com/>.
+@prefix grel: <http://semweb.datasciencelab.be/ns/grel#>.
+@base <http://example.com/>.
+
+<#PERSON>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "/home/user/data/people.csv";
+    	rml:referenceFormulation ql:CSV;
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://ex.com/Person/{name}" ;
+    	rr:class ex:Person ;
+    	rr:class ex:Athlete ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant ex:name];
+    	rr:objectMap	[ rml:reference "name"; 
+                      rr:termType rr:Literal;  
+                      rr:datatype xsd:string;  
+                      rr:language "en" ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant ex:plays ];
+    	rr:objectMap	[
+    		rr:parentTriplesMap	<#SPORT>;
+    		rr:joinCondition	[
+    			rr:child	"sport_id";
+    			rr:parent	"id";
+    		];
+    	];
+    ];
+    rr:predicateObjectMap [
+      rr:predicateMap	[ rr:constant ex:birthdate] ;
+      rr:objectMap	[
+    	  rml:functionExecution <#Fun-date> ;
+    	  rml:return grel:dateOut ;
+    	];
+    ]; .
+
+<#SPORT>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "/home/user/data/sports.json";
+    	rml:referenceFormulation ql:JSONPath;
+        rml:iterator "$\dollar$.*";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://ex.com/Sport/{sport}" ;
+    	rr:class ex:Sport ;
+    	rr:graphMap [ rr:constant "ex:SportsGraph" ] ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant ex:name];
+    	rr:objectMap	[ rml:reference "sport";  
+                      rr:termType rr:Literal;  
+                      rr:datatype xsd:string;  
+                      rr:language "en" ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant ex:code];
+    	rr:objectMap	[ rml:reference "id";  
+                      rr:termType rr:Literal;  
+                      rr:datatype xsd:integer ]
+    ]; .
+
+<#Fun-date> a rml:FunctionExecution;
+    rml:function grel:toDate ;
+    rml:input [
+      a rml:Input ;
+      rml:parameter grel:valueParam1 ;
+      rml:inputValueMap [ rml:reference "birthdate" ];
+    ];
+    rml:input [
+      a rml:Input ;
+      rml:parameter grel:valueParam2 ;
+      rml:inputValueMap [ rr:constant "dd/MM/yyyy" ];
+    ];
+    rml:input [
+      a rml:Input ;
+      rml:parameter grel:valueParam3 ;
+      rml:inputValueMap [ rr:constant "yyyy-MM-dd" ];
+    ]; .
+\end{lstlisting}}
+\end{captionedlisting}
+
 \subsection{Evaluation}
-
-\subsubsection{Methodology}
-\label{sec:chp5_mapeathor_eval_method}
-
-We carry a user study with two dimensions to test the usability of Mapeathor and evaluate if the spreadsheet-based approach can improve the mapping writing process for users of different expertise. We first carry out a \textit{subjective evaluation} in order to gather opinions and feedback about the spreadsheet template and usability of the tool in order to improve the user experience. We then perform a \textit{objective evaluation} to find out if our approach improves the mapping writing process w.r.t. writing directly the mapping in a target language (i.e. RML) and w.r.t. another mapping editor with a visual interface (i.e. RMLEditor). This section describes the methodology followed for the performed evaluations.
-
-%\textit{motivación: qué queremos comprobar, que si facilita la creación de mapping rules para experts y no experts. Para eso llevamos a cabo dos evaluaciones con usuarios, subjectiva y objetiva. En la subjectiva usuarios que han probado el software cuentan su experiencia y opiniones. En la objetiva, cogemos a usuarios y los dividimos en 3 grupos, para que generen mappings con rml, rmleditor y mapeathor. Así vemos si 1) mapeathor mejora RML y si 2) funciona mejor que una herramienta visual. Describir background, que no hay bias porque se puso a gente que nos había utilizado esa tech antes. y resultados}
-
-
-\noindent\textit{\textbf{Procedure}} The evaluation is comprised of two steps. The first step, correspondent to the \textit{subjective evaluation}, took place during the Knowledge Graph Construction Tutorial co-located with the 19th edition of the Extended Semantic Web Conference (2022)\footnote{\url{https://kg-construct.github.io/eswc-dkg-tutorial-2022/}}. This tutorial hosted a slot for presenting Mapeathor and the spreadsheet design, allowing time for a hands-on exercise at the end of the explanation. At the end of the slot, participants were asked to fill a questionnaire to assess the usability of the approach and gather some feedback for improvements. The questionnaire first inquired about the background of the participants, asking them to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools. Then, it assessed the usability of the approach with 10 questions that follow the SUS template, with also a 5-point Likert scale rating; and an additional optional question to gather feedback for improvement (\cref{tab:chp5_sub_questionnaire}).
-
+We evaluate the presented approach by performing a user study with two dimensions to test the usability of Mapeathor and check if the spreadsheet-based approach can improve the mapping writing process for users of different expertise. 
 
 \begin{table}[t!]
 \caption{Questionnaire for subjective assessment of the usability of the spreadsheet design and Mapeathor. }
@@ -227,41 +312,62 @@ We carry a user study with two dimensions to test the usability of Mapeathor and
 \end{tabular}}
 \end{table}
 
+\subsubsection{Methodology}
+\label{sec:chp5_mapeathor_eval_method}
+
+The evaluation is performed in two steps. We first carry out a \textit{subjective evaluation} in order to gather opinions and feedback about the spreadsheet template and usability of the tool in order to improve the user experience. We then perform a \textit{objective evaluation} to find out if our approach improves the mapping writing process w.r.t. writing directly the mapping in a target language (i.e. RML) and w.r.t. another mapping editor with a visual interface (i.e. RMLEditor). This section describes the methodology followed for the performed evaluations.
+
+%\textit{motivación: qué queremos comprobar, que si facilita la creación de mapping rules para experts y no experts. Para eso llevamos a cabo dos evaluaciones con usuarios, subjectiva y objetiva. En la subjectiva usuarios que han probado el software cuentan su experiencia y opiniones. En la objetiva, cogemos a usuarios y los dividimos en 3 grupos, para que generen mappings con rml, rmleditor y mapeathor. Así vemos si 1) mapeathor mejora RML y si 2) funciona mejor que una herramienta visual. Describir background, que no hay bias porque se puso a gente que nos había utilizado esa tech antes. y resultados}
+
+
+\noindent\textit{\textbf{Procedure}} The evaluation is comprised of two steps. The first step, correspondent to the \textit{subjective evaluation}, took place during the Knowledge Graph Construction Tutorial co-located with the 19th edition of the Extended Semantic Web Conference (2022)\footnote{\url{https://kg-construct.github.io/eswc-dkg-tutorial-2022/}}. This tutorial hosted a slot for presenting Mapeathor and the spreadsheet design, allowing time for a hands-on exercise at the end of the explanation. At the end of the slot, participants were asked to fill a questionnaire to assess the usability of the approach and gather some feedback for improvements. The questionnaire first inquired about the background of the participants, asking them to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools. Then, it assessed the usability of the approach with 10 questions that follow the SUS template, with also a 5-point Likert scale rating; and an additional optional question to gather feedback for improvement (\cref{tab:chp5_sub_questionnaire}).
 
 
 
 
-The second step of the evaluation that comprises the \textit{objective evaluation} took place in May 2023, once the improvements gathered from the previous step were implemented. In this step, the spreadsheet-based approach proposed in this work was compared with the widely used RML mapping language~\citep{Dimou2014rml}, and with a visual editor, RMLEditor~\citep{heyvaert2016rmleditor}. A group of 30 participants was divided into three groups of 10. Each group had to carry out the same task, to create a mapping from a given dataset and ontology with the assigned tool. All groups were introduced to the needed concepts about mapping languages and specific guidelines with examples of the assigned tool. The groups performed the given task in separated sessions, i.e. one session per tool was carried out, to ensure that all participants were given the same level of assistance independently of the tool. Participants were asked to carry out the proposed task in 30 minutes, after that they were asked to submit the mapping they have created so far. In addition, likewise as in the first step, participants were asked to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and to write their personal opinion on the assigned tool.
+
+
+
+
+The second step of the evaluation that comprises the \textit{objective evaluation} took place in May 2023, once the improvements gathered from the previous step were implemented. In this step, the spreadsheet-based approach proposed in this work was compared with the widely used RML mapping language~\citep{Dimou2014rml}, and with a visual editor, RMLEditor~\citep{heyvaert2016rmleditor}. A group of 30 participants was divided into three groups of 10. Each group had to carry out the same task, to create a mapping from a given dataset and ontology with the assigned tool. All groups were introduced to the needed concepts about mapping languages and specific guidelines with examples of the assigned tool. The groups performed the given task in separated sessions, i.e. one session per tool was carried out, to ensure that all participants were given the same level of assistance independently of the tool. Participants were asked to carry out the proposed task in 30 minutes. Having reached the time limit, they were asked to submit the mapping they have created so far. In addition, in the same way as in the first step, participants were asked to rate in a 5-point Likert scale their expertise in (i) linked data and (ii) mapping languages and tools; and to write their personal opinion on the assigned tool.
 
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=0.85\linewidth]{figures/mapeathor_us_onto.png}
+\includegraphics[width=\linewidth]{figures/chp5-1_us_onto.png}
 \caption[Ontology diagram for the user study exercise of Mapeathor]{Ontology diagram representing a subset of the Vocabulary for data representation of the local business census and activities licenses.}
-\label{fig:chp5_us_onto}
+\label{fig:chp5-1_us_onto}
 \end{figure*}
 
 \noindent\textit{\textbf{Resources}}
-The same data and ontology was used for both evaluations. We use a subset of the \textit{Vocabulary for data representation of the local business census and activities licenses}\footnote{\url{http://vocab.ciudadesabiertas.es/def/comercio/tejido-comercial/index-en.html}} that represents local businesses, their postal address and geolocalization (\cref{fig:chp5_us_onto}). 
+The same data and ontology was used for both evaluations. We use a subset of the \textit{Vocabulary for data representation of the local business census and activities licenses}\footnote{\url{http://vocab.ciudadesabiertas.es/def/comercio/tejido-comercial/index-en.html}} that represents local businesses, their postal address and geolocalization (\cref{fig:chp5-1_us_onto}). 
 We chose this dataset, that belongs to the common-knowledge domain, to avoid heterogeneous prior domain knowledge influence on the results of the study.
 
 We provided participants with the subset ontology description and associated data, that is comprised of three CSV files: \texttt{bar.csv}, \texttt{restaurant.csv} and \texttt{address.csv}. Information about bars, restaurants and their geolocalization is represented in the files \texttt{bar.csv}, \texttt{restaurant.csv} respectively. 
 These files contain the same columns, but different data. The file \texttt{address.csv} represent the postal address of the businesses present in the other two files. 
 The original data is available in GitHub\footnote{\url{https://github.com/CiudadesAbiertas/vocab-comercio-censo-locales/}}. 
-To facilitate the exercise for participants, some data cleaning was performed over the original files, as well as translation to all columns form spanish to english~\citep{iglesias-molina_2022_8154522}.
+To facilitate the exercise for participants, some data cleaning was performed over the original files, as well as translation to all columns form spanish to english. The used resources are published in Zenodo~\citep{iglesias-molina_2022_8154522}.
 
 
 
 \noindent\textit{\textbf{Participants}} 
 In the \textit{subjective evaluation}, 17 attendants submitted answers to the questionnaire provided during the session. Most of the participants were knowledgeable in linked data, while less than half had already used mappings before. 
-In the \textit{objective evaluation}, 30 participants were sampled from the Ontology Engineering Group, ranging from MSc students to full professors. Their background ranged from having basic knowledge about linked data and mappings, to being knowledgeable practitioners, including participants that were experts in linked data but had no knowledge about mappings. Participants were pseudo-randomly divided into three groups, one per tool. Prior to this assignation, participants were asked to provide information about whether they had prior knowledge of any of the tools, so that no participant would use a tool which they were already familiar with. Each group was balanced w.r.t. the heterogeneity in background. 
+In the \textit{objective evaluation}, 30 participants were sampled from the Ontology Engineering Group, ranging from MSc students to full professors. Their background ranged from having basic knowledge about linked data and mappings, to being knowledgeable practitioners, including participants that were experts in linked data but had no knowledge about mappings. Prior to the assignation of participants to each group, participants were asked to provide information about whether they had prior knowledge of any of the tools, so that no participant would use a tool which they were already familiar with. Taking into account this restriction, they were randomly divided into three groups, one per tool. Each group was balanced w.r.t. the heterogeneity in background (\cref{fig:chp5-1_expertise}). 
+
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=1\linewidth]{figures/chp5-1_expertise.pdf}
+\caption[Expertise of participants of the user study.]{Distribution of expertise of participants according to the 5-point Likert scale in (a) Linked Data and (b) mappings.}
+\label{fig:chp5-1_expertise}
+\end{figure*}
 
 \noindent\textit{\textbf{Metrics}} 
 The \textit{subjective evaluation} measured the responses to the SUS questionnaire on a 5-point Likert scale. 
 For the \textit{objective evaluation},
 %the accuracy of the mapping submitted was calculated. All participants had 30 minutes to perform the task and upload the resulting mapping, thus two kinds of accuracies are calculated. \ana{igual esta frase cuadrarla después }
-we calculate two kinds of accuracies: (i)~\textit{Total Accuracy} (TA) for the number of correct rules written w.r.t. the reference correct mapping, and (ii)~\textit{Local Accuracy} (LA) for the number of correct rules w.r.t. all the rules written. We calculate both accuracies because of the fixed time for completing the exercise. TA can be interpreted as a measure of completeness, while LA focusses on assessing the correctness of the written rules independently on the total completeness.
-We divide the mapping in four components: \textit{Subject}, \textit{Source}, \textit{Predicate-Object (PO)} and \textit{Join}, and calculate the accuracy for each component and the totality of the mapping. Then a T-Test is performed to look for significant differences of accuracy among the tools. 
+we calculate two kinds of accuracies: (i)~\textit{Total Accuracy} (TA) for the number of correct rules written w.r.t. the reference correct mapping, and (ii)~\textit{Local Accuracy} (LA) for the number of correct rules w.r.t. all the written rules. We calculate both accuracies because of the fixed time for completing the exercise. TA can be interpreted as a measure of completeness, while LA focusses on assessing the correctness of the written rules independently on the total completeness.
+We divide the mapping in four components: \textit{Subject}, \textit{Source}, \textit{Predicate-Object (PO)} and \textit{Join}, and calculate the accuracy for each component and the totality of the mapping. Then a T-Test is performed to look for significant differences of accuracy among the tools. This test is sed under the assumptions of (i) normality, (ii) sameness of variance, (iii) data independence, and (iv) variable continuity.
 
 
 \noindent\textit{\textbf{Threats to validity}}~\citep{creswell2017research} We identify the following internal and external threats to the validity of our experiment.
@@ -269,13 +375,13 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 \textbf{Internal validity threats} concern the experimental setup or experience of participants which threaten the ability to draw correct conclusions about the population in the experiment. We identify three internal threats: \textit{tool familiarity bias}, \textit{selection bias} and \textit{instruction bias}.
 \begin{itemize}
     \item \textbf{Tool familiarity bias.} Practitioners tend to be more expert in some specific technologies and languages that they use more frequently. Thus, in the sample there it is possible to have participants that have used any of the tested approaches, which in turn can influence the results. For creating the groups, participants' experience was inquired to avoid assigning them a tool that they had previously used.
-    \item \textbf{Selection bias.} The sample includes participants with different range on skills and previous knowledge about linked data and mappings. We mitigate this threat by defining groups that were  homogeneous w.r.t. range of expertise in mappings and linked data, considering also the mitigation measures for the \textit{tool familiarity} threat. That is to say, all groups included from beginner users to knowledgeable practitioners. 
+    \item \textbf{Selection bias.} The sample includes participants with different range of skills and previous knowledge about linked data and mappings. We mitigate this threat by defining groups that were  homogeneous w.r.t. range of expertise in mappings and linked data, considering also the mitigation measures for the \textit{tool familiarity} threat. That is to say, all groups included from beginner users to knowledgeable practitioners. 
     \item \textbf{Instruction bias.} One of the evaluated approaches is designed by the conductors of the user study. This situation could incur in bias on information delivery. To mitigate this threat, we provided participants with the same instruction guidelines for each tool. Three sessions were conducted subsequently to provide the same explanations and attention to each tool. During each sessions, all questions were answered with equal level of detail and guidance for all tools and participants.
 \end{itemize}
 
 \textbf{External validity threats} occur when wrong inferences from sample data are made beyond the studied sample or experimental setup. We identify two external threats: \textit{background of participants sample} and \textit{environment}.
 \begin{itemize}
-    \item \textbf{Background of participants sample.} This threat concerns the generalization to individuals outside the study. The sample of participants include a wide range in the variety of backgrounds, from not very familiar with linked data and mappings, to experts. We deliberately choose to have this variety for each group so that the results can be generalized to a broader sample, while mitigating the risks of internal threats described above that this choice poses. 
+    \item \textbf{Background of participants sample.} This threat concerns the generalization to individuals outside the study. The sample of participants include a wide range in the variety of backgrounds, from not very familiar with linked data and mappings, to expert practitioners. We deliberately choose to have this variety for each group so that the results can be generalized to a broader sample, while mitigating the risks of internal threats described above that this choice poses. 
     \item \textbf{Environment.} This threat concerns the generalization to individuals outside the experiment’s setting. Participants were free to use a computer, browser and tools of their choice. Thus, they could perform the tasks required for the study in a well-known environment. No specific experimental setup prevents generalizations to individuals outside our study.
 \end{itemize}
 
@@ -287,12 +393,10 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 
 \noindent\textit{\textbf{Subjective evaluation results}}
 
-\noindent\textit{\textbf{Objective evaluation results}}
 
-\ana{gráficas background per group and general}
-\begin{table}[h]
-\caption{Results of the user study, showing the mean of the local accuracy (LA), total accuracy (TA) and p-value of the submitted responses per mapping feature and tool.}
-\label{tab:chp5_summary_mapeathor}
+\begin{table}[!t]
+\caption{Results of the user study, showing the mean of the local accuracy (LA), total accuracy (TA) and p-value of the submitted responses per mapping feature and tool. }
+\label{tab:chp5-1_summary_results}
 \centering
 \resizebox{\columnwidth}{!}
 {\begin{tabular}{ccc|cc|cc|cc|cc}
@@ -306,6 +410,23 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 \end{tabular}}
 \end{table}
 
+\noindent\textit{\textbf{Objective evaluation results}}
+
+\ana{e ir intercalando opiniones sobre cada approach para apoyar los resultados, ambas buenas y malas}
+
+%% In general
+\cref{tab:chp5-1_summary_results} shows the results obtained from the user study. In general, it can be observed that Mapeathor obtains the highest accuracy rate in all cases. Surprisingly, RMLEditor struggles with the base approach, RML, obtaining in general slightly worse results. Between these two approaches, participants using RML were able to complete more total mapping rules, while for RMLEditor the written rules were more accurate. 
+
+%% no significance, but tendencies in differences in parts
+Yet, none of the differences in the results for any type of mapping rule is significant (p-values $>$ 0.05), but we can observe some tendencies.
+\textit{sin embargo, ninguno de los resultados es significativo (p-value $<$ 0.05), pero sí se pueden observar tendencias. Los resultados donde más se acerca el p-value a ser significativo es para el total accuracy del mapping completo, y para la escritura de los sujetos, especialmente en el local accuracy. En estos casos se puede afirmar con más seguridad que Mapeathor va bien encaminado a mejorar la escritura de las mapping rules.}  \ana{de donde rmleditor supera a rml tb?}
+
+%% analysis of parts of mappings
+\textit{mirando más en detalle a cada una de las partes del mapping, se puede ver que en general la escritura de sujetos, sources y poms es muy exitosa, sobre todo de los sources, donde el local accuracy de todos los approaches es cercanoa 1. regarding el total accuracy, los resultados no son tan buenos, en parte puede ser por el tiempo dado, y en parte por la complejidad incremental del mapping. que había dos sujetos creados a partir del mismo archivo, y dos archivos que servian para crear el mismo sujeto. Donde todas las herramientas fallan estrepitosamente es en la creación de joins, llevandose la palma RML. Aquí si se puede ver que los user-friendly approaches si apoyan a la escritura, pero sin mucho éxito tampoco.}
+
+
+%% en general
+\textit{en general los resultados (accuracy conseguido) dejan bastante que desear. Hay que tener en cuenta que los participantes tenían un tiempo limitado para terminar el ejercicio, pero aún así el mejor resultado de total accuracy (en total y en las partes) supera por poco la mitad del completeness. Para cada grupo hubo gente que consiguió terminar el ejercicio o se quedó muy cerca (al menos una persona por grupo). Mientras, fueron mayoría quienes completaron pocas reglas, de ahí que el local accuracy sea mejor. Sin embargo, este accuracy también nos dice que la mayoría de participantes tuvo dificultades para hacer el mapping, cosa que ocurrió para ambos gente que ya habían hecho mappings y nuevos usuarios. Estos resultados resaltan que queda mucho camino por recorrer para mejorar el proceso de creación y escritura de mappings. }
 
 
 \begin{figure}[t!]
@@ -315,13 +436,13 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
     	\caption{Local accuracy.}
     	\label{fig:chp5_mapeathor_relacc}
     \end{subfigure}
-    %\hspace{0.05\textwidth}
+   %\hspace{0.05\textwidth}
     \begin{subfigure}[b]{\linewidth}
     	\includegraphics[width=\linewidth]{figures/mapeathor_total-acc.pdf}
     	\caption{Total accuracy.}
     	\label{fig:chp5_mapeathor_totacc}
     \end{subfigure}
-    \caption{Accuracy results.}
+    \caption{Accuracy results.\ana{estando la tabla esto queda redundante?}}
     \label{fig:reification-app}
 \end{figure}
 
@@ -334,6 +455,7 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 
 \subsection{Discussion}
 \label{sec:chp5_mapeathor_discussion}
-\ana{discusión de resultados, y use cases también se pueden comentar}
+\ana{discusión de resultados, y use cases también se pueden comentar. O al igual si no es mucho se puede decir directamente en las conclusiones del capítulo}
+
 \ana{newpage hasta que la seccióne esté entera, borrar después}
 \newpage

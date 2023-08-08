@@ -7,7 +7,7 @@
  $spreadsheet \longleftarrow input\_spreadsheet$\;
  $output\_m \longleftarrow \emptyset$\;
  $rules \longleftarrow extract\_rules(spreadsheet)$\;
- $output\_m.add(translate\_prefixes(rules))$\;
+ $output\_m.add(translate\_prefixes(rules, language))$\;
   
  \For{$ruleset \in rules$}{
     $rules.add(enrich\_ruleset(ruleset))$\;
@@ -19,7 +19,7 @@
         }
     }
  
- \Return{$validate(write\_m)$}\;
+ \Return{$write(output\_m)$}\;
 \caption{Mapeathor translation algorithm}
 \label{alg:mapeathor}
 \end{algorithm}
