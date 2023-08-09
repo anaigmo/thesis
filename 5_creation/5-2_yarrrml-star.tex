@@ -1,4 +1,4 @@
-\section{User-friendly creation of RDF-star with YARRRML}
+\section{User-friendly Creation of RDF-star with YARRRML}
 \label{sec:chp5_yarrrml_star}
 
 Along with mapping editors described before, human-friendly serialisations emerged 
@@ -16,7 +16,7 @@ This section describes YARRRML-star, the extension of YARRRML to support RML-sta
 We also improve the serialisation it to adhere with the latest RML updates
 (e.g., datatypes, joins, etc.), and develope a translator system --Yatter-- that implements the new features, and validate our proposal with test cases and compared it to other user-friendly serializations.
 
-\subsection{YARRRML serialization for RML}
+\subsection{User-friendly Syntax for Mapping Rules}
 \label{sec:chp5_yarrrml-desc}
 We extend the YARRRML serialisation to support the RDF-star construction and two updates: the dynamic datatypes and language tags, and a shortcut for join conditions. These are recent features in RML that so far were not considered in YARRRML.
 To illustrate the extensions,
@@ -236,7 +236,7 @@ All the described updates have been proposed for the YARRRML specification and i
 
 
 
-\subsection{Yatter}
+\subsection{Implementation: Yatter}
 
 %In this section, we describe 
 Yatter\footnote{\label{foot:yatter}\url{https://github.com/oeg-upm/yatter/}} is a new open-source bi-directional YARRRML translator that supports the aforementioned new features. 
@@ -248,8 +248,6 @@ Yatter receives as input a mapping document in the YARRRML serialisation and the
 \cref{alg:yatter} presents the procedure implemented by the system to translate an input YARRRML mapping document into [R2]RML. 
 First, %prefixes are added (
 the namespaces defined in YARRRML are added together with a set of predefined ones (e.g., \texttt{foaf\footnote{\url{http://xmlns.com/foaf/0.1/}}, rml\footnote{\url{http://semweb.mmlab.be/ns/rml\#}}, rdf\footnote{\url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#}}}) that are used in by [R2]RML. 
-
-\input{algorithms/algorithm_yatter}
 
 Second, functions, targets, and databases are identified in the entire YARRRML document and translated into RML. Each of them generates a global identifier mapped into a hash table that can be used by any \texttt{rr:TermMap}. For external source declaration, their identifiers are also mapped into a hash table for the next steps.
 Regarding the RDF-star support, the mapping rules are parsed to identify if it contains \texttt{quoted} or \texttt{quotedNonAsserted} keys.
@@ -263,15 +261,14 @@ Nevertheless, multiple predicate maps and object maps are allowed within the sam
 Finally, the cartesian product of sources and subject maps together with the predicate object maps is combined to generate the desirable triples map.
 Before returning the mapping rules, Yatter validates that the generated output is a valid RDF graph.
 
-Although YARRRML leaves the RDF-based syntax of the mapping rules to be processed only by the knowledge graph construction systems, we also provide a human-readable output considering previous experiences~\citep{chaves2022systematic,corcho2021high,chaves2020bench}.
-This helps knowledge engineers in complex data integration contexts to easier understand if the mapping document in YARRRML represents the desirable rules of [R2]RML and, hence, if the constructed knowledge graph will be correct or not. 
-Thus, the output mapping follows a Turtle-based syntax, using predicate object lists within blank node properties\footnote{\url{https://www.w3.org/TR/turtle/\#unlabeled-bnodes}}, as recommended by the [R2]RML specifications.
-We also ensure the same mapping rules' order as they are defined in YARRRML. 
-Functions, targets, and databases appear first, while for each \texttt{rr:TriplesMap}, the sequence is: source, subject map, and the set of predicate object maps.
+\input{algorithms/algorithm_yatter}
+
+Although YARRRML leaves the RDF-based syntax of the mapping rules to be processed only by the knowledge graph construction systems, we also provide a human-readable output in the same way as does Mapeathor (see \cref{sec:chp5_mapeathor_tool}). 
+Moreover, we ensure that functions, targets, and databases appear first, while for each \texttt{rr:TriplesMap}, the sequence is: source, subject map, and the set of predicate object maps.
 
 The source code of Yatter is openly available under Apache 2.0 license\cref{foot:yatter}.
 Following open science best practices, each release automatically generates a dedicated DOI to ensure reproducibility in any experimental evaluation\footnote{\url{https://doi.org/10.5281/zenodo.7024500}}. 
-The development is under continuous integration using GitHub Actions and the YARRRML test-cases (Section \ref{sec:validation}) have more than 80\% code coverage. 
+The development is under continuous integration using GitHub Actions and the YARRRML test-cases (Section \ref{sec:chp5_yarrrml-validation}) have more than 80\% code coverage. 
 Yatter is available through PyPi as a module\footnote{\url{https://pypi.org/project/yatter/}} to be easily integrated in any Python development. % (e.g., providing RML to a KG construction system implemented in this language).
 %such as SDM-RDFizer~\citep{iglesias2020sdm} or Morph-KGC~\citep{arenas2022morph}.
 
@@ -493,19 +490,6 @@ Additionally, based on the YARRRML test cases, we develop the corresponding test
 
 \textit{Discussion.}
 All systems provide a solid user experience and are -mostly- highly conformant with their corresponding serialisation. ShExML is especially useful for integrating different data sources and formats, but lacks RDF-star support, writing functions results cumbersome and the translation to RML is incomplete. Stardog works smoothly with its proprietary Stardog databases, but managing several different sources becomes complex as a different mapping rule set is required per source. 
-XRM is installed within a coding editor, and helps actively the writing process with suggestions and warnings. YARRRML-parser supports most of the functionalities that are also implemented in Yatter but still it does not support the latest RML features. YARRRML-parser translates functions to non-standard set of RML rules, while our implementation supports the specification proposed by the W3C CG on Knowledge Graph Construction\footnote{\url{https://w3id.org/kg-construct/rml-fnml}}.
+XRM is installed within a coding editor, and helps actively the writing process with suggestions and warnings. YARRRML-parser supports most of the functionalities that are also implemented in Yatter but still it does not support the latest RML features. YARRRML-parser translates functions to non-standard set of RML rules, while our implementation supports the specification proposed by the W3C CG on Knowledge Graph Construction\footnote{\url{https://w3id.org/rml/fnml/spec}}.
 
 
-\subsubsection{Use Cases}
-
-\ana{Igual quitar esto, salen recursos de David nada más}
-
-We present two use cases with YARRRML-star and Yatter:% the construction of KGs for research performing organizations, and the support of mapping process for each EU member state in the Public Procurement Data Space (PPDS).
-
-\noindent\textbf{Constructing KGs for Research-Performing Organizations.} In a previous work~\citep{chaves2022systematic} we used YARRRML-star and Yatter to support the creation of KGs for research supporting organizations with R2RML. 
-Thanks to this setup, we created a fluent and iterative pipeline for testing and debugging the created mapping rules in a complex environment, where almost 2000 tables were mapped into RDF. 
-Additionally, the easy-to-read RML outcome helped the knowledge engineer to easily identify and fix errors during the construction of the KGs.  
-
-\noindent\textbf{The EU Public Procurement Data Space (PPDS).} The EU PPDS aims to construct a decentralized KG\footnote{\url{https://europa.eu/!qx9WxQ}}, declaratively mapping the procurement data from each EU member state into the e-Procurement Ontology (ePO)\footnote{\url{https://docs.ted.europa.eu/EPO/latest/}}. 
-YARRRML-star is the selected serialisation to ensure the maintainability of the KG construction, and it is currently used together with Yatter to develop the initial pilots. 
-In the latest pilots, open Spanish public procurement data extracted from their national platform was mapped, where the mapping rules\footnote{\url{https://github.com/oeg-upm/yatter/tree/main/test/projects/PPDSTC}} contain dynamic language tags and complex XPath expressions to extract the desirable data.
