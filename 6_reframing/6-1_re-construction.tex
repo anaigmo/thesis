@@ -100,7 +100,7 @@ PREDICATION_AUX_ID , PREDICATION_ID , SUBJ_SCORE , TIMESTAMP
 To test the scalability of the evaluated approaches, we subset this dataset into four sizes taking as input from the abovementioned CSV files with (i)~1K rows, (ii)~10K rows, (iii)~100K rows and (iv)~1M rows. The number of triples produced for each reification version in each scale is shown in \cref{tab:chp6-1_data-triple-number}.
 
 \begin{table}[t]
-\caption{Number of triples of the SemMedDB graph in the selected representations for each scale.}
+\caption[SemMedDB scale sizes]{Number of triples of the SemMedDB graph in the selected representations for each scale.}
 \label{tab:chp6-1_data-triple-number}
 \centering
 \begin{tabular}{cccccc}
@@ -169,7 +169,7 @@ RML extends the R2RML Recommendation~\citep{das2012r2rml} to describe more data 
 
 
 \begin{table}[t!]
-    \caption{Characteristics of mappings in RML and SPARQL-Anything. \#TM stands for number of Triples Map, \#POM for Predicate Object Map, and \#TP for Triple Patterns. The shown operators appear usually in the \texttt{WHERE} clause; the ones marked with $^c$ appear in the \texttt{CONSTRUCT} clause. }
+    \caption[Characteristics of evaluation mapping]{Characteristics of mappings in RML and SPARQL-Anything. \#TM stands for number of Triples Map, \#POM for Predicate Object Map, and \#TP for Triple Patterns. The shown operators appear usually in the \texttt{WHERE} clause; the ones marked with $^c$ appear in the \texttt{CONSTRUCT} clause. }
     \label{tab:chp6-1_mapping-char}
     \centering
     \begin{tabular}{ccc|cc}
@@ -233,7 +233,7 @@ CONSTRUCT  {
 
 
 \begin{table}[t!]
-\caption{Characteristics of the SPARQL queries used for the evaluation to transform the graph from a \textit{source} representation to a \textit{target} representation. \#TP stands for the number of triple patterns. Fields marked with $^c$ appear in the \texttt{CONSTRUCT} clause, while $^w$ indicates the \texttt{WHERE} clause. }
+\caption[Characteristics of evaluation SPARQL queries]{Characteristics of the SPARQL queries used for the evaluation to transform the graph from a \textit{source} representation to a \textit{target} representation. \#TP stands for the number of triple patterns. Fields marked with $^c$ appear in the \texttt{CONSTRUCT} clause, while $^w$ indicates the \texttt{WHERE} clause. }
 \centering
 \label{tab:chp6-1_query-char}
 \resizebox{\columnwidth}{!}
@@ -350,7 +350,7 @@ Only in GraphDB, Q9 reports less time to produce N-Ary Relationship than Standar
 
 %%%% transposed table, occupies more space
 \begin{table}[t!]
-\caption{Geometric mean of the query result times (s) from all triplestores grouping by \textit{source} representation and \textit{target} representation. The lowest times are highlighted in \textbf{bold}, while the highest are \underline{underlined}.}
+\caption[Execution time results for re-construction evaluation with triplestores]{Geometric mean of the query result times (s) from all triplestores grouping by \textit{source} representation and \textit{target} representation. The lowest times are highlighted in \textbf{bold}, while the highest are \underline{underlined}.}
 \centering
 \label{tab:chp6-1_closeup-queries}
 \begin{tabular}{cccccc}

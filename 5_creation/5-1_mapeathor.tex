@@ -204,26 +204,26 @@ The source code of Mapeathor is openly available under Apache 2.0 license\footno
 We evaluate the presented approach by performing a user study to test %the usability of Mapeathor and check 
 if the spreadsheet-based approach can improve the mapping writing process for users of different expertise. 
 
-\begin{table}[t!]
-\caption{Questionnaire for subjective assessment of the usability of the spreadsheet design and Mapeathor. }
-\centering
-\label{tab:chp5-1_sub_questionnaire}
-\resizebox{\columnwidth}{!}
-{\begin{tabular}{cl}
-\multicolumn{2}{c}{\textbf{Questions}} \\ \midrule
-1. & I think that I would like to use this tool frequently\\ \midrule
-2. & I found the tool unnecessarily complex\\ \midrule
-3. & I thought the spreadsheet template was easy to use\\ \midrule
-4. & I think that I would need the support of a technical person to be able to use the spreadsheet template\\ \midrule
-5. & I found the different facets in this spreadsheet template were well integrated\\ \midrule
-6. & I thought there was too much inconsistency in this tool\\ \midrule
-7. & I think that most people would learn how to write the spreadsheet template very quickly\\ \midrule
-8. & I found the tool unmanageable to use\\ \midrule
-9. & I felt very confident using the spreadsheet template\\ \midrule
-10. & I needed to learn a lot of things before I could get going with this tool\\ \midrule
-11. & Optional comments (feedback to improve) \\ \bottomrule
-\end{tabular}}
-\end{table}
+%\begin{table}[t!]
+%\caption[]{Questionnaire for subjective assessment of the usability of the spreadsheet design and Mapeathor. }
+%\centering
+%\label{tab:chp5-1_sub_questionnaire}
+%\resizebox{\columnwidth}{!}
+%{\begin{tabular}{cl}
+%\multicolumn{2}{c}{\textbf{Questions}} \\ \midrule
+%1. & I think that I would like to use this tool frequently\\ \midrule
+%2. & I found the tool unnecessarily complex\\ \midrule
+%3. & I thought the spreadsheet template was easy to use\\ \midrule
+%4. & I think that I would need the support of a technical person to be able to use the spreadsheet template\\ \midrule
+%5. & I found the different facets in this spreadsheet template were well integrated\\ \midrule
+%6. & I thought there was too much inconsistency in this tool\\ \midrule
+%7. & I think that most people would learn how to write the spreadsheet template very quickly\\ \midrule
+%8. & I found the tool unmanageable to use\\ \midrule
+%9. & I felt very confident using the spreadsheet template\\ \midrule
+%10. & I needed to learn a lot of things before I could get going with this tool\\ \midrule
+%11. & Optional comments (feedback to improve) \\ \bottomrule
+%\end{tabular}}
+%\end{table}
 
 \subsubsection{Methodology}
 \label{sec:chp5_mapeathor_eval_method}
@@ -332,12 +332,12 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 \cref{fig:chp5-1_accuracy} shows the results obtained from the user study. In general, it can be observed that Mapeathor obtains the highest accuracy rate in all cases. Surprisingly, RMLEditor struggles with the base approach, RML, obtaining in general slightly worse results. Between these two approaches, participants using RML were able to complete more total mapping rules, while for RMLEditor the written rules were more accurate. 
 
 %% analysis of parts of mappings
-Looking at the details of each mapping parts, in general the writing of \textit{Sources}, \textit{Subjects} and \textit{Predicate-Object} pairs (\textit{PO}) is carried out mostly successfully. It is especially remarkable for \textit{Sources}, that achieves a local accuracy near to 1. However, the results reported for its total accuracy are not that high, which can be due to the time limit and the increasing complexity of the exercise. The accuracy of the creation of \textit{Subjects} with the RMLEditor is rather low w.r.t the other approaches. The most common mistake done by participants in this case was writing wrongly the class to which the subject is type of, indicating the path of the source file instead of the class IRI. The mapping element where all approaches fail to assist users is unmistakably the \textit{Join}. Most participants did not even try to write them, and those who did, mostly failed. The most plausible reason to explain this behaviour is the lack of understanding on how and when to use a \textit{Join} in a mapping. RML presents the worst results in this case, as the specification of this element in this language is the one that requires most mapping constructs. 
+Looking at the details of each mapping parts, in general the writing of \textit{Sources}, \textit{Subjects} and \textit{Predicate-Object} pairs (\textit{PO}) is carried out mostly successfully. It is especially remarkable for \textit{Sources}, that achieves a local accuracy near to 1. However, the results reported for its total accuracy are not that high, which can be due to the time limit and the increasing complexity of the exercise. The accuracy of the creation of \textit{Subjects} with the RMLEditor is rather low w.r.t. the other approaches. The most common mistake done by participants in this case was writing wrongly the class to which the subject is type of, indicating the path of the source file instead of the class IRI. The mapping element where all approaches fail to assist users is unmistakably the \textit{Join}. Most participants did not even try to write them, and those who did, mostly failed. The most plausible reason to explain this behaviour is the lack of understanding on how and when to use a \textit{Join} in a mapping. RML presents the worst results in this case, as the specification of this element in this language is the one that requires most mapping constructs. 
 
 %\textit{mirando más en detalle a cada una de las partes del mapping, se puede ver que en general la escritura de sujetos, sources y poms es muy exitosa, sobre todo de los sources, donde el local accuracy de todos los approaches es cercanoa 1. regarding el total accuracy, los resultados no son tan buenos, en parte puede ser por el tiempo dado, y en parte por la complejidad incremental del mapping. que había dos sujetos creados a partir del mismo archivo, y dos archivos que servian para crear el mismo sujeto. Donde todas las herramientas fallan estrepitosamente es en la creación de joins, llevandose la palma RML. Aquí si se puede ver que los user-friendly approaches si apoyan a la escritura, pero sin mucho éxito tampoco.}
 
 \begin{table}[!t]
-\caption{Results of the user study, showing the mean of the local accuracy (LA), total accuracy (TA) and p-value of the submitted responses per mapping feature and tool. }
+\caption[Accuracy results and significance of user study]{Results of the user study, showing the mean of the local accuracy (LA), total accuracy (TA) and p-value of the submitted responses per mapping feature and tool. }
 \label{tab:chp5-1_summary_results}
 \centering
 \resizebox{\columnwidth}{!}

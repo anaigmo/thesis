@@ -1,24 +1,24 @@
 \section{User-friendly Creation of RDF-star with YARRRML}
 \label{sec:chp5_yarrrml_star}
 
-Along with mapping editors described before, human-friendly serialisations emerged 
-to ease the definition of mapping rules. Focusing on R2RML and RML, we highlight the following serialisations that have been more widely adopted recently.
+Along with mapping editors described before, human-friendly serializations emerged 
+to ease the definition of mapping rules. Focusing on R2RML and RML, we highlight the following serializations that have been more widely adopted recently.
 YARRRML~\citep{Heyvaert2018yarrrml} leverages YAML
 to offer a user-friendly representation to define mapping rules, while
 ShExML~\citep{Garcia-Gonzalez2020shexml} extends the syntax of the ShEx constraint language~\citep{prud2014shex}.
 XRM~\citep{xrm}
 provides an abstract syntax that simulates programming languages and 
 SMS2~\citep{sms2}, proposed by Stardog,\footnote{\label{foot:stardog}\url{https://www.stardog.com/}} is loosely based on the SPARQL query language and extends the features of R2RML to create virtual KGs.
-Each serialisation is accompanied by a system that translates their rules into mapping languages, such as RML or R2RML (henceforth abbreviated as [R2]RML). 
-%These serialisations and translators were not compared with each other in terms of serialisations' features and system's characteristics, even though it would help to decide which serialisation fits each use case.
+Each serialization is accompanied by a system that translates their rules into mapping languages, such as RML or R2RML (henceforth abbreviated as [R2]RML). 
+%These serializations and translators were not compared with each other in terms of serializations' features and system's characteristics, even though it would help to decide which serialization fits each use case.
 
 This section describes YARRRML-star, the extension of YARRRML to support RML-star~\citep{delva2021rml-star} to construct RDF-star graphs.
-We also improve the serialisation it to adhere with the latest RML updates
+We also improve the serialization it to adhere with the latest RML updates
 (e.g., datatypes, joins, etc.), and develope a translator system --Yatter-- that implements the new features, and validate our proposal with test cases and compared it to other user-friendly serializations.
 
 \subsection{User-friendly Syntax for Mapping Rules}
 \label{sec:chp5_yarrrml-desc}
-We extend the YARRRML serialisation to support the RDF-star construction and two updates: the dynamic datatypes and language tags, and a shortcut for join conditions. These are recent features in RML that so far were not considered in YARRRML.
+We extend the YARRRML serialization to support the RDF-star construction and two updates: the dynamic datatypes and language tags, and a shortcut for join conditions. These are recent features in RML that so far were not considered in YARRRML.
 To illustrate the extensions,
 we use a CSV file as input (\cref{lst:chp5_csv}) with information about pole vaulters: an identifier, name, language of the country, height of the jump, date when the jump takes place, and type of date format specified.
 
@@ -240,7 +240,7 @@ All the described updates have been proposed for the YARRRML specification and i
 
 %In this section, we describe 
 Yatter\footnote{\label{foot:yatter}\url{https://github.com/oeg-upm/yatter/}} is a new open-source bi-directional YARRRML translator that supports the aforementioned new features. 
-Yatter receives as input a mapping document in the YARRRML serialisation and the desirable output format (R2RML or RML), or the other way around.
+Yatter receives as input a mapping document in the YARRRML serialization and the desirable output format (R2RML or RML), or the other way around.
 
 
 
@@ -277,21 +277,21 @@ Yatter is available through PyPi as a module\footnote{\url{https://pypi.org/proj
 \subsection{Validation}
 \label{sec:chp5_yarrrml-validation}
 We validate the extensions to YARRRML and the developed implementation by 
-proposing and testing a set of test cases, and comparing to other proposed user-friendly serialisations and corresponding systems.
+proposing and testing a set of test cases, and comparing to other proposed user-friendly serializations and corresponding systems.
 
 \subsubsection{YARRRML Test Cases} %David
 Test cases are a common method to evaluate the conformance of a system~\citep{arenas2023morphstar,heyvaert2019conformance}. 
 %with respect to a language/syntax specification 
 %(see for example). 
-To the best of our knowledge, previous R2RML~\citep{boris2012r2rml} and RML~\citep{heyvaert2019conformance} test cases were not translated to any human-friendly serialisation (e.g., YARRRML).
+To the best of our knowledge, previous R2RML~\citep{boris2012r2rml} and RML~\citep{heyvaert2019conformance} test cases were not translated to any human-friendly serialization (e.g., YARRRML).
 Relying on [R2]RML test cases, we propose a set of representative test cases (including also the new features presented in this work) to assess the conformance of any YARRRML translator system.
 %In this way, practitioners can easier understand the coverage of these systems with respect to the proposed language/syntax and select the one that fits better to their own use cases.
-The proposed test cases require to be two-fold defined: to cover the complete vocabulary of the serialisation, and also have the flexibility to declare the rules (e.g., shortcuts or location of the keys). 
+The proposed test cases require to be two-fold defined: to cover the complete vocabulary of the serialization, and also have the flexibility to declare the rules (e.g., shortcuts or location of the keys). 
 %To avoid starting from scratch, we rely on the test cases proposed by R2RML~\citep{R2RML_test_cases} first, that were also extended for RML~\citep{heyvaert2019conformance}. 
 
 We follow a systematic methodology for creating the YARRRML test cases. 
 We analyzed the [R2]RML test cases and observed that several assess correct data generation.
-Since YARRRML serves as user-friendly serialisation for another mapping language, the focus of its test cases is not on assessing data correctness, but on covering the language expressiveness.
+Since YARRRML serves as user-friendly serialization for another mapping language, the focus of its test cases is not on assessing data correctness, but on covering the language expressiveness.
 Hence, we select 15 R2RML test cases that cover the R2RML features and manually translate them into YARRRML. 
 %the flexiblity in rules declaration in YARRRML (i.e., to test proper manage of shortcuts).
 Since RML is a superset of R2RML, it introduces modifications with respect to R2RML to include the definition of heterogenous datasets (e.g., \texttt{rr:LogicalTable} is superseded by \texttt{rml:LogicalSource}). % with their associated properties (e.g., \texttt{rml:source}), and \texttt{rr:column} by \texttt{rml:reference}.
@@ -309,31 +309,31 @@ They are openly available\footnote{\label{foot:yarrrml-resources}\url{https://gi
 Yatter passes all test cases successfully. %Following good software development practices, we integrate the test cases in the continuous integration pipeline of our system as unit tests.
 
 
-\subsubsection{Serialisations Comparison} %Ana
+\subsubsection{serializations Comparison} %Ana
 
 %YARRRML was developed to be a user-friendly syntax for the RML mapping language~\citep{heyvaert2018yarrrml}. There have been proposed more syntaxes with the same purpose, such as Stardog's SMS2 for R2RML and Zazuko's XRM for [R2]RML and CSVW.
 
 
 
 
-We compare a set of user-friendly serialisations and languages, namely SMS2~\citep{sms2}, XRM~\citep{xrm}, ShExML~\citep{Garcia-Gonzalez2020shexml} and YARRRML~\citep{Heyvaert2018yarrrml} incorporating the updates described in \cref{sec:chp5_yarrrml-desc}, regarding their expressiveness. 
+We compare a set of user-friendly serializations and languages, namely SMS2~\citep{sms2}, XRM~\citep{xrm}, ShExML~\citep{Garcia-Gonzalez2020shexml} and YARRRML~\citep{Heyvaert2018yarrrml} incorporating the updates described in \cref{sec:chp5_yarrrml-desc}, regarding their expressiveness. 
 To that end, we study 15 features that tackle usual characteristics and functionalities in mapping languages.
-We describe each and discuss how each serialisation addresses it (\cref{tab:chp5_lang-comparison}). 
+We describe each and discuss how each serialization addresses it (\cref{tab:chp5_lang-comparison}). 
 
 \textbf{LF1. Subject Term Type.} 
 This feature indicates what kind of RDF[-star] term the language can generate as subject.
 In RDF, subjects can be IRIs or blank nodes, while in RDF-star they can also be RDF-star triples.
-All serialisations enable the creation of subjects at least as IRIs, SMS2 and YARRRML additionally implement RDF-star triples and, along with ShExML, blank nodes.
+All serializations enable the creation of subjects at least as IRIs, SMS2 and YARRRML additionally implement RDF-star triples and, along with ShExML, blank nodes.
 
 \textbf{LF2. Subject Generation.} 
 This feature indicates if subjects can be generated as constant or dynamic values; and how many subject declarations are allowed at a time. In dynamically generated values, the subject value changes with a field in the data source. In our example, the subject uses the field ``\texttt{ID}" to generate different subject for each row of input data. %(\cref{lst:chp5_yarrrml-mapping} line 6) . Esto viene de la sección de background, que por ahora no voy a incluir
-All serialisations can generate constant and dynamic subjects. For each set of rules, exactly one subject declaration is expected, i.e. one subject for predicate-object pairs. YARRRML can also accept no subject declaration, producing a blank node. % as default behavior.
+All serializations can generate constant and dynamic subjects. For each set of rules, exactly one subject declaration is expected, i.e. one subject for predicate-object pairs. YARRRML can also accept no subject declaration, producing a blank node. % as default behavior.
 %whose default behavior generates a blank node when a subject is not described.
 
 
 \begin{table}[t!]
-\caption{Features of user-friendly serialisations. BN stands for blank node, L for literal, ST for RDF-star triple, C for constant and D for dynamic. \underline{Underlined} features indicate the updates of YARRRML-star, while
-``*" indicates that a feature is possible with the implementation but not explicit in the serialisation.}
+\caption[Features of user-frienly serializations]{Features of user-friendly serializations. BN stands for blank node, L for literal, ST for RDF-star triple, C for constant and D for dynamic. \underline{Underlined} features indicate the updates of YARRRML-star, while
+``*" indicates that a feature is possible with the implementation but not explicit in the serialization.}
 \label{tab:chp5_lang-comparison}
 %\def\arraystretch{1.25}
 \centering
@@ -361,7 +361,7 @@ All serialisations can generate constant and dynamic subjects. For each set of r
 
 
 \textbf{LF3. Predicate Term Type.} 
-This feature indicates if the serialisation is able to generate an IRI for a predicate and all serialisations do so.
+This feature indicates if the serialization is able to generate an IRI for a predicate and all serializations do so.
 
 \textbf{LF4. Predicate Generation.}
 This feature indicates if predicates can be generated as constant or dynamic values; and how many predicate declarations are allowed at a time. In dynamically generated values, the subject value changes with a field in the data source. 
@@ -369,29 +369,29 @@ This feature indicates if predicates can be generated as constant or dynamic val
 SMS2 and YARRRML enable dynamic predicates, and YARRRML is also able to handle more than one predicate, which avoids repeating the same object for different predicates.
 
 \textbf{LF5. Object Term Type.} 
-This feature indicates what kind of RDF[-star] term the serialisation is able to generate as object. The serialisations can generate the same kinds of terms as in subjects (LF1), with the addition of literals. 
+This feature indicates what kind of RDF[-star] term the serialization is able to generate as object. The serializations can generate the same kinds of terms as in subjects (LF1), with the addition of literals. 
 
 \textbf{LF6. Object Generation.}
 This feature indicates if objects can be generated as constant or dynamic values; and how many predicate declarations are allowed at a time.
 %can be generated as constant values or change dynamically with the data iteration; and how many objects declarations are allowed at a time. 
-As for subjects, all serialisations can generate constant and dynamic objects. In addition, SMS2 and YARRRML allow more than one at a time, which avoids repeating the same predicate for different objects.
+As for subjects, all serializations can generate constant and dynamic objects. In addition, SMS2 and YARRRML allow more than one at a time, which avoids repeating the same predicate for different objects.
 
 \textbf{LF7. Datatype.}
 This feature indicates if datatypes can be specified constant or dynamically.
-All serialisations enable the optional declaration of constant datatypes, but ShExML and YARRRML also enable dynamic datatypes.
+All serializations enable the optional declaration of constant datatypes, but ShExML and YARRRML also enable dynamic datatypes.
 
 \textbf{LF8. Language Tag.}
-This feature indicates if language tags can be constant or dynamic. Just as for datatypes, all serialisations enable the optional declaration of constant language tags, XRM is the only not allowing dynamic.
+This feature indicates if language tags can be constant or dynamic. Just as for datatypes, all serializations enable the optional declaration of constant language tags, XRM is the only not allowing dynamic.
 
 \textbf{LF9. Named Graph.} 
 This feature indicates if named graphs can be assigned to the generated statements and how (constant or dynamically). 
-All serialisations enable their optional declaration as constant IRI. XRM and YARRRML also enable more than one graph assignation, and allow dynamic values. 
+All serializations enable their optional declaration as constant IRI. XRM and YARRRML also enable more than one graph assignation, and allow dynamic values. 
 
 \textbf{LF10. Data references.} 
-This features indicates how many data references a term can contain when generated dynamically (i.e. when its value changes with the input data). It applies to subjects, predicates, objects, datatypes, language tags and named graphs when the serialisation allows dynamic generation. All serialisations allow more than one data reference for dynamic generation.
+This features indicates how many data references a term can contain when generated dynamically (i.e. when its value changes with the input data). It applies to subjects, predicates, objects, datatypes, language tags and named graphs when the serialization allows dynamic generation. All serializations allow more than one data reference for dynamic generation.
 
 \textbf{LF11. Data Description.}
-This feature indicates if the input or output data (e.g., format, iteration, name, path, etc.) can be described. All serialisations can describe input data source, and YARRRML also provides the output data source.
+This feature indicates if the input or output data (e.g., format, iteration, name, path, etc.) can be described. All serializations can describe input data source, and YARRRML also provides the output data source.
 
 \textbf{LF12. Data Linking.}
 This feature indicates if explicit data linking (e.g. join, fuzzy linking, etc) can be performed with mapping rules. ShExML and YARRRML provide specific features for this end; in XRM and SMS2, however, it is not explicit, but it is possible by using SQL queries. 
@@ -400,13 +400,13 @@ This feature indicates if explicit data linking (e.g. join, fuzzy linking, etc) 
 This feature indicates if different levels of a hierarchy source can be accessed in the same data iteration. ShExML is the only language that implements this feature. It is not implemented in YARRRML since is not supported in RML either as a language feature in the time of writing. 
 
 \textbf{LF14. Functions.}
-This indicates if data transformations are applicable to input data (e.g. lowercase). XRM is the only serialisation not supporting it. 
+This indicates if data transformations are applicable to input data (e.g. lowercase). XRM is the only serialization not supporting it. 
 
 \textbf{LF15. Conditions.}
 This feature indicates if a statement is generated or not depending on a condition. Only ShExML and YARRRML implement this.
 
 \textit{Discussion.} 
-All serialisations offer a rich variety of mapping features, but ShExML and YARRRML have a richer selection. SMS2 leverages the SPARQL syntax, lowering the learning curve for SPARQL users. At the same time, data processing is limited to basic SPARQL functions and the user is unable to integrate custom ones. 
+All serializations offer a rich variety of mapping features, but ShExML and YARRRML have a richer selection. SMS2 leverages the SPARQL syntax, lowering the learning curve for SPARQL users. At the same time, data processing is limited to basic SPARQL functions and the user is unable to integrate custom ones. 
 XRM is designed to mimic natural language and adds minimal overhead with its own syntax keywords, which also makes it easy-to-learn, but provides a more limited variety of features.
 
 
@@ -416,7 +416,7 @@ XRM is designed to mimic natural language and adds minimal overhead with its own
 
 %Can be added to the table: Mapping merging support, Named graph construction support, Transformations support
 
-We also compare the systems that support the aforementioned serialisations: 
+We also compare the systems that support the aforementioned serializations: 
 ShExML translator\footnote{\label{foot:shexml}\url{https://github.com/herminiogg/ShExML}}, %uses mappings written in the ShExML syntax to produce both RML mappings and the RDF graph.
 Stardog\cref{foot:stardog} %is a cloud-native enterprise knowledge graph platform that offers many different features for linked data management. 
 (with focus on how Stardog maps data sources to RDF graphs, using R2RML or SMS2),
@@ -437,13 +437,13 @@ Stardog and XRM are commercial systems and their implementation is not available
 All systems support relational databases and CSV files as input data sources. Only Stardog and Yatter support NoSQL data sources.
 
 
-\textbf{SF4. Input Serialisation.}
-This feature indicates the input mapping serialisation. 
-All systems support their corresponding mapping serialisation. 
+\textbf{SF4. Input serialization.}
+This feature indicates the input mapping serialization. 
+All systems support their corresponding mapping serialization. 
 Additionally, Stardog can transform R2RML mapping rules to RDF graphs, whereas both YARRRML systems can translate R2RML or RML files into YARRRML.
 
-\textbf{SF5. Output Serialisation.} 
-This indicates the output mapping serialisation. 
+\textbf{SF5. Output serialization.} 
+This indicates the output mapping serialization. 
 XRM and YARRRML systems translate their mapping rules to [R2]RML, while XRM also supports CARML and CSVW. 
 Stardog directly constructs the RDF graph. 
 ShExML generates both RML mapping rules and RDF graphs.
@@ -462,11 +462,11 @@ ShExML, Yatter and Stardog
 \textbf{SF8. Dynamic Datatype Tag Support.} %This feature indicates if the system supports the generation of dynamic datatype tags. 
 Yatter and ShExML are the only systems that enable the reference of datatypes dynamically. 
 
-Additionally, based on the YARRRML test cases, we develop the corresponding test cases for the other analyzed serialisations. The results of the conformance test of the analysed systems are presented online\cref{foot:yarrrml-resources}.
+Additionally, based on the YARRRML test cases, we develop the corresponding test cases for the other analyzed serializations. The results of the conformance test of the analysed systems are presented online\cref{foot:yarrrml-resources}.
 
 
 \begin{table}[t!]
-\caption{Features of the systems that support the different languages.}
+\caption[Features of user-friendly serialization systems]{Features of the systems that support the user-friendly serializations.}
 \label{tab:chp5_eng-comparison}
 \footnotesize
 \centering
@@ -489,7 +489,7 @@ Additionally, based on the YARRRML test cases, we develop the corresponding test
 
 
 \textit{Discussion.}
-All systems provide a solid user experience and are -mostly- highly conformant with their corresponding serialisation. ShExML is especially useful for integrating different data sources and formats, but lacks RDF-star support, writing functions results cumbersome and the translation to RML is incomplete. Stardog works smoothly with its proprietary Stardog databases, but managing several different sources becomes complex as a different mapping rule set is required per source. 
+All systems provide a solid user experience and are -mostly- highly conformant with their corresponding serialization. ShExML is especially useful for integrating different data sources and formats, but lacks RDF-star support, writing functions results cumbersome and the translation to RML is incomplete. Stardog works smoothly with its proprietary Stardog databases, but managing several different sources becomes complex as a different mapping rule set is required per source. 
 XRM is installed within a coding editor, and helps actively the writing process with suggestions and warnings. YARRRML-parser supports most of the functionalities that are also implemented in Yatter but still it does not support the latest RML features. YARRRML-parser translates functions to non-standard set of RML rules, while our implementation supports the specification proposed by the W3C CG on Knowledge Graph Construction\footnote{\url{https://w3id.org/rml/fnml/spec}}.
 
 
