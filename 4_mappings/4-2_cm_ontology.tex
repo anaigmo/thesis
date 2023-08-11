@@ -50,14 +50,14 @@ Lastly, SPARQL-based languages pose a challenge. SPARQL is a rich and powerful q
 \subsubsection{Mapping Challenges}
 \label{sec:chp4_mapping_challenges}
 
-Following its inception, the W3C Knowledge Graph Construction Community Group\cref{foot:kgc} defined a series of challenges for mapping languages based on the experience of members in using declarative mappings\cref{foot:challenges}. These challenges are a summary of the limitations of current languages. They have been partially addressed independently in some of the analyzed languages, such as RML~\citep{delva2021rml-fields} and ShExML~\citep{garcia2021shexml-challenges}. These challenges are summarized as follows:
+Following its inception, the W3C Knowledge Graph Construction Community Group\cref{foot:kgc} defined a series of challenges for mapping languages based on the experience of members in using declarative mappings\cref{foot:challenges}. These challenges are a summary of the limitations of current languages. They have been partially addressed independently in some of the analyzed languages, such as RML~\citep{delva2021rml-fields,iglesias2023rml} and ShExML~\citep{garcia2021shexml-challenges}. These challenges are summarized as follows:
 
 \begin{itemize}
-    \item \textbf{[C1] Language Tags and Datatype.} It refers to dynamically building language tags ([C1a]) and datatypes ([C1b]), that is, from data rather than as constant values.
-    \item \textbf{[C2] Iterators.} This challenge addresses the need to access data values 'outside' the iteration pattern ([C2a]), especially in \textcolor{black}{some tree-like data sources such as JSON}; and iterating over multi-value references ([C2b]).
-    \item \textbf{[C3] Multi-value References.} It discusses how languages  handle data fields that contain multiple values ([C3a]), their datatypes and associated language tags ([C3b]).
+    \item \textbf{[C1] Language Tags and Datatype.} It refers to dynamically building language tags [C1a] and datatypes [C1b], that is, from data rather than as constant values.
+    \item \textbf{[C2] Iterators.} This challenge addresses the need to access data values 'outside' the iteration pattern [C2a], especially in \textcolor{black}{some tree-like data sources such as JSON}; and iterating over multi-value references [C2b].
+    \item \textbf{[C3] Multi-value References.} It discusses how languages  handle data fields that contain multiple values [C3a], their datatypes and associated language tags [C3b].
     \item \textbf{[C4] RDF Collections and Containers.} This challenge addresses the need to handle RDF collections and containers.
-    \item \textbf{[C5] Joins.} It refers to joining resources with zero join conditions ([C5a]) and joining literals instead of IRIs ([C5b]).
+    \item \textbf{[C5] Joins.} It refers to joining resources with zero join conditions [C5a] and joining literals instead of IRIs [C5b].
 \end{itemize} 
 
 
@@ -107,6 +107,8 @@ In order to represent the fragments of data that are referenced in a statement m
 
 A source frame corresponds to a data source (with \texttt{hasDataSource}) and defines which data is retrieved from the source and how it is fragmented (with \texttt{expression}). Among others, JSONPaths, XPaths, queries, or regular expressions can be expressed with this feature. \textcolor{black}{The language of the expression is defined with \texttt{language}, which domain is the reused class from RML \texttt{rml:ReferenceFormulation}}. A source frame may be related to another source frame with  \texttt{hasNest\-edFrame}, e.g. a frame is accessed firstly with a SPARQL query, and their results as a CSV file with this property. A source fragment may refer to many data fields (with \texttt{hasField}, which is the inverse property of \texttt{belongsToFrame}).
 
+\ana{target}
+
 
 \noindent\paragraph{\textbf{Statements.}} The central class of this section is the \texttt{StatementMap}, which represents a rule that defines for a triple its subject (\texttt{hasSubject}), predicate (\texttt{hasPredicate}), and object (\texttt{hasObject}). Optionally, it can also specify the object datatype (\texttt{hasDatatype}), language (\texttt{hasLanguage}) and assigned named graph (\texttt{hasNamedGraph}). Therefore, statement maps are similar to RDF statements as both of them are comprised by a subject, predicate and object. In statement maps, objects are resources (\texttt{ResourceMap}), and subjects and predicates are more specific, certain subclasses of the resource map: predicates are reference node maps (\texttt{ReferenceNodeMap}) that represent resources with an IRI, i.e., ontology properties. Subjects are node maps (\texttt{NodeMap}) that may be blank nodes (\texttt{Blank Node}) or also reference node maps. An object may be a literal (\texttt{LiteralMap}), a blank node, a container (\texttt{ContainerMap}) or a collection that defines a list (\texttt{ListMap}). The language is expressed as a literal, and the datatype is also a resource with an IRI, i.e. a reference node map.
 
@@ -149,39 +151,45 @@ The HTML documentation is not the only documentation resource provided. An overv
 The maintenance is supported by the Issue Tracker\footnote{\url{https://github.com/oeg-upm/Conceptual-Mapping/issues}}, where proposals for new requirements, additions, deletions or modifications can be added as GitHub issues. This approach allows authors to review the proposals and discuss their possible implementation.
 
 
-
-
-\subsection{Extensions}
-
-The Conceptual Mapping ontology has been designed as a core ontology. However, as time passes, new requirements may emerge. In order to include these new requirements, new modules of the Conceptual Mapping ontology shall be developed. It is worth mentioning that this is a common practice for ontologies, which is highly suitable for adapting an existing ontology to new scenarios, by ontology modules specialized for a specific set of requirements. A clear example of this is the SAREF ontology\footnote{\url{https://saref.etsi.org/}}, that has a core module\footnote{\url{https://saref.etsi.org/core/v3.1.1/}} and then specific extensions\footnote{\url{https://saref.etsi.org/extensions.html}} for certain domains, such as energy (SAREF4ENER) or buildings (SAREF4BLDG) among others. For the Conceptual Mapping we present two extensions: for allowing a more detailed CSV description and for generating RDF-star.
-
-\subsubsection{CSV description: CM-CSV}
-The core if the Conceptual Mapping includes limited posibilities for describing CSV files in depth. The extension CM-CSV\footnote{\url{http://vocab.linkeddata.es/def/conceptual-mapping-csv}} provides this possibility. The CSVW proposal has been blended as an ontology module linked to the core Conceptual Mapping ontology. The class \texttt{CSVSourceFrame} is created as a subclass of \texttt{SourceFrame} and \texttt{csvw:Dialect} to inherit their characteristics. This module is depicted in \cref{fig:chp4-2_csv-ext}. Thus, this extension allows to describe CSV characteristics such as if the file contains headers (\texttt{csvw:header}), its delimiter (\texttt{csvw:delimiter}), separator (\texttt{csvw:separator}), etc. 
-
-
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.8\linewidth]{figures/chp4-2_cm-csv.pdf}
 \caption[CM-CSV module]{Conceptualization of the CM-CSV module following the Chowlk visual notation~\citep{feria2022chowlk}.}
-\label{fig:chp4-2_csv-ext}
+\label{fig:chp4-2_cm-csv}
 \end{figure}
 
-\subsubsection{RDF-star generation: CM-star}
-\ana{falta descripción más detallada de lo que pasa por aquí}
-RDF-star was recently proposed as an alternative for reification in RDF. It extends the RDF syntax introducing the notion of quoted triples, i.e. triples that can be placed in the position of objects and/or subjects. Since its proposal, it has been increasingly adopted by different semantic technologies. Among them, RML was extended to be able to generate RDF-star graphs~\citep{iglesias2022rmlstar} (further details in \cref{sec:chp4_rml_star}). 
+
+\subsection{Extensions}
+
+The Conceptual Mapping ontology has been designed as a core ontology. However, as time passes, new requirements may emerge. In order to include these new requirements, new modules of the Conceptual Mapping ontology shall be developed. It is worth mentioning that this is a common practice for ontologies, which is highly suitable for adapting an existing ontology to new scenarios, by ontology modules specialized for a specific set of requirements. A clear example of this is the SAREF ontology\footnote{\url{https://saref.etsi.org/}}, that has a core module\footnote{\url{https://saref.etsi.org/core/v3.1.1/}} and then specific extensions\footnote{\url{https://saref.etsi.org/extensions.html}} for certain domains, such as energy (SAREF4ENER) or buildings (SAREF4BLDG) among others. For the Conceptual Mapping we present two extensions: for allowing a more detailed description of CSV files, and for generating RDF-star graphs.
+
+\subsubsection{CSV description: CM-CSV}
+The core module of the Conceptual Mapping includes limited possibilities for describing CSV files in depth. The extension CM-CSV\footnote{\url{https://w3id.org/conceptual-mapping/csv}} provides extended features to this end. Thus, the CSVW~\citep{Tennison2015csvw} proposal has been blended as an ontology module linked to the core Conceptual Mapping ontology. The class \texttt{CSVSourceFrame} is created as a subclass of \texttt{SourceFrame} and \texttt{csvw:Dialect} to inherit their characteristics. This module is depicted in \cref{fig:chp4-2_cm-csv}. Thus, this extension allows to describe CSV characteristics such as if the file contains headers (\texttt{csvw:header}), its delimiter (\texttt{csvw:delimiter}), separator (\texttt{csvw:separator}), among many others. 
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/chp4-2_cm-star.pdf}
+\includegraphics[width=1\linewidth]{figures/chp4-2_cm-star.pdf}
 \caption[CM-star module]{Conceptualization of the CM-star module following the Chowlk visual notation~\citep{feria2022chowlk}.}
-\label{fig:chp4-2_star-ext}
+\label{fig:chp4-2_cm-star}
 \end{figure}
+
+\subsubsection{RDF-star generation: CM-star}
+RDF-star~\citep{hartig2017foundations} was recently proposed as a compact alternative for reification in RDF. It extends the RDF syntax introducing the notion of \textit{Quoted triples}, i.e. triples that can be placed in the position of objects and/or subjects. These triples can be inserted in the graph outside the quoted triple (i.e. they are \textit{asserted}), or appear only inside another triples (i.e. they are \textit{non-asserted}).
+
+RDF-star has quickly gained popularity, leading
+to its adoption by a wide range of systems~\footnote{\url{https://w3c.github.io/rdf-star/implementations.html}} (e.g., Apache Jena~\footnote{\url{https://jena.apache.org}}, Oxigraph~\citep{oxigraph}) and the formation of the RDF-star Working Group\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. \ana{ver si es too much después del SOTA}
+
+Regarding mapping languages, SPARQL-Anything is able to generate RDF-graphs as it natively implements the updates from Apache Jena; RML was extended for this purpose with the RML-star module~\citep{iglesias2022rmlstar,delva2021rml-star,iglesias2023rml} (further details in \cref{sec:chp4_rml_star}), as well as R2RML-star~\citep{sundqvist2022extending}.
+
+The Conceptual Mapping implements the RDF-star graph generation adopting the recursive nature of quoted triples in the CM-star module\footnote{\url{https://w3id.org/conceptual-mapping/star}}. \cref{fig:chp4-2_cm-star} represents the overview of this module. Two subclasses of \texttt{StatementMap} are created to denote asserted (\texttt{AssertedStatementMap}) and non-asserted (\texttt{NonAssertedStatementMap}) statement maps. These statements can be quoted as subjects and objects with the properties \texttt{hasQuotedSubject} and \texttt{hasQuotedObject} respectively. The range of these properties is the union of the introduced statement subclasses. This extension enables potentially an infinite number of quoted statements, as the RDF-star specification indicates~\cite{hartig2023rdf}. 
+
+
 
 \subsection{Ontology usage example}\label{sec:cm_example} 
 
 
 
-\begin{figure}[b!]
+\begin{figure}[t!]
     \centering
     \begin{subfigure}[b]{0.45\linewidth}
         \centering
