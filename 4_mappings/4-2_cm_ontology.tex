@@ -107,8 +107,10 @@ In order to represent the fragments of data that are referenced in a statement m
 
 A source frame corresponds to a data source (with \texttt{hasDataSource}) and defines which data is retrieved from the source and how it is fragmented (with \texttt{expression}). Among others, JSONPaths, XPaths, queries, or regular expressions can be expressed with this feature. \textcolor{black}{The language of the expression is defined with \texttt{language}, which domain is the reused class from RML \texttt{rml:ReferenceFormulation}}. A source frame may be related to another source frame with  \texttt{hasNest\-edFrame}, e.g. a frame is accessed firstly with a SPARQL query, and their results as a CSV file with this property. A source fragment may refer to many data fields (with \texttt{hasField}, which is the inverse property of \texttt{belongsToFrame}).
 
-\ana{target}
-
+The desired output of the statements that are to be generated can be described with the imported \texttt{rml:LogicalTarget}, referenced by the optional property \texttt{hasLogicalTarget}. A \textit{Logical Target} specifies which RDF serialisation the output should be encoded (\texttt{rml:serialization}), and the referred \texttt{rml:Target}. 
+The \texttt{rml:Target} indicates how the output target can be accessed,
+and can describe: (i) the compression format for the RDF output (\texttt{rml:compression}) and, if so, how e.g., GZip,
+and (ii) the encoding (\texttt{rml:encoding}), e.g., UTF-8.
 
 \noindent\paragraph{\textbf{Statements.}} The central class of this section is the \texttt{StatementMap}, which represents a rule that defines for a triple its subject (\texttt{hasSubject}), predicate (\texttt{hasPredicate}), and object (\texttt{hasObject}). Optionally, it can also specify the object datatype (\texttt{hasDatatype}), language (\texttt{hasLanguage}) and assigned named graph (\texttt{hasNamedGraph}). Therefore, statement maps are similar to RDF statements as both of them are comprised by a subject, predicate and object. In statement maps, objects are resources (\texttt{ResourceMap}), and subjects and predicates are more specific, certain subclasses of the resource map: predicates are reference node maps (\texttt{ReferenceNodeMap}) that represent resources with an IRI, i.e., ontology properties. Subjects are node maps (\texttt{NodeMap}) that may be blank nodes (\texttt{Blank Node}) or also reference node maps. An object may be a literal (\texttt{LiteralMap}), a blank node, a container (\texttt{ContainerMap}) or a collection that defines a list (\texttt{ListMap}). The language is expressed as a literal, and the datatype is also a resource with an IRI, i.e. a reference node map.
 
@@ -151,6 +153,12 @@ The HTML documentation is not the only documentation resource provided. An overv
 The maintenance is supported by the Issue Tracker\footnote{\url{https://github.com/oeg-upm/Conceptual-Mapping/issues}}, where proposals for new requirements, additions, deletions or modifications can be added as GitHub issues. This approach allows authors to review the proposals and discuss their possible implementation.
 
 
+
+\subsection{Extensions}
+
+The Conceptual Mapping ontology has been designed as a core ontology. However, as time passes, new requirements may emerge. In order to include these new requirements, new modules of the Conceptual Mapping ontology shall be developed. It is worth mentioning that this is a common practice for ontologies, which is highly suitable for adapting an existing ontology to new scenarios, by ontology modules specialized for a specific set of requirements. A clear example of this is the SAREF ontology\footnote{\url{https://saref.etsi.org/}}, that has a core module\footnote{\url{https://saref.etsi.org/core/v3.1.1/}} and then specific extensions\footnote{\url{https://saref.etsi.org/extensions.html}} for certain domains, such as energy (SAREF4ENER) or buildings (SAREF4BLDG) among others. For the Conceptual Mapping we present two extensions: for allowing a more detailed description of CSV files, and for generating RDF-star graphs.
+
+
 \begin{figure}[!t]
 \centering
 \includegraphics[width=0.8\linewidth]{figures/chp4-2_cm-csv.pdf}
@@ -159,12 +167,15 @@ The maintenance is supported by the Issue Tracker\footnote{\url{https://github.c
 \end{figure}
 
 
-\subsection{Extensions}
-
-The Conceptual Mapping ontology has been designed as a core ontology. However, as time passes, new requirements may emerge. In order to include these new requirements, new modules of the Conceptual Mapping ontology shall be developed. It is worth mentioning that this is a common practice for ontologies, which is highly suitable for adapting an existing ontology to new scenarios, by ontology modules specialized for a specific set of requirements. A clear example of this is the SAREF ontology\footnote{\url{https://saref.etsi.org/}}, that has a core module\footnote{\url{https://saref.etsi.org/core/v3.1.1/}} and then specific extensions\footnote{\url{https://saref.etsi.org/extensions.html}} for certain domains, such as energy (SAREF4ENER) or buildings (SAREF4BLDG) among others. For the Conceptual Mapping we present two extensions: for allowing a more detailed description of CSV files, and for generating RDF-star graphs.
-
 \subsubsection{CSV description: CM-CSV}
 The core module of the Conceptual Mapping includes limited possibilities for describing CSV files in depth. The extension CM-CSV\footnote{\url{https://w3id.org/conceptual-mapping/csv}} provides extended features to this end. Thus, the CSVW~\citep{Tennison2015csvw} proposal has been blended as an ontology module linked to the core Conceptual Mapping ontology. The class \texttt{CSVSourceFrame} is created as a subclass of \texttt{SourceFrame} and \texttt{csvw:Dialect} to inherit their characteristics. This module is depicted in \cref{fig:chp4-2_cm-csv}. Thus, this extension allows to describe CSV characteristics such as if the file contains headers (\texttt{csvw:header}), its delimiter (\texttt{csvw:delimiter}), separator (\texttt{csvw:separator}), among many others. 
+
+\subsubsection{RDF-star generation: CM-star}
+RDF-star~\citep{hartig2017foundations} was recently proposed as a compact alternative for reification in RDF. It extends the RDF syntax introducing the notion of \textit{Quoted triples}, i.e. triples that can be placed in the position of objects and/or subjects. These triples can be inserted in the graph outside the quoted triple (i.e. they are \textit{asserted}), or appear only inside another triples (i.e. they are \textit{non-asserted}).
+
+RDF-star has quickly gained popularity, leading
+to its adoption by a wide range of systems~\footnote{\url{https://w3c.github.io/rdf-star/implementations.html}} (e.g., Apache Jena~\footnote{\url{https://jena.apache.org}}, Oxigraph~\citep{oxigraph}) and the formation of the RDF-star Working Group\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. \ana{ver si es too much después del SOTA}
+
 
 \begin{figure}[!t]
 \centering
@@ -173,11 +184,6 @@ The core module of the Conceptual Mapping includes limited possibilities for des
 \label{fig:chp4-2_cm-star}
 \end{figure}
 
-\subsubsection{RDF-star generation: CM-star}
-RDF-star~\citep{hartig2017foundations} was recently proposed as a compact alternative for reification in RDF. It extends the RDF syntax introducing the notion of \textit{Quoted triples}, i.e. triples that can be placed in the position of objects and/or subjects. These triples can be inserted in the graph outside the quoted triple (i.e. they are \textit{asserted}), or appear only inside another triples (i.e. they are \textit{non-asserted}).
-
-RDF-star has quickly gained popularity, leading
-to its adoption by a wide range of systems~\footnote{\url{https://w3c.github.io/rdf-star/implementations.html}} (e.g., Apache Jena~\footnote{\url{https://jena.apache.org}}, Oxigraph~\citep{oxigraph}) and the formation of the RDF-star Working Group\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. \ana{ver si es too much después del SOTA}
 
 Regarding mapping languages, SPARQL-Anything is able to generate RDF-graphs as it natively implements the updates from Apache Jena; RML was extended for this purpose with the RML-star module~\citep{iglesias2022rmlstar,delva2021rml-star,iglesias2023rml} (further details in \cref{sec:chp4_rml_star}), as well as R2RML-star~\citep{sundqvist2022extending}.
 
