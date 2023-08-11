@@ -1,8 +1,46 @@
 
-\section{Motivating Example}
+\section{Motivation}
 \label{sec:chp6-1_mot-example}
 
-\ana{alinear con paper ISWC y ajustar título}
+\subsection{KG Representation impact on its consumption}
+
+Previous studies comparing knowledge representations have focused primarily on query performance~\citep{das2014tale,nguyen2014don,alocci2015property,hernandez2015reifying,frey2019evaluation,orlandi2021benchmarking} and graph interoperability~\citep{angles2019rdf,angles2020mapping}. For this scenario, the representations need to ensure efficiency to minimize performance time. 
+However, applications relating to exploration by end users and machine learning over KGs have not been taken into account~\citep{karger2014semantic,hogan2020twodecades}. 
+Knowledge exploration scenarios, e.g., browsing, are impacted by representational choices, and therefore the selected representations should reduce the cognitive load and user expertise needed to explore, access, and acquire knowledge.
+Similarly, many embedding models-based tasks such as knowledge graph completion~\citep{ren2022smore} require adequate representations to maximize the performance of the models on downstream predictive tasks.
+
+Motivated by the lack of research on the representation impact on a broader set of KG consumption tasks, we carry out in \cite{iglesias2023kgconsumption} an evaluation to assess the fitness of four popular KR approaches (Standard Reification, N-Ary Relationships, Wikidata qualifiers, and RDF-Star) for the needs of the abovementioned scenarios. 
+First, to understand user preferences in knowledge exploration tasks, we run a user study where participants interact with a web browser interface and a query endpoint to determine the representation that improves knowledge acquisition for real-world questions.
+Then, to assess the differential performance of the representations, we test several queries using synthetic and real-world data.
+Lastly, to estimate the impact on KG embedding model performance, we train and evaluate a selection of these models for the KG completion task with different representations.
+
+\begin{table}[t]
+    \centering
+    \caption[Summary results of the representation impact on KG consumption scenarios]{Summary of the fitness for each representation evaluated in the studied scenarios, where \checkmark means suitable, $\backsim$ is acceptable, X is avoidable and * indicates that the value is not tested but equivalent to Qualifiers.}
+    \label{tab:chp6-1_kgconsumption_summary}
+    \resizebox{0.9\columnwidth}{!}{\begin{tabular}{ccccc}
+          & \begin{tabular}[c]{@{}c@{}}\textbf{User}\\\textbf{interaction}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Simple graphs}\\\textbf{and queries}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Large graphs and}\\\textbf{demanding queries}\end{tabular} & \begin{tabular}[c]{@{}c@{}}\textbf{Graph}\\\textbf{completion}\end{tabular} \\ \midrule
+        \textbf{Qualifiers} & \checkmark & \checkmark & \checkmark & \checkmark (RotatE) \\ \midrule
+        \textbf{RDF-star} & \checkmark* & \checkmark & $\backsim$ & -\\ \midrule
+        \textbf{N-Ary Rel.} & \checkmark & \checkmark & $\backsim$ & \checkmark (TransE) \\ \midrule
+        \textbf{Std. Reif.} & X & \checkmark & $\backsim$ & \checkmark (ComplEx) \\ \bottomrule
+    \end{tabular}}
+\end{table}
+
+This study found significant differences for particular scenarios, summarized in \cref{tab:chp6-1_kgconsumption_summary}, drawing the following conclusions: 
+\begin{enumerate}
+    \item Standard Reification is the least suitable for users. Its anti-intuitive structure results time-consuming to navigate with, and it introduces additional complexity to retrieve correct and complete information.
+    \item RDF-star still needs improved support in all studies scenarios, as it is underway of becoming part of the RDF 1.2 specification~\cite{hartig2023rdf}. At the moment, it is risky to use it in high-demanding scenarios.
+    \item Qualifiers obtain steadily better results for retrieving results in high-demanding querying scenarios. Despite being restricted to Wikidata at the moment, its representation could be considered to be adopted in more knowledge graphs.
+    \item Analysing and understanding how each embedding model works is key to select a representation for graph completion (and hence, additional embedding-based tasks). While for the other scenarios all representations showed acceptable behaviour, here the decision is critical.
+    \item Promoting the use of interfaces such as browsers highly improves the user experience in knowledge exploration. These interfaces help mask the representation complexity and differences, which directly influences the adoption and usability of semantic resources, an aspect usually overlooked.
+\end{enumerate}
+
+Overall, the lack of a good-for-all solution raises the need of improving the interoperability among representations, especially in cases where knowledge graphs are consumed for very different purposes.
+
+
+
+\subsection{Re-construction example}
 
 \begin{figure}[t!]
     \centering
@@ -394,5 +432,5 @@ This clause also limits the kinds of transformations. For instance, SPARQL 1.1 d
 
 
 %%%%%%%%%%% LIMITS OF THE ENGINES %%%%%%%%%%%%
-The reported results also open up new challenges for improvement. From the triplestores, only GraphDB could perform reasonably well when re-constructing from RDF-star. This highlights the need to continue to improve the processing of this new representation, as it is currently being included in the future RDF 1.2 specification~\citep{hartig2023rdf}. Yet, this representation obtains overall better results when it comes to constructing it. This will facilitate its adoption, since evolving current KGs into this representation would not suppose an obstacle in terms of performance. 
+The reported results also open up new challenges for improvement. From the triplestores, only GraphDB could perform reasonably well when RDF-star is the source representation. This highlights the need to continue to improve the processing of this new representation, as it is currently being included in the future RDF 1.2 specification~\citep{hartig2023rdf}. Yet, this representation obtains overall better results when it is the target representation. This will facilitate its adoption, since evolving current KGs into this representation would not suppose an obstacle in terms of performance. 
 In addition, all triplestores struggle when the \texttt{CONSTRUCT} clause includes several joins. This fact does not only affect the pairs of transformations studied in this paper, but all potential transformations for evolving knowledge graphs. Regarding KG construction systems, the main challenge still consists of their adoption, as the learning curve for mapping languages is still steep despite efforts to lower it (see \cref{chapter:creation}).
