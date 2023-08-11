@@ -1,26 +1,37 @@
-\section{Mapping Rules for RDF-star: RML-star}
+\section{Mapping Rules for RDF-star: RML-star \ana{cambiar a algo más general}}
 \label{sec:chp4_rml_star}
+
+As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance R2RML~\cite{das2012r2rml}, on its release in 2012 it was only focused on RDF construction from relational databases. A growing number of extensions raised with the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\citep{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\citep{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\cite{DBLP:conf/webist/MichelDFM15,DBLP:conf/ercimdl/DebruyneMO17} and RDF-star graphs~\citep{delva2021rml-star,sundqvist2022extending}. 
+
+As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the RML mapping language. The result of this efforts is materialized in the recently published new version of RML~\citep{iglesias2023rml}. The language is published as a modular ontology, and implements most of the requirements proposed by the Conceptual Mapping (see \cref{sec:chp4_cm-reqs}), integrating: (i) extended possibilities in triple generation (RML-Core)~\citep{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\citep{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\citep{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\citep{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\citep{star_ontology}.
+
+This language is implemented in five different modules. For each module, there are more resources associated apart from the ontology: its requirements, an specification with the module's details with examples and the restrictions written in SHACL shapes to validate mapping documents. All associated resources of this new version of RML are gathered in the ontology portal~\footnote{\url{https://w3id.org/rml/portal}}.
+
+This section focuses on presenting one of the abovementioned modules, RML-star, that enables the generation of RDF-star graphs. The essencial context about RDF reification is first introduced, followed by the motivation and description of the module and its validation. Finally, the adoption that this module had since its inception is shown, both the implementations and produced graphs. 
+
+
+
+
 
 %In the late years, the RDF-star~\citep{hartig2017foundations} approach for reification has gained popularity. Along with its expansions, different semantic web technologies have been updated to include this new syntax\footnote{\url{https://w3c.github.io/rdf-star/implementations}}. This section describes one of these updates related to building RDF-star graphs: RML-star. \ana{esto no liga del todo bien con lo anterior}
 
 
+%Making statements about statements in RDF has posed a challenge since the inception of RDF.
+%The first W3C Recommendation of RDF~\citep{lassila1999rdf} already included a description of the standard reification approach to tackle this issue.
+%Other alternatives were proposed over the years, such as named graphs~\citep{carroll2005namedgraphs}, N-ary relationships~\citep{naryw3c2006}, singleton properties~\citep{nguyen2014don}, RDF$^+$~\citep{schueler2008querying}, and more recently, \mbox{RDF-star}~\citep{hartig2017foundations}, which is currently being incorporated in the RDF 1.2 specification~\citep{hartig2023rdf}. 
 
-Making statements about statements in RDF has
-posed a challenge since the inception of RDF.
-The first W3C Recommendation of RDF~\citep{lassila1999rdf} already included a description of the standard reification approach to tackle this issue.
-Other alternatives were proposed over the years,
-such as named graphs~\citep{carroll2005namedgraphs}, N-ary relationships~\citep{naryw3c2006}, singleton properties~\citep{nguyen2014don}, RDF$^+$~\citep{schueler2008querying}, and more recently, \mbox{RDF-star}~\citep{hartig2017foundations}, which is currently being incorporated in the RDF 1.2 specification~\citep{hartig2023rdf}. 
+%RDF-star does not leverage the characteristics of RDF as the others proposals. Instead it extends the RDF syntax to introduce the notion of \texttt{quoted triples}. This approach is currently under development to become a W3C standard\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. 
+%As a consequence, an increasing number of semantic technologies are supporting this proposal\footnote{\url{https://w3c.github.io/rdf-star/implementations}}, which include triplestores (e.g. GraphDB, AnzoGraph) and programming libraries (e.g. Apache Jena, Oxigraph).
 
-RDF-star does not leverage the characteristics of RDF as the others proposals. Instead it extends the RDF syntax to introduce the notion of \texttt{embedded triples}. This approach is currently under development to become a W3C standard\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. 
-As a consequence, an increasing number of semantic technologies are supporting this proposal\footnote{\url{https://w3c.github.io/rdf-star/implementations}}, which include triplestores (e.g. GraphDB, AnzoGraph) and programming libraries (e.g. Apache Jena, Oxigraph).
-
-It is possible to construct reified RDF graphs using mappings with the reification approaches abovementioned, except for RDF-star. As this proposal extends the original RDF syntax, it requires mapping languages to adapt and evolve in order to construct RDF-star graphs. This chapter presents the extension of the RML language to enable the construction of RDF-star graphs, RML-star. We first introduce how reified RDF graphs can be constructed using RML with different reification approaches, and then we present RML-star. This proposal is validated with \mbox{Morph-KGC$^{star}$}, a KG construction engine that implements our proposal.
+%\textcolor{red}{It is possible to construct reified RDF graphs using mappings with the reification approaches abovementioned, except for RDF-star. As this proposal extends the original RDF syntax, it requires mapping languages to adapt and evolve in order to construct RDF-star graphs. This chapter presents the extension of the RML language to enable the construction of RDF-star graphs, RML-star. We first introduce how reified RDF graphs can be constructed using RML with different reification approaches, and then we present RML-star. This proposal is validated with \mbox{Morph-KGC$^{star}$}, a KG construction engine that implements our proposal.}
 
 %This section describes popular reification approaches and shows how they can be used in RML and RML-star with a running example. 
 %Standard reification and singleton properties are considered in Section \ref{sec:chp4_validation}, showing that \mbox{Morph-KGC$^{star}$} does not add any overhead in the time required to generate the \mbox{RDF-star} triples compared to them.
 
 \subsection{Statements about statements in mapping rules}
 \label{sec:chp4_reif_mappings}
+
+\ana{intro más amplia para rdf-stark coger de paper de rml, para motivación tb, si no queda repetitivo con CM. y explicar más qué pasa en esta sección }
 
 We illustrate each reification alternative presented throughout this section with a running example that uses the data shown in \cref{lst:chp4_csv_star}.
 It contains CSV data related to pole vault:
@@ -585,3 +596,8 @@ PREDICATION_AUX_ID, PREDICATION_ID, SUBJECT_SCORE, TIMESTAMP
 \end{captionedlisting}
 \end{minipage}
 
+
+
+\subsection{Adoption}
+
+\ana{implementation by morph-kgcstar, preliminary by sdm-rdfizer. grafo de somef y mirar citas para ver dónde más se está utilizando}
