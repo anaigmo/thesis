@@ -1,13 +1,16 @@
-\section{Mapping Rules for RDF-star: RML-star \ana{cambiar a algo más general}}
+\section{Featuring new mapping needs in RML: Language evolution for RDF-star}
 \label{sec:chp4_rml_star}
 
-As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance R2RML~\cite{das2012r2rml}, on its release in 2012 it was only focused on RDF construction from relational databases. A growing number of extensions raised with the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\citep{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\citep{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\cite{DBLP:conf/webist/MichelDFM15,DBLP:conf/ercimdl/DebruyneMO17} and RDF-star graphs~\citep{delva2021rml-star,sundqvist2022extending}. 
+As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance the W3C Recommendation R2RML~\cite{das2012r2rml}, on its release in 2012 it was only focused on RDF construction from relational databases. A growing number of extensions raised with the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\citep{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\citep{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\cite{DBLP:conf/webist/MichelDFM15,DBLP:conf/ercimdl/DebruyneMO17} and RDF-star graphs~\citep{delva2021rml-star,sundqvist2022extending}. 
 
-As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the RML mapping language. The result of this efforts is materialized in the recently published new version of RML~\citep{iglesias2023rml}. The language is published as a modular ontology, and implements most of the requirements proposed by the Conceptual Mapping (see \cref{sec:chp4_cm-reqs}), integrating: (i) extended possibilities in triple generation (RML-Core)~\citep{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\citep{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\citep{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\citep{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\citep{star_ontology}.
+As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the widely adopted RML mapping language. The result of this efforts is materialized in the recently published new version of RML~\citep{iglesias2023rml}. The language is published as a modular ontology, and implements most of the requirements proposed by the Conceptual Mapping (see \cref{sec:chp4_cm-reqs}), integrating: (i) extended possibilities in triple generation (RML-Core)~\citep{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\citep{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\citep{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\citep{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\citep{star_ontology}.
 
-This language is implemented in five different modules. For each module, there are more resources associated apart from the ontology: its requirements, an specification with the module's details with examples and the restrictions written in SHACL shapes to validate mapping documents. All associated resources of this new version of RML are gathered in the ontology portal~\footnote{\url{https://w3id.org/rml/portal}}.
+Hence, this language is implemented in five different modules. 
+For each module, there are more resources associated besides the ontology: its requirements, an specification with the module's details with examples and the restrictions written in SHACL shapes to validate mapping documents. 
+All associated resources of this new version of RML are gathered in the ontology portal\footnote{\url{https://w3id.org/rml/portal}}. 
+In addition, the semantics of the relationships between the old and this new specification are defined and available online\footnote{\url{https://w3id.org/rml/portal/backwards-compatibility}} to facilitate backwards compatibility.
 
-This section focuses on presenting one of the abovementioned modules, RML-star, that enables the generation of RDF-star graphs. The essencial context about RDF reification is first introduced, followed by the motivation and description of the module and its validation. Finally, the adoption that this module had since its inception is shown, both the implementations and produced graphs. 
+This section focuses on presenting one of the abovementioned modules, RML-star, that enables the generation of RDF-star graphs.  The essential context about RDF reification is first introduced, followed by the motivation and description of the module and its validation. Finally, the adoption that this module had since its inception is shown, both the implementations and produced graphs. 
 
 
 
@@ -28,20 +31,41 @@ This section focuses on presenting one of the abovementioned modules, RML-star, 
 %This section describes popular reification approaches and shows how they can be used in RML and RML-star with a running example. 
 %Standard reification and singleton properties are considered in Section \ref{sec:chp4_validation}, showing that \mbox{Morph-KGC$^{star}$} does not add any overhead in the time required to generate the \mbox{RDF-star} triples compared to them.
 
-\subsection{Statements about statements in mapping rules}
+
+\subsection{Reification with RML-star}
 \label{sec:chp4_reif_mappings}
 
-\ana{intro más amplia para rdf-stark coger de paper de rml, para motivación tb, si no queda repetitivo con CM. y explicar más qué pasa en esta sección }
+As introduced in \cref{sec:chp4_cm-star}, RDF-star has gained adoption over the years since its inception. We introduce RML-star as a module of RML to enable the generation of \mbox{RDF-star} graphs (\cref{fig:chp4-3_rml-star}). 
 
-We illustrate each reification alternative presented throughout this section with a running example that uses the data shown in \cref{lst:chp4_csv_star}.
-It contains CSV data related to pole vault:
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=1\linewidth]{figures/chp4-3_rml-star_diagram.pdf}
+\caption[RML-star module]{The \mbox{RML-star} module (represented using the Chowlk notation~\citep{feria2022chowlk}). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
+\label{fig:chp4-3_rml-star}
+\end{figure*}
+
+\mbox{RML-star} (\cref{fig:chp4-3_rml-star}) adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. 
+Following the \mbox{RDF-star} data model,
+a quoted triple may appear only in the subject or object of a triple.
+Thus, star maps can only be used in subject and object maps.
+Star maps use the property \texttt{rml:quotedTriplesMap} to refer to the triples map that generates the quoted triples. 
+The referenced triples map can only be one of the following: (i) \texttt{rml:AssertedTriplesMap} to be asserted in the output graph, or (ii) \texttt{rml:NonAssertedTriplesMap} to not be asserted. A quoted triples map can specify \texttt{rml:class} in the subject map or have multiple predicate-object maps.
+Thus, several triples sharing the same subject map and logical source can be quoted by the same star map.
+
+
+
+
+
+
+
+An example of an \mbox{RML-star} mapping rule is shown in \cref{lst:chp4_rml-star}, which generates the \mbox{RDF-star} triples in \cref{lst:chp4_res-rml-star}.
+The example uses the data in \cref{lst:chp4_csv_star}, that contains CSV data related to pole vault:
 the vaulter (\texttt{PERSON}),
 the height of the jump (\texttt{MARK}) and its score (\texttt{SCORE}),
 the date when the jump was performed (\texttt{DATE}) and
 an identifier of the jump (\texttt{ID}).
-The running example represents
-that a person jumped some height on a specific date, i.e., it adds the metadata about ``date''
-to the statement ``a person jumped some height''.
+%The running example represents that a person jumped some height on a specific date, i.e., it adds the metadata about ``date'' to the statement ``a person jumped some height''.
 
 \noindent\hspace{0.15\linewidth}\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_csv_star}{Contents of the logical source \texttt{:marks} in CSV format.}
@@ -57,270 +81,8 @@ ID  , DATE       , MARK ,   PERSON   , SCORE
 \end{captionedlisting}
 \end{minipage}
 
-\subsubsection{Reification with RML}
-
-There are several reification approaches for RDF as presented in \cref{chp2_reification}, such as standard reification, singleton properties, N-ary relationships or named graphs. 
-These approaches use strategies that add metadata to triples
-without modifying the original RDF syntax.
-Thus, they can be used with RML without any further modification. RML mapping rules enable the generation of blank nodes (required for the standard reification approach), dynamically generated predicates (required for the singleton properties approach) and named graphs (required for the named graphs approach). %\ana{si voy con todos, influye en el ejemplo de aquí abajo y en los use cases. En ese caso, quitar somef (demasiado grande el mapping, con semmeddb es suficiente)}
-
-%\ana{probablemente en sota estarán explicados cada uno de los modelos, probablemente no haga falta ponerlos aquí también.}
-
-
-\noindent\textbf{\textit{Standard Reification}}~\citep{lassila1999rdf} was proposed in the first W3C Recommendation of RDF.
-It assigns statements to unique identifiers (typically blank nodes) typed with \texttt{rdf:Statement} and described using the properties \texttt{rdf:subject}, \texttt{rdf:predicate} and \texttt{rdf:object}.
-This way, the unique identifier representing the statement can be further annotated with additional statements. \cref{lst:chp4_res-std-reif} shows an example of standard reification for the data in \cref{lst:chp4_csv_star}, created with the RML mapping rules in \cref{lst:chp4_std-reif}. 
-This mapping creates blank nodes in the subject with the \texttt{ID} data field, typed with \texttt{rdf:Statement}; and has three predicate object maps to generate the \texttt{rdf:subject}, \texttt{rdf:predicate}, \texttt{rdf:object} of the triples (\textit{An athlete jumps certain height}) and a predicate object map to annotate the statements with \texttt{:date} (\textit{in a specific date}).
-
-
-
-
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_std-reif}{Example RML mapping using standard reification that transforms data in \cref{lst:chp4_csv_star}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<#TM> a rr:TriplesMap ;
-  rml:logicalSource :marks ;
-  rr:subjectMap [ 
-    rml:reference "ID" ;
-    rr:termType rr:BlankNode ;
-    rr:class rdf:Statement  ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate rdf:subject ;
-    rr:objectMap [
-      rr:template ":{PERSON}" ] ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate rdf:predicate ;
-    rr:object :jumps ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate rdf:object ;
-    rr:objectMap [
-      rml:reference "MARK" ] ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate :date ;
-    rr:objectMap [
-      rml:reference "DATE" ] ] .
-\end{lstlisting}}
-\end{multicols}
-\end{captionedlisting}
-\end{minipage}
-
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_res-std-reif}{RDF triples generated by the mapping in \cref{lst:chp4_std-reif}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-_:1 rdf:type      rdf:Statement .
-_:1 rdf:subject   :Angelica .
-_:1 rdf:predicate :jumps .
-_:1 rdf:object    "4.80" .
-_:1 :date         "2022-03-21" .
-_:2 rdf:type      rdf:Statement .
-_:2 rdf:subject   :Katerina .
-_:2 rdf:predicate :jumps .
-_:2 rdf:object    "4.85" .
-_:2 :date         "2022-03-19" .
-\end{lstlisting}}
-\end{multicols}
-\end{captionedlisting}
-\end{minipage}
-
-
-
-\noindent\textbf{\textit{Singleton Properties}}~\citep{nguyen2014don}. This approach uses unique predicates linked with \texttt{rdf:singletonPropertyOf} to the original predicate. 
-This unique predicate can then be annotated as the subject of additional statements. 
-\cref{lst:chp4_res-sp-reif} shows the reified triples for the data in \cref{lst:chp4_csv_star} created with the RML mapping rules in \cref{lst:chp4_sp-reif}. 
-It uses a singleton property dynamically generated with the \texttt{ID} data field for the property \texttt{:jumps} (\textit{An athlete jumps certain height}), annotated with \texttt{:date} (\textit{in a specific date}).
-
-
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_sp-reif}{Example RML mapping using a singleton property that transforms data in \cref{lst:chp4_csv_star}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<#TM> a rr:TriplesMap ;
-  rml:logicalSource :marks ;
-  rr:subjectMap [ 
-    rr:template ":{PERSON}" ] ;
-  rr:predicateObjectMap [ 
-    rr:predicateMap [
-     rr:template ":jumps#{ID}" ] ;
-    rr:objectMap [
-      rml:reference "MARK" ] ] .
-<#TM-SP> a rr:TriplesMap ;
-  rr:logicalSource :marks ;
-  rr:subjectMap [ 
-    rr:template ":jumps#{ID}" ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate rdf:singletonPropertyOf;
-    rr:object :jumps ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate :date ;
-    rr:objectMap [
-      rml:reference "DATE" ] ] .
-\end{lstlisting}}
-\end{multicols}
-\end{captionedlisting}
-\end{minipage}
-
-
-
-\noindent\hspace{0.12\linewidth}\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_res-sp-reif}{RDF triples generated by the mapping in \cref{lst:chp4_sp-reif}.}
-\centering
-\begin{tabular}{c}
-\hspace{4em}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-:Angelica   :jumps#1  "4.80" .
-:jumps#1    :date     "2022-03-21" .
-:jumps#1    rdf:singletonPropertyOf :jumps .
-:Katerina   :jumps#2  "4.85" .
-:jumps#2    :date     "2022-03-19" .
-:jumps#2    rdf:singletonPropertyOf :jumps .
-\end{lstlisting}}
-\end{tabular}
-\end{captionedlisting}
-\end{minipage}
-
-
-
-\textit{\textbf{Named Graphs}}~\citep{carroll2005namedgraphs}. This approach encloses each reified triple inside a unique named graph. This named graph can then be annotated with an additional triple. In \cref{lst:chp4_graph-reif} a graph is created for the triples that state the height of the jump (\texttt{:G} with the field \texttt{ID}) (\textit{An athlete jumps certain height}). A second graph contains the annotated triple and references the first graph (\texttt{:GA} with the field \texttt{ID}) (\textit{in a specific date}). The resulting RDF triples in TriG syntax\footnote{\url{https://www.w3.org/TR/trig/}} are shown in \cref{lst:chp4_res-graph-reif}.
-
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_graph-reif}{Example RML mapping using named graphs that transforms data in \cref{lst:chp4_csv_star}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<#TM> a rr:TriplesMap ;
-  rml:logicalSource :marks ;
-  rr:subjectMap [ 
-    rr:template ":{PERSON}" ;
-    rr:graphMap [
-      rr:template ":G{ID}" ] ] ;
-  rr:predicateObjectMap [ 
-    rr:predicateMap [
-     rr:template ":jumps" ] ;
-    rr:objectMap [
-      rml:reference "MARK" ] ] .
-<#TM-GA> a rr:TriplesMap ;
-  rr:logicalSource :marks ;
-  rr:subjectMap [ 
-    rr:template ":{ID}" ;
-    rr:graphMap [
-      rr:template ":GA{ID}"] ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate :date ;
-    rr:objectMap [
-      rml:reference "DATE" ] ] .
-\end{lstlisting}}
-\end{multicols}
-\end{captionedlisting}
-\end{minipage}
-
-\noindent\hspace{0.12\linewidth}\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_res-graph-reif}{RDF triples generated by the mapping in \cref{lst:chp4_graph-reif}.}
-\centering
-\begin{tabular}{c}
-\hspace{4em}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-:G1  {:Angelica :jumps  "4.80" .}
-:GA1 {:G1       :date   "2022-03-21" .}
-:G2  {:Katerina :jumps#2  "4.85" .}
-:GA2 {:G2       :date     "2022-03-19" .}
-\end{lstlisting}}
-\end{tabular}
-\end{captionedlisting}
-\end{minipage}
-
-
-\textit{\textbf{N-Ary Relationships}}~\citep{naryw3c2006}. This approach  converts a relationship into an instance that describes the relation, which can have attached both the main object and additional statements. The mapping shown in \cref{lst:chp4_nary-reif} creates instances of the relationship ``jump" with the field \texttt{ID}, which contain the date and height of the jump.  (\textit{An athlete jumps a jump with certain height and in a specific date}). 
-The resulting RDF triples are shown in \cref{lst:chp4_res-nary-reif}.
-
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_nary-reif}{Example RML mapping using a N-ary relationship that transforms data in \cref{lst:chp4_csv_star}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<#TM> a rr:TriplesMap ;
-  rml:logicalSource :marks ;
-  rr:subjectMap [ 
-    rr:template ":{PERSON}" ] ;
-  rr:predicateObjectMap [ 
-    rr:predicateMap [
-     rr:template ":jumps" ] ;
-    rr:objectMap [
-      rr:template ":Jump{ID}";
-      rr:termType rr:IRI] ] .
-<#TM-JUMP> a rr:TriplesMap ;
-  rr:logicalSource :marks ;
-  rr:subjectMap [ 
-    rr:template ":Jump{ID}" ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate :height ;
-    rr:objectMap [
-      rml:reference "MARK" ] ] ;
-  rr:predicateObjectMap [ 
-    rr:predicate :date ;
-    rr:objectMap [
-      rml:reference "DATE" ] ] .
-\end{lstlisting}}
-\end{multicols}
-\end{captionedlisting}
-\end{minipage}
-
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_res-nary-reif}{RDF triples generated by the mapping in \cref{lst:chp4_nary-reif}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-:Angelica  :jumps   :Jump1 .
-:Jump1     :date    "2022-03-21" .
-:Jump1     :height  "4.80" .
-:Katerina  :jumps   :Jump2 .
-:Jump2     :date    "2022-03-19" .
-:Jump2     :height  "4.85" .
-\end{lstlisting}}
-\end{multicols}
-\end{captionedlisting}
-\end{minipage}
-
-
-
-
-\subsubsection{Reification with RML-star}
-
-
-
-We propose RML-star as an extension of RML to generate \mbox{RDF-star} graphs (\cref{fig:chp4-3_rml-star}). 
-\mbox{RML-star} adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. 
-Following the \mbox{RDF-star} data model,
-a quoted triple may appear only in the subject or object of a triple.
-Thus, star maps can only be used in subject and object maps.
-Star maps use the property \texttt{rml:quotedTriplesMap} to refer to the triples map that generates the quoted triples. 
-The referenced triples map can only be one of the following: (i) \texttt{rml:AssertedTriplesMap} to be asserted in the output graph, or (ii) \texttt{rml:NonAssertedTriplesMap} to not be asserted. A quoted triples map can specify \texttt{rml:class} in the subject map or have multiple predicate-object maps.
-Thus, several triples sharing the same subject map and logical source can be quoted by the same star map.
-
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=1\linewidth]{figures/chp4-3_rml-star_diagram.pdf}
-\caption[RML-star module]{The \mbox{RML-star} module (represented using the Chowlk notation~\citep{feria2022chowlk}). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
-\label{fig:chp4-3_rml-star}
-\end{figure*}
-
-
-
-An example of an \mbox{RML-star} mapping rule is shown in \cref{lst:chp4_rml-star}, which generates the \mbox{RDF-star} triples in \cref{lst:chp4_res-rml-star} from data in \cref{lst:chp4_csv_star}. 
 The mapping rules use an asserted triples map (\texttt{<\#jumpTM>}) within the subject map of a triples map (\texttt{<\#dateTM>}). The quoted triples map \texttt{<\#jumpTM>} contains two predicate-object maps that produce triples annotated with \texttt{:date}. The first predicate-object map (\textit{lines 6-9}) produces the triples for the height of the jump, the same as the examples presented previously for the other reification approaches. We extend the RML-star example with a second predicate-object map to also represent the score of the jump within the same quoted triples map (\textit{lines 10-13}). To produce this triple in the other reification approaches an additional triples map for each case would be required.
 
-
-Currently, the \mbox{RML-star} specification~\citep{iglesias2022rmlstar} provides a complete description of the language, is published as a W3C Draft Community Group Report, and is maintained by the W3C Knowledge Graph Construction Community Group.\cref{foot:kgc} 
-This extension belongs to the modules that comprise the new RML specification\footnote{\label{foot:rml-portal}\url{http://w3id.org/rml/portal/}} that is currently under development by the aforementioned Community Group. The semantics of the relationships between the old and this new specification are defined and available online~\footnote{\url{https://w3id.org/rml/portal/backwards-compatibility}} to facilitate backwards compatibility.
-Both the language and the specification are kept up-to-date reflecting the modifications in \mbox{RDF-star}.
-For instance, the latest \mbox{RML-star} releases update the term ``embedded'' to ``quoted'',
-according to the modifications in \mbox{RDF-star}.
-%that occurred after the first release of RML-star~\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}}. 
-This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:quotedTriplesMap}.
 
 
 
@@ -387,13 +149,23 @@ This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:
 \end{minipage}
 
 
+Currently, the \mbox{RML-star} specification~\citep{iglesias2022rmlstar} provides a complete description of the language, is published as a W3C Draft Community Group Report, and is maintained by the W3C Knowledge Graph Construction Community Group\cref{foot:kgc}. 
+This extension belongs to the modules that comprise the new RML specification\footnote{\label{foot:rml-portal}\url{http://w3id.org/rml/portal/}} that is currently under development by the aforementioned Community Group. 
+Both the language and the specification are kept up-to-date reflecting the modifications in \mbox{RDF-star}.
+For instance, the latest \mbox{RML-star} releases update the term ``embedded'' to ``quoted'',
+according to the modifications in \mbox{RDF-star}.
+%that occurred after the first release of RML-star~\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}}. 
+This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:quotedTriplesMap}.
+In addition, RML-star is implemented by Morph-KGC$^star$~\cite{arenas2023morphstar} and the SDM-RDFizer~\footnote{\url{https://github.com/SDM-TIB/SDM-RDFizer-Star}}~\cite{iglesias2020rdfizer} at the moment of writing this document.
+
 
 
 
 \subsection{Validation}
 \label{sec:chp4_validation}
 
-We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}): software metadata extraction~\citep{kelley2021framework} (SoMEF) and biomedical research literature~\citep{SemMedDB} (SemMedDB). We use for both cases \mbox{Morph-KGC$^{star}$}, an implementation of RML-star.
+We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}): software metadata extraction~\citep{kelley2021framework} (SoMEF) and biomedical research literature~\citep{SemMedDB} (SemMedDB). 
+%We use for both cases \mbox{Morph-KGC$^{star}$}, an implementation of RML-star.
 
 
 
@@ -412,7 +184,7 @@ To create a representative set of test cases for \mbox{RML-star}, we selected th
 For each \mbox{RDF-star} test case, we created two associated \mbox{RML-star} test cases that generate the original \mbox{RDF-star} dataset: one test case with a single input data source (i.e., the mapping does not include joins) and another with two input data sources (i.e., the mapping includes joins among triple maps).
 For each test case, we manually created the input source(s) in the CSV format and the corresponding \mbox{RML-star} mapping rules to generate the output \mbox{RDF-star} datasets.
 Following this approach, we obtained 16 \mbox{RML-star} test cases.
-The test cases are openly available at the W3C Community Group on Knowledge Graph Construction~(\footnote{\url{https://github.com/kg-construct/rml-star/tree/main/test-cases}}),
+The test cases are openly available\footnote{\url{https://github.com/kg-construct/rml-star/tree/main/test-cases}},
 and can be reused by any engine to test its conformance with respect to \mbox{RML-star}.
 
 
@@ -420,9 +192,9 @@ and can be reused by any engine to test its conformance with respect to \mbox{RM
 \label{sec:chp4_star_usecases}
 
 We create RML-star mappings for in two real-world use cases. 
-The first generates \mbox{RDF-star} graphs from scientific software documentation, 
+The first generates \mbox{RDF-star} graphs from scientific software documentation~\ana{citar poster cuando esté publicado}, 
 and the second annotates statements extracted from biomedical research publications. 
-For both use cases, we use the tool \mbox{Morph-KGC$^{star}$}.
+For both use cases, we use the tool \mbox{Morph-KGC$^{star}$}. 
 
 
 
@@ -598,6 +370,8 @@ PREDICATION_AUX_ID, PREDICATION_ID, SUBJECT_SCORE, TIMESTAMP
 
 
 
-\subsection{Adoption}
-
-\ana{implementation by morph-kgcstar, preliminary by sdm-rdfizer. grafo de somef y mirar citas para ver dónde más se está utilizando}
+%\subsection{Adoption}
+% usado en : 
+% - https://www.ucl.ac.uk/bartlett/construction/sites/bartlett_construction/files/semantic_sensor_data_federation_in_dynamic_knowledge_graphs_using.pdf
+% - somef poster (not yet out)
+%\ana{implementation by morph-kgcstar, preliminary by sdm-rdfizer. grafo de somef y mirar citas para ver dónde más se está utilizando}
