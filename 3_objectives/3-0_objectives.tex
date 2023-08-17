@@ -45,13 +45,39 @@ Finally, with regard to the third objective (to assess the role of mapping techn
 
 \section{Assumptions}
 \label{sec:chp3-assumptions}
+Our work is based on the assumptions listed below. These assumptions provide a background to facilitate the comprehension of the decisions taken during the development of this work. 
 
+
+\begin{enumerate}
+    \item[\textbf{A1}] Mapping languages have human readable documentation
+    \item[\textbf{A2}] The target schema (ontology) for creating the mapping documents is available and implemented in OWL or RDFS. 
+\end{enumerate}
 
 
 \section{Hypothesis}
 \label{sec:chp3-hypothesis}
 
+After the identification of the assumptions, we can describe the research hypothesis  of this thesis. They cover the general characteristics of the contributions \ana{si?}
+
+\begin{enumerate}
+    \item[\textbf{H1}] The expressiveness of mapping languages can be gathered and represented in a formal language (i.e. an ontology).
+    \item[\textbf{H2}] New needs in KG construction ¿and updates in the RDF schema?  can be implemented in current mapping languages
+    \item[\textbf{H3}] Writing the mapping rules in spreadsheets can improve the user experience for practitioners of different backgrounds with respect to other approaches for writting mappings
+    \item[\textbf{H4}] Mappings can help enhance in the evolution of KGs withing the KG lifecycle, not only in construction.
+\end{enumerate}
 
 
 \section{Restrictions}
 \label{sec:chp3-restrictions}
+
+Finally, there is a set of restrictions that describe the limitations and define the future work objectives.
+
+\begin{enumerate}
+    \item[\textbf{R1}] \ana{algo de la eleccion de lenguajes?}
+    \item[\textbf{R2}] The requirements in KGC are considered until summer 2023, time of writing this document. The updates made between this time until its publication are not considered.
+    \item[\textbf{R3}] The representation of mapping language features that provide a procedural language (loops, embedded clauses) is out of the scope
+    \item[\textbf{R4}] The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec
+    \item[\textbf{R5}] THe YARRRML updates include all RMLv2 modules except for the RML-CC module.
+    \item[\textbf{R6}] The changes considered in KG evolution are a result of the schema changes of a switch in reification approach, not all possible modifications in KGs are considered.
+    \item[\textbf{R7}] The evolution considered involves only changes in the schema of the KG, the data represented in the KG is stable with no additions or deletions, just change in how it is structured.
+\end{enumerate}
