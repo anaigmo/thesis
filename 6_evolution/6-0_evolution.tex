@@ -1,7 +1,7 @@
 
 
 \chapter{Mappings in Knowledge Graph Evolution}
-\label{chapter:reframing}
+\label{chapter:evolution}
 
 Knowledge graphs are not immutable, as they along with the ontology or network of ontologies that defines their schema are subject to modifications. This need for evolution may triggered by changes in the domain of knowledge or on the graph consumption requirements in downstream tasks. 
 An example is the need to add information about a triple, thus making statements about statements (i.e. statement reification).
@@ -15,7 +15,7 @@ It is not uncommon for an existing KG to strive for adopting one of these repres
 When the situation comes that a re-structuration of the knowledge graph is needed, the following question arises: Which is more convenient, to construct the graph from the original input data sources again, or to re-construct it within the triplestore? This section analyses which of these approaches reports better performance and the parameters that influence the choice. 
 To this end, we perform a comprehensive empirical study of this transformation in four representations (Standard Reification, N-Ary Relationships, Named Graphs and RDF-star) using (i) declarative mapping languages to construct each representation with KG construction engines and (ii) transformation per peers of representations with SPARQL \texttt{CONSTRUCT} queries in different triplestores. This section aims to unravel the aspects to consider when re-constructing a knowledge graph, to help in the decision on how to perform it. We also raise awareness of recently overlooked aspects of \texttt{CONSTRUCT} queries, while contributing to research on the impact of RDF reification to enhance KG management.
 
-\input{6_reframing/6-1_re-construction}
+\input{6_evolution/6-1_re-construction}
 
 \section{Conclusions}
 
