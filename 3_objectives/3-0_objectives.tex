@@ -1,16 +1,16 @@
 \chapter{Objectives and Contributions}
 \label{chapter:objectives}
 
-This chapter presents the main objectives of this thesis and identifies the contributions to the state of the art. We enumerate the assumptions considered in this work, describe the main hypothesis and delimit the scope of the thesis describing the restrictions.
+This chapter presents the main objectives of this thesis and identifies the contributions to the state of the art. We enumerate the assumptions considered in this work, describe the main hypotheses and delimit the scope of the thesis describing the restrictions. \cref{fig:chp3_summary} provides an overview of the objectives and contributions presented in this thesis, along with their relations with identified hypotheses, assumptions and restrictions. 
 
 \section{Objectives}
 \label{sec:chp3-objectives}
 
-The general objective of this thesis is to \textit{improve the mapping languages regarding expressiveness and usage to comply with the current evolving needs in knowledge graph construction}. In order to achieve this goal, the following sub-objectives are defined:
+The general objective of this thesis is to \textit{improve the mapping languages regarding expressiveness, usage and adoption to comply with the current evolving needs in knowledge graph construction}. In order to achieve this goal, the following sub-objectives are defined:
 
 \begin{enumerate}
     %\item[\textbf{O1.}] To analyse, understand and gather the capabilities of the mapping languages for KG construction from heterogeneous data sources.
-    \item[\textbf{O1}] To understand and gather the necessities for knowledge graph construction from heterogeneous data sources, that will help in the evolution of mapping languages to address them. 
+    \item[\textbf{O1}] To understand and gather the necessities for knowledge graph construction from heterogeneous data sources, that will support the evolution of mapping languages to address them. 
     \item[\textbf{O2}] To help knowledge engineers and domain experts to build mapping documents providing the means for a user-friendly experience.
     \item[\textbf{O3}] To assess the value of mapping technologies for supporting the evolution of knowledge graphs. 
 \end{enumerate}
@@ -49,24 +49,24 @@ Finally, for achieving the third objective, the following open research problem 
 In this work, we describe the solutions corresponding to the objectives and open research problems described in \cref{sec:chp3-objectives}. We present as follows the contributions that support the advance of the current state of the art regarding the first objective (understand and gather the needs for KG construction): 
 
 \begin{enumerate}
-    \item[\textbf{C1.1}] Design of a \textbf{comparison framework analysing the state-of-the-art mapping languages} proposed to generate knowledge graphs from heterogeneous data sources. We extract the characteristics of these languages and compare them over a set of detailed features that show their expressiveness. 
+    \item[\textbf{C1}] Design of a \textbf{comparison framework analysing the state-of-the-art mapping languages} proposed to generate knowledge graphs from heterogeneous data sources. We extract the characteristics of these languages and compare them over a set of detailed features that show their expressiveness. 
     
-    \item[\textbf{C1.2}] \textbf{Identification, definition and formal implementation of requirements for knowledge graph construction} from heterogeneous data sources. Based on the analysis performed on the comparison framework, we are able to extract what are the needs for building knowledge graphs, which are possible to achieve with the current languages and which need to be addressed yet. We implement these requirements in a formal language. 
+    \item[\textbf{C2}] \textbf{Identification, definition and formal implementation of requirements for knowledge graph construction} from heterogeneous data sources. Based on the analysis performed on the comparison framework, we are able to extract what are the needs for building knowledge graphs, which are possible to achieve with the current languages and which need to be addressed yet. We implement these requirements in a formal language. 
     
-    \item[\textbf{C1.3}] \textbf{Development of new features for the RML mapping language} to address the limitations of the language according to the new needs in knowledge graph construction identified. We focus on the development of the extension to create RDF-star graphs. 
+    \item[\textbf{C3}] \textbf{Development of new features for the RML mapping language} to address the limitations of the language according to the new needs in knowledge graph construction identified. We focus on the development of the extension to create RDF-star graphs. 
 \end{enumerate}
 
 Regarding the second objective (to help knowledge engineers and domain experts to build mappings), we present new advances with the following contributions:
 
 \begin{enumerate}
-    \item[\textbf{C2.1}] \textbf{Design of a user-friendly approach for writing mapping rules based on spreadsheets}. We propose this approach as a way of writing mappings by only specifying the essential information, erasing the need of learning the language constructs and the syntax's peculiarities. We also develop an implementation of this approach to translate the mapping rules in spreadsheets into different mapping languages. 
-    \item[\textbf{C2.2}] \textbf{Update of the YARRRML syntax for RML with new features}. We include in a new version of this syntax the features incorporated in the evolucion of the RML mapping language, to keep this language accessible for a broader community of users that already use YARRRML. We also provide an implementation to translate between the updated YARRRML version into other mapping languages to facilitate its adoption.
+    \item[\textbf{C4}] \textbf{Design of a user-friendly approach for writing mapping rules based on spreadsheets}. We propose this approach as a way of writing mappings by only specifying the essential information, erasing the need of learning the language constructs and the syntax's peculiarities. We also develop an implementation of this approach to translate the mapping rules in spreadsheets into different mapping languages. 
+    \item[\textbf{C5}] \textbf{Update of the YARRRML syntax for RML with new features}. We include in a new version of this syntax the features incorporated in the evolucion of the RML mapping language, to keep this language accessible for a broader community of users that already use YARRRML. We also provide an implementation to translate between the updated YARRRML version into other mapping languages to facilitate its adoption.
 \end{enumerate}
 
 Finally, with regard to the third objective (to assess the role of mapping technologies in KG evolution), this work presents the following contribution:
 
 \begin{enumerate}
-    \item[\textbf{C3.1}]\textbf{ Analysis of the scenarios in which mapping compliant systems can play a valuable role in the re-construction of pre-existing graphs}. We conduct an evaluation to study how mapping technologies can not only be useful for KG construction, but also for enhancing the evolution of knowledge graphs that need a change in their schema. 
+    \item[\textbf{C6}]\textbf{ Analysis of the scenarios in which mapping compliant systems can play a valuable role in the re-construction of pre-existing graphs}. We conduct an evaluation to study how mapping technologies can not only be useful for KG construction, but also for enhancing the evolution of knowledge graphs that need a change in their schema. 
 \end{enumerate}
 
 
@@ -76,35 +76,44 @@ Our work is based on the assumptions listed below. These assumptions provide a b
 
 
 \begin{enumerate}
-    \item[\textbf{A1}] Mapping languages have human readable documentation
-    \item[\textbf{A2}] The target schema (ontology) for creating the mapping documents is available and implemented in OWL or RDFS. 
+    \item[\textbf{A1}] Mapping languages provide human readable documentation available online.
+    \item[\textbf{A2}] Mapping languages are declarative and follow W3C standards.
+    \item[\textbf{A3}] Features characteristic of procedural languages are not requirements for KG construction.
+    \item[\textbf{A4}] The schema of knowledge graphs (ontology) used for creating mapping documents is available online, and implemented in OWL or RDF(S). 
+    \item[\textbf{moar?}] KGs refer to RDF graphs?
 \end{enumerate}
 
 
-\section{Hypothesis}
-\label{sec:chp3-hypothesis}
+\section{Hypotheses}
+\label{sec:chp3-hypotheses}
 
-After the identification of the assumptions, we can describe the research hypothesis  of this thesis. They cover the general characteristics of the contributions \ana{si?}
+After the identification of the assumptions, we can describe the research hypotheses  of this thesis. They cover the general characteristics of the contributions:
 
 \begin{enumerate}
-    \item[\textbf{H1}] The expressiveness of mapping languages can be gathered and represented in a formal language (i.e. an ontology).
-    \item[\textbf{H2}] New needs in KG construction ¿and updates in the RDF schema?  can be implemented in current mapping languages
-    \item[\textbf{H3}] Writing the mapping rules in spreadsheets can improve the user experience for practitioners of different backgrounds with respect to other approaches for writting mappings
-    \item[\textbf{H4}] Mappings can help enhance in the evolution of KGs withing the KG lifecycle, not only in construction.
+    \item[\textbf{H1}] Current mapping languages do not cover the entire extension of features required to construct knowledge graphs from heterogeneous data sources.
+    \item[\textbf{H2}] It is possible to include in current mapping languages new features that address the evolving needs in construction of knowledge graphs.
+    \item[\textbf{H3}] Writing the mapping rules in spreadsheet environments can improve the user experience for practitioners of different backgrounds for writing mappings reducing errors. 
+    \item[\textbf{H4}] Mapping-compliant technologies can bring benefits in the evolution of knowledge graphs within their life cycle, not only in their construction.
 \end{enumerate}
 
 
 \section{Restrictions}
 \label{sec:chp3-restrictions}
 
-Finally, there is a set of restrictions that describe the limitations and define the future work objectives.
+Finally, there is a set of restrictions that describe the limitations and define the future work objectives:
 
 \begin{enumerate}
-    \item[\textbf{R1}] \ana{algo de la eleccion de lenguajes?}
-    \item[\textbf{R2}] The requirements in KGC are considered until summer 2023, time of writing this document. The updates made between this time until its publication are not considered.
-    \item[\textbf{R3}] The representation of mapping language features that provide a procedural language (loops, embedded clauses) is out of the scope
-    \item[\textbf{R4}] The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec
-    \item[\textbf{R5}] THe YARRRML updates include all RMLv2 modules except for the RML-CC module.
-    \item[\textbf{R6}] The changes considered in KG evolution are a result of the schema changes of a switch in reification approach, not all possible modifications in KGs are considered.
-    \item[\textbf{R7}] The evolution considered involves only changes in the schema of the KG, the data represented in the KG is stable with no additions or deletions, just change in how it is structured.
+    \item[\textbf{R1}] Requirements for KG construction are considered up to the beginning of 2023.
+    \item[\textbf{R2}] The point of reference for the RML specification is the release on 2014~\cite{Dimou2014rml}.
+    \item[\textbf{R3}] The evaluation of the value of mappings in KG evolution considers only schema changes, not data changes.
+    \item[\textbf{R4}] Changes considered in KG evolution are a result of the schema changes for switching among reification approaches for RDF graphs.
+    \item[\textbf{moar?}] algo de la selección de lenguajes? algo para mapeathor y yarrrml? The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec. The YARRRML updates include all RMLv2 modules except for the RML-CC module.
 \end{enumerate}
+
+
+\begin{sidewaysfigure}[t!]
+    \centering
+    \includegraphics[width=1\linewidth]{figures/chp3_summary.pdf}
+    \caption[summary]{Overview of objectives, contributions, hypotheses, assumptions and restrictions, and their relations.}
+    \label{fig:chp3_summary}
+\end{sidewaysfigure}
