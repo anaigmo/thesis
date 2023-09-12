@@ -80,7 +80,8 @@ Our work is based on the assumptions listed below. These assumptions provide a b
     \item[\textbf{A2}] Mapping languages are declarative and follow W3C standards.
     \item[\textbf{A3}] Features characteristic of procedural languages are not requirements for KG construction.
     \item[\textbf{A4}] The schema of knowledge graphs (ontology) used for creating mapping documents is available online, and implemented in OWL or RDF(S). 
-    \item[\textbf{moar?}] KGs refer to RDF graphs?
+    \item[\textbf{A5}] Mapping rules can be translated into different languages with information preservation.
+    %\item[\textbf{moar?}] KGs refer to RDF graphs?
 \end{enumerate}
 
 
@@ -105,15 +106,20 @@ Finally, there is a set of restrictions that describe the limitations and define
 \begin{enumerate}
     \item[\textbf{R1}] Requirements for KG construction are considered up to the beginning of 2023.
     \item[\textbf{R2}] The point of reference for the RML specification is the release on 2014~\cite{Dimou2014rml}.
-    \item[\textbf{R3}] The evaluation of the value of mappings in KG evolution considers only schema changes, not data changes.
-    \item[\textbf{R4}] Changes considered in KG evolution are a result of the schema changes for switching among reification approaches for RDF graphs.
-    \item[\textbf{moar?}] algo de la selección de lenguajes? algo para mapeathor y yarrrml? The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec. The YARRRML updates include all RMLv2 modules except for the RML-CC module.
-\end{enumerate}
+    \item[\textbf{R3}] Features characteristic of procedural languages cannot be modelled in an ontology.
+    \item[\textbf{R4}] Our proposal does not include all modules of the RML release on 2023~\cite{iglesias2023rml}.
+    \item[\textbf{R5}] The evaluation of the value of mappings in KG evolution considers only schema changes, not data changes.
+    \item[\textbf{R6}] Changes considered in KG evolution are a result of the schema changes for switching among reification approaches for RDF graphs.
+    %\item[\textbf{moar?}] algo de la selección de lenguajes? algo para mapeathor y yarrrml? The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec. The YARRRML updates include all RMLv2 modules except for the RML-CC module.
+    \end{enumerate}
 
 
 \begin{sidewaysfigure}[t!]
     \centering
     \includegraphics[width=1\linewidth]{figures/chp3_summary.pdf}
-    \caption[summary]{Overview of objectives, contributions, hypotheses, assumptions and restrictions, and their relations.}
+    \caption[Relations between objectives, contributions, hypotheses, assumptions and restrictions of this thesis]{Overview of objectives, contributions, hypotheses, assumptions and restrictions, and their relations.}
     \label{fig:chp3_summary}
 \end{sidewaysfigure}
+
+\section{Research Methodology?}
+

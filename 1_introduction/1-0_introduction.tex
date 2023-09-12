@@ -19,12 +19,19 @@ Then about how to write mappings, still hard for many people who find it difficu
 The remainder of this thesis is structured as follows:
 
 \begin{itemize}
-    \item \cref{chapter:sota}
-    \item \cref{chapter:objectives}
-    \item \cref{chapter:mappings}
-    \item \cref{chapter:creation}
-    \item \cref{chapter:evolution}
-    \item \cref{chapter:conclusions}
+    \item \cref{chapter:sota} reviews the current state of the art of the topics related to this thesis. \ana{moar cuando sepa la estructura de la sección}
+    
+    \item \cref{chapter:objectives} presents the main objectives and contributions of this thesis, along with the assumptions, hypotheses and restrictions of the work. 
+    
+    \item In \cref{chapter:mappings} we define a comparison framework to analyze the features of current mapping languages. This framework helps extract a set of requirements for knowledge graph construction, that are gathered and represented in an ontology. Additionally, we present a particular case of the update of the RML mapping language to address some of the presented requirements, specifically the RML-star module to construct RDF-star graphs.
+    
+    \item In \cref{chapter:creation} we present two approaches to facilitate the creation of mapping documents for users. The first relies on spreadsheets to write mapping rules, and is with real users with different backgrounds to test is usability. The second supposes an update on the YARRRML user friendly syntax with recent modifications over RML. Both these approaches are presented with compliant tools to create mapping documents in target languages. 
+    
+    \item In \cref{chapter:evolution} we assess the role that mapping-compliant technologies can play in knowledge graph evolution. We conduct and empirical evaluation performing schema changes with KG construction engines that use mappings, and SPARQL \texttt{CONSTRUCT} queries, and evaluate which approach is more suitable in different situations. 
+    
+    \item Finally, \cref{chapter:conclusions} draws the main conclusions of the presented work, and outlines the future lines of research. 
+    
+    \item Appendix?
 \end{itemize}
 
 
@@ -37,7 +44,7 @@ The work presented in this document has been disseminated in thw following inter
     
     \item The second contribution  in \cref{chapter:mappings} was preliminary published in: Delva, T., Arenas-Guerrero, J.,\textbf{ Iglesias-Molina, A.}, Corcho, O., Chaves-Fraga, D., and Dimou, A.: RML-star: A declarative mapping language for RDF-star generation, in Proceedings of the ISWC 2021 Posters, Demos and Industry Tracks (ISWC2021). The extended version of this contribution was published in: \textbf{Iglesias-Molina, A.}, Van Assche, D., Arenas-Guerrero, J., De Meester, B., Debruyne, C., Jozashoori, S., Maria, P., Michel, F., Chaves-Fraga, D. and Dimou, A., 2023. The RML Ontology: A Community-Driven Modular Redesign After a Decade of Experience in Mapping Heterogeneous Data to RDF, in Proceedings of the 22st International Semantic Web Conference (ISWC2023); and in: Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Garijo, D., Corcho, O. and Dimou, A., Declarative generation of RDF-star graphs from heterogeneous data, Semantic Web Journal, 2023 (the first two authors contributed equally to this publication). This contribution is the result of the collaboration with the Knowledge Graph Construction W3C Community Group. 
 
-    \item The first contribution in \cref{chapter:creation} was initially published \ana{cambiar si se envia la ultima parte} in: \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Priyatna, F. and Corcho, O., 2019, November. Towards the definition of a language-independent mapping template for knowledge graph creation, in Proceedings of the Third International Workshop on Capturing Scientific Knowledge co-located with the Eleventh International Conference on Knowledge Capture 2021 (K-CAP2021); and in: \textbf{Iglesias-Molina, A.}, Pozo-Gilo, L., Dona, D., Ruckhaus, E., Chaves-Fraga, D. and Corcho, O., Mapeathor: Simplifying the Specification of Declarative Rules for Knowledge Graph Construction, in Proceedings of the ISWC 2020 Demos and Industry Tracks (ISWC2020).
+    \item The first contribution in \cref{chapter:creation} was initially published \ana{cambiar si se envia la ultima parte } in: \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Priyatna, F. and Corcho, O., 2019, November. Towards the definition of a language-independent mapping template for knowledge graph creation, in Proceedings of the Third International Workshop on Capturing Scientific Knowledge co-located with the Eleventh International Conference on Knowledge Capture 2021 (K-CAP2021); and in: \textbf{Iglesias-Molina, A.}, Pozo-Gilo, L., Dona, D., Ruckhaus, E., Chaves-Fraga, D. and Corcho, O., Mapeathor: Simplifying the Specification of Declarative Rules for Knowledge Graph Construction, in Proceedings of the ISWC 2020 Demos and Industry Tracks (ISWC2020).
 
     \item The second contribution in \cref{chapter:creation} was published in: \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Dasoulas, I. and Dimou, A., Human-Friendly RDF Graph Construction: Which One Do You Chose?, in Proceedings of the 23rd International Conference on Web Engineering 2023 (ICWE2023). This contribution is the result of the collaboration with KU Leuven.
 
