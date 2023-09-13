@@ -1,18 +1,32 @@
 \chapter{Introduction}
 \label{chapter:intro}
 
+\textit{intro sobre la web, cómo surgió web semantica?}
 
-* General context about knowledge graphs, they are everywhere, representing every kind of information, used for many different purposes. 
 
-* General context about how to create KGs: code libraries, tools like openrefine, and mappings. Then on and on with mappings, how they have evolved blabla, increasing support by different engines blabla
+%\textit{* General context about knowledge graphs, they are everywhere, representing every kind of information, used for many different purposes. }
 
-* Mappping-compliant technologies are increasingly proving to be convenient/useful/good for KGs: maintainability, understandability, engines already optimized, no need to code (accessibility for wider range of profiles). 
+Over the last few decades, knowledge graphs have gained momentum. Knowledge graphs can be defined as \ana{encontrar def que se ajuste}. Practitioners from very diverse fields and background started making use of these technology to publish and exploit their data. Not only within the scientific community, but industry (including big companies) realized their potential and are taking advantage of it. Thus, companies like Google, LinkedIn, Pinterest, Yahoo? produce their own KGs. Other largely known and widely used open KGs are Wikidata, DBPedia, YAGO/NEL?, WordNet\footnote{\url{https://en-word.net/}}, EncycNet\footnote{\url{https://encycnet.github.io/}}, KGs en dominio bio (uniprot, y algo más habrá)
 
-However, data is still complex, the requirements for KG evolve and these languages are sometimes limited. **Then first reference to a whole: gather which are these necessities**
+%\textit{* General context about how to create KGs: code libraries, tools like openrefine, and mappings. Then on and on with mappings, how they have evolved blabla, increasing support by different engines blabla}
 
-Then about how to write mappings, still hard for many people who find it difficult or blabla, how to increase the adoption by making the user experience better: visual approaches do not scale and blabla. user friendly serializations are popular, we keep on updating them with needs already identified (above), and develop a new approach that can be for bot domain experts and experienced practitioners.
+The adoption of KGs comes hand-by-hand with the easiness of constructing them. Its wide-spread use has incurred in a high variety of ways for KG construction. The most straight-forward way consists of using coding libraries, such as rdflib for Python or Jena for Java. While this method brings benefits regarding complete flexibility to address data heterogeneity, processing and generation, it requires certain expertise of coding skills. However, not only practitioners with this profile are desired to generate KGs. To widen the extent of users to make possible their construction, different interfaces and methods were developed. For instance, OpenRefine comprises a framework to upload tabular data and manually edit to generate RDF datasets; Semantify.it provides a user-friendly editor to manually annotate data for creating structured content with \url{Schema.org} for webpages. This kind of editors enable the transformation of small amounts of data with limited options, and in most cases, the reproducibility, maintainability and automation of the transformation is compromised. Despite this fact, this option usually results the most suitable for new users or practitioners with non-technical backgrounds, as they are designed to be intuitive and easy to use. 
 
-\ana{Por aquí hay que leer y meter cosas de KG life cycle } teniendo en cuenta que los mappings están en construcción, se podría plantear cómo pueden ayudar en el mantenimiento y evolución de KGs, son suficientemente robustos los current approaches para este purpose?
+%\textit{* Mappping-compliant technologies are increasingly proving to be convenient/useful/good for KGs: maintainability, understandability, engines already optimized, no need to code (accessibility for wider range of profiles). }
+
+A compromise between these two approaches emerged with declarative mapping languages. We define in this work mappings as the rules that hold of the correspondences between source data and a target ontology to create a knowledge graph. The main milestone in the progress of these technologies came with the standarization of the RDB2RDF Mapping Language (R2RML) in 2012~\citep{das2012r2rml}. This language, based on previous efforts such as XLWrap, D2RQ or R2O, focused on describing the transformation of data in relational databases. While it was increasingly adopted and used in real-world scenarios, its limitations became evident. This triggered the release of a considerable amount of extensions~\citep{} and new languages~\citep{}, able to address a wider heterogeneity of data and use cases with multiple additional features~\citep{}.  The use of mapping languages over this decade has proven to be a suitable approach for semi-automated KG construction, maintainable in the long-term and scalable for large data sizes, with a vibrant community of users actively supporting it\footnote{\url{https://www.w3.org/community/kg-construct/}}. 
+
+%\textit{However, data is still complex, the requirements for KG evolve and these languages are sometimes limited. **Then first reference to a whole: gather which are these necessities**}
+
+ Hence, mapping languages provide a means (usually a vocabulary or syntax) to describe these transformation rules declaratively in a file. All languages share a common core of characteristics: the description of the input data, and specification on how to generate the output triples in the graph according to the schema of an ontology. The extent, level of detail and variability on how to perform this task relies on the heterogeneity of languages proposed. They were developed from different needs and use cases, resulting in different features and hence, providing different possibilities for users. \ana{problema a resolver, 1) para CM, 2) para actualizar lenguajes conforme las necesidades crecen} 
+
+%\textit{Then about how to write mappings, still hard for many people who find it difficult or blabla, how to increase the adoption by making the user experience better: visual approaches do not scale and blabla. user friendly serializations are popular, we keep on updating them with needs already identified (above), and develop a new approach that can be for bot domain experts and experienced practitioners.}
+
+Mapping files are later processed by a compliant engine along with the input data to construct the KG. Then, users are not required to have coding skills, in turn, they need to learn the language. Most mapping languages are defined as an ontology. Hence, they can leverage RDF serializations, usually Turtle, as the syntax to write the file. Other popular approaches use SPARQL as the basis to tackle input data description extending the query language with additional clauses. For these cases, practitioners with a background in semantic technologies have it easier to learn the mapping languages, as they probably already know they syntax. Without this advantage, the learning curve for any other user is duplicated. For this very reason, to narrow the bridge for adopting these technologies and making more accessible for non-expert users, several different approaches were develop, ranging from visual approaches~\citep{} to user-friendly syntaxes~\citep{}. While user-friendly syntaxes have had a wider adoption by more experienced practitioners, new users still have difficulties to learn them, while visual approaches do not come convenient for complex or large user cases. 
+
+\textit{\ana{Por aquí hay que leer y meter cosas de KG life cycle } teniendo en cuenta que los mappings están en construcción, se podría plantear cómo pueden ayudar en el mantenimiento y evolución de KGs, son suficientemente robustos los current approaches para este purpose?}
+
+
 
 \section{Thesis structure}
 
@@ -31,7 +45,7 @@ The remainder of this thesis is structured as follows:
     
     \item Finally, \cref{chapter:conclusions} draws the main conclusions of the presented work, and outlines the future lines of research. 
     
-    \item Appendix?
+    \item \ana{Appendix? cuando estén más seguros jeje}
 \end{itemize}
 
 
