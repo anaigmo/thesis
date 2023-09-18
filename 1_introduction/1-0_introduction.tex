@@ -1,14 +1,14 @@
 \chapter{Introduction}
 \label{chapter:intro}
 
-\textit{intro sobre la web, cómo surgió web semantica?}
+%\textit{intro sobre la web, cómo surgió web semantica?}
 
 
 %\textit{* General context about knowledge graphs, they are everywhere, representing every kind of information, used for many different purposes. }
 
-Over the last few decades, knowledge graphs have gained momentum. Knowledge graphs can be defined as "graphs of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities"~\cite{hogan2021kg}. 
-Practitioners from very diverse fields and background started making use of them to structure, publish and exploit their data. 
-There are countless success stories of knowledge graphs being currently used, from publicly available and representing common knowledge or domain-specific knowledge, to privately-owned graphs. 
+Knowledge graphs can be defined as ``graphs of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities"~\cite{hogan2021kg}. 
+Over the last few decades, knowledge graphs have gained momentum, enabling the community to structure, exploit and publish data on the web. 
+There are countless success stories of knowledge graphs being currently used, from publicly available and representing common knowledge or domain-specific knowledge, to privately owned graphs. 
 Largely known and widely used Open Knowledge Graphs include examples containing common knowledge, such as Wikidata~\citep{erxleben2014introducing}, DBPedia~\citep{lehmann2015dbpedia}, YAGO~\citep{pellissier2020yago} or Freebase~\citep{bollacker2007freebase}; 
 %, EncycNet\footnote{\url{https://encycnet.github.io/}}, 
 and about a specific domain, such as 
@@ -18,7 +18,7 @@ tourism~\citep{karle2018building,alonso2018rioja},
 geography~\citep{stadler2012linkedgeodata}, 
 cultural heritage~\citep{carriero2019arco}, 
 life sciences~\citep{dumontier2014bio2rdf,pinero2020disgenet}, among many others. 
-Not only within the scientific community, but also companies realized their potential and are taking advantage of it. Thus, companies like 
+Not only within the scientific community, but also companies realized their potential and are taking advantage of it. Therefore, companies such as
 Google\footnote{\url{https://blog.google/products/search/introducing-knowledge-graph-things-not/}},
 Microsoft~\citep{farber2019microsoft},
 LinkedIn\footnote{\url{https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph}}, 
@@ -27,28 +27,28 @@ produce their own knowledge graphs.
 
 %\textit{* General context about how to create KGs: code libraries, tools like openrefine, and mappings. Then on and on with mappings, how they have evolved blabla, increasing support by different engines blabla}
 
-The adoption of KGs comes hand-by-hand with the easiness of constructing them by the community~\citep{hogan2020twodecades,karger2014semantic}. Its wide-spread use has incurred in a high variety of ways for KG construction, requiring different level of manual effort and suitable for multiple data sizes and formats, from (semi)structured to text. Focusing on the systematic construction from semi-structured data, the most straight-forward way consists of using coding libraries, such as rdflib\footnote{\url{https://rdflib.readthedocs.io/en/stable/}} for Python or Jena\footnote{\url{https://jena.apache.org/}} for Java. While this method brings benefits regarding complete flexibility to address data heterogeneity, processing and generation, it requires certain expertise of coding skills. However, not only practitioners with this profile are desired to generate KGs~\citep{karger2014semantic}. To widen the extent of users to make possible their construction, different interfaces and methods were developed. For instance, OpenRefine\footnote{\url{https://openrefine.org/}} comprises a framework to upload tabular data and manually edit to generate RDF datasets; \url{Semantify.it} provides a user-friendly editor to manually annotate data for creating structured content with \url{Schema.org} for webpages. This kind of editors enable the transformation of small amounts of data with limited options, and in most cases, the reproducibility, maintainability and automation of the transformation is compromised. Despite this fact, this option usually results the most suitable for new users or practitioners with non-technical backgrounds, as they are designed to be intuitive and easy to use. 
+The adoption of KGs comes hand in hand with the ease of constructing them by the community~\citep{hogan2020twodecades,karger2014semantic}. Its wide-spread use has incurred in a high variety of ways for KG construction, requiring a different level of manual effort and suitable for multiple data sizes and formats, from (semi)structured to text. Focusing on the systematic construction from semi-structured data, the most straightforward way consists of using coding libraries, such as rdflib\footnote{\url{https://rdflib.readthedocs.io/en/stable/}} for Python or Jena\footnote{\url{https://jena.apache.org/}} for Java. While this method brings benefits regarding complete flexibility to address data heterogeneity, processing and generation, it requires certain expertise of coding skills. However, not only practitioners with this profile are desired to generate KGs~\citep{karger2014semantic}. To widen the extent of users to make their construction possible, different interfaces and methods were developed. For instance, OpenRefine\footnote{\url{https://openrefine.org/}} comprises a framework to upload tabular data and manually edit them to generate RDF datasets; \url{Semantify.it} provides a user-friendly editor to manually annotate data to create structured content with \url{Schema.org} for webpages. This kind of editors enable the transformation of small amounts of data with limited options, and in most cases, the reproducibility, maintainability and automation of the transformation is compromised. Despite this fact, this option usually results the most suitable for new users or practitioners with non-technical backgrounds, as they are designed to be intuitive and easy to use. 
 
 %\textit{* Mappping-compliant technologies are increasingly proving to be convenient/useful/good for KGs: maintainability, understandability, engines already optimized, no need to code (accessibility for wider range of profiles). }
 
-A compromise between these two approaches emerged with declarative mapping languages. We define in this work mappings as the rules that hold of the correspondences between source data and a target ontology to create a knowledge graph. The main milestone in the progress of these technologies came with the standarization of the RDB2RDF Mapping Language (R2RML) in 2012~\citep{das2012r2rml}. This language, based on previous efforts such as XLWrap~\citep{xlwrap}, D2RQ~\citep{bizer2004d2rq} or R2O~\citep{barrasa2004r2o}, focused on describing the transformation of data in relational databases. While it was increasingly adopted and used in real-world scenarios, its limitations became evident. This triggered the release of a considerable amount of extensions (e.g. RML~\citep{Dimou2014rml}, xR2RML~\citep{michel2015xr2rml}, FunUL~\citep{junior2016funul}, KR2RML~\citep{slepicka2015kr2rml}) and new languages (e.g., Tarql\footnote{\url{https://tarql.github.io/}}, SPARQL-Generate~\citep{Lefrancois2017sparqlgenerate}, Helio~\citep{cimmino2022helio}, ShExML~\citep{Garcia-Gonzalez2020shexml}, SPARQL-Anything~\citep{asprino2023sparql-anything}), able to address a wider heterogeneity of data and use cases with multiple additional features. The use of mapping languages over this decade has proven to be a suitable approach for semi-automated KG construction, maintainable in the long-term and scalable for large data sizes, with a vibrant community of users actively supporting it\footnote{\url{https://www.w3.org/community/kg-construct/}}. 
+A compromise between these two approaches emerged with declarative mapping languages. In this work, we define mappings as the rules that hold of the correspondences between source data and a target ontology to create a knowledge graph. The main milestone in the progress of these technologies came with the standardization of the RDB2RDF Mapping Language (R2RML) in 2012~\citep{das2012r2rml}. This language, based on previous efforts such as XLWrap~\citep{xlwrap}, D2RQ~\citep{bizer2004d2rq} or R2O~\citep{barrasa2004r2o}, focused on describing the transformation of data in relational databases. Although it was increasingly adopted and used in real-world scenarios, its limitations became evident. This triggered the release of a considerable amount of extensions (e.g. RML~\citep{Dimou2014rml}, xR2RML~\citep{michel2015xr2rml}, FunUL~\citep{junior2016funul}, KR2RML~\citep{slepicka2015kr2rml}) and new languages (e.g., Tarql\footnote{\url{https://tarql.github.io/}}, SPARQL-Generate~\citep{Lefrancois2017sparqlgenerate}, Helio~\citep{cimmino2022helio}, ShExML~\citep{Garcia-Gonzalez2020shexml}, SPARQL-Anything~\citep{asprino2023sparql-anything}), capable of addressing a wider heterogeneity of data and use cases with multiple additional features. The use of mapping languages over this decade has proven to be a suitable approach for semi-automated KG construction, maintainable in the long term and scalable for large data sizes, with a vibrant community of users actively supporting it\footnote{\url{https://www.w3.org/community/kg-construct/}}. 
 
 %\textit{However, data is still complex, the requirements for KG evolve and these languages are sometimes limited. **Then first reference to a whole: gather which are these necessities**}
 
- Hence, mapping languages provide a means (usually a vocabulary or syntax) to describe these transformation rules declaratively in a file. All languages share a common core of characteristics: (i) the description of the input data, and (ii) specification on how to generate the output triples in the graph according to the schema of an ontology. The extent, level of detail and variability on how to perform this task relies on the heterogeneity of languages proposed. They were developed from different needs and use cases, resulting in different features and hence, providing different possibilities for users. However, \textbf{there is no study gathering and analysing the current needs for knowledge graph construction}, what can facilitate the update of existing languages to address them. 
+ Hence, mapping languages provide a means (usually a vocabulary or syntax) to describe these transformation rules declaratively in a file. All languages share a common core of characteristics: (i) the description of the input data, and (ii) specification on how to generate the output triples in the graph according to the schema of an ontology. The extent, level of detail and variability on how to perform this task relies on the heterogeneity of languages proposed. They were developed from different needs and use cases, resulting in different features and hence, providing different possibilities for users. However, \textbf{there is no study collecting and analyzing the current needs for knowledge graph construction}, which can facilitate the update of existing languages to address them. 
 
 
 %\textit{Then about how to write mappings, still hard for many people who find it difficult or blabla, how to increase the adoption by making the user experience better: visual approaches do not scale and blabla. user friendly serializations are popular, we keep on updating them with needs already identified (above), and develop a new approach that can be for bot domain experts and experienced practitioners.}
 
-Mapping files are later processed by a compliant engine along with the input data to construct the KG. Then, users are not required to have coding skills, in turn, they need to learn the language. Most mapping languages are defined as an ontology (e.g. R2RML and its extensions). Hence, they can leverage RDF serializations, usually Turtle~\citep{turtle}, as the syntax to write the file. Other popular approaches use SPARQL~\citep{harris2013sparql} as the basis to tackle input data description extending the query language with additional clauses (e.g. SPARQL-Generate, SPARQL-Anything, Tarql). For these cases, practitioners with a background in semantic technologies have it easier to learn the mapping languages, as they are more prone to have previous knowledge about these syntaxes. Without this advantage, the learning curve for any other user is duplicated. For this very reason, to narrow the bridge for adopting these technologies and making more accessible for non-expert users, several different approaches were develop, ranging from visual approaches (e.g. Karma~\citep{gupta2012karma}, RMLEditor~\citep{heyvaert2016rmleditor}) to user-friendly syntaxes (e.g. YARRRML~\citep{Heyvaert2018yarrrml}, SMS2~\citep{sms2}). While user-friendly syntaxes have had a wider adoption by more experienced practitioners, new users still have difficulties to learn them. In addition, visual approaches are limited for complex or large user cases. \textbf{Research is needed to develop an approach to facilitate the writing of mappings reducing the needs to learn a language or syntax, while remaining scalable for large use cases}, in order to facilitate the adoption of these technologies. In addition, since each language is processed by different engines with different capabilities, it is not unusual to need to learn more than one single language, when use cases' needs change and cannot be addressed by one engine. Hence, \textbf{it is required to enhance the interoperability between existing mapping languages}. 
+Mapping files are later processed by a compliant engine along with the input data to construct the KG. Then, users are not required to have coding skills, in turn, they need to learn the language. Most mapping languages are defined as an ontology (e.g. R2RML and its extensions). Therefore, they can use RDF serializations, usually Turtle~\citep{turtle}, as the syntax to write the file. Other popular approaches use SPARQL~\citep{harris2013sparql} as the basis to tackle input data description extending the query language with additional clauses (e.g. SPARQL-Generate, SPARQL-Anything, Tarql). For these cases, practitioners with a background in semantic technologies have it easier to learn the mapping languages, as they are more prone to have previous knowledge about these syntaxes. Without this advantage, the learning curve for any other user is duplicated. For this very reason, to narrow the bridge for adopting these technologies and making more accessible for non-expert users, several different approaches were develop, ranging from visual approaches (e.g. Karma~\citep{gupta2012karma}, RMLEditor~\citep{heyvaert2016rmleditor}) to user-friendly syntaxes (e.g. YARRRML~\citep{Heyvaert2018yarrrml}, SMS2~\citep{sms2}). While user-friendly syntaxes have had a wider adoption by more experienced practitioners, new users still have difficulties learning them. In addition, visual approaches are limited for complex or large user cases. \textbf{Research is needed to develop an approach to facilitate the writing of mappings, reducing the need to learn a language or syntax, while remaining scalable for large use cases}, in order to facilitate the adoption of these technologies. In addition, since each language is processed by different engines with different capabilities, it is not unusual to need to learn more than one single language, when use cases' needs change and cannot be addressed by one engine. Hence, \textbf{it is required to improve the interoperability between existing mapping languages}. 
 
-The technologies revolving mappings are a perfect fit for composing modular, automated approaches to be integrated in larger pipelines that manage knowledge graphs~\citep{simsek2021knowledge,cimmino2022helio,grassi2023composable}. However, these technologies are yet relatively recent, and as mentioned before, struggle with a wider adoption. Still, the last few years have witnessed an increased effort for being refined and optimized~\citep{calvanese2017ontop,chaves2019parameters,arenas2022morphkgc,iglesias2023scaling}, to reduce the learning curve and to prove their benefits with respect to ad-hoc approaches~\citep{iglesias2019bio2rdf}. Hence, \textbf{there is a lack on research to prove how this technologies can improve not only in the construction of knowledge graphs, but also the beneficial role they can play in their evolution} with respect to other more mature technologies.  
+The technologies revolving mappings are a perfect fit for composing modular, automated approaches to be integrated into larger pipelines that manage knowledge graphs~\citep{simsek2021knowledge,cimmino2022helio,grassi2023composable}. However, these technologies are relatively recent, and as mentioned before, struggle with a wider adoption. Still, the last few years have witnessed an increased effort for being refined and optimized~\citep{calvanese2017ontop,chaves2019parameters,arenas2022morphkgc,iglesias2023scaling}, to reduce the learning curve and to prove their benefits with respect to ad-hoc approaches~\citep{iglesias2019bio2rdf}. Therefore, \textbf{ there is a lack of research to prove how these technologies can improve not only the construction of knowledge graphs, but also the beneficial role they can play in their evolution} compared to other more mature technologies.  
 
 %\textit{\ana{Por aquí hay que leer y meter cosas de KG life cycle } teniendo en cuenta que los mappings están en construcción, se podría plantear cómo pueden ayudar en el mantenimiento y evolución de KGs, son suficientemente robustos los current approaches para este purpose?}
 
 \section{Main contributions}
 
-The contribution of this thesis are listed below, organized according to the main thesis objectives:
+The contributions of this thesis are listed below, organized according to the main thesis objectives:
 
 \begin{enumerate}
     \item The first objective consists of gathering, understanding and implementing the current needs for knowledge graph construction from heterogeneous data sources with mapping languages. 
@@ -58,7 +58,7 @@ The contribution of this thesis are listed below, organized according to the mai
 
         \item \textbf{A set of requirements for knowledge graph construction}, extracted from the comparison framework and the needs of the community of practitioners. These requirements are implemented in a formal language, an ontology. 
 
-        \item \textbf{The implementation of these requirements to the RML mapping language.} The requirements gathered in previous contributions are implemented in RML, a widely adopted language, focusing on the update that involve enabling the construction of RDF-star graphs.
+        \item \textbf{The implementation of these requirements in the RML mapping language.} The requirements gathered in previous contributions are implemented in RML, a widely adopted language, focusing on the update that involves enabling the construction of RDF-star graphs.
     \end{itemize}
 
     \item The second objective consists of improving the user experience for knowledge engineers and domain experts to write mapping rules.
@@ -66,10 +66,10 @@ The contribution of this thesis are listed below, organized according to the mai
     \begin{itemize}
         \item \textbf{A spreadsheet-based approach to write mapping rules along with Mapeathor, the compliant tool to generate mapping files in diverse languages.} This approach enables users to write mapping rules in well-known spreadsheet editors (e.g. MS Excel, Google Spreadsheets) without the need to learn a language's constructs or syntax, to be automatically translated into a correctly formatted mapping file. 
 
-        \item \textbf{The update of the user-friendly serialization YARRRML for RML}, incorporating the latest features in the language, along with the compliant tool Yatter to translate them into readable [R2]RML mapping files. 
+        \item \textbf{The update of the user-friendly serialization YARRRML for RML}, incorporating the latest features of the language, along with the compliant tool Yatter to translate them into readable [R2]RML mapping files. 
     \end{itemize}
 
-    \item The third objective consists of assessing the role of mapping compliant technologies for supporting the evolution of knowledge graphs.
+    \item The third objective consists of assessing the role of mapping-compliant technologies to support the evolution of knowledge graphs.
 
     \begin{itemize}
         \item \textbf{An evaluation of mapping-compliant systems with well-known triplestores performing re-construction of knowledge graphs} with different metadata representation models. We test the performance of each approach and the features needed for re-constructing each representation to evaluate which approach is more suitable in each case. 
@@ -88,13 +88,13 @@ The remainder of this thesis is structured as follows:
     
     \item In \cref{chapter:mappings} we define a comparison framework to analyze the features of current mapping languages. This framework helps extract a set of requirements for knowledge graph construction, that are gathered and represented in an ontology. Additionally, we present a particular case of the update of the RML mapping language to address some of the presented requirements, specifically the RML-star module to construct RDF-star graphs.
     
-    \item In \cref{chapter:creation} we present two approaches to facilitate the creation of mapping documents for users. The first relies on spreadsheets to write mapping rules, and is with real users with different backgrounds to test is usability. The second supposes an update on the YARRRML user friendly syntax with recent modifications over RML. Both these approaches are presented with compliant tools to create mapping documents in target languages. 
+    \item In \cref{chapter:creation} we present two approaches to facilitate the creation of mapping documents for users. The first relies on spreadsheets to write mapping rules, and is with real users with different backgrounds to test its usability. The second supposes an update on the YARRRML user-friendly syntax with recent modifications over RML. Both approaches are presented with compliant tools to create mapping documents in target languages. 
     
-    \item In \cref{chapter:evolution} we assess the role that mapping-compliant technologies can play in knowledge graph evolution. We conduct and empirical evaluation performing schema changes with KG construction engines that use mappings, and SPARQL \texttt{CONSTRUCT} queries, and evaluate which approach is more suitable in different situations. 
+    \item In \cref{chapter:evolution} we assess the role that mapping-compliant technologies can play in knowledge graph evolution. We conduct an empirical evaluation performing schema changes with KG construction engines that use mappings, and SPARQL \texttt{CONSTRUCT} queries, and evaluate which approach is more suitable in different situations. 
     
-    \item Finally, \cref{chapter:conclusions} draws the main conclusions of the presented work, and outlines the future lines of research. 
+    \item Finally, \cref{chapter:conclusions} draws the main conclusions of the presented work, and outlines the future research directions. 
     
-    \item \ana{Appendix? cuando estén más seguros jeje}
+    \item \ana{Appendix? cuando estén más seguros}
 \end{itemize}
 
 
@@ -102,48 +102,58 @@ The remainder of this thesis is structured as follows:
 
 This section lists the publications derived from the work in this thesis.
 
-\subsection{Journal Publications}
 
 \begin{itemize}
-    \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Ruckhaus, E., Chaves-Fraga, D., García-Castro, R., Corcho, O. (2022) An Ontological Approach for Representing Declarative Mapping Languages. \textit{Semantic Web}, Pre-press. 
-
-    \item Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Garijo, D., Corcho, O. and Dimou, A. (2023) Declarative generation of RDF-star graphs from heterogeneous data. \textit{Semantic Web}, under review.
-\end{itemize}
-
-
-\subsection{Conference Publications}
-\begin{itemize}
-    \item \textbf{Iglesias-Molina A.}, Toledo J., Corcho O. and Chaves-Fraga D. (2023) Re-Construction Impact on Metadata Representation Models, \ana{venue :)}.
-
-    \item \textbf{Iglesias-Molina, A.}, Van Assche, D., Arenas-Guerrero, J., De Meester, B., Debruyne, C., Jozashoori, S., Maria, P., Michel, F., Chaves-Fraga, D. and Dimou, A. (2023) The RML Ontology: A Community-Driven Modular Redesign After a Decade of Experience in Mapping Heterogeneous Data to RDF. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens.
-
-    \item \textbf{Iglesias-Molina, A.}, Ahrabian, K., Ilievski, F., Pujara, J. and Corcho, O. (2023) Comparison of Knowledge Graph Representations for Consumer Scenarios. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens.
-
-    \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Dasoulas, I. and Dimou, A. (2023) Human-Friendly RDF Graph Construction: Which One Do You Chose?. In \textit{Proceedings of the 23rd International Conference on Web Engineering 2023 (ICWE2023)}, June 6--9, Alicante.
-\end{itemize}
-
-\subsection{Workshop Publications}
-\begin{itemize}
-    \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Corcho, O. (2022) Devising Mapping Interoperability with Mapping Translation. In \textit{Proceedings of the Third International Workshop on Knowledge Graph Construction, co-located with the 19th Extended Semantic Web Conference}. May 29 -- June 2, Hersonissos. 
-
-    \item Arenas-Guerrero J., Scrocca M., \textbf{Iglesias-Molina A.}, Toledo J., Pozo-Gilo L., Dona D., Corcho O. and Chaves-Fraga D. (2021) Knowledge Graph Construction with R2RML and RML: An ETL System-based Overview. In \textit{Proceedings of the Second International Workshop on Knowledge Graph Construction, co-located with the 18th Extended Semantic Web Conference}. June 6--10, online.
+    \item \textbf{Journal Publications}
+    \begin{itemize}
+        \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Ruckhaus, E., Chaves-Fraga, D., García-Castro, R., Corcho, O. (2022) An Ontological Approach for Representing Declarative Mapping Languages. \textit{Semantic Web}, Pre-press. 
     
-    \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Priyatna, F. and Corcho, O. (2019) . Towards the definition of a language-independent mapping template for knowledge graph creation. In \textit{Proceedings of the Third International Workshop on Capturing Scientific Knowledge co-located with the Eleventh International Conference on Knowledge Capture}. November 19--21, Marina del Rey.
+        \item Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Garijo, D., Corcho, O. and Dimou, A. (2023) Declarative generation of RDF-star graphs from heterogeneous data. \textit{Semantic Web}, under review.
+    \end{itemize}
 \end{itemize}
 
-\subsection{Posters and demos}
-\begin{itemize}
-    \item \textbf{Iglesias-Molina, A.} and Garijo D. (2023) Towards Assessing FAIR Research Software Best Practices in an Organization Using RDF-star. In \textit{Proceedings of the Semantics 2023 Posters and Demos Track}, September 19--22, Leipzig.
-    
-    \item Delva, T., Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Corcho, O., Chaves-Fraga, D., and Dimou, A. (2021) RML-star: A declarative mapping language for RDF-star generation. In \textit{Proceedings of the ISWC 2021 Posters, Demos and Industry Tracks}, October 24--28, online.
 
-    \item \textbf{Iglesias-Molina, A.}, Pozo-Gilo, L., Dona, D., Ruckhaus, E., Chaves-Fraga, D. and Corcho, O. (2020) Mapeathor: Simplifying the Specification of Declarative Rules for Knowledge Graph Construction. In \textit{Proceedings of the ISWC 2020 Demos and Industry Tracks}, November 2--6, online.
+
+
+\begin{itemize}
+    \item \textbf{Conference Publications}
+    \begin{itemize}
+        \item \textbf{Iglesias-Molina A.}, Toledo J., Corcho O. and Chaves-Fraga D. (2023) Re-Construction Impact on Metadata Representation Models, \ana{venue :)}.
+    
+        \item \textbf{Iglesias-Molina, A.}, Van Assche, D., Arenas-Guerrero, J., De Meester, B., Debruyne, C., Jozashoori, S., Maria, P., Michel, F., Chaves-Fraga, D. and Dimou, A. (2023) The RML Ontology: A Community-Driven Modular Redesign After a Decade of Experience in Mapping Heterogeneous Data to RDF. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens.
+    
+        \item \textbf{Iglesias-Molina, A.}, Ahrabian, K., Ilievski, F., Pujara, J. and Corcho, O. (2023) Comparison of Knowledge Graph Representations for Consumer Scenarios. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens.
+    
+        \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Dasoulas, I. and Dimou, A. (2023) Human-Friendly RDF Graph Construction: Which One Do You Chose?. In \textit{Proceedings of the 23rd International Conference on Web Engineering 2023 (ICWE2023)}, June 6--9, Alicante.
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Workshop Publications}
+    \begin{itemize}
+        \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Corcho, O. (2022) Devising Mapping Interoperability with Mapping Translation. In \textit{Proceedings of the Third International Workshop on Knowledge Graph Construction, co-located with the 19th Extended Semantic Web Conference}. May 29 -- June 2, Hersonissos. 
+    
+        \item Arenas-Guerrero J., Scrocca M., \textbf{Iglesias-Molina A.}, Toledo J., Pozo-Gilo L., Dona D., Corcho O. and Chaves-Fraga D. (2021) Knowledge Graph Construction with R2RML and RML: An ETL System-based Overview. In \textit{Proceedings of the Second International Workshop on Knowledge Graph Construction, co-located with the 18th Extended Semantic Web Conference}. June 6--10, online.
+        
+        \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Priyatna, F. and Corcho, O. (2019) Towards the definition of a language-independent mapping template for knowledge graph creation. In \textit{Proceedings of the Third International Workshop on Capturing Scientific Knowledge co-located with the Eleventh International Conference on Knowledge Capture}. November 19--21, Marina del Rey.
+    \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Posters and demos}
+    \begin{itemize}
+        \item \textbf{Iglesias-Molina, A.} and Garijo D. (2023) Towards Assessing FAIR Research Software Best Practices in an Organization Using RDF-star. In \textit{Proceedings of the Semantics 2023 Posters and Demos Track}, September 19--22, Leipzig.
+        
+        \item Delva, T., Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Corcho, O., Chaves-Fraga, D., and Dimou, A. (2021) RML-star: A declarative mapping language for RDF-star generation. In \textit{Proceedings of the ISWC 2021 Posters, Demos and Industry Tracks}, October 24--28, online.
+    
+        \item \textbf{Iglesias-Molina, A.}, Pozo-Gilo, L., Dona, D., Ruckhaus, E., Chaves-Fraga, D. and Corcho, O. (2020) Mapeathor: Simplifying the Specification of Declarative Rules for Knowledge Graph Construction. In \textit{Proceedings of the ISWC 2020 Demos and Industry Tracks}, November 2--6, online.
+    \end{itemize}
 \end{itemize}
 
 
 \section{Research stay}
 \begin{itemize}
-    \item 06/07/2022 -- 06/09/2022. Research stay at the \textbf{Information Sciences Institute of the University of Southern California}, supervised by Prof. Dr. Filip Ilievski. During this stay, we analyses the differential impact of diverse knowledge graph representation over different consumption scenarios: knowledge exploration performed by users, systematic query performance and graph completion tasks. This stay was funded by the a scholarship from Programa Propio I+D+i of UPM, oriented to research personnel in pre-doctoral formation for doing an international research stay equal or superior to three months.
+    \item 06/07/2022 -- 06/09/2022. Research stay at the \textbf{Information Sciences Institute of the University of Southern California}, supervised by Prof. Dr. Filip Ilievski. During this stay, we analyzed the differential impact of diverse knowledge graph representation over different consumption scenarios: knowledge exploration performed by users, systematic query performance and graph completion tasks. This stay was funded by a scholarship from Programa Propio I+D+i of UPM, oriented to research personnel in predoctoral formation for doing an international research stay equal to or superior to three months.
 \end{itemize}
 
 \section{Tutorials and workshops}
