@@ -3,16 +3,16 @@
 
 Along with mapping editors described before, human-friendly serializations emerged 
 to ease the definition of mapping rules. Focusing on R2RML and RML, we highlight the following serializations that have been more widely adopted recently.
-YARRRML~\citep{Heyvaert2018yarrrml} leverages YAML
+YARRRML~\cite{Heyvaert2018yarrrml} leverages YAML
 to offer a user-friendly representation to define mapping rules, while
-ShExML~\citep{Garcia-Gonzalez2020shexml} extends the syntax of the ShEx constraint language~\citep{prud2014shex}.
-XRM~\citep{xrm}
+ShExML~\cite{Garcia-Gonzalez2020shexml} extends the syntax of the ShEx constraint language~\cite{prud2014shex}.
+XRM~\cite{xrm}
 provides an abstract syntax that simulates programming languages and 
-SMS2~\citep{sms2}, proposed by Stardog,\footnote{\label{foot:stardog}\url{https://www.stardog.com/}} is loosely based on the SPARQL query language and extends the features of R2RML to create virtual KGs.
+SMS2~\cite{sms2}, proposed by Stardog,\footnote{\label{foot:stardog}\url{https://www.stardog.com/}} is loosely based on the SPARQL query language and extends the features of R2RML to create virtual KGs.
 Each serialization is accompanied by a system that translates their rules into mapping languages, such as RML or R2RML (henceforth abbreviated as [R2]RML). 
 %These serializations and translators were not compared with each other in terms of serializations' features and system's characteristics, even though it would help to decide which serialization fits each use case.
 
-This section describes YARRRML-star, the extension of YARRRML to support RML-star~\citep{delva2021rml-star} to construct RDF-star graphs.
+This section describes YARRRML-star, the extension of YARRRML to support RML-star~\cite{delva2021rml-star} to construct RDF-star graphs.
 We also improve the serialization it to adhere with the latest RML updates
 (e.g., datatypes, joins, etc.), and develope a translator system --Yatter-- that implements the new features, and validate our proposal with test cases and compared it to other user-friendly serializations.
 
@@ -42,7 +42,7 @@ ID , PERSON         , COUNTRY , MARK , DATE                       , DATE-TYPE
  %\ana{ojo con repetir de qué va RDF-star, que en relwork y RML-star ya se dirá también)
 
 RDF-star introduces the notion of RDF-star triples, i.e. triples that are subjects or objects of another triple. These triples are enclosed using ``\texttt{<<}'' and ``\texttt{>>}'', and can be (1) quoted, if they only appear in a graph embedded by another triple (List~\ref{lst:chp5_res-rdf-star} lines 2,4); or (2) asserted, if the quoted triple is also generated outside the triple where it is quoted (lines 1-4).
-We extend YARRRML to specify how we can construct RDF-star graphs, aligned with the RML-star specification~\citep{iglesias2022rmlstar}.
+We extend YARRRML to specify how we can construct RDF-star graphs, aligned with the RML-star specification~\cite{iglesias2022rmlstar}.
 
 \begin{minipage}{\linewidth}
 \centering
@@ -270,7 +270,7 @@ The source code of Yatter is openly available under Apache 2.0 license\cref{foot
 Following open science best practices, each release automatically generates a dedicated DOI to ensure reproducibility in any experimental evaluation\footnote{\url{https://doi.org/10.5281/zenodo.7024500}}. 
 The development is under continuous integration using GitHub Actions and the YARRRML test-cases (Section \ref{sec:chp5_yarrrml-validation}) have more than 80\% code coverage. 
 Yatter is available through PyPi as a module\footnote{\url{https://pypi.org/project/yatter/}} to be easily integrated in any Python development. % (e.g., providing RML to a KG construction system implemented in this language).
-%such as SDM-RDFizer~\citep{iglesias2020sdm} or Morph-KGC~\citep{arenas2022morph}.
+%such as SDM-RDFizer~\cite{iglesias2020sdm} or Morph-KGC~\cite{arenas2022morph}.
 
 
 
@@ -280,14 +280,14 @@ We validate the extensions to YARRRML and the developed implementation by
 proposing and testing a set of test cases, and comparing to other proposed user-friendly serializations and corresponding systems.
 
 \subsubsection{YARRRML Test Cases} %David
-Test cases are a common method to evaluate the conformance of a system~\citep{arenas2023morphstar,heyvaert2019conformance}. 
+Test cases are a common method to evaluate the conformance of a system~\cite{arenas2023morphstar,heyvaert2019conformance}. 
 %with respect to a language/syntax specification 
 %(see for example). 
-To the best of our knowledge, previous R2RML~\citep{boris2012r2rml} and RML~\citep{heyvaert2019conformance} test cases were not translated to any human-friendly serialization (e.g., YARRRML).
+To the best of our knowledge, previous R2RML~\cite{boris2012r2rml} and RML~\cite{heyvaert2019conformance} test cases were not translated to any human-friendly serialization (e.g., YARRRML).
 Relying on [R2]RML test cases, we propose a set of representative test cases (including also the new features presented in this work) to assess the conformance of any YARRRML translator system.
 %In this way, practitioners can easier understand the coverage of these systems with respect to the proposed language/syntax and select the one that fits better to their own use cases.
 The proposed test cases require to be two-fold defined: to cover the complete vocabulary of the serialization, and also have the flexibility to declare the rules (e.g., shortcuts or location of the keys). 
-%To avoid starting from scratch, we rely on the test cases proposed by R2RML~\citep{R2RML_test_cases} first, that were also extended for RML~\citep{heyvaert2019conformance}. 
+%To avoid starting from scratch, we rely on the test cases proposed by R2RML~\cite{R2RML_test_cases} first, that were also extended for RML~\cite{heyvaert2019conformance}. 
 
 We follow a systematic methodology for creating the YARRRML test cases. 
 We analyzed the [R2]RML test cases and observed that several assess correct data generation.
@@ -298,7 +298,7 @@ Since RML is a superset of R2RML, it introduces modifications with respect to R2
 We propose 8 new test cases to cover these features. 
 
 For features not covered by the RML test cases, we follow a similar procedure. 
-We inspected the RML-star test cases~\citep{david_chaves_2022_6518802}, and translated to YARRRML the ones that provide a complete coverage of this extension. 
+We inspected the RML-star test cases~\cite{david_chaves_2022_6518802}, and translated to YARRRML the ones that provide a complete coverage of this extension. 
 From the 16 test cases proposed to assess the conformance of RML-star, we adapt 6. 
 Finally, as there are still no test cases proposed for RML-Target, RML-FNML, RML dynamic language tags and datatypes, we 
 %analyze both of each specifications (RML and YARRRML) and 
@@ -311,12 +311,12 @@ Yatter passes all test cases successfully. %Following good software development 
 
 \subsubsection{serializations Comparison} %Ana
 
-%YARRRML was developed to be a user-friendly syntax for the RML mapping language~\citep{heyvaert2018yarrrml}. There have been proposed more syntaxes with the same purpose, such as Stardog's SMS2 for R2RML and Zazuko's XRM for [R2]RML and CSVW.
+%YARRRML was developed to be a user-friendly syntax for the RML mapping language~\cite{heyvaert2018yarrrml}. There have been proposed more syntaxes with the same purpose, such as Stardog's SMS2 for R2RML and Zazuko's XRM for [R2]RML and CSVW.
 
 
 
 
-We compare a set of user-friendly serializations and languages, namely SMS2~\citep{sms2}, XRM~\citep{xrm}, ShExML~\citep{Garcia-Gonzalez2020shexml} and YARRRML~\citep{Heyvaert2018yarrrml} incorporating the updates described in \cref{sec:chp5_yarrrml-desc}, regarding their expressiveness. 
+We compare a set of user-friendly serializations and languages, namely SMS2~\cite{sms2}, XRM~\cite{xrm}, ShExML~\cite{Garcia-Gonzalez2020shexml} and YARRRML~\cite{Heyvaert2018yarrrml} incorporating the updates described in \cref{sec:chp5_yarrrml-desc}, regarding their expressiveness. 
 To that end, we study 15 features that tackle usual characteristics and functionalities in mapping languages.
 We describe each and discuss how each serialization addresses it (\cref{tab:chp5_lang-comparison}). 
 
@@ -420,11 +420,11 @@ We also compare the systems that support the aforementioned serializations:
 ShExML translator\footnote{\label{foot:shexml}\url{https://github.com/herminiogg/ShExML}}, %uses mappings written in the ShExML syntax to produce both RML mappings and the RDF graph.
 Stardog\cref{foot:stardog} %is a cloud-native enterprise knowledge graph platform that offers many different features for linked data management. 
 (with focus on how Stardog maps data sources to RDF graphs, using R2RML or SMS2),
-XRM translator~\citep{xrm}, and
+XRM translator~\cite{xrm}, and
 %is a user-friendly java API that translates XRM mapping language syntax to [R2]RML, CARML or CSVW format. 
 YARRRML-parser\footnote{\label{foot:yarrrml-p}\url{https://github.com/RMLio/yarrrml-parser}} and our system, Yatter\cref{foot:yatter}. 
 %is an open source Jvascript library that translates the YARRRML syntax to [R2]RML.
-%\Cref{tab:chp5_eng-comparison} shows how the different systems compare to YARRRML-translator~\citep{chaves2023translator}. 
+%\Cref{tab:chp5_eng-comparison} shows how the different systems compare to YARRRML-translator~\cite{chaves2023translator}. 
 We study 8 system features to draw conclusions about them including:
 
 \textbf{SF1. Availability.}

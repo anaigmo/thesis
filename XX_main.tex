@@ -1,0 +1,409 @@
+% --------------------------
+% Document class
+% --------------------------
+\documentclass[%
+paper=A4,               % paper size A4
+twoside=true,           % onesite or twoside printing
+openright,              % doublepage cleaning ends up right side
+chapterprefix=true,     % prefix for chapter marks
+12pt,                   % font size
+headings=normal,        % size of headings
+bibliography=nottotoc,  % include bib in toc
+listof=totoc,           % include listof entries in toc
+titlepage=on,           % own page for each title page
+captions=tableabove,    % display table captions above the float env
+chapterprefix=false,    % do not display a prefix for chapters
+appendixprefix=false,   % but display a prefix for appendix chapter
+draft=false,            % value for draft version
+]{book}%
+
+% **************************************************
+% Settings
+% **************************************************
+% --------------------------
+% Packages
+% --------------------------
+\usepackage[spanish,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}     % Use a modern font (that is not pixelated)
+\usepackage[protrusion=true, expansion=true]{microtype}  % Use microtype to improve readability
+\usepackage{multicol}    % Use multiple columns
+\usepackage{amsmath} 
+\usepackage{setspace}
+\usepackage{graphicx,graphics}           % packages to manage images
+\usepackage{subfigure}                   % display two figures next to each other
+\usepackage[export]{adjustbox}
+\usepackage{ragged2e} 
+\usepackage{comment} 
+\usepackage{blindtext}
+\usepackage[acronym,nonumberlist,nomain]{glossaries}  % package for list of acronyms
+\usepackage{hyperref}
+\usepackage[a4paper]{geometry}
+\usepackage{parskip}     % paragraph spacing (suppress indentation)
+\usepackage{fancyhdr}    % personalizar encabezado
+\usepackage{enumitem}
+
+\newcommand{\ana}[2][inline]{\color{red} [AI]: #2\color{black}}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lipsum}  
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{lscape}
+\usepackage{hvfloat}
+%\usepackage[table,xcdraw]{xcolor}
+\usepackage{balance}
+
+\usepackage[ruled,vlined]{algorithm2e}
+
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{color}
+\usepackage{makecell}
+\usepackage{tabu, booktabs}
+
+
+\usepackage{listings,chngcntr}
+\def\dollar{\$}
+\lstset{mathescape=true}
+\lstset{%
+	basicstyle=\scriptsize\ttfamily,%
+	basewidth=.5em,%
+	captionpos=b,
+	frame=single,
+	tabsize=4,
+	numbers=left}%
+\lstset{
+	escapechar={(@}{^)}
+}
+\lstset{
+   literate=
+        {í}{{\'i}}1
+        {ñ}{{\~n}}1
+}
+%% -- Listings
+
+\colorlet{punct}{red!60!black}
+%\definecolor{background}{HTML}{EEEEEE}
+%\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+\lstdefinelanguage{json}{
+	keywords=[1]{},
+	keywordstyle=[1]\color{teal}\bfseries,
+	keywords=[2]{resource_rules, id, datasource_ids, subject, properties, predicate, object, is_literal, link_rules, condition, source, target},	% types; money and time units
+	keywordstyle=[2]\color{burgundy}\bfseries,
+    basicstyle=\footnotesize\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    identifierstyle=\color{black},
+    breaklines=true,
+    %backgroundcolor=\color{verylightgray},
+    literate=
+     *{:}{{{\color{black}{:}}}}{1}
+      {\$}{{{\color{punct}{\$}}}}{1}
+      {,}{{{\color{red}{,}}}}{1}
+      {\{}{{{\color{red}{\{}}}}{1}
+      {\}}{{{\color{red}{\}}}}}{1}
+      {[}{{{\color{red}{[}}}}{1}
+      {]}{{{\color{red}{]}}}}{1},
+}
+\definecolor{bittersweet}{rgb}{1.0, 0.44, 0.37}
+\lstdefinelanguage{Shex}{
+	keywords=[1]{},
+	keywordstyle=[1]\color{teal}\bfseries,
+	keywords=[2]{SOURCE, ITERATOR, FIELD},	% types; money and time units
+	keywordstyle=[2]\color{bittersweet}\bfseries,
+	keywords=[3]{c_city, cities_rdb, coord_json, it_cities, population, year, zipcode, it_coord, lat, long, loc_city, long},
+	keywordstyle=[3]\color{teal}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=true,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{black}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+	literate=
+     *{\{}{{{\color{bittersweet}{\{}}}}{1}
+      {\}}{{{\color{bittersweet}{\}}}}}{1}
+      {<}{{{\color{bittersweet}{<}}}}{1}
+      {>}{{{\color{bittersweet}{>}}}}{1},
+}
+
+\lstdefinelanguage{yarrrml}{
+	keywords=[1]{},
+	keywordstyle=[1]\color{teal}\bfseries,
+	keywords=[2]{mappings, sources, s, po, function, parameters, value, parameter},	% types; money and time units
+	keywordstyle=[2]\color{violet}\bfseries,
+	keywords=[3]{Locations, Cities},
+	keywordstyle=[3]\color{teal}\bfseries,	
+	keywords=[4]{xsd, double, integer, boolean, decimal, string},
+	keywordstyle=[4]\color{applegreen}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=true,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{black}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+	literate=
+     *{[}{{{\color{violet}{[}}}}{1}
+      {]}{{{\color{violet}{]}}}}{1}
+       {-}{{{\color{violet}\bfseries{-}}}}{1},
+}
+
+\lstdefinelanguage{sparql}{
+	keywords=[1]{} % generic keywords including crypto operations
+	keywordstyle=[1]\color{blue}\bfseries,
+	keywords=[2]{},	% types; money and time units
+	keywordstyle=[2]\color{teal}\bfseries,
+	keywords=[3]{block, blockhash, coinbase, difficulty, gaslimit, number, timestamp, msg, data, gas, sender, sig, value, now, tx, gasprice, origin},	% environment variables
+	keywordstyle=[3]\color{violet}\bfseries,
+	keywords=[4]{xsd, double, integer, boolean, decimal, string},
+	keywordstyle=[4]\color{applegreen}\bfseries,
+	keywordstyle=[5]\color{iris}\bfseries,
+	keywords=[5]{GENERATE, REPLACE, WHERE, FILTER, BIND, CONSTRUCT, GRAPH},
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]"
+}
+
+\lstdefinelanguage{concm}{
+	keywords=[1]{} % generic keywords including crypto operations
+	keywordstyle=[1]\color{blue}\bfseries,
+	keywords=[2]{Locations, Cities, Sources, Rules},	% types; money and time units
+	keywordstyle=[2]\color{violet}\bfseries,
+	keywords=[3]{cm, dcat, expression, hasField, hasDataSource, mediaType, SourceFrame, accessService, hasProtocol, endpointURL, hasSecurityScheme, DataField, field, hasNestedFrame, ReferenceNodeMap, hasEvaluableExpression, hasFunctionName, hasInput, subject, predicate, hasFrame, constantValue, Literal, object, FunctionExpression, functionName, hasBooleanCondition, hasDatatype, source, target, property, LinkingExpression, ConditionalStatementMap, SynchronousSource, StatementMap, JoinCombination, datatype, language, combinesFrame, joinsBy, ListMap, hasLanguage},	% environment variables
+	keywordstyle=[3]\color{steelblue}\bfseries,
+	keywords=[4]{xsd, double, integer, boolean, decimal, string, time},
+	keywordstyle=[4]\color{applegreen}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+}
+
+\definecolor{verylightgray}{rgb}{.97,.97,.97}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{iris}{rgb}{0.35, 0.31, 0.81}
+\definecolor{richelectricblue}{rgb}{0.03, 0.57, 0.82}
+\definecolor{shamrockgreen}{rgb}{0.0, 0.62, 0.38}
+\definecolor{fulvous}{rgb}{0.86, 0.52, 0.0}
+\definecolor{steelblue}{rgb}{0.27, 0.51, 0.71}
+
+\lstdefinelanguage{Solidity}{
+	%keywords=[1]{} % generic keywords including crypto operations
+	%keywordstyle=[1]\color{blue}\bfseries,
+	%keywords=[2]{CitiesSource, LocationSource, Locations, Cities},	% types; money and time units
+	%keywordstyle=[2]\color{richelectricblue}\bfseries,
+	%keywords=[3]{rr, xrr, logicalSource, subjectMap, predicateObjectMap, tableName, predicate, object, objectMap, template, reference, class, datatype, TriplesMap, LogicalTable, termType, rml, BlankNode,  predicateMap, NonAssertedTriplesMap, quotedTriplesMap},	% environment variables
+	%keywordstyle=[3]\color{shamrockgreen}\bfseries,
+	%keywords=[4]{xsd, double, integer, boolean, decimal, string, time},
+	%keywordstyle=[4]\color{applegreen}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	%stringstyle=\color{fulvous}\bfseries,
+	morestring=[b]',
+	morestring=[b]",
+}
+
+\lstset{
+	language=Solidity,
+	%backgroundcolor=\color{verylightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b,
+	frame=none
+}
+
+%% --
+
+\usepackage{xparse}
+\newcounter{captionedlistingcounter}
+\NewDocumentEnvironment{captionedlisting}{mmm}{
+	\refstepcounter{captionedlistingcounter}
+	% commented out the figure part bc we don't need it and they couldn't be used in minipages
+	% not sure if this is actually different from using the default listing captions/labels now
+	%\begin{figure}[#3]
+	{\centering\label{#1}}
+
+}{
+
+	\vspace{0.5\baselineskip}
+	Listing \thecaptionedlistingcounter: #2
+	\\%\end{figure}
+}
+
+\usepackage[capitalize,nameinlink]{cleveref}
+\crefname{line}{line}{lines}
+\Crefname{Line}{Line}{Lines}
+\crefname{captionedlistingcounter}{Listing}{Listings}
+\Crefname{captionedlistingcounter}{Listing}{Listings}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+
+
+% **************************************************
+% THESIS details
+% **************************************************
+
+\newcommand{\University}{\protect{Universidad Polit\'ecnica de Madrid}}
+\newcommand{\UNIVERSITY}{\protect{UNIVERSIDAD POLIT\'ECNICA DE MADRID}}
+
+\input{thesisDetails}
+
+% **************************************************
+% Customize document
+% **************************************************
+% Define the geometry of the document
+\newgeometry {top=2.5cm, bottom=2.5cm, right=2.5cm, left=2.5cm}
+
+\setlength{\parskip}{10pt}   % Change the default value
+
+% hiperlinks
+\hypersetup{
+    colorlinks=true,          % Enable colored links
+    linkcolor=black,          % Color for internal links
+    urlcolor=blue
+}
+
+% Header and footer
+\fancyhf{}   % Clear the default header and footer
+\renewcommand{\headrulewidth}{0.2pt}
+ 
+\fancyhead[RO]{\leftmark}       % Define the header for odd and even pages
+\fancyhead[LE]{\thesisAuthor}   % Define the header for odd and even pages
+
+\fancyfoot[C]{\thepage}
+
+% Increase indentation in lists
+\newlist{mydescription}{description}{1}
+\setlist[mydescription,1]{labelindent=2em, leftmargin=2em}
+
+% **************************************************
+% Begin document
+% **************************************************
+\begin{document}
+
+% --------------------------
+% Cover and front matter
+% --------------------------
+
+\frontmatter
+\pagestyle{empty}				% no header or footers
+\input{0_frontmatter/1_cover}
+\newpage
+
+\input{0_frontmatter/2_frontpage}
+\newpage
+
+\pagenumbering{roman}			    % roman page numbing 
+\pagestyle{plain}				    % empty header, just page number in footer
+\input{0_frontmatter/3_teseo}
+\newpage
+
+\input{0_frontmatter/4_dedication}   % dedication (optional)
+\newpage
+
+\input{0_frontmatter/5_acknowledgement}  % acknowledgement (optional)
+\newpage
+
+\input{0_frontmatter/6_abstract}		% abstract (in English and Spanish)
+\newpage
+
+\setcounter{tocdepth}{3}		% define depth of toc
+\tableofcontents				% display table of contents
+\newpage
+
+\addcontentsline{toc}{section}{List of Figures}
+\listoffigures
+\newpage
+
+\addcontentsline{toc}{section}{List of Tables}
+\listoftables
+\newpage
+
+\input{0_frontmatter/7_acronyms}
+\cleardoublepage
+
+% --------------------------
+% Main matter
+% --------------------------
+\mainmatter
+\pagenumbering{arabic}			% arabic page numbering
+\setcounter{page}{1}			% set page counter
+\pagestyle{fancy} 	            % fancy header and footer
+\parskip=7pt                    % space after each paragraph
+\parindent=0pt                  % suppress indentation of paragraphs
+
+
+%Introduccion
+%\include{mainmatter/Introduction}
+%\include{mainmatter/Background}
+
+\input{1_introduction/1-0_introduction}
+
+%\input{2_stateoftheart/2-0_stateofart}
+
+%\input{3_objectives/3-0_objectives}
+
+%\input{4_mappings/4-0_mappings}
+
+%\input{5_creation/5-0_creation}
+
+%\input{6_evolution/6-0_evolution}
+
+%\input{7_conclusions/7-0_conclusions}
+
+
+
+
+\cleardoublepage
+
+
+\backmatter
+%\chapter{References}
+\bibliographystyle{Latex/Classes/jmb}
+\bibliography{bibliography/bibliography}
+
+%\appendix
+%\chapter{Annexes}  
+
+\appendix
+\include{appendix/appendix-cm}
+\include{appendix/appendix-mapeathor}
+
+
+
+% **************************************************
+% End of document
+% **************************************************
+\end{document}
