@@ -110,9 +110,11 @@ titlepage=on            % own page for each title page
 \printbibliography[title=References, heading=bibintoc]
 
 \appendix
-\chapter{Annexes}  
-\include{appendix/appendix-cm}
-\include{appendix/appendix-mapeathor}
+\chapter*{Annexes}  
+\addcontentsline{toc}{chapter}{Annexes}
+\renewcommand{\thesection}{\Alph{section}}
+\input{appendix/appendix-cm}
+\input{appendix/appendix-mapeathor}
 
 % **************************************************
 % End of document
