@@ -1,9 +1,9 @@
 \section{Featuring new mapping needs in RML: Language evolution for RDF-star}
 \label{sec:chp4_rml_star}
 
-As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance the W3C Recommendation R2RML~\cite{das2012r2rml}, on its release in 2012 it was only focused on RDF construction from relational databases. A growing number of extensions raised with the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\cite{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\cite{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\cite{DBLP:conf/webist/MichelDFM15,DBLP:conf/ercimdl/DebruyneMO17} and RDF-star graphs~\cite{delva2021rml-star,sundqvist2022extending}. 
+As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance the W3C Recommendation R2RML~\parencite{das2012r2rml}, on its release in 2012 it was only focused on RDF construction from relational databases. A growing number of extensions raised with the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\parencite{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\parencite{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\parencite{DBLP:conf/webist/MichelDFM15,DBLP:conf/ercimdl/DebruyneMO17} and RDF-star graphs~\parencite{delva2021rml-star,sundqvist2022extending}. 
 
-As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the widely adopted RML mapping language. The result of this efforts is materialized in the recently published new version of RML~\cite{iglesias2023rml}. The language is published as a modular ontology, and implements most of the requirements proposed by the Conceptual Mapping (see \cref{sec:chp4_cm-reqs}), integrating: (i) extended possibilities in triple generation (RML-Core)~\cite{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\cite{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\cite{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\cite{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\cite{star_ontology}.
+As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the widely adopted RML mapping language. The result of this efforts is materialized in the recently published new version of RML~\parencite{iglesias2023rml}. The language is published as a modular ontology, and implements most of the requirements proposed by the Conceptual Mapping (see \cref{sec:chp4_cm-reqs}), integrating: (i) extended possibilities in triple generation (RML-Core)~\parencite{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\parencite{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\parencite{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\parencite{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\parencite{star_ontology}.
 
 Hence, this language is implemented in five different modules. 
 For each module, there are more resources associated besides the ontology: its requirements, an specification with the module's details with examples and the restrictions written in SHACL shapes to validate mapping documents. 
@@ -16,12 +16,12 @@ This section focuses on presenting one of the abovementioned modules, RML-star, 
 
 
 
-%In the late years, the RDF-star~\cite{hartig2017foundations} approach for reification has gained popularity. Along with its expansions, different semantic web technologies have been updated to include this new syntax\footnote{\url{https://w3c.github.io/rdf-star/implementations}}. This section describes one of these updates related to building RDF-star graphs: RML-star. \ana{esto no liga del todo bien con lo anterior}
+%In the late years, the RDF-star~\parencite{hartig2017foundations} approach for reification has gained popularity. Along with its expansions, different semantic web technologies have been updated to include this new syntax\footnote{\url{https://w3c.github.io/rdf-star/implementations}}. This section describes one of these updates related to building RDF-star graphs: RML-star. \ana{esto no liga del todo bien con lo anterior}
 
 
 %Making statements about statements in RDF has posed a challenge since the inception of RDF.
-%The first W3C Recommendation of RDF~\cite{lassila1999rdf} already included a description of the standard reification approach to tackle this issue.
-%Other alternatives were proposed over the years, such as named graphs~\cite{carroll2005namedgraphs}, N-ary relationships~\cite{naryw3c2006}, singleton properties~\cite{nguyen2014don}, RDF$^+$~\cite{schueler2008querying}, and more recently, \mbox{RDF-star}~\cite{hartig2017foundations}, which is currently being incorporated in the RDF 1.2 specification~\cite{hartig2023rdf}. 
+%The first W3C Recommendation of RDF~\parencite{lassila1999rdf} already included a description of the standard reification approach to tackle this issue.
+%Other alternatives were proposed over the years, such as named graphs~\parencite{carroll2005namedgraphs}, N-ary relationships~\parencite{naryw3c2006}, singleton properties~\parencite{nguyen2014don}, RDF$^+$~\parencite{schueler2008querying}, and more recently, \mbox{RDF-star}~\parencite{hartig2017foundations}, which is currently being incorporated in the RDF 1.2 specification~\parencite{hartig2023rdf}. 
 
 %RDF-star does not leverage the characteristics of RDF as the others proposals. Instead it extends the RDF syntax to introduce the notion of \texttt{quoted triples}. This approach is currently under development to become a W3C standard\footnote{\url{https://www.w3.org/groups/wg/rdf-star}}. 
 %As a consequence, an increasing number of semantic technologies are supporting this proposal\footnote{\url{https://w3c.github.io/rdf-star/implementations}}, which include triplestores (e.g. GraphDB, AnzoGraph) and programming libraries (e.g. Apache Jena, Oxigraph).
@@ -41,7 +41,7 @@ As introduced in \cref{sec:chp4_cm-star}, RDF-star has gained adoption over the 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=1\linewidth]{figures/chp4-3_rml-star_diagram.pdf}
-\caption[RML-star module]{The \mbox{RML-star} module (represented using the Chowlk notation~\cite{feria2022chowlk}). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
+\caption[RML-star module]{The \mbox{RML-star} module (represented using the Chowlk notation~\parencite{feria2022chowlk}). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
 \label{fig:chp4-3_rml-star}
 \end{figure*}
 
@@ -149,14 +149,14 @@ The mapping rules use an asserted triples map (\texttt{<\#jumpTM>}) within the s
 \end{minipage}
 
 
-Currently, the \mbox{RML-star} specification~\cite{iglesias2022rmlstar} provides a complete description of the language, is published as a W3C Draft Community Group Report, and is maintained by the W3C Knowledge Graph Construction Community Group\cref{foot:kgc}. 
+Currently, the \mbox{RML-star} specification~\parencite{iglesias2022rmlstar} provides a complete description of the language, is published as a W3C Draft Community Group Report, and is maintained by the W3C Knowledge Graph Construction Community Group\cref{foot:kgc}. 
 This extension belongs to the modules that comprise the new RML specification\footnote{\label{foot:rml-portal}\url{http://w3id.org/rml/portal/}} that is currently under development by the aforementioned Community Group. 
 Both the language and the specification are kept up-to-date reflecting the modifications in \mbox{RDF-star}.
 For instance, the latest \mbox{RML-star} releases update the term ``embedded'' to ``quoted'',
 according to the modifications in \mbox{RDF-star}.
 %that occurred after the first release of RML-star~\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}}. 
 This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:quotedTriplesMap}.
-In addition, RML-star is implemented by Morph-KGC$^star$~\cite{arenas2023morphstar} and the SDM-RDFizer~\footnote{\url{https://github.com/SDM-TIB/SDM-RDFizer-Star}}~\cite{iglesias2020rdfizer} at the moment of writing this document.
+In addition, RML-star is implemented by Morph-KGC$^star$~\parencite{arenas2023morphstar} and the SDM-RDFizer~\footnote{\url{https://github.com/SDM-TIB/SDM-RDFizer-Star}}~\parencite{iglesias2020rdfizer} at the moment of writing this document.
 
 
 
@@ -164,7 +164,7 @@ In addition, RML-star is implemented by Morph-KGC$^star$~\cite{arenas2023morphst
 \subsection{Validation}
 \label{sec:chp4_validation}
 
-We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}): software metadata extraction~\cite{kelley2021framework} (SoMEF) and biomedical research literature~\cite{SemMedDB} (SemMedDB). 
+We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}): software metadata extraction~\parencite{kelley2021framework} (SoMEF) and biomedical research literature~\parencite{SemMedDB} (SemMedDB). 
 %We use for both cases \mbox{Morph-KGC$^{star}$}, an implementation of RML-star.
 
 
@@ -174,7 +174,7 @@ We present the development of the RML star test-cases (\cref{sec:chp4_star_testc
 \label{sec:chp4_star_testcases}
 
 Test cases are commonly used %in standardization processes 
-to evaluate the conformance of an engine with respect to a language specification (e.g., RML test cases~\cite{heyvaert2019conformance}). 
+to evaluate the conformance of an engine with respect to a language specification (e.g., RML test cases~\parencite{heyvaert2019conformance}). 
 A set of \mbox{RDF-star} test cases was proposed
 covering the syntax of various of its serializations\footnote{\url{https://w3c.github.io/rdf-star/tests/}}.
 We adapted these test cases to create the RML-star test cases and evaluate the conformance of \mbox{Morph-KGC$^{star}$}
@@ -214,8 +214,8 @@ For both use cases, we use the tool \mbox{Morph-KGC$^{star}$}.
 %In summary, our test and use cases show that \mbox{Morph-KGC$^{star}$} generates valid RDF triples and does not add an overhead in the generation time of reified triples. However, a more thorough analysis (out of the scope of this paper) is required to describe the behaviour of each mapping approach.
 
 \noindent\textbf{\textit{Scientific Software Metadata Extraction.}}
-Scientific software has become a crucial asset to deliver and reproduce the results described in research publications~\cite{chue_hong_fair_2021}. However, scientific software is often time consuming to understand and reuse due to incomplete and heterogeneous documentation, available only in a human-readable manner.
-The Software Metadata Extraction Framework (SoMEF)~\cite{somef} proposes an approach to automatically extract relevant metadata (description, installation instructions, citation, etc.) from code repositories and their documentation. SoMEF includes different text extraction techniques (e.g., supervised classification, regular expressions, etc.) that yield results with different confidence values.
+Scientific software has become a crucial asset to deliver and reproduce the results described in research publications~\parencite{chue_hong_fair_2021}. However, scientific software is often time consuming to understand and reuse due to incomplete and heterogeneous documentation, available only in a human-readable manner.
+The Software Metadata Extraction Framework (SoMEF)~\parencite{somef} proposes an approach to automatically extract relevant metadata (description, installation instructions, citation, etc.) from code repositories and their documentation. SoMEF includes different text extraction techniques (e.g., supervised classification, regular expressions, etc.) that yield results with different confidence values.
 For example, \cref{lst:JSONsnippet} shows a JSON snippet with the description that SoMEF obtained from a software repository (Widoco) using the GitHub API.
 The confidence in this case is high as the extracted description was manually curated by the creators of the code repository.
 SoMEF extracts more than 30 different metadata fields about 
@@ -288,7 +288,7 @@ ex:oeg-upm/Widoco :description "Wizard for documenting ontologies. WIDOCO is ...
 
 
 \noindent\textbf{\textit{Biomedical Research Literature.}} 
-SemMedDB~\cite{SemMedDB}, the Semantic MEDLINE Database, is a repository 
+SemMedDB~\parencite{SemMedDB}, the Semantic MEDLINE Database, is a repository 
 that contains information on extracted biomedical entities 
 and predications (subject-predicate-object triples) 
 from biomedical texts (titles and abstracts from PubMed citations). 
