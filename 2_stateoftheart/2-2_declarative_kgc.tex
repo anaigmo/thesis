@@ -24,7 +24,7 @@ Following, we present an overview of existing mapping languages, listed in \cref
 
 \begin{figure*}[h]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/chp2_mapping_languages}
+\includegraphics[width=1\linewidth]{figures/chp2_mapping_languages}
 \caption[Existing mapping languages and the relationships among them]{Existing mapping languages and the relationships among them.}
 \label{fig:chp2_mapping_languages}
 \end{figure*}
@@ -44,8 +44,8 @@ Classification                 & Language        & Reference(s) \\ \hline
                               & KR2RML          & \parencite{slepicka2015kr2rml}\\ \cline{2-3} 
                               & FunUL           & \parencite{junior2016funul}\\ \cline{2-3} 
                               & R2RML-f         & \parencite{debruyne2016r2rmlf}\\ \cline{2-3} 
-                              & D2RML           & \parencite{chortaras2018d2rml}\\ \cline{2-3}  
-                              & WoT mappings    & \parencite{cimmino2020ewot}\\ \cline{2-3} 
+                              & D2RML           & \parencite{chortaras2018d2rml}\\ \cline{2-3} 
+                              & R2RML for collections & \parencite{debruyne2017R2RML-collections}\\ \cline{2-3}   
                               & XLWrap          & \parencite{langegger2009xlwrap,xlwrap}\\ \cline{2-3} 
                               & CSVW            & \parencite{Tennison2015csvw}\\ \hline
 \multirow{4}{*}{SPARQL-based} & SPARQL-Generate &     
@@ -53,7 +53,7 @@ Classification                 & Language        & Reference(s) \\ \hline
                               & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ \cline{2-3} 
                               & TARQL           & \parencite{tarql}\\ \cline{2-3}
                               & Facade-X        & \parencite{asprino2023sparql-anything,sparqlanything}\\ \cline{2-3}
-                              & SMS2            & \parencite{sms2}\\ \hline
+                              & Sansa            & \parencite{stadler2023spark}\\ \hline
 \multirow{3}{*}{Others}       & Helio mappings  & \parencite{cimmino2022helio}\\ \cline{2-3} 
                               & D-REPR          & \parencite{Vu2019d-repr}\\ \cline{2-3} 
                               & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\ \cline{2-3}
@@ -85,9 +85,9 @@ This group of languages are specified as ontologies or vocabularies able to desc
 
 \noindent\textbf{D2RML}~\parencite{chortaras2018d2rml}
 
-\noindent\textbf{CSVW}~\parencite{Tennison2015csvw}
+\noindent\textbf{R2RML for collections}
 
-\noindent\textbf{WoT Mappings}~\parencite{cimmino2020ewot}
+\noindent\textbf{CSVW}~\parencite{Tennison2015csvw}
 
 \textit{The most well-known language in this category is R2RML~\parencite{das2012r2rml}, which allows mapping of data stored in relational databases to RDF. This language is heavily influenced by previous languages (R$_2$O~\parencite{barrasa2004r2o} and D2RQ~\parencite{bizer2004d2rq}). Some serializations (e.g. SML~\parencite{Stadler2015sml}, OBDA mappings from Ontop~\parencite{rodriguez2015efficient}) and several extensions of R2RML were developed in the following years after its release: R2RML-f~\parencite{debruyne2016r2rmlf} extends R2RML to include functions to be applied over the data; RML~\parencite{Dimou2014rml} and its user-friendly compact syntax YARRRML~\parencite{Heyvaert2018yarrrml} provide the possibility of covering additional data formats (CSV, XML and JSON); this language also considers the use of functions for data transformation (e.g. lowercase, replace, trim) by using the Function Ontology (FnO)\footnote{\url{https://fno.io/rml/}}~\parencite{DeMeester2017fno_dbpedia}; FunUL~\parencite{junior2016funul} proposes an extension to also incorporate functions, but focusing on the CSV format; KR2RML~\parencite{slepicka2015kr2rml} is also an extension for CSV, XML and JSON, with the addition of representing all sources with the Nested Relational Model as an intermediate model and the possibility of cleaning data with Python functions; xR2RML~\parencite{michel2015xr2rml} extends R2RML and RML to include NoSQL databases and incorporates more features to handle tree-like data; D2RML~\parencite{chortaras2018d2rml}, also based on R2RML and RML, is able to transform data from XML, JSON, CSVs and REST/SPARQL endpoints, and enables functions and conditions to create triples. }
 
