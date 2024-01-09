@@ -1,7 +1,9 @@
 \section{Declarative Knowledge Graph Construction \textcolor{red}{By 12/1}}
 \label{sec:chp2_declarative_kgc}
 
-\ana{overview de distintas formas y métodos en general de construir KGs. Debería ser algo larga, ampliando lo que hay en la intro. Luego terminar con enfocarse en los approaches declarativos, que se extienden en la siguiente subsección}
+Knowledge graphs can be constructed in diverse manners. One way comprises collecting knowledge from contributions form the community, such as Wikidata. Other way involves transforming data from heterogeneous formats and sources, unstructured or (semi-)structured, into RDF. This section focuses on providing an overview of the latter, to declaratively construct knowledge graphs from heterogeneous data sources. \ana{decir que pasa en cada subsección?}
+
+%\ana{overview de distintas formas y métodos en general de construir KGs. Debería ser algo larga, ampliando lo que hay en la intro. Luego terminar con enfocarse en los approaches declarativos, que se extienden en la siguiente subsección}
 
 %\ana{RAW} In this section, the current scene of mapping languages is described first, regardless of the approach they follow, i.e., RDF materialization or virtualization. Then, previous works comparing mapping languages are surveyed. 
 
@@ -9,16 +11,11 @@
 
 \subsection{Declarative Mapping Rules}
 
-\ana{DEFINICIÓN (mejor no poner como tal subsección y describir tal cual?)}
+Constructing RDF knowledge graphs from heterogeneous data sources involve a schema transformation of the data to the desired graph structure. This transformation may be done in several different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises an agnostic approach that can (and has been) applied to multiple different use cases. \ana{refs}
 
-\ana{Empezar por qué es un mapping, quizá hablar de los otros tipos, y terminar escogiendo la definición que se aplica a los mappings d elos que se va a hablar el resto de la tesis, de datos (semi)estructurados a RDF. Intentar hacer algo de formalización ya de paso, aunque solo sea para esta parte de definir. }
+The usual workflow in which declarative approaches are involved is depicted in \ana{figure}. They enable both materialization and virtualization of knowledge graphs. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source. \ana{mention OBDA?}
 
-\ana{pero es que igual cuadra más en el SOTA, porque como tal no estoy proponiendo una definición, sino cogiendo de otras ya hechas. }
-
-\ana{Por ahora la que más cuadra es la sección 2 del paper-review de DylanVA. "Data Integration: A Theoretical Perspective" va encaminado, pero luego se mete en muchisimo detalle.}
-
-
-Following, we present an overview of existing mapping languages, listed in \cref{tab:chp2_languages_summary}. We classify these languages in three categories depending on the schema they are based on or extend: RDF-based, SPARQL-based, and based on other schemas. An overview of the evolution, extensions and influences of these languages is depicted in \cref{fig:chp2_mapping_languages}.
+Following, we present an overview of existing mapping languages, listed in \cref{tab:chp2_languages_summary}. We classify these languages in three categories, based on the schema they are based on or extend: (i)~RDF-based, (ii)~SPARQL-based, and (iii)~based on alternative schemas. An overview of the evolution, extensions and influences of these languages is depicted in \cref{fig:chp2_mapping_languages}.
 
 
 
@@ -56,10 +53,12 @@ Classification                 & Language        & Reference(s) \\ \hline
                               & Sansa            & \parencite{stadler2023spark}\\ \hline
 \multirow{3}{*}{Others}       & Helio mappings  & \parencite{cimmino2022helio}\\ \cline{2-3} 
                               & D-REPR          & \parencite{Vu2019d-repr}\\ \cline{2-3} 
-                              & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\ \cline{2-3}
-                              & XRM             & \parencite{xrm}\\ \hline
+                              & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\  \hline
 \end{tabular}
 \end{table}
+
+
+
 
 \subsubsection{RDF-based mapping languages.} 
 
@@ -71,21 +70,21 @@ This group of languages are specified as ontologies or vocabularies able to desc
 
 \noindent\textbf{XLWrap}~\parencite{langegger2009xlwrap}
 
-\noindent\textbf{R2RML}~\parencite{das2012r2rml}
+\noindent\textbf{R2RML}~\parencite{das2012r2rml} 
 
-\noindent\textbf{R2RML-f}~\parencite{debruyne2016r2rmlf}
-
-\noindent\textbf{RML}~\parencite{Dimou2014rml}
-
-\noindent\textbf{FunUL}~\parencite{junior2016funul}
+\noindent\textbf{RML}~\parencite{Dimou2014rml} + extensions (RML-star, RML fields, RML target, RML+FnO)
 
 \noindent\textbf{KR2RML}~\parencite{slepicka2015kr2rml}
 
 \noindent\textbf{xR2RML}~\parencite{michel2015xr2rml}
 
-\noindent\textbf{D2RML}~\parencite{chortaras2018d2rml}
+\noindent\textbf{FunUL}~\parencite{junior2016funul}
 
-\noindent\textbf{R2RML for collections}
+\noindent\textbf{R2RML-F}~\parencite{debruyne2016r2rmlf}
+
+\noindent\textbf{R2RML for collections and containers}~\parencite{debruyne2017R2RML-collections}
+
+\noindent\textbf{D2RML}~\parencite{chortaras2018d2rml}
 
 \noindent\textbf{CSVW}~\parencite{Tennison2015csvw}
 
@@ -103,9 +102,9 @@ This group is integrated by languages that leverage the SPARQL query language, u
 
 \noindent\textbf{XSPARQL}~\parencite{Bischof2012xsparql}
 
-\noindent\textbf{TARQL}~\parencite{tarql}
-
 \noindent\textbf{SPARQL-Generate}~\parencite{Lefrancois2017sparqlgenerate}
+
+\noindent\textbf{TARQL}~\parencite{tarql}
 
 \noindent\textbf{SPARQL-Anything}~\parencite{asprino2023sparql-anything}
 
@@ -126,11 +125,11 @@ Lastly, the languages of this group rely on schemas different from RDF or SPARQL
 
 \noindent\textbf{R$_2$O}~\parencite{barrasa2004r2o} XML-based~\footnote{https://pdfs.semanticscholar.org/4c47/0826aafc07fc6d37ca7e2474c1d3b290ade1.pdf}
 
+\noindent\textbf{D-REPR}~\parencite{Vu2019d-repr}
+
 \noindent\textbf{ShExML}~\parencite{Garcia-Gonzalez2020shexml,garcia2021shexml-challenges}
 
 \noindent\textbf{Helio??}~\parencite{cimmino2022helio}
-
-\noindent\textbf{D-REPR}~\parencite{Vu2019d-repr}
 
 \textit{ShExML~\parencite{Garcia-Gonzalez2020shexml,garcia2021shexml-challenges} uses Shape Expressions (ShEx)~\parencite{prud2014shex} to map data sources in RDBs, CSV, JSON, XML and RDF using SPARQL queries. The Helio mapping language~\parencite{cimmino2022helio} is based on JSON and provides the capability of using functions for data transformation and data linking~\parencite{cimmino2018hybrid}. D-REPR~\parencite{Vu2019d-repr} focuses on describing heterogeneous data with JSONPath and allows the use of data transformation functions. XRM (Expressive RDF Mapper)~\parencite{xrm} is a commercial language that provides a unique user-friendly syntax to create mappings in R2RML, CSVW and RML.}
 
