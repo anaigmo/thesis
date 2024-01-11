@@ -1,78 +1,110 @@
-\section{Declarative Knowledge Graph Construction \textcolor{red}{By 12/1}}
+\section{Knowledge Graph Construction with Declarative Mapping Rules \textcolor{red}{By 12/1}}
 \label{sec:chp2_declarative_kgc}
 
-Knowledge graphs can be constructed in diverse manners. One way comprises collecting knowledge from contributions form the community, such as Wikidata. Other way involves transforming data from heterogeneous formats and sources, unstructured or (semi-)structured, into RDF. This section focuses on providing an overview of the latter, to declaratively construct knowledge graphs from heterogeneous data sources. \ana{decir que pasa en cada subsección?}
+Knowledge graphs can be constructed in diverse manners. One way comprises collecting knowledge from contributions form the community, such as Wikidata. Other way involves transforming data from heterogeneous formats and sources, unstructured or (semi-)structured, into RDF. This section focuses on providing an overview of the latter, to declaratively construct knowledge graphs from heterogeneous data sources.
 
 %\ana{overview de distintas formas y métodos en general de construir KGs. Debería ser algo larga, ampliando lo que hay en la intro. Luego terminar con enfocarse en los approaches declarativos, que se extienden en la siguiente subsección}
 
 %\ana{RAW} In this section, the current scene of mapping languages is described first, regardless of the approach they follow, i.e., RDF materialization or virtualization. Then, previous works comparing mapping languages are surveyed. 
 
 
-
-\subsection{Declarative Mapping Rules}
-
 Constructing RDF knowledge graphs from heterogeneous data sources involve a schema transformation of the data to the desired graph structure. This transformation may be done in several different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises an agnostic approach that can (and has been) applied to multiple different use cases. \ana{refs}
 
 The usual workflow in which declarative approaches are involved is depicted in \ana{figure}. They enable both materialization and virtualization of knowledge graphs. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source. \ana{mention OBDA?}
 
-Following, we present an overview of existing mapping languages, listed in \cref{tab:chp2_languages_summary}. We classify these languages in three categories, based on the schema they are based on or extend: (i)~RDF-based, (ii)~SPARQL-based, and (iii)~based on alternative schemas. An overview of the evolution, extensions and influences of these languages is depicted in \cref{fig:chp2_mapping_languages}.
+This section presents an overview of existing mapping languages.  We first show two RDF-based mapping languages that have had a significant impact, the W3C Recommendation R2RML (\cref{sec:chp2_R2RML}), and its most impactful extension, RML (\cref{sec:chp2_RML}); and then other relevant languages (\cref{sec:chp2_more-languages}). Lastly, we discuss the approaches that compare the diversity and expressiveness of these mapping languages (\cref{sec:chp2_language-comparison}).
 
 
 
-\begin{figure*}[h]
-\centering
-\includegraphics[width=1\linewidth]{figures/chp2_mapping_languages}
-\caption[Existing mapping languages and the relationships among them]{Existing mapping languages and the relationships among them.}
-\label{fig:chp2_mapping_languages}
-\end{figure*}
+
+
+
+\subsection{R2RML: RDB to RDF Mapping Language}
+\label{sec:chp2_R2RML}
+
+R2RML~\parencite{das2012r2rml} addresses the transformation of data in relational databases into RDF. This language specifies to write the transformation rules in R2RML mapping documents. An R2RML mapping document is composed by at least one \textit{Triples Map} (\texttt{rr:TriplesMap}). \textit{Triples Maps} are used to define the transformation rules to generate RDF triples, and contain:
+
+\begin{itemize}
+    \item One \textit{Logical Table} (\texttt{rr:LogicalTable}), that describes the source relational table or view of a database.
+    \item One \textit{Subject Map} (\texttt{rr:SubjectMap}), that defines how to generate the subject of the triples, and optionally, the corresponding class(es) it may be instance of (\texttt{rr:class}).
+    \item Zero to multiple \textit{Predicate-Object Maps} (\texttt{rr:PredicateObjectMap}). A \textit{Predicate-Object Map} (POM) is formed by one to multiple \textit{Predicate Maps} (\texttt{rr:PredicateMap}), and one to many \textit{Object Maps} (\texttt{rr:ObjectMap}).% or \textit{Referencing Object Maps} (\texttt{rr:RefObjectMap}). The former is used for regular objects of triples, and the latter for creating as object the subject of another \textit{Triples Map}. 
+\end{itemize}
+
+Zero or more \textit{Graph Maps} (\texttt{rr:GraphMap}), which indicate how to generate named graphs, can be assigned to both \textit{Subject Maps} and \textit{Predicate Object Maps}. 
+It is also possible to join \textit{Logical Tables} by replacing \textit{Object Map} by \texttt{Referencing Object Maps} (\texttt{rr:RefObjectMap}), which uses the subject of another \textit{Triples Map}, indicated with \texttt{rr:parentTriplesMap}, as the object of the triple. 
+This join may have a condition to be performed, which is indicated using \texttt{rr:joinCondition}, \texttt{rr:child}, and \texttt{rr:parent}. 
+Additionally, \textit{Object Maps} may include additional information, such as datatypes (\texttt{rr:datatype}) and languages (\texttt{rr:language}) of literals. \ana{figure of triples map}
+
+\textit{Subject Map}, \textit{Predicate Map}, \textit{Object Map}, and \textit{Graph Map} are subclasses of \textit{Term Map} (\texttt{rr:TermMap}), which define how to generate RDF terms. 
+\textit{Term Maps} can be (i) \textit{constant-valued} (\texttt{rr:constant}), i.e., always generating the same RDF term; 
+(ii) \textit{column-valued} (\texttt{rr:column}), i.e., the RDF terms are directly obtained from cells of a column in the RDB; 
+or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms are composed from the data in columns and constant strings. These terms can be generated either as IRIs (\texttt{rr:IRI}), Blank Nodes (\texttt{rr:BlankNode}) or literals (\texttt{rr:Literal}) using \texttt{rr:termType}.  \ana{figure of term map}
+
+\ana{example}
+
+\subsection{RML: RDF Mapping Language}
+\label{sec:chp2_RML}
+
+~\parencite{Dimou2014rml} + extensions (RML-star, RML fields, RML target, RML+FnO)
+
+
+
+\subsection{Other Mapping Languages}
+\label{sec:chp2_more-languages}
+
+Following, we present an overview of existing mapping languages, listed in \cref{tab:chp2_languages_summary} and depicted in  \cref{fig:chp2_mapping_languages}. This section presents additional relevant languages classified in three categories, based on the schema they are based on or extend: (i)~RDF-based (\cref{sec:chp2_RDF-languages}), (ii)~SPARQL-based (\cref{sec:chp2_SPARQL-languages}), and (iii)~based on alternative schemas (\cref{sec:chp2_alternative-languages}).
+
 
 \begin{table}[t]
-\caption[Mapping languages overview]{Analyzed mapping languages and their corresponding references. \ana{pensar en eliminar helio, la versión nueva igual no entra dentro de esto y puede que cuadre quitar SMS2 y ponerlo luego con el análisis de las sintaxis}}
+\caption[Mapping languages overview]{Analyzed mapping languages and their corresponding references.}
 \label{tab:chp2_languages_summary}
-\begin{tabular}{c|c|c}
-\hline
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{ccc}
 %\rowcolor[HTML]{EFEFEF} 
-Classification                 & Language        & Reference(s) \\ \hline
-\multirow{11}{*}{RDF-based}   & D2RQ            & \parencite{bizer2004d2rq,d2rq}\\ \cline{2-3} 
-                              & R$_2$O          & \parencite{barrasa2004r2o}\\ \cline{2-3} 
-                              & R2RML           & \parencite{das2012r2rml}\\ \cline{2-3} 
-                              & xR2RML          & \parencite{michel2015xr2rml,xr2rml}\\ \cline{2-3} 
-                              & RML             & \parencite{Dimou2014rml,rml}\\ \cline{2-3} 
-                              & KR2RML          & \parencite{slepicka2015kr2rml}\\ \cline{2-3} 
-                              & FunUL           & \parencite{junior2016funul}\\ \cline{2-3} 
-                              & R2RML-f         & \parencite{debruyne2016r2rmlf}\\ \cline{2-3} 
-                              & D2RML           & \parencite{chortaras2018d2rml}\\ \cline{2-3} 
-                              & R2RML for collections & \parencite{debruyne2017R2RML-collections}\\ \cline{2-3}   
-                              & XLWrap          & \parencite{langegger2009xlwrap,xlwrap}\\ \cline{2-3} 
-                              & CSVW            & \parencite{Tennison2015csvw}\\ \hline
-\multirow{4}{*}{SPARQL-based} & SPARQL-Generate &     
-                              \parencite{Lefrancois2017sparqlgenerate,sparqlgenerate}\\ \cline{2-3} 
-                              & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ \cline{2-3} 
-                              & TARQL           & \parencite{tarql}\\ \cline{2-3}
-                              & Facade-X        & \parencite{asprino2023sparql-anything,sparqlanything}\\ \cline{2-3}
-                              & Sansa            & \parencite{stadler2023spark}\\ \hline
-\multirow{3}{*}{Others}       & Helio mappings  & \parencite{cimmino2022helio}\\ \cline{2-3} 
-                              & D-REPR          & \parencite{Vu2019d-repr}\\ \cline{2-3} 
-                              & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\  \hline
-\end{tabular}
+\textbf{Classification}                 & \textbf{Language}        & \textbf{Reference(s)} \\ \midrule
+\multirow{15}{*}{\textbf{RDF-based}}   & D2RQ            & \parencite{bizer2004d2rq,d2rq}\\ \cmidrule{2-3} 
+                              & R$_2$O          & \parencite{barrasa2004r2o}\\ \cmidrule{2-3} 
+                              & R2RML           & \parencite{das2012r2rml}\\ \cmidrule{2-3} 
+                              & xR2RML          & \parencite{michel2015xr2rml,xr2rml}\\ \cmidrule{2-3} 
+                              & RML             & \parencite{Dimou2014rml,rml}\\ \cmidrule{2-3} 
+                              & KR2RML          & \parencite{slepicka2015kr2rml}\\ \cmidrule{2-3} 
+                              & FunUL           & \parencite{junior2016funul}\\ \cmidrule{2-3} 
+                              & R2RML-F         & \parencite{debruyne2016r2rmlf}\\ \cmidrule{2-3} 
+                              & D2RML           & \parencite{chortaras2018d2rml}\\ \cmidrule{2-3} 
+                              & R2RML for collections & \parencite{debruyne2017R2RML-collections}\\ \cmidrule{2-3}   
+                              & XLWrap          & \parencite{langegger2009xlwrap,xlwrap}\\ \cmidrule{2-3} 
+                              & CSVW            & \parencite{Tennison2015csvw}\\ \midrule
+\multirow{6}{*}{\textbf{SPARQL-based}} & SPARQL-Generate &     
+                              \parencite{Lefrancois2017sparqlgenerate,sparqlgenerate}\\ \cmidrule{2-3} 
+                              & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ \cmidrule{2-3} 
+                              & TARQL           & \parencite{tarql}\\ \cmidrule{2-3}
+                              & Facade-X        & \parencite{asprino2023sparql-anything,sparqlanything}\\ \cmidrule{2-3}
+                              & Sansa            & \parencite{stadler2023spark}\\ \midrule
+\multirow{4}{*}{\textbf{Alternative schema}}       & Helio mappings  & \parencite{cimmino2022helio}\\ \cmidrule{2-3} 
+                              & D-REPR          & \parencite{Vu2019d-repr}\\ \cmidrule{2-3} 
+                              & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\  \bottomrule
+\end{tabular}}
 \end{table}
 
 
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=1\linewidth]{figures/chp2_mapping_languages}
+\caption[Existing mapping languages and the relationships among them]{Mapping languages developed in the last two decades, classified according to the schema they are based on, and the relationships among them.}
+\label{fig:chp2_mapping_languages}
+\end{figure*}
 
 \subsubsection{RDF-based mapping languages.} 
+\label{sec:chp2_RDF-languages}
 
 Mapping languages in this group are formalized using RDF. They are usually modelled as ontologies or vocabularies that enable the description of data transformation rules. Mappings that follow these languages are usually written in files following the Turtle syntax~\parencite{turtle}. 
 
 
 
-\noindent\textbf{D2RQ}~\parencite{bizer2004d2rq}
+\noindent\textbf{D2RQ}~\parencite{bizer2004d2rq} One of the first mapping languages, developed to access the content of non RDF relational databases. 
 
 \noindent\textbf{XLWrap}~\parencite{langegger2009xlwrap}
-
-\noindent\textbf{R2RML}~\parencite{das2012r2rml} 
-
-\noindent\textbf{RML}~\parencite{Dimou2014rml} + extensions (RML-star, RML fields, RML target, RML+FnO)
 
 \noindent\textbf{KR2RML}~\parencite{slepicka2015kr2rml}
 
@@ -95,7 +127,8 @@ Mapping languages in this group are formalized using RDF. They are usually model
 
 
 
-\subsubsection{SPARQL-based mapping languages.} 
+\subsubsection{SPARQL-based mapping languages.}
+\label{sec:chp2_SPARQL-languages} 
 
 This group is integrated by languages that leverage the SPARQL query language, usually by extending its features to describe non-RDF data sources~\parencite{harris2013sparql}. 
 
@@ -118,7 +151,8 @@ This group is integrated by languages that leverage the SPARQL query language, u
 
 
 
-\subsubsection{Based on other schemas.} 
+\subsubsection{Based on alternative schemas.} 
+\label{sec:chp2_alternative-languages}
 
 Lastly, the languages of this group rely on schemas different from RDF or SPARQL, equally able and expressive enough to enable users to write transformation rules. 
 
@@ -143,6 +177,8 @@ Lastly, the languages of this group rely on schemas different from RDF or SPARQL
 
 
 \subsection{Mapping Languages Comparison}
+\label{sec:chp2_language-comparison}
+
 As the number of mapping languages increased and their adoption grew wider, comparisons between these languages inevitably occurred. This is the case of, for instance, SPARQL-Generate~\parencite{Lefrancois2017sparqlgenerate}, which is compared to RML in terms of query/mapping complexity; and ShExML~\parencite{Garcia-Gonzalez2020shexml}, which is compared to SPARQL-Generate and YARRRML from a usability perspective.
 
 Some studies dig deeper, providing qualitative complex comparison frameworks. Hert et al.~\parencite{hert2011comparison} provide a comparison framework for mapping languages focused on transforming relational databases to RDF. The framework is composed of 15 features, and the languages are evaluated based on the presence or absence of these features.% (Logical table to class, M:N relationships, project attributes, select conditions, user-defined instance URIs, literal to URIs, vocabulary reuse, transformation functions, datatypes, named graphs, blank nodes, integrity constraints, static metadata, one table to \textit{n} classes, and write support). 
