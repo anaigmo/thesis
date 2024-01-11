@@ -44,12 +44,29 @@ or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms ar
 
 \subsection{RML: RDF Mapping Language}
 \label{sec:chp2_RML}
+RML~\parencite{Dimou2014rml} extends R2RML to address the transformation of heterogeneous data formats, such as CSV, XML or JSON. Broadening the possibilities for KG construction with minimal changes in the vocabulary with respect to the standard, this language rapidly gained importance, and currently gathers an active community of users and developers. 
 
-~\parencite{Dimou2014rml} + extensions (RML-star, RML fields, RML target, RML+FnO)
+The main differences of RML with R2RML~\parencite{dimou2020rml-r2rml-diffs} are listed as follows:
+\begin{itemize}
+    \item \textbf{Data source reference}. RML introduces the \textit{Logical Source} (\texttt{rml:LogicalSource}), that extends R2RML's \textit{Logical Table}. Where the \textit{Logical Table} focuses on relational databases, the \textit{Logical source} enables the description of more heterogeneous data sources in addition to relational databases.
+
+    \item \textbf{Data source language}. In R2RML, the data source language is implicitly assumed to be SQL. To address heterogeneous data formats, RML uses the \textit{Reference Formulation} (\texttt{rml:ReferenceFormulation}) to indicate which formulation is suitable to parse data in a specific format. For instance, the JSONPath formation can be used for parsing data in a JSON file. 
+
+    \item \textbf{Iteration}. For tabular data sources, the iteration of the data source is per row. This strategy is followed by every R2RML processor to construct RDF graphs from RDBs. For non-tabular data sources, the iteration cannot always be implicitly assumed. For this reason, RML introduces the \textit{Iterator} (\texttt{rml:iterator})enabling the explicit determination of the iteration pattern to specify the specific data used in each iteration to build the RDF triples. The use of the \textit{Iterator} is optional, its use relies on the needs and particularities of each data source and use case.
+
+    \item \textbf{Value reference}. R2RML relies on column names when referring to values in a table or view of a RDB (\texttt{rr:column}). RML broadens the scope of this concept using \textit{References} (\texttt{rml:reference}), that may refer to columns, objects (such as in the case of XML and JSON) or other elements valid with respect to the used \textit{Reference Formulation}. 
+\end{itemize}
+
+\ana{example}
+
+Several proposals have been proposed for RML in the following years of its release to extend its capabilites. The initial features for addressing heterogeneous data sources were expanded by~\cite{}~\ana{ref de 2015}, allowing more diverse data accesses and fine-grained description of the data sources. RML+FnO \cite{DeMeester2017fno_dbpedia}. \cite{delva2021rml-fields} introduced the RML Fields, that allowed [+++]. RML spreadsheets (markus). RML Target by \cite{VanAssche2021LeveragingWebThings}. RDF-star by \cite{delva2021rml-star}. 
+
+The Knowledge Graph Construction W3C Community Group has gathered these variety of specifications and released a new version of RML~\parencite{iglesias2023rml}, that includes several of these extensions, overcoming the identified limitations for declarative KG construction.
 
 
 
-\subsection{Other Mapping Languages}
+
+\subsection{Additional Mapping Languages}
 \label{sec:chp2_more-languages}
 
 Following, we present an overview of existing mapping languages, listed in \cref{tab:chp2_languages_summary} and depicted in  \cref{fig:chp2_mapping_languages}. This section presents additional relevant languages classified in three categories, based on the schema they are based on or extend: (i)~RDF-based (\cref{sec:chp2_RDF-languages}), (ii)~SPARQL-based (\cref{sec:chp2_SPARQL-languages}), and (iii)~based on alternative schemas (\cref{sec:chp2_alternative-languages}).
@@ -98,8 +115,8 @@ Following, we present an overview of existing mapping languages, listed in \cref
 \subsubsection{RDF-based mapping languages.} 
 \label{sec:chp2_RDF-languages}
 
-Mapping languages in this group are formalized using RDF. They are usually modelled as ontologies or vocabularies that enable the description of data transformation rules. Mappings that follow these languages are usually written in files following the Turtle syntax~\parencite{turtle}. 
-
+Mapping languages in this group are formalized using RDF. They are usually modelled as ontologies or vocabularies that enable the description of data transformation rules. Mappings that follow these languages are usually written in files following the Turtle syntax~\parencite{turtle}. R2RML and RML, previously presented in \cref{sec:chp2_R2RML}
+and \cref{sec:chp2_RML} respectively, also belong to this group of languages. 
 
 
 \noindent\textbf{D2RQ}~\parencite{bizer2004d2rq} One of the first mapping languages, developed to access the content of non RDF relational databases. 
