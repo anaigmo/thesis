@@ -98,32 +98,34 @@ or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms ar
 \end{lstlisting}}
 \end{captionedlisting}
 
+\begin{minipage}{\textwidth}
 \begin{captionedlisting}{lst:chp2_r2rml-result-rdf}{RDF graph resulting from transforming data from the database table shown in \cref{fig:chp2_database-example} using the R2RML mapping in \cref{lst:chp2_r2rml-mapping}.}
 \centering
+\begin{multicols}{2}
 {\begin{lstlisting}[language=r2rml]
 ex:athlete/1 a ex:Athlete ;
     ex:name "Armand Duplantis" ;
     ex:rank "1"^^xsd:integer ;
     ex:mark "6.22"^^xsd:float .
-    
 ex:athlete/2 a ex:Athlete ;
     ex:name "Sondre Guttormsen" ;
     ex:rank "2"^^xsd:integer ;
     ex:mark "6.00"^^xsd:float .
-    
 ex:athlete/3 a ex:Athlete ;
     ex:name "Menno Vloon" ;
     ex:rank "3"^^xsd:integer ;
     ex:mark "5.91"^^xsd:float .
 \end{lstlisting}}
+\end{multicols}
 \end{captionedlisting}
+\end{minipage}
 
 
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.45\linewidth]{figures/chp2_database-example.pdf}
-\caption[Input "Athletes" table]{Input "Athletes" table with ranks and marks for athletes.}
+\caption[Input "Athletes" table]{Input "Athletes" table with names, ranks and marks for athletes.}
 \label{fig:chp2_database-example}
 \end{figure*}
  
@@ -142,7 +144,65 @@ The main differences of RML with R2RML~\parencite{dimou2020rml-r2rml-diffs} are 
     \item \textbf{Value reference}. R2RML relies on column names when referring to values in a table or view of a RDB (\texttt{rr:column}). RML broadens the scope of this concept using \textit{References} (\texttt{rml:reference}), that may refer to columns, objects (such as in the case of XML and JSON) or other elements valid with respect to the used \textit{Reference Formulation}. 
 \end{itemize}
 
-\ana{example}
+
+Listing \cref{lst:chp2_rml-mapping} shows an RML mapping that generates the same output RDF graph (\cref{lst:chp2_r2rml-result-rdf}) as the R2RML mapping previously shown in \cref{lst:chp2_r2rml-mapping}. The input is a JSON file (\cref{lst:chp2_json-example}) described with the \textit{Logical Source)} (Lines 6-19). \textit{The difference is the input data and reference, signaled with different color)}
+
+\begin{minipage}{\textwidth}
+\begin{captionedlisting}{lst:chp2_json-example}
+{Input "Athletes.json" file with names, ranks and marks for athletes.}
+\centering
+\begin{multicols}{2}
+{\begin{lstlisting}[]
+[ { "NAME": "Duplantis",
+    "RANK": "1",
+    "MARK": "6.22"},
+  { "NAME": "Guttormsen",
+    "RANK": "2",  
+    "MARK": "6.00"},
+  { "NAME": "Vloon",
+    "RANK": "3",
+    "MARK": "5.91"} ]
+\end{lstlisting}}
+\end{multicols}
+\end{captionedlisting}
+\end{minipage}
+
+
+\begin{captionedlisting}{lst:chp2_rml-mapping}{RML mapping to generate the RDF graph in \cref{lst:chp2_r2rml-result-rdf} with data from the JSON file shown in \cref{lst:chp2_json-example}.}
+\centering
+{\begin{lstlisting}[language=r2rml]
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ex: <http://example.com/ns#>.
+
+<#TriplesMapAthletes>
+  rml:logicalSource [
+    rml:source "Athletes.json";
+    rml:referenceFormulation ql:JSONPath;
+    rml:iterator "$\dollar$.*"
+  ];
+    rr:subjectMap [
+        rr:template "http://example.com/athlete/{RANK}";
+        rr:class ex:Athlete;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:name;
+        rr:objectMap [ rml:reference "NAME" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:rank;
+        rr:objectMap [ 
+            rml:reference "RANK" ; 
+            rr:datatype xsd:integer ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:mark;
+        rr:objectMap [ 
+            rml:reference "MARK" ;
+            rr:datatype xsd:float ];
+    ].
+\end{lstlisting}}
+\end{captionedlisting}
 
 Several proposals have been proposed for RML in the following years of its release to extend its capabilities. The initial features for addressing heterogeneous data sources were expanded by~\cite{Dimou2015Machine}, allowing more diverse data accesses and fine-grained description of the data sources. \cite{DeMeester2017fno_dbpedia} proposed \textbf{RML+FnO}, which provided RML with a connector to the Function Ontology~\parencite{demeester2016fno} to include data transformation functions in the mappings. \cite{delva2021rml-fields} introduced the \textbf{RML Fields}, that addressed several challenges to accurately access nested data. \textbf{RML Target} was developed by \cite{VanAssche2021LeveragingWebThings} to specify how to create the output triples regarding, for instance, RDF serialization, compression format or encoding. Lastly, \textbf{RML-star} was proposed by \cite{delva2021rml-star}, and later refined by \cite{arenas2023morphstar}, to allow the construction of RDF-star graphs. 
 
