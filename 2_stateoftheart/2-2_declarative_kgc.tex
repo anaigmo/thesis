@@ -10,9 +10,16 @@ Knowledge graphs can be constructed in diverse manners. One way comprises collec
 
 Constructing RDF knowledge graphs from heterogeneous data sources involve a schema transformation of the data to the desired graph structure. This transformation may be done in several different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises an agnostic approach that can (and has been) applied to multiple different use cases. \ana{refs}
 
-The usual workflow in which declarative approaches are involved is depicted in \ana{figure}. They enable both materialization and virtualization of knowledge graphs. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source. \ana{mention OBDA?}
+The usual workflow in which declarative approaches are involved is depicted in \cref{fig:chp2_kgc-workflow}. They enable both materialization and virtualization of knowledge graphs. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source. \ana{mention OBDA?}
 
-This section presents an overview of existing mapping languages.  We first show two RDF-based mapping languages that have had a significant impact, the W3C Recommendation R2RML (\cref{sec:chp2_R2RML}), and its most impactful extension, RML (\cref{sec:chp2_RML}); and then other relevant languages (\cref{sec:chp2_more-languages}). Lastly, we discuss the approaches that compare the diversity and expressiveness of these mapping languages (\cref{sec:chp2_language-comparison}).
+\begin{figure*}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/chp2_kgc-workflow.pdf}
+\caption[Declarative knowledge graph construction workflow]{Declarative knowledge graph construction workflow.}
+\label{fig:chp2_kgc-workflow}
+\end{figure*}
+
+This section presents an overview of existing mapping languages. We first show two RDF-based mapping languages that have had a significant impact, the W3C Recommendation R2RML (\cref{sec:chp2_R2RML}), and its most impactful extension, RML (\cref{sec:chp2_RML}); and then other relevant languages (\cref{sec:chp2_more-languages}). Lastly, we discuss the approaches that compare the diversity and expressiveness of these mapping languages (\cref{sec:chp2_language-comparison}).
 
 
 
@@ -22,26 +29,104 @@ This section presents an overview of existing mapping languages.  We first show 
 \subsection{R2RML: RDB to RDF Mapping Language}
 \label{sec:chp2_R2RML}
 
-R2RML~\parencite{das2012r2rml} addresses the transformation of data in relational databases into RDF. This language specifies to write the transformation rules in R2RML mapping documents. An R2RML mapping document is composed by at least one \textit{Triples Map} (\texttt{rr:TriplesMap}). \textit{Triples Maps} are used to define the transformation rules to generate RDF triples, and contain:
+R2RML~\parencite{das2012r2rml} addresses the transformation of data in relational databases into RDF. This language specifies to write the transformation rules in R2RML mapping documents. An R2RML mapping document is composed by at least one \textit{Triples Map} (\texttt{rr:TriplesMap}). \textit{Triples Maps} are used to define the transformation rules to generate RDF triples, their structure is depicted in \cref{fig:chp2_r2rml-tm}. It contains:
 
 \begin{itemize}
     \item One \textit{Logical Table} (\texttt{rr:LogicalTable}), that describes the source relational table or view of a database.
     \item One \textit{Subject Map} (\texttt{rr:SubjectMap}), that defines how to generate the subject of the triples, and optionally, the corresponding class(es) it may be instance of (\texttt{rr:class}).
-    \item Zero to multiple \textit{Predicate-Object Maps} (\texttt{rr:PredicateObjectMap}). A \textit{Predicate-Object Map} (POM) is formed by one to multiple \textit{Predicate Maps} (\texttt{rr:PredicateMap}), and one to many \textit{Object Maps} (\texttt{rr:ObjectMap}).% or \textit{Referencing Object Maps} (\texttt{rr:RefObjectMap}). The former is used for regular objects of triples, and the latter for creating as object the subject of another \textit{Triples Map}. 
+    \item Zero to multiple \textit{Predicate Object Maps} (\texttt{rr:PredicateObjectMap}). A \textit{Predicate Object Map} (POM) is formed by one to multiple \textit{Predicate Maps} (\texttt{rr:PredicateMap}), and one to many \textit{Object Maps} (\texttt{rr:ObjectMap}).% or \textit{Referencing Object Maps} (\texttt{rr:RefObjectMap}). The former is used for regular objects of triples, and the latter for creating as object the subject of another \textit{Triples Map}. 
 \end{itemize}
 
 Zero or more \textit{Graph Maps} (\texttt{rr:GraphMap}), which indicate how to generate named graphs, can be assigned to both \textit{Subject Maps} and \textit{Predicate Object Maps}. 
 It is also possible to join \textit{Logical Tables} by replacing \textit{Object Map} by \texttt{Referencing Object Maps} (\texttt{rr:RefObjectMap}), which uses the subject of another \textit{Triples Map}, indicated with \texttt{rr:parentTriplesMap}, as the object of the triple. 
 This join may have a condition to be performed, which is indicated using \texttt{rr:joinCondition}, \texttt{rr:child}, and \texttt{rr:parent}. 
-Additionally, \textit{Object Maps} may include additional information, such as datatypes (\texttt{rr:datatype}) and languages (\texttt{rr:language}) of literals. \ana{figure of triples map}
+Additionally, \textit{Object Maps} may include additional information, such as datatypes (\texttt{rr:datatype}) and languages (\texttt{rr:language}) of literals. 
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{figures/chp2_r2rml_tm.pdf}
+\caption[Structure of Triples Map from R2RML]{Structure of a \textit{Triples Map} and its properties (adapted from \cite{das2012r2rml}).}
+\label{fig:chp2_r2rml-tm}
+\end{figure*}
 
 \textit{Subject Map}, \textit{Predicate Map}, \textit{Object Map}, and \textit{Graph Map} are subclasses of \textit{Term Map} (\texttt{rr:TermMap}), which define how to generate RDF terms. 
 \textit{Term Maps} can be (i) \textit{constant-valued} (\texttt{rr:constant}), i.e., always generating the same RDF term; 
 (ii) \textit{column-valued} (\texttt{rr:column}), i.e., the RDF terms are directly obtained from cells of a column in the RDB; 
-or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms are composed from the data in columns and constant strings. These terms can be generated either as IRIs (\texttt{rr:IRI}), Blank Nodes (\texttt{rr:BlankNode}) or literals (\texttt{rr:Literal}) using \texttt{rr:termType}.  \ana{figure of term map}
+or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms are composed from the data in columns and constant strings. These terms can be generated either as IRIs (\texttt{rr:IRI}), Blank Nodes (\texttt{rr:BlankNode}) or literals (\texttt{rr:Literal}) using \texttt{rr:termType}. The structure of a \textit{Term Map} is shown in \cref{fig:chp2_r2rml-term}.
 
-\ana{example}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.45\linewidth]{figures/chp2_r2rml_term.pdf}
+\caption[Structure of Triples Map from R2RML]{Structure of a \textit{Term Map} and its properties (adapted from \cite{das2012r2rml}).}
+\label{fig:chp2_r2rml-term}
+\end{figure*}
+
+
+
+\cref{lst:chp2_r2rml-mapping} shows an example of an R2RML mapping to construct the KG in \cref{lst:chp2_r2rml-result-rdf}. The R2RML mapping contains one \textit{Triples Map}, "TriplesMapAthletes" (Line 5). It takes as input the "Athletes" table shown in \cref{fig:chp2_database-example} (Line 6), which shows information about pole vault athletes, including their name, position in the ranking and height of a jump. The subject is formed with a template using one data source column (Line 8). The set of \textit{Predicate Object Maps} are used to describe with further attributes each instance (Lines 11-26). Two of them add the datatype to the object, one as an integer (Line 19) and other as a float (Line 25). 
+
+\begin{captionedlisting}{lst:chp2_r2rml-mapping}{R2RML mapping to generate the RDF graph in \cref{lst:chp2_r2rml-result-rdf} with data from the database table shown in \cref{fig:chp2_database-example}.}
+\centering
+{\begin{lstlisting}[language=r2rml]
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ex: <http://example.com/ns#>.
+
+<#TriplesMapAthletes>
+    rr:logicalTable [ rr:tableName "Athletes" ];
+    rr:subjectMap [
+        rr:template "http://example.com/athlete/{RANK}";
+        rr:class ex:Athlete;
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:name;
+        rr:objectMap [ rr:column "NAME" ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:rank;
+        rr:objectMap [ 
+            rr:column "RANK" ; 
+            rr:datatype xsd:integer ];
+    ];
+    rr:predicateObjectMap [
+        rr:predicate ex:mark;
+        rr:objectMap [ 
+            rr:column "MARK" ;
+            rr:datatype xsd:float ];
+    ].
+\end{lstlisting}}
+\end{captionedlisting}
+
+\begin{captionedlisting}{lst:chp2_r2rml-result-rdf}{RDF graph resulting from transforming data from the database table shown in \cref{fig:chp2_database-example} using the R2RML mapping in \cref{lst:chp2_r2rml-mapping}.}
+\centering
+{\begin{lstlisting}[language=r2rml]
+ex:athlete/1 a ex:Athlete ;
+    ex:name "Armand Duplantis" ;
+    ex:rank "1"^^xsd:integer ;
+    ex:mark "6.22"^^xsd:float .
+    
+ex:athlete/2 a ex:Athlete ;
+    ex:name "Sondre Guttormsen" ;
+    ex:rank "2"^^xsd:integer ;
+    ex:mark "6.00"^^xsd:float .
+    
+ex:athlete/3 a ex:Athlete ;
+    ex:name "Menno Vloon" ;
+    ex:rank "3"^^xsd:integer ;
+    ex:mark "5.91"^^xsd:float .
+\end{lstlisting}}
+\end{captionedlisting}
+
+
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.45\linewidth]{figures/chp2_database-example.pdf}
+\caption[Input "Athletes" table]{Input "Athletes" table with ranks and marks for athletes.}
+\label{fig:chp2_database-example}
+\end{figure*}
+ 
 \subsection{RML: RDF Mapping Language}
 \label{sec:chp2_RML}
 RML~\parencite{Dimou2014rml} extends R2RML to address the transformation of heterogeneous data formats, such as CSV, XML or JSON. Broadening the possibilities for KG construction with minimal changes in the vocabulary with respect to the standard, this language rapidly gained importance, and currently gathers an active community of users and developers. 
@@ -59,9 +144,9 @@ The main differences of RML with R2RML~\parencite{dimou2020rml-r2rml-diffs} are 
 
 \ana{example}
 
-Several proposals have been proposed for RML in the following years of its release to extend its capabilites. The initial features for addressing heterogeneous data sources were expanded by~\cite{}~\ana{ref de 2015}, allowing more diverse data accesses and fine-grained description of the data sources. RML+FnO \cite{DeMeester2017fno_dbpedia}. \cite{delva2021rml-fields} introduced the RML Fields, that allowed [+++]. RML spreadsheets (markus). RML Target by \cite{VanAssche2021LeveragingWebThings}. RDF-star by \cite{delva2021rml-star}. 
+Several proposals have been proposed for RML in the following years of its release to extend its capabilities. The initial features for addressing heterogeneous data sources were expanded by~\cite{Dimou2015Machine}, allowing more diverse data accesses and fine-grained description of the data sources. \cite{DeMeester2017fno_dbpedia} proposed \textbf{RML+FnO}, which provided RML with a connector to the Function Ontology~\parencite{demeester2016fno} to include data transformation functions in the mappings. \cite{delva2021rml-fields} introduced the \textbf{RML Fields}, that addressed several challenges to accurately access nested data. \textbf{RML Target} was developed by \cite{VanAssche2021LeveragingWebThings} to specify how to create the output triples regarding, for instance, RDF serialization, compression format or encoding. Lastly, \textbf{RML-star} was proposed by \cite{delva2021rml-star}, and later refined by \cite{arenas2023morphstar}, to allow the construction of RDF-star graphs. 
 
-The Knowledge Graph Construction W3C Community Group has gathered these variety of specifications and released a new version of RML~\parencite{iglesias2023rml}, that includes several of these extensions, overcoming the identified limitations for declarative KG construction.
+Recently, the Knowledge Graph Construction W3C Community Group\footnote{\url{https://www.w3.org/community/kg-construct/}} gathered these variety of specifications and released a new version of RML~\parencite{iglesias2023rml}, which includes several of these extensions, overcoming the identified limitations for declarative knowledge graph construction.
 
 
 

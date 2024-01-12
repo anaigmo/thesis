@@ -173,24 +173,32 @@
 }
 
 \lstdefinelanguage{concm}{
-	keywords=[1]{} % generic keywords including crypto operations
-	keywordstyle=[1]\color{blue}\bfseries,
-	keywords=[2]{Locations, Cities, Sources, Rules},	% types; money and time units
-	keywordstyle=[2]\color{violet}\bfseries,
-	keywords=[3]{cm, dcat, expression, hasField, hasDataSource, mediaType, SourceFrame, accessService, hasProtocol, endpointURL, hasSecurityScheme, DataField, field, hasNestedFrame, ReferenceNodeMap, hasEvaluableExpression, hasFunctionName, hasInput, subject, predicate, hasFrame, constantValue, Literal, object, FunctionExpression, functionName, hasBooleanCondition, hasDatatype, source, target, property, LinkingExpression, ConditionalStatementMap, SynchronousSource, StatementMap, JoinCombination, datatype, language, combinesFrame, joinsBy, ListMap, hasLanguage},	% environment variables
-	keywordstyle=[3]\color{steelblue}\bfseries,
-	keywords=[4]{xsd, double, integer, boolean, decimal, string, time},
-	keywordstyle=[4]\color{applegreen}\bfseries,
+        alsoletter=:-,
+	keywords=[1]{cm:dcat, cm:expression, cm:hasField, cm:hasDataSource, dcat:mediaType, cm:SourceFrame, dcat:accessService, cm:hasProtocol, dcat:endpointURL, cm:hasSecurityScheme, cm:DataField, cm:field, cm:hasNestedFrame, cm:ReferenceNodeMap, cm:hasEvaluableExpression, cm:hasFunctionName, cm:hasInput, cm:subject, cm:predicate, cm:hasFrame, cm:constantValue, cm:Literal, cm:object, cm:FunctionExpression, cm:functionName, cm:hasBooleanCondition, cm:hasDatatype, cm:source, cm:target, cm:property, cm:LinkingExpression, cm:ConditionalStatementMap, cm:SynchronousSource, cm:StatementMap, cm:JoinCombination, cm:datatype, cm:language, cm:combinesFrame, cm:joinsBy, cm:ListMap, cm:hasLanguage, cmf:concat, cmf:replace},	
+	keywordstyle=[1]\color{cmviolet}\bfseries,
 	identifierstyle=\color{black},
 	sensitive=false,
-	comment=[l]{//},
+	comment=[l]{\#},
 	morecomment=[s]{/*}{*/},
 	commentstyle=\color{gray}\ttfamily,
-	stringstyle=\color{fulvous}\bfseries,
 	morestring=[b]',
 	morestring=[b]",
 }
 
+\lstdefinelanguage{r2rml}{
+        alsoletter=:-,
+	keywords=[1]{rr:logicalTable, rr:tableName, rr:subjectMap, rr:template, rr:class, rr:predicateObjectMap, rr:predicate, rr:objectMap, rr:column, rr:datatype},	
+	keywordstyle=[1]\color{steelblue}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{@},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	morestring=[b]',
+	morestring=[b]",
+}
+
+\definecolor{cmviolet}{HTML}{8065C7}
 \definecolor{verylightgray}{rgb}{.97,.97,.97}
 \definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
 \definecolor{iris}{rgb}{0.35, 0.31, 0.81}
@@ -249,7 +257,7 @@
 }{
 
 	\vspace{0.5\baselineskip}
-	Listing \thecaptionedlistingcounter: #2
+	\textbf{Listing \thecaptionedlistingcounter:} #2
 	\\%\end{figure}
 }
 
