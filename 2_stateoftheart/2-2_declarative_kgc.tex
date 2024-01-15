@@ -209,7 +209,7 @@ Recently, the Knowledge Graph Construction W3C Community Group\footnote{\url{htt
 \subsection{Additional Mapping Languages}
 \label{sec:chp2_more-languages}
 
-Following, we present an overview of existing mapping languages, listed in \cref{tab:chp2_languages_summary} and depicted in  \cref{fig:chp2_mapping_languages}. This section presents additional relevant languages classified in three categories, based on the schema they are based on or extend: (i)~RDF-based (\cref{sec:chp2_RDF-languages}), (ii)~SPARQL-based (\cref{sec:chp2_SPARQL-languages}), and (iii)~based on alternative schemas (\cref{sec:chp2_alternative-languages}).
+Following, we present an overview of existing mapping languages, listed in \cref{tab:chp2_languages_summary} and depicted in  \cref{fig:chp2_mapping_languages}. This section presents additional relevant languages classified in three categories, based on the schema they are based on or extend: (i)~RDF-based, (ii)~SPARQL-based, and (iii)~based on alternative schemas.
 
 
 \begin{table}[t]
@@ -236,7 +236,7 @@ Following, we present an overview of existing mapping languages, listed in \cref
                               & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ \cmidrule{2-3} 
                               & TARQL           & \parencite{tarql}\\ \cmidrule{2-3}
                               & Facade-X        & \parencite{asprino2023sparql-anything,sparqlanything}\\ \cmidrule{2-3}
-                              & Sansa            & \parencite{stadler2023spark}\\ \midrule
+                              & \textcolor{red}{Sansa}            & \parencite{stadler2023spark}\\ \midrule
 \multirow{4}{*}{\textbf{Alternative schema}}       & Helio mappings  & \parencite{cimmino2022helio}\\ \cmidrule{2-3} 
                               & D-REPR          & \parencite{Vu2019d-repr}\\ \cmidrule{2-3} 
                               & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\  \bottomrule
@@ -252,6 +252,9 @@ Following, we present an overview of existing mapping languages, listed in \cref
 \label{fig:chp2_mapping_languages}
 \end{figure*}
 
+
+
+
 \subsubsection{RDF-based mapping languages.} 
 \label{sec:chp2_RDF-languages}
 
@@ -259,27 +262,22 @@ Mapping languages in this group are formalized using RDF. They are usually model
 and \cref{sec:chp2_RML} respectively, also belong to this group of languages. 
 
 
-\noindent\textbf{D2RQ}~\parencite{bizer2004d2rq} One of the first mapping languages, developed to access the content of non RDF relational databases. 
+\noindent\textbf{D2RQ}~\parencite{bizer2004d2rq} is one of the first mapping languages, developed to access the content of non RDF relational databases. The main components of this language are the \textit{Class Map} (\texttt{d2rq:ClassMap}) and the \textit{Property Bridge} (\texttt{d2rq:PropertyBridge})~\parencite{d2rq}. A \textit{Class Map} specifies how the instances of a class are generated, indicating the class that the instances belong to, the database's column(s) and URI pattern to create the URI for the instances. Each \textit{Class Map} also specifies the access to the input database, and refer to \textit{Property Bridges}. These \textit{Property Bridges} are used to generate the pairs of predicate-objects for the \textit{Class Map}, specifying the property for the predicate, and patterns and column references for the object. 
 
-\noindent\textbf{XLWrap}~\parencite{langegger2009xlwrap}
 
-\noindent\textbf{KR2RML}~\parencite{slepicka2015kr2rml}
+\noindent\textbf{XLWrap}~\parencite{langegger2009xlwrap} enables the transformation of spreadsheets to RDF. These mappings are written using the TriG syntax. They contain a graph instance of \texttt{xl:Mapping}, that describes the input file (workbook) (\texttt{xl:fileName}) and worksheet (\texttt{xl:sheetName}), a constant graph with information about the mapping (\texttt{xl:constantGraph}), references to \textit{Template Graphs} (\texttt{xl:templateGraph}) and \textit{Transformation Operations} (\texttt{xl:transformationOperation}). The \textit{Template Graphs} specify how to create the desired RDF graphs with references from the spreadsheet's cells and XLWrap expressions. This language provides further features to accurately access data in spreadsheets, described in the specification~\parencite{xlwrap}.  
 
-\noindent\textbf{xR2RML}~\parencite{michel2015xr2rml}
+\noindent\textbf{KR2RML}~\parencite{slepicka2015kr2rml} extended R2RML to: (i) address multiple input data formats, such as CSV, JSON and XML; (ii) select the RDF serialization to create the output graph and (iii) integrate data transformation functions for pre-processing messy data without relying on SQL queries or views. To this end, the authors developed the nested Relational Model (NRM), as an intermediate form to represent data. NRM allowed the unification of the way to access data without loosing expressiveness. 
 
-\noindent\textbf{FunUL}~\parencite{junior2016funul}
+\noindent\textbf{xR2RML}~\parencite{michel2015xr2rml} extends R2RML and RML to include additional heterogeneous data sources and additional features not usually tackled by other mapping languages. It extends RML's \textit{Logical Source} to include NoSQL databases (e.g. MongoDB), and refines the access to different levels of iterations for hierarchical data sources with \texttt{xrr:pushDown}. It enables the creation of RDF lists and containers, by including additional \textit{Term Map} types (\texttt{xrr:RdfList}, \texttt{xrr:RdfSeq}, \texttt{xrr:RdfBag} and \texttt{xrr:RdfAlt}). Additionally, it allows the creation of dynamic language tags (i.e., with references from the input data) with \texttt{xrr:languageReference}.
 
-\noindent\textbf{R2RML-F}~\parencite{debruyne2016r2rmlf}
+\noindent\textbf{R2RML-F}~\parencite{debruyne2016r2rmlf} is a dedicated extension of R2RML to include data transformation functions, later refined in \textbf{FunUL}~\parencite{junior2016funul}. It introduces the \textit{Function} class (\texttt{rrf:Function}), which defines a data transformation function with name and body. An additional type of \textit{Term Map} is defined, the \textit{Function Valued Term Map}, which connects with the \textit{Function} and supplies it with parameter bindings. 
 
-\noindent\textbf{R2RML for collections and containers}~\parencite{debruyne2017R2RML-collections}
+\noindent\textbf{R2RML for collections and containers}~\parencite{debruyne2017R2RML-collections} is another R2RML extensions focused on the generation of RDF lists and containers. These terms are created with \textit{Gather Maps}, that create a group of \textit{Object Maps} within an \textit{Object Map} with the \texttt{rrf:gather} property. 
 
-\noindent\textbf{D2RML}~\parencite{chortaras2018d2rml}
+\noindent\textbf{D2RML}~\parencite{chortaras2018d2rml} proposes a vocabulary extension to R2RML and RML with a large amount of features to describe in detail different heterogeneous data formats (e.g., JSON, CSV, XML) and accesses (e.g., RESTful APIs, SPARQL endpoints, documents) with a high level of detail. For instance, it adds to R2RML's \textit{Logical Table} and RML's \textit{Logical Source} the \textit{SQL Tables}, \textit{SPARQL Tables}, \textit{CSV Tables} and \textit{Information Source}. This proposal also includes data transformation functions to be used within the data source descriptions, and enables conditional generation of \textit{Term Maps}. 
 
-\noindent\textbf{CSVW}~\parencite{Tennison2015csvw}
-
-\textit{The most well-known language in this category is R2RML~\parencite{das2012r2rml}, which allows mapping of data stored in relational databases to RDF. This language is heavily influenced by previous languages (R$_2$O~\parencite{barrasa2004r2o} and D2RQ~\parencite{bizer2004d2rq}). Some serializations (e.g. SML~\parencite{Stadler2015sml}, OBDA mappings from Ontop~\parencite{rodriguez2015efficient}) and several extensions of R2RML were developed in the following years after its release: R2RML-f~\parencite{debruyne2016r2rmlf} extends R2RML to include functions to be applied over the data; RML~\parencite{Dimou2014rml} and its user-friendly compact syntax YARRRML~\parencite{Heyvaert2018yarrrml} provide the possibility of covering additional data formats (CSV, XML and JSON); this language also considers the use of functions for data transformation (e.g. lowercase, replace, trim) by using the Function Ontology (FnO)\footnote{\url{https://fno.io/rml/}}~\parencite{DeMeester2017fno_dbpedia}; FunUL~\parencite{junior2016funul} proposes an extension to also incorporate functions, but focusing on the CSV format; KR2RML~\parencite{slepicka2015kr2rml} is also an extension for CSV, XML and JSON, with the addition of representing all sources with the Nested Relational Model as an intermediate model and the possibility of cleaning data with Python functions; xR2RML~\parencite{michel2015xr2rml} extends R2RML and RML to include NoSQL databases and incorporates more features to handle tree-like data; D2RML~\parencite{chortaras2018d2rml}, also based on R2RML and RML, is able to transform data from XML, JSON, CSVs and REST/SPARQL endpoints, and enables functions and conditions to create triples. }
-
-\textit{In this category, we can also find more languages not related to R2RML. XLWrap~\parencite{langegger2009xlwrap} is focused on transforming spreadsheets into different formats. CSVW~\parencite{Tennison2015csvw} enables tabular data annotation on the Web with metadata, but also supports the generation of RDF. Finally, WoT Mappings~\parencite{cimmino2020ewot} are oriented to be used in the context of the Web of Things.}
+\noindent\textbf{CSV on the Web (CSVW)}~\parencite{Tennison2015csvw} is a W3C Recommendation that enables a fine-grained annotation of CSV files and other tabular data formats, such as datatypes, valid values, data transformations, and primary and foreign key constraints. 
 
 
 
