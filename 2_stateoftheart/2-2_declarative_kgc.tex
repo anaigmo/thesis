@@ -64,7 +64,15 @@ or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms ar
 
 
 
-\cref{lst:chp2_r2rml-mapping} shows an example of an R2RML mapping to construct the KG in \cref{lst:chp2_r2rml-result-rdf}. The R2RML mapping contains one \textit{Triples Map}, "TriplesMapAthletes" (Line 5). It takes as input the "Athletes" table shown in \cref{fig:chp2_database-example} (Line 6), which shows information about pole vault athletes, including their name, position in the ranking and height of a jump. The subject is formed with a template using one data source column (Line 8). The set of \textit{Predicate Object Maps} are used to describe with further attributes each instance (Lines 11-26). Two of them add the datatype to the object, one as an integer (Line 19) and other as a float (Line 25). 
+\cref{lst:chp2_r2rml-mapping} shows an example of an R2RML mapping to construct the RDF graph in \cref{lst:chp2_r2rml-result-rdf}. The R2RML mapping contains one \textit{Triples Map}, "TriplesMapAthletes" (Line 5). It takes as input the "Athletes" table shown in \cref{fig:chp2_database-example} (Line 6), which contains information about pole vault athletes, including their name, position in the ranking and height of a jump. The subject is formed with a template using one data source column (Line 8). The set of \textit{Predicate Object Maps} are used to describe with further attributes each instance (Lines 11-26). Two of them add the datatype to the object, one as an integer (Line 19) and other as a float (Line 25). 
+
+
+\begin{figure*}[h]
+\centering
+\includegraphics[width=0.45\linewidth]{figures/chp2_database-example.pdf}
+\caption[Input "Athletes" table]{Input "Athletes" table with names, ranks and marks for athletes.}
+\label{fig:chp2_database-example}
+\end{figure*}
 
 \begin{captionedlisting}{lst:chp2_r2rml-mapping}{R2RML mapping to generate the RDF graph in \cref{lst:chp2_r2rml-result-rdf} with data from the database table shown in \cref{fig:chp2_database-example}.}
 \centering
@@ -85,15 +93,11 @@ or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms ar
     ];
     rr:predicateObjectMap [
         rr:predicate ex:rank;
-        rr:objectMap [ 
-            rr:column "RANK" ; 
-            rr:datatype xsd:integer ];
+        rr:objectMap [ rr:column "RANK" ; rr:datatype xsd:integer ];
     ];
     rr:predicateObjectMap [
         rr:predicate ex:mark;
-        rr:objectMap [ 
-            rr:column "MARK" ;
-            rr:datatype xsd:float ];
+        rr:objectMap [ rr:column "MARK" ; rr:datatype xsd:float ];
     ].
 \end{lstlisting}}
 \end{captionedlisting}
@@ -122,12 +126,6 @@ ex:athlete/3 a ex:Athlete ;
 
 
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=0.45\linewidth]{figures/chp2_database-example.pdf}
-\caption[Input "Athletes" table]{Input "Athletes" table with names, ranks and marks for athletes.}
-\label{fig:chp2_database-example}
-\end{figure*}
  
 \subsection{RML: RDF Mapping Language}
 \label{sec:chp2_RML}
@@ -145,7 +143,7 @@ The main differences of RML with R2RML~\parencite{dimou2020rml-r2rml-diffs} are 
 \end{itemize}
 
 
-Listing \cref{lst:chp2_rml-mapping} shows an RML mapping that generates the same output RDF graph (\cref{lst:chp2_r2rml-result-rdf}) as the R2RML mapping previously shown in \cref{lst:chp2_r2rml-mapping}. The input is a JSON file (\cref{lst:chp2_json-example}) described with the \textit{Logical Source)} (Lines 6-19). \textit{The difference is the input data and reference, signaled with different color)}
+\cref{lst:chp2_rml-mapping} shows an example RML mapping that generates the same output RDF graph (\cref{lst:chp2_r2rml-result-rdf}) as the R2RML mapping previously shown in \cref{lst:chp2_r2rml-mapping}. Instead of a database table, this mapping takes as input a JSON file (\cref{lst:chp2_json-example}), which is described with the \textit{Logical Source)} (Lines 6-19). The fields of the input JSON file are referred to using the \texttt{rml:reference} property. 
 
 \begin{minipage}{\textwidth}
 \begin{captionedlisting}{lst:chp2_json-example}
@@ -172,6 +170,7 @@ Listing \cref{lst:chp2_rml-mapping} shows an RML mapping that generates the same
 \centering
 {\begin{lstlisting}[language=r2rml]
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix ex: <http://example.com/ns#>.
 
@@ -191,15 +190,11 @@ Listing \cref{lst:chp2_rml-mapping} shows an RML mapping that generates the same
     ];
     rr:predicateObjectMap [
         rr:predicate ex:rank;
-        rr:objectMap [ 
-            rml:reference "RANK" ; 
-            rr:datatype xsd:integer ];
+        rr:objectMap [ rml:reference "RANK" ; rr:datatype xsd:integer ];
     ];
     rr:predicateObjectMap [
         rr:predicate ex:mark;
-        rr:objectMap [ 
-            rml:reference "MARK" ;
-            rr:datatype xsd:float ];
+        rr:objectMap [ rml:reference "MARK" ; rr:datatype xsd:float ];
     ].
 \end{lstlisting}}
 \end{captionedlisting}
