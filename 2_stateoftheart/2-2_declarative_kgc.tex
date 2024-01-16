@@ -219,27 +219,28 @@ Following, we present an overview of existing mapping languages, listed in \cref
 \begin{tabular}{ccc}
 %\rowcolor[HTML]{EFEFEF} 
 \textbf{Classification}                 & \textbf{Language}        & \textbf{Reference(s)} \\ \midrule
-\multirow{15}{*}{\textbf{RDF-based}}   & D2RQ            & \parencite{bizer2004d2rq,d2rq}\\ \cmidrule{2-3} 
-                              & R$_2$O          & \parencite{barrasa2004r2o}\\ \cmidrule{2-3} 
-                              & R2RML           & \parencite{das2012r2rml}\\ \cmidrule{2-3} 
-                              & xR2RML          & \parencite{michel2015xr2rml,xr2rml}\\ \cmidrule{2-3} 
+\multirow{15}{*}{\textbf{RDF-based}}   & R2RML           & \parencite{das2012r2rml}\\ \cmidrule{2-3} 
                               & RML             & \parencite{Dimou2014rml,rml}\\ \cmidrule{2-3} 
-                              & KR2RML          & \parencite{slepicka2015kr2rml}\\ \cmidrule{2-3} 
-                              & FunUL           & \parencite{junior2016funul}\\ \cmidrule{2-3} 
-                              & R2RML-F         & \parencite{debruyne2016r2rmlf}\\ \cmidrule{2-3} 
-                              & D2RML           & \parencite{chortaras2018d2rml}\\ \cmidrule{2-3} 
-                              & R2RML for collections & \parencite{debruyne2017R2RML-collections}\\ \cmidrule{2-3}   
+                              & D2RQ            & \parencite{bizer2004d2rq,d2rq}\\ \cmidrule{2-3} 
                               & XLWrap          & \parencite{langegger2009xlwrap,xlwrap}\\ \cmidrule{2-3} 
-                              & CSVW            & \parencite{Tennison2015csvw}\\ \midrule
-\multirow{6}{*}{\textbf{SPARQL-based}} & SPARQL-Generate &     
+                              & CSVW            & \parencite{Tennison2015csvw}\\ \cmidrule{2-3}  
+                              & KR2RML          & \parencite{slepicka2015kr2rml}\\ \cmidrule{2-3} 
+                              & xR2RML          & \parencite{michel2015xr2rml,xr2rml}\\ \cmidrule{2-3} 
+                              & R2RML-F         & \parencite{debruyne2016r2rmlf}\\ \cmidrule{2-3} 
+                              & FunUL           & \parencite{junior2016funul}\\ \cmidrule{2-3} 
+                              & R2RML for collections & \parencite{debruyne2017R2RML-collections}\\ \cmidrule{2-3}   
+                              & D2RML           & \parencite{chortaras2018d2rml}\\  \midrule
+\multirow{6}{*}{\textbf{SPARQL-based}} & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ \cmidrule{2-3} 
+                              & SPARQL-Generate &     
                               \parencite{Lefrancois2017sparqlgenerate,sparqlgenerate}\\ \cmidrule{2-3} 
-                              & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ \cmidrule{2-3} 
                               & TARQL           & \parencite{tarql}\\ \cmidrule{2-3}
-                              & Facade-X        & \parencite{asprino2023sparql-anything,sparqlanything}\\ \cmidrule{2-3}
+                              & Facade-X        & \parencite{daga2021facade,sparqlanything}\\ \cmidrule{2-3}
                               & \textcolor{red}{Sansa}            & \parencite{stadler2023spark}\\ \midrule
-\multirow{4}{*}{\textbf{Alternative schema}}       & Helio mappings  & \parencite{cimmino2022helio}\\ \cmidrule{2-3} 
+\multirow{4}{*}{\textbf{Alternative schema}}       & R$_2$O          & \parencite{barrasa2004r2o}\\ \cmidrule{2-3}
                               & D-REPR          & \parencite{Vu2019d-repr}\\ \cmidrule{2-3} 
-                              & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\  \bottomrule
+                              & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\ \cmidrule{2-3} 
+                              & Helio mappings  & \parencite{cimmino2022helio}\\ 
+                              \bottomrule
 \end{tabular}}
 \end{table}
 
@@ -255,7 +256,7 @@ Following, we present an overview of existing mapping languages, listed in \cref
 
 
 
-\subsubsection{RDF-based mapping languages.} 
+\subsubsection{RDF-based Mapping Languages.} 
 \label{sec:chp2_RDF-languages}
 
 Mapping languages in this group are formalized using RDF. They are usually modelled as ontologies or vocabularies that enable the description of data transformation rules. Mappings that follow these languages are usually written in files following the Turtle syntax~\parencite{turtle}. R2RML and RML, previously presented in \cref{sec:chp2_R2RML}
@@ -267,6 +268,8 @@ and \cref{sec:chp2_RML} respectively, also belong to this group of languages.
 
 \noindent\textbf{XLWrap}~\parencite{langegger2009xlwrap} enables the transformation of spreadsheets to RDF. These mappings are written using the TriG syntax. They contain a graph instance of \texttt{xl:Mapping}, that describes the input file (workbook) (\texttt{xl:fileName}) and worksheet (\texttt{xl:sheetName}), a constant graph with information about the mapping (\texttt{xl:constantGraph}), references to \textit{Template Graphs} (\texttt{xl:templateGraph}) and \textit{Transformation Operations} (\texttt{xl:transformationOperation}). The \textit{Template Graphs} specify how to create the desired RDF graphs with references from the spreadsheet's cells and XLWrap expressions. This language provides further features to accurately access data in spreadsheets, described in the specification~\parencite{xlwrap}.  
 
+\noindent\textbf{CSV on the Web (CSVW)}~\parencite{Tennison2015csvw} is a W3C Recommendation that enables a fine-grained annotation of CSV files and other tabular data formats, such as datatypes, valid values, data transformations, and primary and foreign key constraints. 
+
 \noindent\textbf{KR2RML}~\parencite{slepicka2015kr2rml} extended R2RML to: (i) address multiple input data formats, such as CSV, JSON and XML; (ii) select the RDF serialization to create the output graph and (iii) integrate data transformation functions for pre-processing messy data without relying on SQL queries or views. To this end, the authors developed the nested Relational Model (NRM), as an intermediate form to represent data. NRM allowed the unification of the way to access data without loosing expressiveness. 
 
 \noindent\textbf{xR2RML}~\parencite{michel2015xr2rml} extends R2RML and RML to include additional heterogeneous data sources and additional features not usually tackled by other mapping languages. It extends RML's \textit{Logical Source} to include NoSQL databases (e.g. MongoDB), and refines the access to different levels of iterations for hierarchical data sources with \texttt{xrr:pushDown}. It enables the creation of RDF lists and containers, by including additional \textit{Term Map} types (\texttt{xrr:RdfList}, \texttt{xrr:RdfSeq}, \texttt{xrr:RdfBag} and \texttt{xrr:RdfAlt}). Additionally, it allows the creation of dynamic language tags (i.e., with references from the input data) with \texttt{xrr:languageReference}.
@@ -277,12 +280,10 @@ and \cref{sec:chp2_RML} respectively, also belong to this group of languages.
 
 \noindent\textbf{D2RML}~\parencite{chortaras2018d2rml} proposes a vocabulary extension to R2RML and RML with a large amount of features to describe in detail different heterogeneous data formats (e.g., JSON, CSV, XML) and accesses (e.g., RESTful APIs, SPARQL endpoints, documents) with a high level of detail. For instance, it adds to R2RML's \textit{Logical Table} and RML's \textit{Logical Source} the \textit{SQL Tables}, \textit{SPARQL Tables}, \textit{CSV Tables} and \textit{Information Source}. This proposal also includes data transformation functions to be used within the data source descriptions, and enables conditional generation of \textit{Term Maps}. 
 
-\noindent\textbf{CSV on the Web (CSVW)}~\parencite{Tennison2015csvw} is a W3C Recommendation that enables a fine-grained annotation of CSV files and other tabular data formats, such as datatypes, valid values, data transformations, and primary and foreign key constraints. 
 
 
 
-
-\subsubsection{SPARQL-based mapping languages.}
+\subsubsection{SPARQL-based Mapping Languages.}
 \label{sec:chp2_SPARQL-languages} 
 
 This group is integrated by languages that leverage the SPARQL query language, usually by extending its features to describe non-RDF data sources~\parencite{harris2013sparql}. 
@@ -294,7 +295,7 @@ This group is integrated by languages that leverage the SPARQL query language, u
 
 \noindent\textbf{TARQL}~\parencite{tarql}
 
-\noindent\textbf{SPARQL-Anything}~\parencite{asprino2023sparql-anything}
+\noindent\textbf{Facade-X}~\parencite{daga2021facade}
 
 \noindent\textbf{Sansa/whatever}~\parencite{stadler2023spark}
 
@@ -306,23 +307,22 @@ This group is integrated by languages that leverage the SPARQL query language, u
 
 
 
-\subsubsection{Based on alternative schemas.} 
+\subsubsection{Mapping Languages Based on Alternative Schemas.} 
 \label{sec:chp2_alternative-languages}
 
-Lastly, the languages of this group rely on schemas different from RDF or SPARQL, equally able and expressive enough to enable users to write transformation rules. 
+Lastly, the languages of this group rely on schemas different from RDF or SPARQL, equally able and expressive enough to allow users to write transformation rules. 
 
 
-\noindent\textbf{R$_2$O}~\parencite{barrasa2004r2o} XML-based~\footnote{https://pdfs.semanticscholar.org/4c47/0826aafc07fc6d37ca7e2474c1d3b290ade1.pdf}
+\noindent\textbf{R$_2$O}~\parencite{barrasa2004r2o} is an XML-based language able to describe the transformation rules for constructing graphs from relational databases. %Its vocabulary relies on three main concepts: \textit{Concept Maps}, \textit{Attribute Maps} and \textit{Relation Maps}. 
+An R$_2$O mapping consists on the following components: description of the database schema, ontology URI(s), mapping definitions between the ontology and database, and optionally a set of instance URIs to be added. The mapping definitions enable the description on how to generate the triples, as well as conditional expression, joins over the data source elements and data transformation functions. 
 
-\noindent\textbf{D-REPR}~\parencite{Vu2019d-repr}
+%~\footnote{https://pdfs.semanticscholar.org/4c47/0826aafc07fc6d37ca7e2474c1d3b290ade1.pdf}
 
-\noindent\textbf{ShExML}~\parencite{Garcia-Gonzalez2020shexml,garcia2021shexml-challenges}
+\noindent\textbf{D-REPR}~\parencite{Vu2019d-repr}, Dataset REPResentation language, can be written as YAML or JSON files, providing a user-friendly approach to describe the transformation rules from a wide range of data source formats. This language requires four components: dataset resources, attributes of data sources, a semantic model to map the attributes to the ontology classes, and rules for the values of the attributes. This language also enables the use of data transformation functions. 
 
-\noindent\textbf{Helio??}~\parencite{cimmino2022helio}
+\noindent\textbf{ShExML}~\parencite{Garcia-Gonzalez2020shexml,shexml} proposes a mapping language based on the ShEx validation language for knowledge graphs~\parencite{prud2014shex}. This language enables the access to heterogeneous data sources, such as JSON, XML, CSV, RDBs and RDF with SPARQL queries. A ShExML mapping is divided in a declaration and a generation part. The declaration part provides the specification of prefixes, data sources, iterators, fields and expressions for merging or transforming data. The generation part describes how to generate triples and graphs with the fields and expressions defined in the declaration part. 
 
-\textit{ShExML~\parencite{Garcia-Gonzalez2020shexml,garcia2021shexml-challenges} uses Shape Expressions (ShEx)~\parencite{prud2014shex} to map data sources in RDBs, CSV, JSON, XML and RDF using SPARQL queries. The Helio mapping language~\parencite{cimmino2022helio} is based on JSON and provides the capability of using functions for data transformation and data linking~\parencite{cimmino2018hybrid}. D-REPR~\parencite{Vu2019d-repr} focuses on describing heterogeneous data with JSONPath and allows the use of data transformation functions. XRM (Expressive RDF Mapper)~\parencite{xrm} is a commercial language that provides a unique user-friendly syntax to create mappings in R2RML, CSVW and RML.}
-
-
+\noindent\textbf{Helio}~\parencite{cimmino2022helio} is a JSON-based language that provides rich possibilities for heterogeneous data formats and accesses, as well as for linking resources further than joins, commonly used in other mapping languages, and transformation functions.  
 
 
 
