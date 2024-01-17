@@ -231,11 +231,11 @@ Following, we present an overview of existing mapping languages, listed in \cref
                               & R2RML for collections & \parencite{debruyne2017R2RML-collections}\\ \cmidrule{2-3}   
                               & D2RML           & \parencite{chortaras2018d2rml}\\  \midrule
 \multirow{6}{*}{\textbf{SPARQL-based}} & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ \cmidrule{2-3} 
+                              & TARQL           & \parencite{tarql}\\ \cmidrule{2-3}
                               & SPARQL-Generate &     
                               \parencite{Lefrancois2017sparqlgenerate,sparqlgenerate}\\ \cmidrule{2-3} 
-                              & TARQL           & \parencite{tarql}\\ \cmidrule{2-3}
                               & Facade-X        & \parencite{daga2021facade,sparqlanything}\\ \cmidrule{2-3}
-                              & \textcolor{red}{Sansa}            & \parencite{stadler2023spark}\\ \midrule
+                              & NORSE            & \parencite{stadler2023spark}\\ \midrule
 \multirow{4}{*}{\textbf{Alternative schema}}       & R$_2$O          & \parencite{barrasa2004r2o}\\ \cmidrule{2-3}
                               & D-REPR          & \parencite{Vu2019d-repr}\\ \cmidrule{2-3} 
                               & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\ \cmidrule{2-3} 
@@ -289,20 +289,20 @@ and \cref{sec:chp2_RML} respectively, also belong to this group of languages.
 This group is integrated by languages that leverage the SPARQL query language, usually by extending its features to describe non-RDF data sources~\parencite{harris2013sparql}. 
 
 
-\noindent\textbf{XSPARQL}~\parencite{Bischof2012xsparql}
+\noindent\textbf{XSPARQL}~\parencite{Bischof2012xsparql} combines XQuery and SPARQL to enable the transformation between XML and RDF data sources bidirectionally. This language inherits all inherent features of both languages, excluding the \texttt{ASK} and \texttt{DESCRIBE} query forms. To perform the translation from XML to RDF, the data is extracted using the XQuery language with variables, that are later used in a \texttt{CONSTRUCT} clause to create the RDF graph. 
 
-\noindent\textbf{SPARQL-Generate}~\parencite{Lefrancois2017sparqlgenerate}
+\noindent\textbf{TARQL}~\parencite{tarql} allows CSV transformation using the SPARQL syntax. The columns names of the input CSV files are treated as variables, which can be used in a \texttt{CONSTRUCT} clause to construct the RDF graph. The input file is referred to using the \texttt{FROM} clause. 
 
-\noindent\textbf{TARQL}~\parencite{tarql}
+\noindent\textbf{SPARQL-Generate}~\parencite{Lefrancois2017sparqlgenerate} presents a more holistic approach than its predecessors providing access to more than one input data source format. This language is capable of generating RDF and text streams from a wide variety of data formats and access protocols. To this end, it introduces three new clauses to the SPARQL syntax: (i) \texttt{SOURCE} to bind variables to the input data source, (ii) \texttt{ITERATOR} to for accurately extracting data from the data sources; and (iii) \texttt{GENERATE}, that replaces and extends the \texttt{CONSTRUCT} clause with embedded SPARQL-Generate queries. 
 
-\noindent\textbf{Facade-X}~\parencite{daga2021facade}
+\noindent\textbf{Facade-X}~\parencite{daga2021facade} is proposed to also deal with a variety heterogeneous data sources relying in the SPARQL syntax, but without extending it with additional clauses. This proposal overrides the \texttt{SERVICE} operator to access heterogeneous data queriable as if it was RDF with a \textit{facade}. Hence, data is retrieved in the \texttt{SERVICE} operator and bound as variables, that are later used in the \texttt{CONSTRUCT} clause to construct RDF graphs. 
 
-\noindent\textbf{Sansa/whatever}~\parencite{stadler2023spark}
-
-
+\noindent\textbf{NORSE}~\parencite{stadler2023spark} was developed as a vocabulary to place non-RDF data source descriptions within the SERVICE operator. This vocabulary allows including RML \textit{Logical Source} descriptions inside queries, bound to SPARQL variables. In this approach, graphs are also generated using the \texttt{CONSTRUCT} clause. 
 
 
-\textit{XSPARQL~\parencite{Bischof2012xsparql} merges SPARQL and XQuery to transform XML into RDF. TARQL~\parencite{tarql} uses the SPARQL syntax to generate RDF from CSV files. SPARQL-Generate~\parencite{Lefrancois2017sparqlgenerate} is capable of generating RDF and document streams from a wide variety of data formats and access protocols. Most recently, Facade-X has been developed, not as a new language, but as a "\textit{facade} to wrap the original resource and to make it queryable as if it was RDF"~\parencite{asprino2023sparql-anything}. It does not extend the SPARQL language, instead it overrides the SERVICE operator. Lastly, authors would like to highlight a loosely SPARQL-based language, Stardog Mapping Syntax 2 (SMS2)~\parencite{sms2}, which represents virtual Stardog graphs and is able to support sources such as JSON, CSV, RDB, MongoDB and Elasticsearch.}
+
+
+%\textit{XSPARQL~\parencite{Bischof2012xsparql} merges SPARQL and XQuery to transform XML into RDF. TARQL~\parencite{tarql} uses the SPARQL syntax to generate RDF from CSV files. SPARQL-Generate~\parencite{Lefrancois2017sparqlgenerate} is capable of generating RDF and document streams from a wide variety of data formats and access protocols. Most recently, Facade-X has been developed, not as a new language, but as a "\textit{facade} to wrap the original resource and to make it queryable as if it was RDF"~\parencite{asprino2023sparql-anything}. It does not extend the SPARQL language, instead it overrides the SERVICE operator. Lastly, authors would like to highlight a loosely SPARQL-based language, Stardog Mapping Syntax 2 (SMS2)~\parencite{sms2}, which represents virtual Stardog graphs and is able to support sources such as JSON, CSV, RDB, MongoDB and Elasticsearch.}
 
 
 
@@ -322,7 +322,7 @@ An R$_2$O mapping consists on the following components: description of the datab
 
 \noindent\textbf{ShExML}~\parencite{Garcia-Gonzalez2020shexml,shexml} proposes a mapping language based on the ShEx validation language for knowledge graphs~\parencite{prud2014shex}. This language enables the access to heterogeneous data sources, such as JSON, XML, CSV, RDBs and RDF with SPARQL queries. A ShExML mapping is divided in a declaration and a generation part. The declaration part provides the specification of prefixes, data sources, iterators, fields and expressions for merging or transforming data. The generation part describes how to generate triples and graphs with the fields and expressions defined in the declaration part. 
 
-\noindent\textbf{Helio}~\parencite{cimmino2022helio} is a JSON-based language that provides rich possibilities for heterogeneous data formats and accesses, as well as for linking resources further than joins, commonly used in other mapping languages, and transformation functions.  
+\noindent\textbf{Helio}~\parencite{cimmino2022helio} is a JSON-based language that provides rich possibilities for heterogeneous data formats and accesses, as well as for linking resources further than joins, commonly used in other mapping languages, and transformation functions. A Helio mapping is composed of a \textit{data source} description, defining also its provider and handler; a set of \textit{resource rules} that conform the triple generation rules; and optionally a set of \textit{linking rules} to be applied over the resource rules. 
 
 
 
