@@ -1,9 +1,10 @@
-\section{Knowledge Representation in the Semantic Web \textcolor{red}{-- By 19/1}}
+\section{Knowledge Representation in the Semantic Web \textcolor{shamrockgreen}{-- Done!}}
 \label{sec:chp2_semweb}
 
-\textit{This section describes some background knowledge about concepts that play a relevant role in knowledge representation on the web. First we look into RDF, used for representing knowledge graphs on the web. Then we go over different approaches to reify knowledge in RDF, useful for representing additional information beyond triple paradigm. ??}
+This section describes some background knowledge about concepts that play a relevant role in knowledge representation on the web, hence also relevant to its creation. First we present the Resource Description Framework (RDF), used as backbone of knowledge graphs and also for specifying declarative transformation rules (\cref{sec:chp2_rdf}). Then, we discuss different approaches for annotating statements in RDF to add additional information (\cref{sec:chp2_reifications}).
 
 \subsection{Resource Description Framework (RDF)}
+\label{sec:chp2_rdf}
 
 The Resource Description Framework (RDF)~\parencite{rdf} is a standard model for data interchange on the web. Its basic unit are triples: two concepts linked by a relationship. These triples are represented in the form of $<$ \textit{s,p,o} $>$, where \textit{s} is the subject, \textit{p} is the predicate and \textit{o} the object. This model relies on the use on the linking structure of the Web, using IRIs to identify uniquely every resource and relationship. 
 
@@ -36,10 +37,11 @@ There are different syntaxes to serialize RDF graphs. RDF/XML\footnote{\url{http
 \end{figure*}
 
 \subsection{Statements about statements in RDF}
+\label{sec:chp2_reifications}
 
 %\ana{basic intro about what is this for and mot example about info that cannot be plainly represented in RDF. Then present all approaches used along the document: std reification, n-ary relationships, singleton properties, rdf-star, named graphs, i'd leave wikidata out of this}
 
-Plain triples are not always able to represent the complexity of certain knowledge. This is the case of statement annotation, when it is required to add information to a triple that does not correspond to a single resource, but the whole. This situation has triggered the development different approaches to achieve triple annotation (or reification). \ana{figure } illustrates instances of these models for the main statement \textit{Yelena Isinbayeva obtained the first position in the rank}, annotated with the additional statement \textit{in the season of 2009}. 
+Plain triples are not always able to represent the complexity of all knowledge. This is the case of statement annotation, when it is required to add information to a triple that does not correspond to a single resource, but the entire statement. This situation triggered the development different approaches to achieve triple annotation (or reification). \cref{fig:chp2_reification} illustrates instances of these models for the main statement \textit{Yelena Isinbayeva obtained the first position in the rank}, annotated with the additional statement \textit{in the season of 2009}. 
 
 \begin{figure*}[t]
 \centering
@@ -48,20 +50,23 @@ Plain triples are not always able to represent the complexity of certain knowled
 \label{fig:chp2_reification}
 \end{figure*}
 
-\noindent\textbf{Standard Reification}~\cite{lassila1999rdf} explicitly declares a resource to denote an \texttt{rdf:Statement}.
-This statement has \texttt{rdf:subject}, \texttt{rdf:predicate}, and \texttt{rdf:object} attached to it and can be further annotated with additional statements. The resource is typically a blank node, but an IRI can be used. \textcolor{red}{In \cref{fig:chp2_reification}a, the resource \texttt{:entity-stm/407} is an \texttt{rdf:Statement} with four associated triples, where the objects of the triples are the actual values of the triple (i.e. \texttt{:entity/407} for the subject, \texttt{:semanticType} for the predicate, and \texttt{"orga"} for the object). The property \texttt{:score} is used with its own value as object.}
+\noindent\textbf{Standard Reification}~\parencite{lassila1999rdf} explicitly declares a resource to denote an \texttt{rdf:Statement}.
+This statement has \texttt{rdf:subject}, \texttt{rdf:predicate}, and \texttt{rdf:object} attached to it and can be further annotated with additional statements. The resource is typically a blank node, but an IRI can be used. 
+In \cref{fig:chp2_reification}a, the resource \texttt{:statement/1} is an \texttt{rdf:Statement} with four associated triples, where the objects of the triples are the actual values of the triple (i.e. \texttt{:athlete/1} for the subject, \texttt{ex:rank} for the predicate, and \texttt{1} for the object). The property \texttt{ex:year} is used with its own value as object.
 
 
-\noindent\textbf{N-Ary Relationships}~\cite{naryw3c2006} converts a relationship into an instance that describes the relation, which can have attached both the main object and additional statements.
-This representation is widely used in ontology engineering as an ontology design pattern~\cite{gangemi2013multi}.\textcolor{red}{ In \cref{fig:chp2_reification}b, the entity \texttt{:entity/407} points to an intermediate node (\texttt{:entity-semtype/ 407}) which holds the triples for both the assignment of the semantic type and the score.}
+\noindent\textbf{N-Ary Relationships}~\parencite{naryw3c2006} converts a relationship into an instance that describes the relation, which can have attached both the main object and additional statements.
+This representation is widely used in ontology engineering as an ontology design pattern~\parencite{gangemi2013multi}. In \cref{fig:chp2_reification}b, the entity \texttt{:athlete/1} points to an intermediate node (\texttt{:rankInYear/1}) which holds the triples for both the position in rank and year when it took place.
 
-\noindent\textbf{Singleton Properties}~\cite{nguyen2014don}
+\noindent\textbf{Singleton Properties}~\parencite{nguyen2014don} uses unique predicates in the main triple. This unique predicate can then become the subject of the additional triple. The unique predicate is linked to the original predicate using \texttt{rdf:singletonPropertyOf}.
+In \cref{fig:chp2_reification}c, the main triple uses the predicate \texttt{:rank/1}, the unique version of the original \texttt{ex:rank}. This predicate is then annotated with the year of the ranking. 
 
-\noindent\textbf{RDF-star}~\cite{hartig2017foundations,hartig2023rdf12} extends RDF to introduce a new syntax for compact triple reification. 
+\noindent\textbf{RDF-star}~\parencite{hartig2017foundations,hartig2023rdf} extends RDF with a new syntax for compact triple reification. 
 It introduces the notion of triple recursiveness with \texttt{Quoted Triples}, which can be used as subjects and/or objects of other triples. This is the only approach that extends the standard RDF features. 
 %, having a potential impact on the development of supporting tools, triplestores, etc. 
-This representation is currently being incorporated into the RDF 1.2 specification~\cite{hartig2023rdf12}, which is currently being developed under the RDF-star W3C Working Group\footnote{\url{https://www.w3.org/groups/wg/rdf-star/}}.
-\textcolor{red}{In Figure \ref{fig:chp2_reification}d we observe the example as an RDF-star graph, and it is represented in RDF as \texttt{{<<:entity/407 :semanticType "orga">> :score 0.8}}.}
+This representation is currently being incorporated into the RDF 1.2 specification~\cite{hartig2023rdf}, which is currently being developed under the RDF-star W3C Working Group\footnote{\url{https://www.w3.org/groups/wg/rdf-star/}}.
+In Figure \ref{fig:chp2_reification}d we observe the example as an RDF-star graph, and it is represented in RDF as \texttt{{<<:athlete/1 ex:rank 1>> ex:year 2009}}.
 
 
-\noindent\textbf{Named Graphs}~\parencite{cyganiak2014rdf11} are a SPARQL 1.1 feature that allows the assignment of an IRI to one or several triples as a graph identifier. Hence, graph IRIs allow the unique identification of triples. These IRIs can be used as subjects to add additional statements. \textcolor{red}{In \cref{fig:chp2_reification}e, the triple indicating the semantic type of an entity is assigned the named graph \texttt{:entity-graph/407}. The graph IRI is subsequently used as subject in a triple that annotates the confidence score of the information within the graph. }
+\noindent\textbf{Named Graphs}~\parencite{rdf} are a SPARQL 1.1 feature that allows the assignment of an IRI to one or several triples as a graph identifier. Hence, graph IRIs allow the unique identification of triples. These IRIs can be used as subjects to add additional statements. 
+In \cref{fig:chp2_reification}e, the main triple indicating the rank position of an athlete is assigned the named graph \texttt{:graph/1}. The graph IRI is subsequently used as subject in a triple that adds information about the year of the triple within the graph. 
