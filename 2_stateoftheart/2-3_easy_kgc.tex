@@ -1,11 +1,11 @@
 \section{User-Friendly Knowledge Graph Construction Approaches \textcolor{red}{-- By 25/1}}
 \label{sec:chp2_easy_kgc}
 
-\ana{dividir o serializations/editores, o manual/semi/automatic o algo así}
+This section presents the different approaches developed for easing the writing of mapping rules for practitioners. We divide these approaches into two categories, (i) visual editors (\cref{sec:chp2_visual-editors}) that rely in an interactive application to graphically depict and edit mappings, and (ii) serializations (\cref{sec:chp2_serializations}) that rely on a simplified syntax for writing the mapping rules. \cref{tab:chp2_easy-mappings} lists the approaches described in the remaining of the section.
 
 \begin{table}[t]
-\caption[Approaches for easy mapping creation]{Approaches for easy mapping creation [++].}
-\label{tab:chp2_languages_summary}
+\caption[Approaches for easy mapping creation]{Approaches for facilitating the mapping creation process for users. The proposals are divided into (i) visual editors and (ii) text-based serializations. For each proposal, the reference, compliant mapping language and subtype is provided.}
+\label{tab:chp2_easy-mappings}
 \resizebox{\columnwidth}{!}{
 \centering
 \begin{tabular}{cccc}
@@ -21,7 +21,7 @@
  & Juma~\parencite{crotti2017juma} & R2RML & Building blocks \\
  & Map-On~\parencite{sicilia2017map} & R2RML & Graph \\
  & gra.fo\tablefootnote{\url{https://gra.fo/}} & R2RML & Graph \\
- & Stardog designer\tablefootnote{\url{https://www.stardog.com/designer/}} & SMS2? & Graph \\
+ & Stardog designer\tablefootnote{\url{https://www.stardog.com/designer/}} & SMS2 & Graph \\
  & Ontopic Studio\tablefootnote{\url{https://ontopic.ai/en/ontopic-studio/}} & Proprietary & Building blocks \\
  & Eccenca Corporate Memory\tablefootnote{\url{https://documentation.eccenca.com/latest/build/lift-data-from-tabular-data-such-as-csv-xslx-or-database-tables}} & Proprietary & Building blocks \\ \midrule
 \multirow{5}{*}{\textbf{Serialization}} & SML~\parencite{Stadler2015sml} & R2RML & SPARQL-based \\
@@ -35,22 +35,23 @@
 
 
 \subsection{Visual Editors}
+\label{sec:chp2_visual-editors}
 
-\textit{descripción general de todo, qué tienen en comun estos editores. que hay tres tipos según dejen construir el mapping, en arbol, grafo o con templates/forms/blocks. }
+Visual editors were first developed for enhancing and easing the mapping writing process. We can subdivide the proposals released over the years based on how the mapping is graphically represented in the tool: either with a tree or graph layout, or using building blocks.
 
-\textit{Los de árbol son los más antiguos, surgieron antes y con R2RML. [++]}
+The tree layout succeeded in the first approaches developed. 
+The first one was developed for the R$_2$O mapping language in ODEMapster~\parencite{barrasa2006odemapster}, providing a graphical interface to visualize and edit the mappings by link the database elements with the ontology resources. 
+After the release of R2RML, Karma~\parencite{gupta2012karma} and RBA (R2RML by assertion)~\parencite{neto2013rba} were developed for this language. Both work similarly to ODEMapster, with the addition of Karma providing automatic mapping suggestions. 
 
-\textit{Los de grafo son los más mayoritarios y hay muchos ejemplos, tanto de academia como más recientemente de industria}
+The graph display was later adopted by multiple editors. ~\parencite{fu2013tree-vs-graph} 
+
+\textit{Los de grafo son los más mayoritarios y hay mas ejemplos}
 
 \textit{Los de template son menos comunes pero hay un par de ellos, también ambos de industria y academia}
 
 Map-On~\parencite{sicilia2017map}
 
-Karma~\parencite{gupta2012karma}
 
-ODEMapster~\parencite{barrasa2006odemapster}
-
-RBA (R2RML by assertion)~\parencite{neto2013rba}
 
 \cite{sengupta2013editing} evolved into \cite{pinkel2014best}
 
@@ -66,8 +67,9 @@ Square~\parencite{blinkiewicz2016square}
 
 
 \subsection{Serializations}
+\label{sec:chp2_serializations}
 
-As an alternative to visual editors, serializations were developed. This approached suited most practitioners with technical profiles or with preferences for a text oriented environment. 
+As an alternative to visual approaches, text-based user-friendly serializations were developed. This approach suited most practitioners with technical profiles or with preferences for a text oriented environment. 
 SML~\parencite{Stadler2015sml} was developed as user-friendly syntax for R2RML. It provides an SPARQL-based syntax, enhancing the simplicity for writing mappings but maintaining the same expressiveness. 
 The virtual KG processor Ontop~\parencite{calvanese2017ontop} also provides a simplified serialization for R2RML, which combines the Turtle syntax for triple generation and SQL for data access. 
 The Stardog triplestore developed another SPARQL-based proprietary serialization, the Stardog Mapping Syntax 2 (SMS2)\cref{foot:sms2}. 
