@@ -74,9 +74,28 @@ SML~\parencite{Stadler2015sml} was developed as user-friendly syntax for R2RML. 
 The virtual KG processor Ontop~\parencite{calvanese2017ontop} also provides a simplified serialization for R2RML, which combines the Turtle syntax for triple generation and SQL for data access. 
 The Stardog triplestore developed another SPARQL-based proprietary serialization, the Stardog Mapping Syntax 2 (SMS2)\cref{foot:sms2}. 
 
-Later on, as more mapping languages emerged, new serializations with a broader language range emerged. This is the case of YARRRML~\parencite{Heyvaert2018yarrrml}, the YAML-based user-friendly syntax created for RML. This serialization can be used with the Matey~\footnote{\url{https://rml.io/yarrrml/matey/}} to translate the RML mapping file, or directly generate RDF triples. 
-XRM\cref{foot:xrm} provides a unique syntax for writing R2RML, RML and CSVW mappings. It can be used with a service plugin integrated into common text editors, Visual Studio Code and Eclipse. This service warns the users about writing errors while writing, and translates the mapping rules into one of the languages abovementioned. 
+Later on, as more mapping languages emerged, new serializations with a broader language range emerged. This is the case of XRM\cref{foot:xrm} (Expressive RDF Mapper), that provides a unique syntax for writing R2RML, RML and CSVW mappings. It can be used with a service plugin integrated into common text editors, Visual Studio Code and Eclipse. This service warns the users about writing errors while writing, and translates the mapping rules into one of the aforementioned languages. 
 
+YARRRML~\parencite{Heyvaert2018yarrrml}, the YAML-based\footnote{\url{https://yaml.org/spec/1.2.2/}} user-friendly syntax created for RML. 
+\cref{lst:chp2_yarrrml-mapping} shows an example of a YARRRML mapping equivalent to the RML example shown in \cref{lst:chp2_rml-mapping}. 
+YARRRML mappings need as well the declaration of the prefixes at the beginning of the document, which is done using the \texttt{prefixes} key (Lines 1-2). The mapping rules are defined within the \texttt{mappings} key (Lines 4-13), which are aggregated in rule set with keys named by the user (e.g. \texttt{athletes}, Line 5). Each mapping rule set describes the input data sources (\texttt{sources}, Lines 6-7), subject (\texttt{s}, Line 8) and predicate-object pairs (\texttt{po}, Lines 9-11).
+This serialization can be used with the Matey\footnote{\url{https://rml.io/yarrrml/matey/}}, a web service able to translate YARRRML into RML mapping files, or directly generate RDF triples. 
 
+\begin{captionedlisting}{lst:chp2_yarrrml-mapping}{YARRRML mapping to generate the RDF graph in \cref{lst:chp2_r2rml-result-rdf} with data from the JSON file shown in \cref{lst:chp2_json-example}. This mapping translates into the RML mapping shown in \cref{lst:chp2_yarrrml-mapping}.}
+\centering
+{\begin{lstlisting}[language=yarrrml]
+prefixes:
+ ex: "http://example.com/ns#"
 
-
+mappings:
+  athletes:
+    sources:
+      - ["data.json~jsonpath", "$\dollar$.*"]
+    s: http://example.com/athlete/$\dollar$(RANK)
+    po:
+      - [a, ex:Athlete]
+      - [ex:name, $\dollar$(NAME)]
+      - [ex:rank, $\dollar$(RANK)]
+      - [ex:mark, $\dollar$(MARK)]
+\end{lstlisting}}
+\end{captionedlisting}
