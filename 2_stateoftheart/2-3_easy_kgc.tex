@@ -1,4 +1,4 @@
-\section{User-Friendly Knowledge Graph Construction Approaches \textcolor{red}{-- By 25/1}}
+\section{User-Friendly Knowledge Graph Construction Approaches \textcolor{shamrockgreen}{-- Done!}}
 \label{sec:chp2_easy_kgc}
 
 This section presents the different approaches developed for easing the writing of mapping rules for practitioners. We divide these approaches into two categories, (i) visual editors (\cref{sec:chp2_visual-editors}) that rely in an interactive application to graphically depict and edit mappings, and (ii) serializations (\cref{sec:chp2_serializations}) that rely on a simplified syntax for writing the mapping rules. \cref{tab:chp2_easy-mappings} lists the approaches described in the remaining of the section.
@@ -11,19 +11,21 @@ This section presents the different approaches developed for easing the writing 
 \begin{tabular}{cccc}
 %\rowcolor[HTML]{EFEFEF} 
 \textbf{Classification} & \textbf{Approach} & \textbf{Mapping Language} & \textbf{Type} \\ \midrule
-\multirow{13}{*}{\textbf{Visual Editor}} & ODEMapster~\parencite{barrasa2006odemapster} & R2O & Tree \\
+\multirow{15}{*}{\textbf{Visual Editor}} & ODEMapster~\parencite{barrasa2006odemapster} & R2O & Tree \\
  & Karma~\parencite{gupta2012karma} & R2RML & Tree \\
  & RBA~\parencite{neto2013rba} & R2RML & Tree \\
  & \cite{sengupta2013editing} & R2RML & Building blocks \\
  & \cite{lembo2014visualization} & R2RML & Graph \\
  & RMLEditor~\parencite{heyvaert2016rmleditor} & R2RML/RML & Graph \\
- & Square~\parencite{blinkiewicz2016square} & R2RML & Graph \\
- & Juma~\parencite{crotti2017juma} & R2RML & Building blocks \\
+ & SQuaRE~\parencite{blinkiewicz2016square} & R2RML & Graph \\
+ & OntopPro~\parencite{calvanese2017ontop} & Proprietary & Building blocks \\
+ & Juma~\parencite{junior2017juma} & R2RML & Building blocks \\
+ & RMLx~\parencite{aryan2017rmlx} & RML & Building blocks \\
  & Map-On~\parencite{sicilia2017map} & R2RML & Graph \\
- & gra.fo\tablefootnote{\url{https://gra.fo/}} & R2RML & Graph \\
- & Stardog designer\tablefootnote{\url{https://www.stardog.com/designer/}} & SMS2 & Graph \\
- & Ontopic Studio\tablefootnote{\url{https://ontopic.ai/en/ontopic-studio/}} & Proprietary & Building blocks \\
- & Eccenca Corporate Memory\tablefootnote{\url{https://documentation.eccenca.com/latest/build/lift-data-from-tabular-data-such-as-csv-xslx-or-database-tables}} & Proprietary & Building blocks \\ \midrule
+ & gra.fo\tablefootnote{\label{foot:gra.fo}\url{https://gra.fo/}} & R2RML & Graph \\
+ & Stardog designer\tablefootnote{\label{foot:stardog-designer}\url{https://www.stardog.com/designer/}} & SMS2 & Graph \\
+ & Ontopic Studio\tablefootnote{\label{foot:ontopic-studio}\url{https://ontopic.ai/en/ontopic-studio/}} & R2RML/Proprietary & Building blocks \\
+ & Eccenca Corporate Memory\tablefootnote{\label{foot:eccenca}\url{https://documentation.eccenca.com/latest/build/lift-data-from-tabular-data-such-as-csv-xslx-or-database-tables}} & Proprietary & Building blocks \\ \midrule
 \multirow{5}{*}{\textbf{Serialization}} & SML~\parencite{Stadler2015sml} & R2RML & SPARQL-based \\
  & Ontop proprietary~\parencite{calvanese2017ontop} & R2RML & TTL- and SQL-based \\
  & YARRRML~\parencite{Heyvaert2018yarrrml} & RML & YAML-based \\
@@ -43,26 +45,11 @@ The tree layout succeeded in the first approaches developed.
 The first one was developed for the R$_2$O mapping language in ODEMapster~\parencite{barrasa2006odemapster}, providing a graphical interface to visualize and edit the mappings by link the database elements with the ontology resources. 
 After the release of R2RML, Karma~\parencite{gupta2012karma} and RBA (R2RML by assertion)~\parencite{neto2013rba} were developed for this language. Both work similarly to ODEMapster, with the addition of Karma providing automatic mapping suggestions. 
 
-The graph display was later adopted by multiple editors. ~\parencite{fu2013tree-vs-graph} 
+The graph display was later adopted by multiple editors, such as in \cite{lembo2014visualization}, SQuaRE~\parencite{blinkiewicz2016square}, RMLEditor~\parencite{heyvaert2016rmleditor} and Map-On~\parencite{sicilia2017map}. These editors provide a graph overview of the mapping while constructing it, while also showing the data sources and ontology. All of them are able to create R2RML mappings, and in addition, the RMLEditor can also produce RML mappings. There are also non open-source editors developed by companies that use a graph layout, such as \url{gra.fo}\cref{foot:gra.fo} and the Stardog designer\cref{foot:stardog-designer}. The former works with R2RML, and the latter with the Stardog proprietary syntax, SMS2, described in the next section. 
 
-\textit{Los de grafo son los más mayoritarios y hay mas ejemplos}
+%~\parencite{fu2013tree-vs-graph} 
 
-\textit{Los de template son menos comunes pero hay un par de ellos, también ambos de industria y academia}
-
-Map-On~\parencite{sicilia2017map}
-
-
-
-\cite{sengupta2013editing} evolved into \cite{pinkel2014best}
-
-\cite{lembo2014visualization}
-
-RMLEditor~\parencite{heyvaert2016rmleditor}
-
-Juma~\parencite{crotti2017juma}
-
-Square~\parencite{blinkiewicz2016square}
-
+Some tools were also developed that follow an alternative approach to the tree and graph layouts, broadly used in the semantic web supporting applications. This approach comprises the use of building blocks or templates, that are the components to build a mapping between data source and ontology. The first editor following this approach was proposed in \cite{sengupta2013editing}, later refined in \cite{pinkel2014best}. OntopPro~\parencite{calvanese2017ontop} released a Protégé plugin to create and edit mappings (in their proprietary language) with templates, allowing also the creation of RDF triples and running SPARQL queries. Juma~\parencite{junior2017juma} and RMLx~\parencite{aryan2017rmlx} allow building R2RML and RML mappings respectively with building blocks. There are also a couple of examples that enable this kind of visualization for mapping construction but using a proprietary language, Ontopic Studio\cref{foot:ontopic-studio} and Eccenca Corporate Memory\cref{foot:eccenca}. 
 
 
 
