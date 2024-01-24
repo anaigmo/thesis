@@ -3,21 +3,46 @@
 
 \ana{dividir o serializations/editores, o manual/semi/automatic o algo así}
 
-\subsection{Serializations}
-
-SML~\parencite{Stadler2015sml}
-
-Ontop~\parencite{rodriguez2015efficient}
-
-XRM~\parencite{xrm}
-
-SMS2~\parencite{sms2}
-
-YARRRML~\parencite{Heyvaert2018yarrrml}
-
+\begin{table}[t]
+\caption[Approaches for easy mapping creation]{Approaches for easy mapping creation [++].}
+\label{tab:chp2_languages_summary}
+\resizebox{\columnwidth}{!}{
+\centering
+\begin{tabular}{cccc}
+%\rowcolor[HTML]{EFEFEF} 
+\textbf{Classification} & \textbf{Approach} & \textbf{Mapping Language} & \textbf{Type} \\ \midrule
+\multirow{13}{*}{\textbf{Visual Editor}} & ODEMapster~\parencite{barrasa2006odemapster} & R2O & Tree \\
+ & Karma~\parencite{gupta2012karma} & R2RML & Tree \\
+ & RBA~\parencite{neto2013rba} & R2RML & Tree \\
+ & \cite{sengupta2013editing} & R2RML & Building blocks \\
+ & \cite{lembo2014visualization} & R2RML & Graph \\
+ & RMLEditor~\parencite{heyvaert2016rmleditor} & R2RML/RML & Graph \\
+ & Square~\parencite{blinkiewicz2016square} & R2RML & Graph \\
+ & Juma~\parencite{crotti2017juma} & R2RML & Building blocks \\
+ & Map-On~\parencite{sicilia2017map} & R2RML & Graph \\
+ & gra.fo\tablefootnote{\url{https://gra.fo/}} & R2RML & Graph \\
+ & Stardog designer\tablefootnote{\url{https://www.stardog.com/designer/}} & SMS2? & Graph \\
+ & Ontopic Studio\tablefootnote{\url{https://ontopic.ai/en/ontopic-studio/}} & Proprietary & Building blocks \\
+ & Eccenca Corporate Memory\tablefootnote{\url{https://documentation.eccenca.com/latest/build/lift-data-from-tabular-data-such-as-csv-xslx-or-database-tables}} & Proprietary & Building blocks \\ \midrule
+\multirow{5}{*}{\textbf{Serialization}} & SML~\parencite{Stadler2015sml} & R2RML & SPARQL-based \\
+ & Ontop proprietary~\parencite{calvanese2017ontop} & R2RML & TTL- and SQL-based \\
+ & YARRRML~\parencite{Heyvaert2018yarrrml} & RML & YAML-based \\
+ & SMS2\tablefootnote{\label{foot:sms2}\url{https://docs.stardog.com/archive/7.5.0/virtual-graphs/mapping-data-sources.html\#sms2-stardog-mapping-syntax-2}} & R2RML & SPARQL-based \\
+ & XRM\tablefootnote{\label{foot:xrm}\url{https://zazuko.com/products/expressive-rdf-mapper/}} & R2RML/RML/CSVW & Proprietary syntax \\ \bottomrule
+\end{tabular}
+}
+\end{table}
 
 
 \subsection{Visual Editors}
+
+\textit{descripción general de todo, qué tienen en comun estos editores. que hay tres tipos según dejen construir el mapping, en arbol, grafo o con templates/forms/blocks. }
+
+\textit{Los de árbol son los más antiguos, surgieron antes y con R2RML. [++]}
+
+\textit{Los de grafo son los más mayoritarios y hay muchos ejemplos, tanto de academia como más recientemente de industria}
+
+\textit{Los de template son menos comunes pero hay un par de ellos, también ambos de industria y academia}
 
 Map-On~\parencite{sicilia2017map}
 
@@ -25,14 +50,31 @@ Karma~\parencite{gupta2012karma}
 
 ODEMapster~\parencite{barrasa2006odemapster}
 
-RBA (R2RML by assertion)
+RBA (R2RML by assertion)~\parencite{neto2013rba}
 
-OntopPro~\parencite{calvanese2017ontop}
+\cite{sengupta2013editing} evolved into \cite{pinkel2014best}
 
-Sengupta et al~\parencite{sengupta2013editing}
-
-Lembo et al~\parencite{lembo2014visualization}
+\cite{lembo2014visualization}
 
 RMLEditor~\parencite{heyvaert2016rmleditor}
 
 Juma~\parencite{crotti2017juma}
+
+Square~\parencite{blinkiewicz2016square}
+
+
+
+
+\subsection{Serializations}
+
+As an alternative to visual editors, serializations were developed. This approached suited most practitioners with technical profiles or with preferences for a text oriented environment. 
+SML~\parencite{Stadler2015sml} was developed as user-friendly syntax for R2RML. It provides an SPARQL-based syntax, enhancing the simplicity for writing mappings but maintaining the same expressiveness. 
+The virtual KG processor Ontop~\parencite{calvanese2017ontop} also provides a simplified serialization for R2RML, which combines the Turtle syntax for triple generation and SQL for data access. 
+The Stardog triplestore developed another SPARQL-based proprietary serialization, the Stardog Mapping Syntax 2 (SMS2)\cref{foot:sms2}. 
+
+Later on, as more mapping languages emerged, new serializations with a broader language range emerged. This is the case of YARRRML~\parencite{Heyvaert2018yarrrml}, the YAML-based user-friendly syntax created for RML. This serialization can be used with the Matey~\footnote{\url{https://rml.io/yarrrml/matey/}} to translate the RML mapping file, or directly generate RDF triples. 
+XRM\cref{foot:xrm} provides a unique syntax for writing R2RML, RML and CSVW mappings. It can be used with a service plugin integrated into common text editors, Visual Studio Code and Eclipse. This service warns the users about writing errors while writing, and translates the mapping rules into one of the languages abovementioned. 
+
+
+
+
