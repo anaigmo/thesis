@@ -35,11 +35,18 @@ This section presents the different approaches developed for easing the writing 
 }
 \end{table}
 
-
 \subsection{Visual Editors}
 \label{sec:chp2_visual-editors}
 
-Visual editors were first developed for enhancing and easing the mapping writing process. We can subdivide the proposals released over the years based on how the mapping is graphically represented in the tool: either with a tree or graph layout, or using building blocks.
+Visual editors were first developed for enhancing and easing the mapping writing process. We can subdivide the proposals released over the years based on how the mapping is graphically represented in the tool: either with a tree or graph layout, or using building blocks (\cref{fig:chp2_visual-editors}).
+
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/chp2_visual-editors.pdf}
+\caption[Graphical representations approaches in visual mapping editors.]{Graphical representations approaches in visual mapping editors: (a) tree layout, (b) graph layout, and (c) building blocks.}
+\label{fig:chp2_visual-editors}
+\end{figure*}
 
 The tree layout succeeded in the first approaches developed. 
 The first one was developed for the R$_2$O mapping language in ODEMapster~\parencite{barrasa2006odemapster}, providing a graphical interface to visualize and edit the mappings by link the database elements with the ontology resources. 
@@ -49,7 +56,7 @@ The graph display was later adopted by multiple editors, such as in \cite{lembo2
 
 %~\parencite{fu2013tree-vs-graph} 
 
-Some tools were also developed that follow an alternative approach to the tree and graph layouts, broadly used in the semantic web supporting applications. This approach comprises the use of building blocks or templates, that are the components to build a mapping between data source and ontology. The first editor following this approach was proposed in \cite{sengupta2013editing}, later refined in \cite{pinkel2014best}. OntopPro~\parencite{calvanese2017ontop} released a Protégé plugin to create and edit mappings (in their proprietary language) with templates, allowing also the creation of RDF triples and running SPARQL queries. Juma~\parencite{junior2017juma} and RMLx~\parencite{aryan2017rmlx} allow building R2RML and RML mappings respectively with building blocks. There are also a couple of examples that enable this kind of visualization for mapping construction but using a proprietary language, Ontopic Studio\cref{foot:ontopic-studio} and Eccenca Corporate Memory\cref{foot:eccenca}. 
+Some tools were also developed that follow an alternative approach to the tree and graph layouts, broadly used in the semantic web supporting applications. This approach comprises the use of building blocks or templates, that are the components to build a mapping between data source and ontology. The first editor following this approach was proposed in \cite{sengupta2013editing}, later refined in \cite{pinkel2014best}. OntopPro~\parencite{calvanese2017ontop} released a Protégé plugin to create and edit mappings (in their proprietary language) with templates, allowing also the creation of RDF triples and running SPARQL queries. Juma~\parencite{junior2017juma} and RMLx~\parencite{aryan2017rmlx} allow building R2RML and RML mappings respectively with building blocks, correspondent to the different parts of the mappings. There are also a couple of examples that enable this kind of visualization for mapping construction but using a proprietary language, Ontopic Studio\cref{foot:ontopic-studio} and Eccenca Corporate Memory\cref{foot:eccenca}. 
 
 
 
@@ -65,7 +72,7 @@ Later on, as more mapping languages emerged, new serializations with a broader l
 
 YARRRML~\parencite{Heyvaert2018yarrrml}, the YAML-based\footnote{\url{https://yaml.org/spec/1.2.2/}} user-friendly syntax created for RML. 
 \cref{lst:chp2_yarrrml-mapping} shows an example of a YARRRML mapping equivalent to the RML example shown in \cref{lst:chp2_rml-mapping}. 
-YARRRML mappings need as well the declaration of the prefixes at the beginning of the document, which is done using the \texttt{prefixes} key (Lines 1-2). The mapping rules are defined within the \texttt{mappings} key (Lines 4-13), which are aggregated in rule set with keys named by the user (e.g. \texttt{athletes}, Line 5). Each mapping rule set describes the input data sources (\texttt{sources}, Lines 6-7), subject (\texttt{s}, Line 8) and predicate-object pairs (\texttt{po}, Lines 9-11).
+YARRRML mappings need as well the declaration of the prefixes at the beginning of the document, which is done using the \texttt{prefixes} key (Lines 1-2). The mapping rules are defined within the \texttt{mappings} key (Lines 4-13), which are aggregated in rule set with keys named by the user (e.g. \texttt{athletes} key, Line 5). Each mapping rule set describes the input data sources (\texttt{sources} key, Lines 6-7), subject (\texttt{s} key, Line 8) and predicate-object pairs (\texttt{po} key, Lines 9-11).
 This serialization can be used with the Matey\footnote{\url{https://rml.io/yarrrml/matey/}}, a web service able to translate YARRRML into RML mapping files, or directly generate RDF triples. 
 
 \begin{captionedlisting}{lst:chp2_yarrrml-mapping}{YARRRML mapping to generate the RDF graph in \cref{lst:chp2_r2rml-result-rdf} with data from the JSON file shown in \cref{lst:chp2_json-example}. This mapping translates into the RML mapping shown in \cref{lst:chp2_yarrrml-mapping}.}
