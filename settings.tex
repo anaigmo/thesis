@@ -10,6 +10,7 @@
 \usepackage{lmodern}     % Use a modern font (that is not pixelated)
 \usepackage[protrusion=true, expansion=true]{microtype}  % Use microtype to improve readability
 \usepackage{amsmath,amssymb} 
+\usepackage{pifont}
 \usepackage{tabularx}    % tables spanning the full text width
 \usepackage{multicol}    % multi-columns in tables
 \usepackage{multirow}    % multi-rows in tables
@@ -35,6 +36,8 @@
 \usepackage[small,hang,bf]{caption}    % caption options
 \usepackage{subcaption}   
 
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{53}}%
 \newcommand{\ana}[2][inline]{\color{red} [AI]: #2\color{black}}
 
 \usepackage[T1]{fontenc}
