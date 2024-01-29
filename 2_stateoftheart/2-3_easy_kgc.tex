@@ -75,7 +75,7 @@ YARRRML~\parencite{Heyvaert2018yarrrml}, the YAML-based\footnote{\url{https://ya
 YARRRML mappings need as well the declaration of the prefixes at the beginning of the document, which is done using the \texttt{prefixes} key (Lines 1-2). The mapping rules are defined within the \texttt{mappings} key (Lines 4-13), which are aggregated in rule set with keys named by the user (e.g. \texttt{athletes} key, Line 5). Each mapping rule set describes the input data sources (\texttt{sources} key, Lines 6-7), subject (\texttt{s} key, Line 8) and predicate-object pairs (\texttt{po} key, Lines 9-11).
 This serialization can be used with the Matey\footnote{\url{https://rml.io/yarrrml/matey/}}, a web service able to translate YARRRML into RML mapping files, or directly generate RDF triples. 
 
-\begin{captionedlisting}{lst:chp2_yarrrml-mapping}{YARRRML mapping to generate the RDF graph in \cref{lst:chp2_r2rml-result-rdf} with data from the JSON file shown in \cref{lst:chp2_json-example}. This mapping translates into the RML mapping shown in \cref{lst:chp2_yarrrml-mapping}.}
+\begin{captionedlisting}{lst:chp2_yarrrml-mapping}{YARRRML mapping to generate the RDF graph in \cref{lst:chp2_r2rml-result-rdf} with data from the JSON file shown in \cref{lst:chp2_json-example}. This mapping translates into the RML mapping shown in \cref{lst:chp2_rml-mapping}.}
 \centering
 {\begin{lstlisting}[language=yarrrml]
 prefixes:
