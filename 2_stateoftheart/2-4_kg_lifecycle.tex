@@ -1,4 +1,4 @@
-\section{Knowledge Graph Lifecycle \textcolor{red}{-- By 16/2}}
+\section{Knowledge Graph Lifecycle \textcolor{shamrockgreen}{-- Done!}}
 \label{sec:chp2_kg_lifecycle}
 
 %\ana{repasar un poco los papers que hablen de ciclo de vida de KGs, dónde encajan los mappings ahí y qué se ha estudiado en su intervención en el proceso, para decir que en la evolución no se ha estudiado}
@@ -22,7 +22,7 @@ These steps include
 
 \begin{figure*}[]
 \centering
-\includegraphics[width=0.6\linewidth]{figures/chp2_LD-lifecycle.png}
+\includegraphics[width=0.55\linewidth]{figures/chp2_LD-lifecycle.png}
 \caption{Linked Data life cycle proposed by \cite{ngomo2014LD-lifecycle}.}
 \label{fig:chp2_LD-lifecycle}
 \end{figure*}
@@ -30,7 +30,7 @@ These steps include
 \cite{simsek2021knowledge} proposed a life cycle for knowledge graphs based on the authors' experience, considering a series of steps and iterations (\cref{fig:chp2_lifecycle-Simsek}). The life cycle starts with the 
 (i) \textit{Knowledge Creation} to construct the knowledge graph from heterogeneous data sources, followed by the 
 (ii) \textit{Knowledge Hosting} in an appropriate graph store. 
-Then, the (iii) \textit{Knowledge Curation} cycle takes place, which is comprised of three steps. First, the \textit{Knowledge Assessment} of the quality (considering completeness and correctness) of the knowledge graph, which triggers the other two steps: \textit{Knowledge Cleaning} for error detection and correction, \textit{Knowledge Enrichment} with related resources. 
+Then, the (iii) \textit{Knowledge Curation} cycle takes place, which is comprised of three steps. First, the \textit{Knowledge Assessment} of the quality (considering completeness and correctness) of the knowledge graph, which triggers the other two steps: \textit{Knowledge Cleaning} for error detection and correction, and \textit{Knowledge Enrichment} with related resources. 
 Once the \textit{Knowledge Assessment} is satisfactory and the knowledge graph is curated, the (iv) \textit{Knowledge Deployment} stage takes place to publish the knowledge graph and make it available for consumption.
 
 \begin{figure*}[]
@@ -40,13 +40,13 @@ Once the \textit{Knowledge Assessment} is satisfactory and the knowledge graph i
 \label{fig:chp2_lifecycle-Simsek}
 \end{figure*}
 
-\cite{tamavsauskaite2023defining} carried out a systematic literature review to find the common stages of Knowledge Graph management process analysing several papers that have described the process followed for their knowledge graphs (\cref{fig:chp2_kg-dev-process}). This process include  
-(i) \textit{Identification of data} and domain of interest of the knowledge graph;
-(ii) \textit{Construction of the ontology} whenever there is no suitable ontology available;
-(iii) \textit{Extraction of knowledge} from the identified data, and more specifically, extracting entities, relations between them and their attributes;
-(iv) \textit{Processing of knowledge} to ensure its high quality, which involves integration from different sources, cleaning, mapping to the ontology, completion, enrichment and validation;
-(v) \textit{Knowledge graph construction} to store it and make it available and accessible for consumption;
-and (vi) \textit{Knowledge graph maintenance} for evaluating the knowledge graph quality and updates for evolution.
+\cite{tamavsauskaite2023defining} carried out a systematic literature review to find the common stages of knowledge graph management process analysing several papers that have described the process followed for their knowledge graphs (\cref{fig:chp2_kg-dev-process}). This process include  
+(i) \textit{Identification of Data} and domain of interest of the knowledge graph;
+(ii) \textit{Construction of the Ontology} whenever there is no suitable ontology available;
+(iii) \textit{Extraction of Knowledge} from the identified data, and more specifically, extracting entities, relations between them and their attributes;
+(iv) \textit{Processing of Knowledge} to ensure its high quality, which involves integration from different sources, cleaning, mapping to the ontology, completion, enrichment and validation;
+(v) \textit{Knowledge Graph Construction} to store it and make it available and accessible for consumption;
+and (vi) \textit{Knowledge Graph Maintenance} for evaluating the knowledge graph quality and updates for evolution.
 
 
 \begin{figure*}[]
@@ -56,8 +56,22 @@ and (vi) \textit{Knowledge graph maintenance} for evaluating the knowledge graph
 \label{fig:chp2_kg-dev-process}
 \end{figure*}
 
-\textit{All these proposed life cycles have stages in common or consider similar aspects. Declarative approaches are in the end involved in the construction, and there are several studies analysing how they can improve or enhance this step? }
+All these proposed life cycles share common stages and consider the main similar aspects. We can group the particular tasks and stages in each proposed life cycle in tree main categories, (i) \textit{Creation}, (ii) \textit{Deployment} and (iii) \textit{Maintenance} of knowledge graphs. 
+\begin{itemize}
+    \item \textbf{Creation.} This phase comprises the tasks dedicated to ultimately produce a high-quality knowledge graph. Examples of tasks in this phase are knowledge extraction, data cleaning and processing, data mapping and transformation, validation, quality assessment, enrichment, linking and completion.
 
-\textit{ºcontinuando con la de antes: enmarcado dentro de este life cycle dónde intervendrían los mappings: en la creación y en cada iteración que haya que hacer (cuadra más groth's aquí eso sí). Señalar paper de benchmark de todas las fases en algún momento. Dentro de la creación de cero, por supuesto porque esa es su función principal. Ahí qué hay de mejora: el de bio2rdf contra php, y todas las optimizaciones del proceso, comentar si acaso del paper de vir vs mat de dylan si está publicado. }
+    \item \textbf{Deployment.} We aggregate in this phase tasks related to making the knowledge graph available for consumption, such as hosting in a graph store, displaying for users and enabling its use for downstream tasks. 
 
-\textit{Mirar si randles et al ha mirado algo de quality gracias a mappings; y comentar si es así. Si no se señala el gap en cómo pueden intervenir estos approaches en más fases, por ej en la evolución.}
+    \item \textbf{Maintenance.} The tasks that takes place in this phase tackle the management over time of the knowledge graph, and may involve iterations over any of the tasks previously carried out for their creation and deployment. The objective of this phase is to curate the graph, detect and correct errors and implement new features according to new needs or requirements for evolving the knowledge graph.
+\end{itemize}
+
+The use of declarative mapping approaches have proven valuable for different tasks within the knowledge graph life cycle. The main task for which they were develop is for the \textit{construction} task, relating the input data sources with the target schema to produce the knowledge graph. For this task, a high amount of effort has been made to improve the process (as has been detailed explained over this chapter), for increasing mapping expressiveness (see \cref{sec:chp2_declarative_kgc}, facilitating their creation (see \cref{sec:chp2_easy_kgc} and for optimizing the use of resources by transformation engines~\parencite{arenas2022morphkgc,iglesias2023scaling,xiao2020virtual,iglesias2022empowering,jozashoori2019mapsdi}. 
+
+Apart from the \textit{construction} task, these declarative approaches can play an important role in other different tasks of the life cycle. They enable \textit{metadata annotation} about the data sources (e.g. DCAT in RML, CSVW for tabular files), which can help enhance the process in terms of transparency, completeness and performance~\parencite{chaves2021morph-csv,vidal2023knowledge}. 
+They also allow for \textit{data processing and cleaning}, thanks to the increasing integration of data transformation functions into the languages' features~\parencite{debruyne2016r2rmlf,junior2016funul,jozashoori2020funmap,DeMeester2017fno_dbpedia}.
+The possibility of expressing how the output graph is generated (e.g. serialization, compression) and managing streams of data can help the \textit{deployment} phase as well (e.g. RML Target, SPARQL-Generate). However, there is no analysis so far looking into the role that these approaches into the \textit{evolution and maintenance} of knowledge graphs. 
+
+
+%\textit{ºcontinuando con la de antes: enmarcado dentro de este life cycle dónde intervendrían los mappings: en la creación y en cada iteración que haya que hacer (cuadra más groth's aquí eso sí). Señalar paper de benchmark de todas las fases en algún momento. Dentro de la creación de cero, por supuesto porque esa es su función principal. Ahí qué hay de mejora: el de bio2rdf contra php, y todas las optimizaciones del proceso, comentar si acaso del paper de vir vs mat de dylan si está publicado. }
+
+%\textit{Mirar si randles et al ha mirado algo de quality gracias a mappings; y comentar si es así. Si no se señala el gap en cómo pueden intervenir estos approaches en más fases, por ej en la evolución. --> solo se centra en evaluar mappings con shacl}
