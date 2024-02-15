@@ -1,8 +1,7 @@
-\chapter{State of the Art \textcolor{red}{-- By 16/2}}
+\chapter{State of the Art}
 \label{chapter:sota}
 
-In this chapter, we discuss the state of the art in declarative construction of knowledge graphs. We first present \textcolor{red}{the representation of knowledge on the web} (\cref{sec:chp2_semweb}). Then we focus on describing current techniques to construct knowledge graphs, focusing on the declarative approaches (\cref{sec:chp2_declarative_kgc}), and the user-friendly approaches developed to facilitate this task (\cref{sec:chp2_easy_kgc}). We also describe the current proposals and methodologies for supporting the knowledge graph life cycle \ana{queda algo suelto, encajar algo de construcción y porqué tiene esto relevancia con el resto} (\cref{sec:chp2_kg_lifecycle}).
-
+In this chapter, we discuss the state of the art of the topics of interests for this thesis to provide an overview of the current and recent developments in the field as well as to identify the open research problems and challenges. The chapter starts describing the essential concepts of knowledge representation and annotation in the web in \cref{sec:chp2_semweb}. Then, in \cref{sec:chp2_declarative_kgc} we focus on describing current techniques to construct knowledge graphs, particularly on the declarative approaches. The challenges on their adoption lead us to present the user-friendly approaches developed to facilitate the creation of the mapping documents in \cref{sec:chp2_easy_kgc}. Next, \cref{sec:chp2_kg_lifecycle} introduces the knowledge graph life cycle proposals, analysing in which stages the declarative mappings can play a beneficial role for its management. The chapter ends in \cref{sec:chp2_conclusions-sota} drawing the conclusions from each area of research and its main gaps, introducing how this thesis can contribute to advance the state of the art. 
 
 
 \input{2_stateoftheart/2-1_semweb}
@@ -13,12 +12,17 @@ In this chapter, we discuss the state of the art in declarative construction of 
 
 \input{2_stateoftheart/2-4_kg_lifecycle}
 
-\section{Conclusions and limitations of the State of the Art \textcolor{red}{-- By 16/2}}
+\section{Conclusions and limitations of the State of the Art}
+\label{sec:chp2_conclusions-sota}
 
-\ana{hay que reformular, pero estas serian las ideas} 
+This chapter presents the relevant work in the state of the art about declarative mapping languages for knowledge graph construction and evolution. We conclude in this section with the identification of the challenges in the field that motivate the contributions of this thesis presented in the following chapters.
 
 \begin{itemize}
-    \item \textit{identification and characterization of expressivenes and features of current mapping languages to identify needs and challenges in KGC with declarative approaches}
-    \item \textit{for mapping creation: visual approaches not really adopted, but serializations not really suitable for non-technical profies, find the middle ground there}
-    \item \textit{to motivate the adoption of declarative KGC technologies, see in which parts or how can be involved in other parts of KG life cycle and if it really can improve the process}
+    \item \textbf{Mapping languages expressiveness.} Many different mapping languages for knowledge graph construction from heterogeneous data sources have been released over the years. These languages offer a differential set of features, providing a wide variety of possibilities for addressing real-world use cases. Deciding which language is the most suitable for the particularities of each use case and requirements becomes hard without a fine-grained comparison of the features that each language provides. 
+    
+    \item \textbf{Updating mapping languages according to new needs.} As the semantic web technologies advance, new needs and requirements emerge in KGC. Despite the current possibilities that mapping languages currently provide, they have limitations and have not adopted yet come of the latest developments (e.g. the currently under development RDF 1.2~\parencite{hartig2023rdf}). These limitations negatively impact on the adoption of declarative approaches for KGC, as they must be leveled with ad-hoc approaches in terms of expressiveness and keep up to the current progress in the field.
+    
+    \item \textbf{Adoption barrier for writing declarative mappings.} Mappings usually follow a syntax that is not easy or convenient to write, specially for non-experts. Several developments have been released, providing user interfaces and user-friendly serializations to improve the writing task for users. However, visual approaches have not been adopted in general, and serializations still pose a barrier for non-technical profile of users. 
+    
+    \item \textbf{The role of declarative mappings in the knowledge graph life cycle.} Mapping languages were developed for constructing KGs from diverse data sources, relating them to the schema provided by an ontology. However, it has been analysed that they can take part in other tasks part of the KG life cycle, such as data pre-processing and metadata annotation. Yet, the role that they can play in other parts of the life cycle has not been assessed. 
 \end{itemize}
