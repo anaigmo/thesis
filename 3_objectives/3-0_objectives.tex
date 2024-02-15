@@ -1,7 +1,7 @@
 \chapter{Objectives and Contributions}
 \label{chapter:objectives}
 
-This chapter presents the main objectives of this thesis and identifies the contributions to the state of the art. We enumerate the assumptions considered in this work, describe the main hypotheses and delimit the scope of the thesis describing the restrictions. \cref{fig:chp3_summary} provides an overview of the objectives and contributions presented in this thesis, along with their relations with identified hypotheses, assumptions and restrictions. 
+This chapter presents the main objectives of this thesis and identifies the contributions to the state of the art. We enumerate the assumptions considered in this work, describe the main hypotheses and draw the limit of the scope of the thesis presenting the restrictions. \cref{fig:chp3_summary} provides an overview of the objectives and contributions presented in this thesis, along with their relations with identified hypotheses, assumptions and restrictions. 
 
 \section{Objectives}
 \label{sec:chp3-objectives}
@@ -17,7 +17,7 @@ The general objective of this thesis is to \textit{improve the mapping languages
 
 In order to achieve the first objective, the following open research problem must be solved:
 \begin{itemize}
-    \item Ever since the first mapping languages began to be developed, several of them have been proposed and released over the years. These languages share address different necessities and propose diverse features, but they share some characteristics, as in the end they all serve the same purpose of constructing RDF graphs. In order to keep improving the KG construction from heterogeneous sources, we need to understand which are the needs and the current challenges to build them. There is a lack of analysis of the capabilities and expressiveness of these mapping languages, as well as a formalization of their derived requirements. 
+    \item Ever since the first mapping languages began to be developed, several of them have been proposed and released over the years. These languages address different necessities and propose diverse features, but they share some characteristics, as in the end they all serve the same purpose of constructing RDF graphs. In order to keep improving the KG construction from heterogeneous sources, we need to understand which are the needs and the current challenges to improve them and facilitate their choice according to their capabilities for addressing different needs. There is a lack of fine-grained analysis of the competences and expressiveness of these mapping languages, as well as a formalization of their derived requirements. 
 \end{itemize}
 
 From a technological perspective, the following problem must be solved:
@@ -27,20 +27,20 @@ From a technological perspective, the following problem must be solved:
 
 In order to achieve the second objective, the following research problem must be solved:
 \begin{itemize}
-    \item Most mapping languages are formalized as ontologies, and they are required to be written in an RDF syntax, usually Turtle (TTL). Other common languages extend SPARQL to write the transformation rules. This supposes a double obstacle for new users, to learn the language and the language's syntax (i.e. TTL or SPARQL) in case they are not familiar with them. There is a lack of user-friendly environments that can support the writing process for both expert practitioners and new users to speed-up the process and become less error-prone, while being up-to-date to the current KGC needs. 
+    \item Most mapping languages are formalized as ontologies, and they are required to be written in an RDF syntax, usually Turtle (TTL). Other common languages extend SPARQL to write the transformation rules. This supposes a double obstacle for new users, to learn the language and the language's syntax (i.e. TTL or SPARQL) in case they are not familiar with them. There is a lack of user-friendly environments that can support the writing process for both expert practitioners and new users to speed-up the process and become less error-prone, while being up-to-date to the current needs in KG construction.
 \end{itemize}
 
 From a technological perspective, the following problem must be solved:
 \begin{itemize}
 
-    \item User-friendly approaches usually involve developing new syntaxes or approaches that are not directly compliant with KGC systems, what ultimately process mappings and data to produce graphs. In addition, different KGC systems are usually compliant with one single language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages to improve the interoperability among them. 
+    \item User-friendly approaches usually involve developing new syntaxes or approaches that are not directly compliant with KGC systems, what ultimately process mappings and data to produce graphs. In addition, different KGC systems are usually compliant with one single language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages to improve the interoperability among them.  \ana{quiero tirar por interoperability? o por encontrar el middle-ground en visualization para no tener que aprender syntaxis pero que sea más escalable que los approaches visuales desarrollados hasta ahora?} 
 
 \end{itemize}
 
 Finally, for achieving the third objective, the following open research problem must be solved:
 
 \begin{itemize}
-    \item Knowledge graphs are modeled according to schemes that are subject to changes over time. These modifications can be triggered by different factors, such as new requirements or error fixing, that can help improve the quality of the KG and the performance of downstream tasks that consume it. Graph re-construction can be achieved in different manners, but it is not known which approach perform best this task in different situations. Thus, there is a lack of research on how mapping languages and compliant technology can assist this task to improve KG evolution. 
+    \item \textcolor{red}{Knowledge graphs are modeled according to schemes that are subject to changes over time. These modifications can be triggered by different factors, such as new requirements or error fixing, that can help improve the quality of the KG and the performance of downstream tasks that consume it. Graph re-construction can be achieved in different manners, but it is not known which approach perform best this task in different situations.} Thus, there is a lack of research on how mapping languages and compliant technology can assist this task to improve KG evolution. 
 \end{itemize}
 
 \section{Contributions}
@@ -66,7 +66,7 @@ Regarding the second objective (to help knowledge engineers and domain experts t
 Finally, with regard to the third objective (to assess the role of mapping technologies in KG evolution), this work presents the following contribution:
 
 \begin{enumerate}
-    \item[\textbf{C6}]\textbf{ Analysis of the scenarios in which mapping compliant systems can play a valuable role in the re-construction of pre-existing graphs}. We conduct an evaluation to study how mapping technologies can not only be useful for KG construction, but also for enhancing the evolution of knowledge graphs that need a change in their schema. 
+    \item[\textbf{C6}]\textbf{ Analysis of the scenarios in which mapping compliant technologies can play a valuable role in the evolution of knowledge graphs}. We conduct an evaluation to study how mapping technologies can not only be useful for KG construction, but also for facilitating the evolution of knowledge graphs that need a change in their schema. 
 \end{enumerate}
 
 
@@ -78,7 +78,7 @@ Our work is based on the assumptions listed below. These assumptions provide a b
 \begin{enumerate}
     \item[\textbf{A1}] Mapping languages provide human readable documentation available online.
     \item[\textbf{A2}] Mapping languages are declarative and follow W3C standards.
-    \item[\textbf{A3}] Features characteristic of procedural languages are not requirements for KG construction.
+    \item[\textbf{A3}] Features characteristic of procedural languages are not requirements for KG construction. \ana{this is risky}
     \item[\textbf{A4}] The schema of knowledge graphs (ontology) used for creating mapping documents is available online, and implemented in OWL or RDF(S). 
     \item[\textbf{A5}] Mapping rules can be translated into different languages with information preservation.
     %\item[\textbf{moar?}] KGs refer to RDF graphs?
@@ -92,7 +92,7 @@ After the identification of the assumptions, we can describe the research hypoth
 
 \begin{enumerate}
     \item[\textbf{H1}] Current mapping languages do not cover the entire extension of features required to construct knowledge graphs from heterogeneous data sources.
-    \item[\textbf{H2}] It is possible to include in current mapping languages new features that address the evolving needs in construction of knowledge graphs.
+    \item[\textbf{H2}] \textcolor{red}{It is possible to include in current mapping languages new features that address the evolving needs in construction of knowledge graphs.}
     \item[\textbf{H3}] Writing the mapping rules in spreadsheet environments can improve the user experience for practitioners of different backgrounds for writing mappings reducing errors. 
     \item[\textbf{H4}] Mapping-compliant technologies can bring benefits in the evolution of knowledge graphs within their life cycle, not only in their construction.
 \end{enumerate}
@@ -107,9 +107,9 @@ Finally, there is a set of restrictions that describe the limitations and define
     \item[\textbf{R1}] Requirements for KG construction are considered up to the beginning of 2023.
     \item[\textbf{R2}] The point of reference for the RML specification is the release on 2014~\parencite{Dimou2014rml}.
     \item[\textbf{R3}] Features characteristic of procedural languages cannot be modelled in an ontology.
-    \item[\textbf{R4}] Our proposal does not include all modules of the RML release on 2023~\parencite{iglesias2023rml}.
+    \item[\textbf{R4}] Our proposal does not include all modules of the RML release on 2023~\parencite{iglesias2023rml}. \ana{which proposal :))))}
     \item[\textbf{R5}] The evaluation of the value of mappings in KG evolution considers only schema changes, not data changes.
-    \item[\textbf{R6}] Changes considered in KG evolution are a result of the schema changes for switching among reification approaches for RDF graphs.
+    \item[\textbf{R6}] The changes considered for KG evolution are schema changes for switching among reification approaches for RDF graphs.
     %\item[\textbf{moar?}] algo de la selección de lenguajes? algo para mapeathor y yarrrml? The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec. The YARRRML updates include all RMLv2 modules except for the RML-CC module.
     \end{enumerate}
 
