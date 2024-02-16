@@ -14,6 +14,18 @@ First, to understand user preferences in knowledge exploration tasks, we run a u
 Then, to assess the differential performance of the representations, we test several queries using synthetic and real-world data.
 Lastly, to estimate the impact on KG embedding model performance, we train and evaluate a selection of these models for the KG completion task with different representations.
 
+
+This study found significant differences for particular scenarios, summarized in \cref{tab:chp6-1_kgconsumption_summary}, drawing the following conclusions: 
+\begin{enumerate}
+    \item Standard Reification is the least suitable for users. Its anti-intuitive structure results time-consuming to navigate with, and it introduces additional complexity to retrieve correct and complete information.
+    \item RDF-star still needs improved support in all studies scenarios, as it is underway of becoming part of the RDF 1.2 specification~\parencite{hartig2023rdf}. At the moment, it is risky to use it in high-demanding scenarios.
+    \item Qualifiers obtain steadily better results for retrieving results in high-demanding querying scenarios. Despite being restricted to Wikidata at the moment, its representation could be considered to be adopted in more knowledge graphs.
+    \item Analysing and understanding how each embedding model works is key to select a representation for graph completion (and hence, additional embedding-based tasks). While for the other scenarios all representations showed acceptable behaviour, here the decision is critical.
+    \item Promoting the use of interfaces such as browsers highly improves the user experience in knowledge exploration. These interfaces help mask the representation complexity and differences, which directly influences the adoption and usability of semantic resources, an aspect usually overlooked.
+\end{enumerate}
+
+Overall, the lack of a good-for-all solution raises the need of improving the interoperability among representations, especially in cases where knowledge graphs are consumed for very different purposes.
+
 \begin{table}[t]
     \centering
     \caption[Summary results of the representation impact on KG consumption scenarios]{Summary of the fitness for each representation evaluated in the studied scenarios, where \checkmark means suitable, $\backsim$ is acceptable, X is avoidable and * indicates that the value is not tested but equivalent to Qualifiers.}
@@ -27,32 +39,21 @@ Lastly, to estimate the impact on KG embedding model performance, we train and e
     \end{tabular}}
 \end{table}
 
-This study found significant differences for particular scenarios, summarized in \cref{tab:chp6-1_kgconsumption_summary}, drawing the following conclusions: 
-\begin{enumerate}
-    \item Standard Reification is the least suitable for users. Its anti-intuitive structure results time-consuming to navigate with, and it introduces additional complexity to retrieve correct and complete information.
-    \item RDF-star still needs improved support in all studies scenarios, as it is underway of becoming part of the RDF 1.2 specification~\parencite{hartig2023rdf}. At the moment, it is risky to use it in high-demanding scenarios.
-    \item Qualifiers obtain steadily better results for retrieving results in high-demanding querying scenarios. Despite being restricted to Wikidata at the moment, its representation could be considered to be adopted in more knowledge graphs.
-    \item Analysing and understanding how each embedding model works is key to select a representation for graph completion (and hence, additional embedding-based tasks). While for the other scenarios all representations showed acceptable behaviour, here the decision is critical.
-    \item Promoting the use of interfaces such as browsers highly improves the user experience in knowledge exploration. These interfaces help mask the representation complexity and differences, which directly influences the adoption and usability of semantic resources, an aspect usually overlooked.
-\end{enumerate}
-
-Overall, the lack of a good-for-all solution raises the need of improving the interoperability among representations, especially in cases where knowledge graphs are consumed for very different purposes.
-
-
 
 \subsection{Re-construction example}
 
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=1\linewidth]{figures/chp6-1_motivating-example.pdf}
-    \caption[KG re-construcion alternatives]{Alternatives for re-constructing a pre-existing knowledge graph.}
-    \label{fig:chp6-1_mot-example}
-\end{figure}
 
 Consider the SemMedDB dataset, that contains entities extracted from biomedical texts, as well as the semantic types of these concepts and a timestamp of when they were extracted. A stable version of a knowledge graph represents this information, where the timestamp and semantic type are related to its correspondent entity with an N-Ary relationship. However, the maintainers of this knowledge graph want to reduce the size of the graph by reducing the number of nodes, as well as to represent this information with RDF-star to start adopting the RDF 1.2 specification.
 
 The graph maintainers have access to the original source data, so they can change the original KG construction pipeline, that uses declarative mappings to construct the graph. However, since this graph is not going to be updated with new data, it is also possible to change the structure of the graph with queries within the triplestore where it is maintained. They know the time it takes to generate the graph in its original representation. However, they are not certain whether generating the graph in the new representation using this pipeline will take more time, or if with queries the transformation could be performed faster (\cref{fig:chp6-1_mot-example}). Hence, the objective of this work consist of assessing the aspects that influence this situation to help in making an informed decision.
 
+
+\begin{figure}[t!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/chp6-1_motivating-example.pdf}
+    \caption[KG re-construcion alternatives]{Alternatives for re-constructing a pre-existing knowledge graph.}
+    \label{fig:chp6-1_mot-example}
+\end{figure}
 
 \section{Methodology}
 \label{sec:chp6-1_methodology}

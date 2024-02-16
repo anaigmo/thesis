@@ -309,7 +309,7 @@ They are openly available\footnote{\label{foot:yarrrml-resources}\url{https://gi
 Yatter passes all test cases successfully. %Following good software development practices, we integrate the test cases in the continuous integration pipeline of our system as unit tests.
 
 
-\subsubsection{serializations Comparison} %Ana
+\subsubsection{Serializations Comparison} %Ana
 
 %YARRRML was developed to be a user-friendly syntax for the RML mapping language~\parencite{heyvaert2018yarrrml}. There have been proposed more syntaxes with the same purpose, such as Stardog's SMS2 for R2RML and Zazuko's XRM for [R2]RML and CSVW.
 
@@ -333,11 +333,11 @@ All serializations can generate constant and dynamic subjects. For each set of r
 
 \begin{table}[t!]
 \caption[Features of user-frienly serializations]{Features of user-friendly serializations. BN stands for blank node, L for literal, ST for RDF-star triple, C for constant and D for dynamic. \underline{Underlined} features indicate the updates of YARRRML-star, while
-``*" indicates that a feature is possible with the implementation but not explicit in the serialization.}
+``*'' indicates that a feature is possible with the implementation but not explicit in the serialization.}
 \label{tab:chp5_lang-comparison}
 %\def\arraystretch{1.25}
 \centering
-%\resizebox{\columnwidth}{!}{
+\resizebox{0.8\columnwidth}{!}{
 \begin{tabular}{r|cccccc}
  & \textbf{ShExML} & & \textbf{SMS2} & & \textbf{XRM} & \textbf{YARRRML-star} \\ \midrule
 \textbf{LF1}& BN, IRI & & BN, IRI, ST & & IRI& BN, IRI, \underline{ST}\\ \midrule
@@ -351,12 +351,12 @@ All serializations can generate constant and dynamic subjects. For each set of r
 \textbf{LF9}& C (0..1) & & C (0..1) & & C, D (0..N) & C, D (0..N)\\ \midrule
 \textbf{LF10} & (1..N) & & (1..N) & & (1..N) & (1..N)\\ \midrule
 \textbf{LF11} & Input & & Input & & Input & Input, output\\ \midrule
-\textbf{LF12} & Yes & & No* & & No* & Yes\\ \midrule
-\textbf{LF13}& Yes & & No & & No & No \\ \midrule
-\textbf{LF14} & Yes & & Yes & & No & Yes\\ \midrule
-\textbf{LF15}& Yes & & No & & No & Yes\\ \midrule
+\textbf{LF12} & \checkmark & & \xmark* & & \xmark* & \checkmark\\ \midrule
+\textbf{LF13}& \checkmark & & \xmark & & \xmark & \xmark \\ \midrule
+\textbf{LF14} & \checkmark & & \checkmark & & \xmark & \checkmark\\ \midrule
+\textbf{LF15}& \checkmark & & \xmark & & \xmark & \checkmark\\ \midrule
 \end{tabular}
-%}
+}
 \end{table}
 
 
@@ -478,9 +478,9 @@ Additionally, based on the YARRRML test cases, we develop the corresponding test
 \textbf{SF3} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\JSON, XML,\\RDF\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\GraphQL\end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, CSV,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML \end{tabular} & \begin{tabular}[c]{@{}c@{}}RDB, NoSQL,\\CSV, JSON,\\XML\end{tabular} \\ \midrule
 \textbf{SF4} & ShExML & \begin{tabular}[c]{@{}c@{}}R2RML,\\SMS, SMS2\end{tabular} & XRM & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular} & \begin{tabular}[c]{@{}c@{}}YARRRML,\\R2RML, RML\end{tabular}\\ \midrule
 \textbf{SF5} & \begin{tabular}[c]{@{}c@{}}RML,\\RDF \end{tabular}& RDF & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\CSVW, CARML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} & \begin{tabular}[c]{@{}c@{}}R2RML, RML,\\YARRRML\end{tabular} \\ \midrule
-\textbf{SF6} & N/A & Yes & N/A & No & Yes\\ \midrule
-\textbf{SF7} & Yes & Yes & N/A & No & Yes\\ \midrule
-\textbf{SF8} & Yes & N/A & N/A & No & Yes\\ \midrule
+\textbf{SF6} & N/A & \checkmark & N/A & \xmark & \checkmark\\ \midrule
+\textbf{SF7} & \checkmark & \checkmark & N/A & \xmark & \checkmark\\ \midrule
+\textbf{SF8} & \checkmark & N/A & N/A & \xmark & \checkmark\\ \midrule
 \end{tabular}
 }
 \end{table}
