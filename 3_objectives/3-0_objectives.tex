@@ -33,14 +33,15 @@ In order to achieve the second objective, the following research problem must be
 From a technological perspective, the following problem must be solved:
 \begin{itemize}
 
-    \item User-friendly approaches usually involve developing new syntaxes or approaches that are not directly compliant with KGC systems, what ultimately process mappings and data to produce graphs. In addition, different KGC systems are usually compliant with one single language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages to improve the interoperability among them.  \ana{quiero tirar por interoperability? o por encontrar el middle-ground en visualization para no tener que aprender syntaxis pero que sea más escalable que los approaches visuales desarrollados hasta ahora?} 
+    \item User-friendly approaches usually involve developing new syntaxes or approaches that are not always directly compliant with KGC systems, what ultimately process mappings and data to produce graphs. In addition, different KGC systems are usually compliant with one single language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages and reduce the barrier adoption enhancing the communication between user-friendly syntaxes and existing KGC implementations.   
 
 \end{itemize}
 
 Finally, for achieving the third objective, the following open research problem must be solved:
 
 \begin{itemize}
-    \item \textcolor{red}{Knowledge graphs are modeled according to schemes that are subject to changes over time. These modifications can be triggered by different factors, such as new requirements or error fixing, that can help improve the quality of the KG and the performance of downstream tasks that consume it. Graph re-construction can be achieved in different manners, but it is not known which approach perform best this task in different situations.} Thus, there is a lack of research on how mapping languages and compliant technology can assist this task to improve KG evolution. 
+    \item Knowledge Graphs undergo a complex process from creation to consumption that comprise their life cycle. Declarative mapping rules are a key in the construction step, but can play a beneficial role in other steps, such as data pre-processing and metadata annotation for transparency. However, there is a lack of research on whether their support in the KG evolution.
+    %\textcolor{red}{Knowledge graphs are modeled according to schemes that are subject to changes over time. These modifications can be triggered by different factors, such as new requirements or error fixing, that can help improve the quality of the KG and the performance of downstream tasks that consume it. Graph re-construction can be achieved in different manners, but it is not known which approach perform best this task in different situations.} Thus, there is a lack of research on how mapping languages and compliant technology can assist this task to improve KG evolution. 
 \end{itemize}
 
 \section{Contributions}
@@ -78,7 +79,7 @@ Our work is based on the assumptions listed below. These assumptions provide a b
 \begin{enumerate}
     \item[\textbf{A1}] Mapping languages provide human readable documentation available online.
     \item[\textbf{A2}] Mapping languages are declarative and follow W3C standards.
-    \item[\textbf{A3}] Features characteristic of procedural languages are not requirements for KG construction. \ana{this is risky}
+    \item[\textbf{A3}] Features characteristic of procedural languages are not considered as requirements for KG construction. 
     \item[\textbf{A4}] The schema of knowledge graphs (ontology) used for creating mapping documents is available online, and implemented in OWL or RDF(S). 
     \item[\textbf{A5}] Mapping rules can be translated into different languages with information preservation.
     %\item[\textbf{moar?}] KGs refer to RDF graphs?
@@ -92,7 +93,7 @@ After the identification of the assumptions, we can describe the research hypoth
 
 \begin{enumerate}
     \item[\textbf{H1}] Current mapping languages do not cover the entire extension of features required to construct knowledge graphs from heterogeneous data sources.
-    \item[\textbf{H2}] \textcolor{red}{It is possible to include in current mapping languages new features that address the evolving needs in construction of knowledge graphs.}
+    \item[\textbf{H2}] It is possible to update  current mapping languages with new features that address the evolving needs in construction of knowledge graphs.
     \item[\textbf{H3}] Writing the mapping rules in spreadsheet environments can improve the user experience for practitioners of different backgrounds for writing mappings reducing errors. 
     \item[\textbf{H4}] Mapping-compliant technologies can bring benefits in the evolution of knowledge graphs within their life cycle, not only in their construction.
 \end{enumerate}
@@ -105,13 +106,13 @@ Finally, there is a set of restrictions that describe the limitations and define
 
 \begin{enumerate}
     \item[\textbf{R1}] Requirements for KG construction are considered up to the beginning of 2023.
-    \item[\textbf{R2}] The point of reference for the RML specification is the release on 2014~\parencite{Dimou2014rml}.
+    \item[\textbf{R2}] The reference for the RML specification in the mapping languages analysis is the release on 2014~\parencite{Dimou2014rml}.
     \item[\textbf{R3}] Features characteristic of procedural languages cannot be modelled in an ontology.
-    \item[\textbf{R4}] Our proposal does not include all modules of the RML release on 2023~\parencite{iglesias2023rml}. \ana{which proposal :))))}
+    \item[\textbf{R4}] The implementations proposed do not include all modules of the new RML release on 2023~\parencite{iglesias2023rml}. 
     \item[\textbf{R5}] The evaluation of the value of mappings in KG evolution considers only schema changes, not data changes.
     \item[\textbf{R6}] The changes considered for KG evolution are schema changes for switching among reification approaches for RDF graphs.
     %\item[\textbf{moar?}] algo de la selección de lenguajes? algo para mapeathor y yarrrml? The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec. The YARRRML updates include all RMLv2 modules except for the RML-CC module.
-    \end{enumerate}
+\end{enumerate}
 
 
 \begin{sidewaysfigure}[t!]
@@ -121,5 +122,5 @@ Finally, there is a set of restrictions that describe the limitations and define
     \label{fig:chp3_summary}
 \end{sidewaysfigure}
 
-\section{Research Methodology?}
+%\section{Research Methodology?}
 
