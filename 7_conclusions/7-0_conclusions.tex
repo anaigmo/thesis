@@ -1,9 +1,35 @@
 \chapter{Conclusions and Future Work \textcolor{red}{By 23/2}}
 \label{chapter:conclusions}
 
-\section{Achievements}
-\label{sec:chp7-1_achievements}
+%This chapter presents the conclusions derived from the work presented in this thesis as well as the future lines of research. 
+
+The overall objective of this thesis is to improve the mapping languages regarding expressiveness, usage and adoption to comply with the current evolving needs in knowledge graph construction from heterogeneous data sources. To that end, we focus on three specific objectives: (i) understanding and gathering the current needs for KG construction, supporting the evolution of mapping languages to address them; (ii) helping knowledge engineers and domain experts to build mapping documents, providing the means for a user-friendly experience; and (iii) assessing the value of declarative mapping technologies for supporting KGs in their evolution. These objectives are fulfilled with the contributions presented in the thesis.
 
 
-\section{Future Work}
-\label{sec:chp7-2_future_work}
+%% (i) understanding and gathering the current needs for KG construction, supporting the evolution of mapping languages to address them;
+% Framwork, CM y RML-star
+Lo primero de todo, diseñamos y ejecutamos un comparison framework. Esto trajo beneficios sentando las bases de la tesis: analizamos las posibilidades y features de mucha variedad de lenguajes, basados en distintos esquemas y diseñados para distintos casos de uso, tanto recientes como más antiguos. Esto dio mucha perspectiva, ya que permite entender  las partes comunes y su fin último, las diferencias y motivaciones que llevaron a su desarrollo, y cómo han ido evolucionando con las necesidades cada vez más exigentes para llegar a más casos de uso. Tanto de aquí como de ver las inquietudes de la comunidad al final se llegaron a una serie de requisitos. Estos requisitos se implementaron como una ontología, recogiendo la expresividad de distintos lenguajes y extendiendola con los challenges que se habían encontrado, abriendo la puerta a una posible interoperabilidad entre ellos. El encontrar nuevos retos y features aun no cubiertas en actuales lenguajes utilizados motivó la colaboración con el CG para implementar en RML la extensión para generar RDF-star graphs, RML-star. De esta forma, seguimos trabajando en estas tecnologías para poder cubrir cada vez más casos de usos reales, estando actualizados con las necesidades actuales según las semweb technologies avanzan alrededor
+
+
+
+%% (ii) helping knowledge engineers and domain experts to build mapping documents, providing the means for a user-friendly experience
+% Spreadsheets, Mapeathor; YARRRML-star y Yatter
+El mayor problema que tienen los mappings es que a la gente le cuesta aprender, aparte la enorme heterogeneidad y falta de interoperabilidad entre ellos no ayuda. Los approaches visuales no han terminado de funcionar y a pesar de la cantidad de editores que se desarrollaron en la pasada de´cada especialmente para R2RML, no han terminado de cuajar. Las serializaciones sí han tenido más éxito, pero restringen el usuario final, ya que sigue siendo necesario pegarse con una sintaxis que no tiene que ser familiar. Por este motivo se diseñó un approach en un entorno familiar para -todo el mundo-, las spreadsheets, para escribir ahí las reglas de transformación. Este approach permite la creación de reglas en diversos lenguajes, y se evaluó con usuarios con distinto background y expertise para ver si puede llegar a todo el mundo, como es el objetivo. Los resultados son sorprendentemente buenos, y motivan el desarrollo en este sentido, aunque también evidencian las limitaicones actuales y cóm ose puede mejorar la experiencia del usuario para que sea más amena la escritura. Como el objetivo es la adopción, y lo que por ahora se ha adoptado mejor es RML y YARRRML, se ha trabajado en colaboraicón para extender la serialización actual con las nuevas actualizaciones en el lenguaje RML. De esta forma queremos facilitar de diversas formas que estas tecnologías tengan más alcance y sean más accesibles a usuarios de distintos perfiles, para facilitar la transición a los approaches declarativos y estandarizados, evitando los desarrollos ad-hoc.
+
+
+
+%% (iii) assessing the value of declarative mapping technologies for supporting KGs in their evolution
+% construct or re-construct, support in evolution not only in construction
+
+Recapitulando de lo anterior, en cada parte hay un problema distinto que lleva como consecuencia la dificultad en adopción. Uno con limitaciones para construction, otro barrera de aprendizaje. Aunque esto cada vez va mejorando, muchas veces falta motivación en cómo puede mejroar todo esto el ciclo de vida de un KG. Se ha trabajado duramente para optimizar el proceso de construcción, describir data transformation rules, el output... Dejando la ejecución en manos de herramientas optimizadas para ello (ya que también se ha trabajdo en estas optimizaciones). Aunque el foco está en la construcción, también puede ayudar en la re-construcción; en KGs ya creados que tengan que cambiar su estructura. Para grandes volumenes de datos estos approaches se ha visto que son mejores que con tripelstores, y llevan menos problemas a la hora de hacer el cambio de estructura: las optimizaciones en las queries son un problema y solo expertos las saben; mientras que con mappings pues no pasa eso. 
+
+
+%% FUTURE WORK
+
+
+
+
+ %% frase más general que enmarque las tres partes?
+%remark value
+%expand expressiveness to address new needs and existing limitations
+%improve user experience to increase adoption 
