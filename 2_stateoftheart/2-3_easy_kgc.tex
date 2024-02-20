@@ -3,6 +3,18 @@
 
 This section presents the different approaches developed for easing the writing of mapping rules for practitioners. We divide these approaches into two categories, (i) visual editors (\cref{sec:chp2_visual-editors}) that rely in an interactive application to graphically depict and edit mappings, and (ii) serializations (\cref{sec:chp2_serializations}) that rely on a simplified syntax for writing the mapping rules. \cref{tab:chp2_easy-mappings} lists the approaches described in the remaining of the section.
 
+
+
+\subsection{Visual Editors}
+\label{sec:chp2_visual-editors}
+
+Visual editors were first developed for enhancing and easing the mapping writing process. We can subdivide the proposals released over the years based on how the mapping is graphically represented in the tool: either with a tree or graph layout, or using building blocks (\cref{fig:chp2_visual-editors}).
+
+
+The tree layout (\cref{fig:chp2_visual-editors}a) succeeded in the first approaches developed. 
+The first one was developed for the R$_2$O mapping language in ODEMapster~\parencite{barrasa2006odemapster}, providing a graphical interface to visualize and edit the mappings by link the database elements with the ontology resources. 
+After the release of R2RML, Karma~\parencite{gupta2012karma} and RBA (R2RML by assertion)~\parencite{neto2013rba} were developed for this language. Both work similarly to ODEMapster, with the addition of Karma providing automatic mapping suggestions. 
+
 \begin{table}[t]
 \caption[Approaches for easy mapping creation]{Approaches for facilitating the mapping creation process for users. The proposals are divided into (i) visual editors and (ii) text-based serializations. For each proposal, the reference, compliant mapping language and subtype is provided.}
 \label{tab:chp2_easy-mappings}
@@ -35,11 +47,6 @@ This section presents the different approaches developed for easing the writing 
 }
 \end{table}
 
-\subsection{Visual Editors}
-\label{sec:chp2_visual-editors}
-
-Visual editors were first developed for enhancing and easing the mapping writing process. We can subdivide the proposals released over the years based on how the mapping is graphically represented in the tool: either with a tree or graph layout, or using building blocks (\cref{fig:chp2_visual-editors}).
-
 
 \begin{figure*}[t]
 \centering
@@ -48,9 +55,6 @@ Visual editors were first developed for enhancing and easing the mapping writing
 \label{fig:chp2_visual-editors}
 \end{figure*}
 
-The tree layout (\cref{fig:chp2_visual-editors}a) succeeded in the first approaches developed. 
-The first one was developed for the R$_2$O mapping language in ODEMapster~\parencite{barrasa2006odemapster}, providing a graphical interface to visualize and edit the mappings by link the database elements with the ontology resources. 
-After the release of R2RML, Karma~\parencite{gupta2012karma} and RBA (R2RML by assertion)~\parencite{neto2013rba} were developed for this language. Both work similarly to ODEMapster, with the addition of Karma providing automatic mapping suggestions. 
 
 The graph display (\cref{fig:chp2_visual-editors}b) was later adopted by multiple editors, such as in \cite{lembo2014visualization}, SQuaRE~\parencite{blinkiewicz2016square}, RMLEditor~\parencite{heyvaert2016rmleditor} and Map-On~\parencite{sicilia2017map}. These editors provide a graph overview of the mapping while constructing it, while also showing the data sources and ontology. All of them are able to create R2RML mappings, and in addition, the RMLEditor can also produce RML mappings. There are also non open-source editors developed by companies that use a graph layout, such as \url{gra.fo}\cref{foot:gra.fo} and the Stardog designer\cref{foot:stardog-designer}. The former works with R2RML, and the latter with the Stardog proprietary syntax, SMS2, described in the next section. 
 
