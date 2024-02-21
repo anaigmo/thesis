@@ -3,18 +3,48 @@
 
 %This chapter presents the conclusions derived from the work presented in this thesis as well as the future lines of research. 
 
-The overall objective of this thesis is to improve the mapping languages regarding expressiveness, usage and adoption to comply with the current evolving needs in knowledge graph construction from heterogeneous data sources. To that end, we focus on three specific objectives: (i) understanding and gathering the current needs for KG construction, supporting the evolution of mapping languages to address them; (ii) helping knowledge engineers and domain experts to build mapping documents, providing the means for a user-friendly experience; and (iii) assessing the value of declarative mapping technologies for supporting KGs in their evolution. These objectives are fulfilled with the contributions presented in the thesis.
+The overall objective of this thesis is to improve the mapping languages for knowledge graph construction from heterogeneous data sources regarding expressiveness, usage and adoption to comply with the current evolving need. To that end, we focus on three specific objectives: (i) understanding and gathering the current needs for KG construction, supporting the evolution of mapping languages to address them; (ii) helping knowledge engineers and domain experts to build mapping documents, providing the means for a user-friendly experience; and (iii) assessing the value of declarative mapping technologies for supporting KGs in their evolution. These objectives are fulfilled with the contributions presented in the thesis.
 
 
 %% (i) understanding and gathering the current needs for KG construction, supporting the evolution of mapping languages to address them;
 % Framwork, CM y RML-star
-Lo primero de todo, diseñamos y ejecutamos un comparison framework. Esto trajo beneficios sentando las bases de la tesis: analizamos las posibilidades y features de mucha variedad de lenguajes, basados en distintos esquemas y diseñados para distintos casos de uso, tanto recientes como más antiguos. Esto dio mucha perspectiva, ya que permite entender  las partes comunes y su fin último, las diferencias y motivaciones que llevaron a su desarrollo, y cómo han ido evolucionando con las necesidades cada vez más exigentes para llegar a más casos de uso. Tanto de aquí como de ver las inquietudes de la comunidad al final se llegaron a una serie de requisitos. Estos requisitos se implementaron como una ontología, recogiendo la expresividad de distintos lenguajes y extendiendola con los challenges que se habían encontrado, abriendo la puerta a una posible interoperabilidad entre ellos. El encontrar nuevos retos y features aun no cubiertas en actuales lenguajes utilizados motivó la colaboración con el CG para implementar en RML la extensión para generar RDF-star graphs, RML-star. De esta forma, seguimos trabajando en estas tecnologías para poder cubrir cada vez más casos de usos reales, estando actualizados con las necesidades actuales según las semweb technologies avanzan alrededor
+Regarding the first objective, we first conducted an \textbf{analysis of the state of the art mapping specifications, presented as a comparison framework}. 
+We studied the characteristics of diverse mapping languages, a total of 16, based on different schemas (RDF and SPARQL mainly, among others), both pioneers and recent ones. 
+We evaluated their features regarding data source and access description, triple generation and additional features (such as data transformation functions, linking rules, conditions, named graphs, etc.). 
+This analysis shed light on the understanding of these languages. It establishes the basis of the thesis, allowing us to identify the shared characteristics and their ultimate goal, their differential capabilities and the motivation behind them, as well as how the needs have evolved and the new language releases and extensions with them.
+
+From this analysis, \textbf{a set of requirements for KG construction was extracted and enriched with the concerns from the community}, published as mapping challenges. 
+These requirements were implemented in the Conceptual Mapping ontology gathering the expressiveness of the analysed languages and extending them with open challenges. This showcase how the requirements can be implemented in RDF-based languages, and it opens the door to language interoperability. 
+However, not all the features and capabilities of SPARQL-based languages could be implemented, as they can specify "instructions" for KG construction in a similar way that procedural languages do, and it is out of the scope for representing them in an ontology. 
+The ontology was evaluated by validating that the features provided in the language can address the set of requirements. 
+
+The evolution of the set of requirements in KGC led to the \textbf{development of RML-star, an extension for of RML for constructing RDF-star graphs}, which has become a module of the new RML release. 
+This module was developed along with a set of test cases, used to evaluate the conformance of an engine with respect to the language specification. 
+The proposal was validated with two use cases, with data from (i) biomedical research literature and (ii) scientific software metadata extraction. 
+The language could satisfy the needs of both use cases, thus reporting that it can successfully describe the generation of RDF-star graphs. 
+
+Throughout the development of these contributions, we learned that despite the wide variety of mapping languages, there is still a need to improve their capabilities. The declarative approach that they allow for constructing KGs brings a set of benefits, but they are still far from being as powerful as if the process was done with procedural languages (i.e. programming scripts). Not only that, but the semantic technologies are not static, they keep on evolving, so there is a continuous need to be keep up with them. In the past few years, a community came together to tackle this issue, with the objective of identify and overcome current limitations in the languages to produce a resource that can address more complex use cases, and that can be useful for a broader community of users. \ana{las ideas están desorganizadas, pero importancia en la comunidad, ideas y visiones distintas para llegar a una abstracción lo mas versátil posible, sin caer en islas como estaban anteriormente los lenguajes. }
+
+%Lo primero de todo, diseñamos y ejecutamos un comparison framework. Esto trajo beneficios sentando las bases de la tesis: analizamos las posibilidades y features de mucha variedad de lenguajes, basados en distintos esquemas y diseñados para distintos casos de uso, tanto recientes como más antiguos. Esto dio mucha perspectiva, ya que permite entender  las partes comunes y su fin último, las diferencias y motivaciones que llevaron a su desarrollo, y cómo han ido evolucionando con las necesidades cada vez más exigentes para llegar a más casos de uso. 
+%Tanto de aquí como de ver las inquietudes de la comunidad al final se llegaron a una serie de requisitos. Estos requisitos se implementaron como una ontología, recogiendo la expresividad de distintos lenguajes y extendiendola con los challenges que se habían encontrado, abriendo la puerta a una posible interoperabilidad entre ellos. 
+%El encontrar nuevos retos y features aun no cubiertas en actuales lenguajes utilizados motivó la colaboración con el CG para implementar en RML la extensión para generar RDF-star graphs, RML-star. 
+%De esta forma, seguimos trabajando en estas tecnologías para poder cubrir cada vez más casos de usos reales, estando actualizados con las necesidades actuales según las semweb technologies avanzan alrededor
+%como reflexión, importancia de comunidad, distintas perspectivas y casos de uso para hacer los recursos lo más generales y útiles posibles, y para el soporte para no quedarnos atrás y seguir siendo competitivos con los otros approaches no declarativos para crear grafos
+
+
+% historia/motivación de cómo se ha llegado a esa contribución
+% qué se ha hecho
+% cómo se ha validado/evaluado
+% qué se ha conseguido con ello
+
 
 
 
 %% (ii) helping knowledge engineers and domain experts to build mapping documents, providing the means for a user-friendly experience
 % Spreadsheets, Mapeathor; YARRRML-star y Yatter
-El mayor problema que tienen los mappings es que a la gente le cuesta aprender, aparte la enorme heterogeneidad y falta de interoperabilidad entre ellos no ayuda. Los approaches visuales no han terminado de funcionar y a pesar de la cantidad de editores que se desarrollaron en la pasada de´cada especialmente para R2RML, no han terminado de cuajar. Las serializaciones sí han tenido más éxito, pero restringen el usuario final, ya que sigue siendo necesario pegarse con una sintaxis que no tiene que ser familiar. Por este motivo se diseñó un approach en un entorno familiar para -todo el mundo-, las spreadsheets, para escribir ahí las reglas de transformación. Este approach permite la creación de reglas en diversos lenguajes, y se evaluó con usuarios con distinto background y expertise para ver si puede llegar a todo el mundo, como es el objetivo. Los resultados son sorprendentemente buenos, y motivan el desarrollo en este sentido, aunque también evidencian las limitaicones actuales y cóm ose puede mejorar la experiencia del usuario para que sea más amena la escritura. Como el objetivo es la adopción, y lo que por ahora se ha adoptado mejor es RML y YARRRML, se ha trabajado en colaboraicón para extender la serialización actual con las nuevas actualizaciones en el lenguaje RML. De esta forma queremos facilitar de diversas formas que estas tecnologías tengan más alcance y sean más accesibles a usuarios de distintos perfiles, para facilitar la transición a los approaches declarativos y estandarizados, evitando los desarrollos ad-hoc.
+El mayor problema que tienen los mappings es que a la gente le cuesta aprender, aparte la enorme heterogeneidad y falta de interoperabilidad entre ellos no ayuda. Los approaches visuales no han terminado de funcionar y a pesar de la cantidad de editores que se desarrollaron en la pasada de´cada especialmente para R2RML, no han terminado de cuajar. Las serializaciones sí han tenido más éxito, pero restringen el usuario final, ya que sigue siendo necesario pegarse con una sintaxis que no tiene que ser familiar. Por este motivo se diseñó un approach en un entorno familiar para -todo el mundo-, las spreadsheets, para escribir ahí las reglas de transformación. Este approach permite la creación de reglas en diversos lenguajes, y se evaluó con usuarios con distinto background y expertise para ver si puede llegar a todo el mundo, como es el objetivo. Los resultados son sorprendentemente buenos, y motivan el desarrollo en este sentido, aunque también evidencian las limitaicones actuales y cómo se puede mejorar la experiencia del usuario para que sea más amena la escritura. Como el objetivo es la adopción, y lo que por ahora se ha adoptado mejor es RML y YARRRML, se ha trabajado en colaboraicón para extender la serialización actual con las nuevas actualizaciones en el lenguaje RML. De esta forma queremos facilitar de diversas formas que estas tecnologías tengan más alcance y sean más accesibles a usuarios de distintos perfiles, para facilitar la transición a los approaches declarativos y estandarizados, evitando los desarrollos ad-hoc.
+
+reflexión: no ha habido suficiente reflexión en qué ha ido mal para que los lenguajes sean tan costosos de aprender, hasta para expertos en semweb, y claramente no se han tenido muy en cuenta las preferencias del usuario cuando de todos los editores no hay ninguno qeue haya tenido éxito. Para que tenga sentido el seguir avanzando con los lenguajes no podemos olvidarnos de facilitar al usuario su uso, 
 
 
 
@@ -23,11 +53,25 @@ El mayor problema que tienen los mappings es que a la gente le cuesta aprender, 
 
 Recapitulando de lo anterior, en cada parte hay un problema distinto que lleva como consecuencia la dificultad en adopción. Uno con limitaciones para construction, otro barrera de aprendizaje. Aunque esto cada vez va mejorando, muchas veces falta motivación en cómo puede mejroar todo esto el ciclo de vida de un KG. Se ha trabajado duramente para optimizar el proceso de construcción, describir data transformation rules, el output... Dejando la ejecución en manos de herramientas optimizadas para ello (ya que también se ha trabajdo en estas optimizaciones). Aunque el foco está en la construcción, también puede ayudar en la re-construcción; en KGs ya creados que tengan que cambiar su estructura. Para grandes volumenes de datos estos approaches se ha visto que son mejores que con tripelstores, y llevan menos problemas a la hora de hacer el cambio de estructura: las optimizaciones en las queries son un problema y solo expertos las saben; mientras que con mappings pues no pasa eso. 
 
+reflexión: 
 
 %% FUTURE WORK
 
+Following, we present some open challenges and issues that have not been addressed in the thesis, or that have come out as a consequence of the advances proposed in it. 
 
+* can languages rdf-based be ever as expressive as sparql-based? or ad-hoc code?
 
+* governance for mappings?
+
+* keep up to date the user-friendly approaches with the new RML release, for now the implementation of the new modules is limited bc the change at the time of writing
+
+* to increase interoperability and backwards compatibility, implement translations between new and old spec. The new spec may not address all limitations identified, but it is expressive enough to deal with more use cases and it'd be easier to serve as reference translation point for the other currently used languages
+
+* estudiados cambios en reificaciones, pero no todos los cambios posibles que puedan afectar más tb en cómo se escriben los mappings o qué contengan
+
+* de representaciones y consumption. toda la tesis se centra en la parte de construcción, pero es solo una parte más del ciclo de vida de los KGs. Aprender de cómo se usan, cambiar representación según cuál sea más eficienta para cada tarea concreta
+
+* mirar cómo pueden mejorar los declarative approaches la transparencia del KG en ciclo de vida, para todo el proceso (paper ME y mirar el de review de K-CAP)
 
  %% frase más general que enmarque las tres partes?
 %remark value
