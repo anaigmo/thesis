@@ -96,21 +96,32 @@ In this chapter we present a summary of the contributions, how they meet the obj
 
 Following, we present some open challenges and issues that have not been addressed in the thesis, or that have appeared during or as a consequence of the advances proposed in it. 
 
-\textcolor{shamrockgreen}{* can languages rdf-based be ever as expressive as sparql-based? or ad-hoc code?}
+%\textcolor{shamrockgreen}{* de representaciones y consumption. toda la tesis se centra en la parte de construcción, pero es solo una parte más del ciclo de vida de los KGs. Aprender de cómo se usan, cambiar representación según cuál sea más eficienta para cada tarea concreta}
 
-Regarding mapping languages and their capability to fully address current KG construction needs, we think there is still room for improvement in terms of expressiveness. Specially RDF-based languages have limitations in how they can represent the transformation, a limitation that for SPARQL-based languages is soften. 
+%\textcolor{shamrockgreen}{* can languages rdf-based be ever as expressive as sparql-based? or ad-hoc code?}
 
-\textcolor{shamrockgreen}{* keep up to date the user-friendly approaches with the new RML release, for now the implementation of the new modules is limited bc the change at the time of writing. look more into the preferences of users! kinda forgotten lately}
+%\textcolor{shamrockgreen}{* keep up to date the user-friendly approaches with the new RML release, for now the implementation of the new modules is limited bc the change at the time of writing. look more into the preferences of users! kinda forgotten lately}
 
-\textcolor{shamrockgreen}{* to increase interoperability and backwards compatibility, implement translations between new and old spec. The new spec may not address all limitations identified, but it is expressive enough to deal with more use cases and it'd be easier to serve as reference translation point for the other currently used languages}
+%\textcolor{shamrockgreen}{* to increase interoperability and backwards compatibility, implement translations between new and old spec. The new spec may not address all limitations identified, but it is expressive enough to deal with more use cases and it'd be easier to serve as reference translation point for the other currently used languages}
 
-\textcolor{shamrockgreen}{* estudiados cambios en reificaciones, pero no todos los cambios posibles que puedan afectar más tb en cómo se escriben los mappings o qué contengan}
+%\textcolor{shamrockgreen}{* estudiados cambios en reificaciones, pero no todos los cambios posibles que puedan afectar más tb en cómo se escriben los mappings o qué contengan}
 
-\textcolor{shamrockgreen}{* de representaciones y consumption. toda la tesis se centra en la parte de construcción, pero es solo una parte más del ciclo de vida de los KGs. Aprender de cómo se usan, cambiar representación según cuál sea más eficienta para cada tarea concreta}
+%\textcolor{shamrockgreen}{* mirar cómo pueden mejorar los declarative approaches la transparencia del KG en ciclo de vida, para todo el proceso (paper ME y mirar el de review de K-CAP)}
 
-\textcolor{shamrockgreen}{* mirar cómo pueden mejorar los declarative approaches la transparencia del KG en ciclo de vida, para todo el proceso (paper ME y mirar el de review de K-CAP)}
+%\textcolor{shamrockgreen}{* governance for mappings?}
 
-\textcolor{shamrockgreen}{* governance for mappings?}
+%\textcolor{shamrockgreen}{* LLMs for facilitating the process}
+
+To be able to progress in declarative KGC technologies, there are three essential factors involved: (i) knowing which are the technical necessities for constructing KGs, (ii) acknowledging the needs of the target audience that is going to use them and (iii) developing technologies and resources able to meet the needs gathered in (i) and (ii). 
+Despite the recent efforts in gathering the technical necessities, this is an on-going line of work that will continue in the future. While the semantic technologies advance and evolve, there will always be the need to keep up to date to produce KGs able to serve the tasks they are created for. The needs and preferences of users, specially with non-technical profiles, need to be put in the center. We need to learn from previous success and failure stories to put the efforts into developments easier to adopt and keep expanding the community of users into a broader audience. %\textit{Getting closer or learning from the HCI disciplines, integrate current developments with widely used implementations (wikimedia stuff)} 
+
+Regarding mapping languages and their capability to fully address current KG construction needs, we think there is still room for improvement in terms of expressiveness. Specially RDF-based languages have limitations in how they can represent the transformation, a limitation that for SPARQL-based languages is soften. Currently, there have been progresses in this regard with the collaboration with the KGC CG in addressing plenty of the identify challenges. We believe that keeping up the collaboration with a heterogeneous community with different backgrounds, perspectives and use cases in collaboration will lead to a resource available and useful for an increasingly wider audience.
+
+There is also plenty of room for improvement is the adoption of declarative approaches for KGC. A key aspect of this issue is demonstrating the overall benefits compared to ad-hoc approaches. In this regard, this thesis is focused on the evolution step of the KG life cycle in a restricted scenario: change of schema from different statement reification approaches. There are studies showing the differential performance of KGC engines based on the characteristics of the mappings. We need to study these changes further, considering also changes in the data and not only the KG schema, to assess their role in a wider set of evolution scenarios. We are also keen in assessing further their role for empowering the transparency of workflows supporting the KG life cycle.
+
+Lastly, the recent success of Large Language Models (LLM) opens the door to multiple possibilities. This models can be suitable for enhancing different tasks during the KG life cycle, from the development of ontologies, to the KG construction and usage. In particular, they have proven successful for user interaction, which can in particular help in KG consumption and enrolment of users in the KG development process.
+
+
 
  %% frase más general que enmarque las tres partes?
 %remark value
