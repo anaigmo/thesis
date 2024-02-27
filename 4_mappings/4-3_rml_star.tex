@@ -288,69 +288,91 @@ ex:oeg-upm/Widoco :description "Wizard for documenting ontologies. WIDOCO is ...
 
 
 \noindent\textbf{\textit{Biomedical Research Literature.}} 
-SemMedDB~\parencite{SemMedDB}, the Semantic MEDLINE Database, is a repository 
-that contains information on extracted biomedical entities 
-and predications (subject-predicate-object triples) 
-from biomedical texts (titles and abstracts from PubMed citations). 
-%consists of a set of triples and annotations automatically extracted from PubMed titles, abstracts, and citations. 
-%a set of data sources with automatic semantic annotations from titles and abstracts of citations available in PubMed.
-The tables comprising SemMedDB are available for download as a relational database or CSV files\footnote{ \url{https://lhncbc.nlm.nih.gov/ii/tools/SemRep_SemMedDB_SKR/SemMedDB_download.html}}.
-We downloaded the MySQL files for (1)~predication predictions (PREDICATION and PREDICATION\_AUX tables), containing more than 117 million annotations; and (2)~entity predictions (ENTITY table), which include more than 410 million annotations.
+%SemMedDB~\parencite{SemMedDB}, the Semantic MEDLINE Database, is a repository 
+%that contains information on extracted biomedical entities 
+%and predications (subject-predicate-object triples) 
+%from biomedical texts (titles and abstracts from PubMed citations). 
+%%%consists of a set of triples and annotations automatically extracted from PubMed titles, abstracts, and citations. 
+%%%a set of data sources with automatic semantic annotations from titles and abstracts of citations available in PubMed.
+%The tables comprising SemMedDB are available for download as a relational database or CSV files\footnote{ \url{https://lhncbc.nlm.nih.gov/ii/tools/SemRep_SemMedDB_SKR/SemMedDB_download.html}}.
+%We downloaded the MySQL files for (1)~predication predictions (PREDICATION and PREDICATION\_AUX tables), containing more than 117 million annotations; and (2)~entity predictions (ENTITY table), which include more than 410 million annotations.
+%Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{lst:chp4_semmeddb_predaux} illustrate the columns used from the tables with synthetic data. 
+%For predications, only data for subjects is shown; the missing columns regarding objects follow the same structure as subjects.
+%%This data contains information on predicted entities and predicted subject-predicate-object predications.
+%Subjects and objects, from predications, and entities are assigned a semantic type 
+%(that categorizes the extracted concept in the biomedical domain) annotated with a confidence score. 
+%In addition, the extraction of subjects and objects is assigned a timestamp on when it took place. 
+%Thus, the score and timestamp represent metadata about other statements.
+%We created an RML-star mapping with 5 triples maps quoting triples:
+%3 of them are used to annotate the assignation of semantic types to entities, subjects, and objects with confidence scores;
+%the remaining 2 provide the timestamps for the extraction of subjects and objects. 
+The Semantic MEDLINE Database (SemMedDB)~\parencite{SemMedDB} is a repository with biomedical entities and relationships (subject-predicate-object) extracted from biomedical texts, mainly titles and abstracts from PubMed citations. 
+This dataset is available as a relational database and CSV files\footnote{\url{https://lhncbc.nlm.nih.gov/ii/tools/SemRep\_SemMedDB\_SKR/SemMedDB\_down\-load.html}}.
+It is licensed under the UMLS - Metathesaurus License Agreement\footnote{\url{https://www.nlm.nih.gov/research/umls/knowledge\_sources/metathesaurus/release\-/license\_agreement.html}}, which does not allow its distribution, but it may be accessed with an account with the UMLS license.\footnote{An account with the UMLS license can be requested at \url{https://www.nlm.nih.gov/databases/umls.html}.}
+We downloaded the MySQL files for (1)~\textit{predication} predictions (PREDICATION and PREDICATION\_AUX tables), containing more than 117 million annotations; and (2)~\textit{entity} predictions (ENTITY table), which include more than 410 million annotations.
 Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{lst:chp4_semmeddb_predaux} illustrate the columns used from the tables with synthetic data. 
-For predications, only data for subjects is shown; the missing columns regarding objects follow the same structure as subjects.
+%We use the CSV files for (i)~\textit{entity} predictions (from ENTITY.csv), and (ii)~\textit{predication} predictions (from PREDICATION.csv and PREDICATION\_AU\-X.csv). 
+%Listings~\ref{lst:chp6-1_semmeddb_entity},~\ref{lst:chp6-1_semmeddb_pred} and~\ref{lst:chp6-1_semmeddb_predaux} illustrate the columns used from the files with synthetic data.
+For \textit{predications}, only data for \textit{subjects} is shown; the missing columns regarding \textit{objects} follow the same structure as \textit{subjects}.
 %This data contains information on predicted entities and predicted subject-predicate-object predications.
-Subjects and objects, from predications, and entities are assigned a semantic type 
-(that categorizes the extracted concept in the biomedical domain) annotated with a confidence score. 
-In addition, the extraction of subjects and objects is assigned a timestamp on when it took place. 
-Thus, the score and timestamp represent metadata about other statements.
+\textit{Subjects} and \textit{objects} (from \textit{predications}), and \textit{entities} are assigned a \textit{semantic type} with a confidence score.
+These \textit{semantic types} categorize the extracted concept in the biomedical domain.\footnote{\url{https://www.nlm.nih.gov/research/umls/new\_users/online\_learning/SEM\_003.html}}
+In addition, the extraction of \textit{subjects} and \textit{objects} is assigned a timestamp on when it took place. 
+Thus, the score and timestamp represent metadata about other statements, which are fit to represent using reification.
 We created an RML-star mapping with 5 triples maps quoting triples:
-3 of them are used to annotate the assignation of semantic types to entities, subjects, and objects with confidence scores;
-the remaining 2 provide the timestamps for the extraction of subjects and objects. 
+3 of them are used to annotate the assignation of \textit{semantic types} to \textit{entities}, \textit{subjects}, and \textit{objects} with confidence scores;
+the remaining 2 provide the timestamps for the extraction of \textit{subjects} and \textit{objects}. 
 
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_semmeddb_entity}{ENTITY table snippet.}
+%We model this tabular dataset as five annotated statements: 
+%Three assign \textit{semantic types} to \textit{subjects}, \textit{objects}, and \textit{entities} with a confidence score; and two provide the timestamp for the extraction of \textit{subjects} and \textit{objects} from text.  
+
+
+\noindent\begin{minipage}{0.42\linewidth}
+\begin{captionedlisting}{lst:chp4_semmeddb_entity}{ENTITY.csv snippet.}
 \centering
 \begin{tabular}{c}
-%\hspace{5em}
+\hspace{-0.7em}
 {
-\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
+\begin{lstlisting}[basicstyle=\ttfamily\small,label={lst:chp6-1_semmeddb_entity},columns=flexible]
 ENTITY_ID , SEMTYPE , SCORE
-12345     , orga    , 790
+12345      , orga     , 790
+\end{lstlisting}
+}
+\end{tabular}
+\end{captionedlisting}
+\end{minipage}
+\,\,\,\,\hfill
+\begin{minipage}{0.58\linewidth}
+\begin{captionedlisting}{lst:chp4_semmeddb_pred}{PREDICATION.csv snippet.}
+\centering
+\begin{tabular}{c}
+\hspace{-1em}
+{
+\begin{lstlisting}[basicstyle=\ttfamily\small,label={lst:chp6-1_semmeddb_pred},columns=flexible]
+PREDICATION_ID , SUBJ_SEMTYPE , SUBJ_NAME
+13579            , Semtype       , SubjName
 \end{lstlisting}
 }
 \end{tabular}
 \end{captionedlisting}
 \end{minipage}
 
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_semmeddb_pred}{PREDICATION table snippet.}
+
+\noindent\hspace{0.23\linewidth}\begin{minipage}{\linewidth}
+\begin{captionedlisting}{lst:chp4_semmeddb_predaux}{PREDICATION\_AUX.csv snippet.}
 \centering
 \begin{tabular}{c}
-%\hspace{-1em}
+\hspace{-7em}
 {
-\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-PREDICATION_ID , SUBJECT_SEMTYPE , SUBJECT_NAME
-13579          , Semtype         , SubjName
+\begin{lstlisting}[basicstyle=\ttfamily\small,label={lst:chp6-1_semmeddb_predaux},columns=flexible]
+PREDICATION_AUX_ID , PREDICATION_ID , SUBJ_SCORE , TIMESTAMP
+67890                , 13579            , 800         , 1651740766
 \end{lstlisting}
 }
 \end{tabular}
 \end{captionedlisting}
 \end{minipage}
 
-\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_semmeddb_predaux}{PREDICATION\_AUX table snippet.}
-\centering
-\begin{tabular}{c}
-%\hspace{-7em}
-{
-\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-PREDICATION_AUX_ID, PREDICATION_ID, SUBJECT_SCORE, TIMESTAMP
-67890             , 13579         , 800          , 1651740766
-\end{lstlisting}
-}
-\end{tabular}
-\end{captionedlisting}
-\end{minipage}
 
 \begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_semmeddb_triples}{RDF-star triples generated from data in Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{lst:chp4_semmeddb_predaux}.}

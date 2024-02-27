@@ -71,24 +71,26 @@ All resources to reproduce the experiments are available on GitHub\footnote{\url
 \subsection{Dataset}
 \label{sec:chp6-1_dataset}
 
-\ana{ojo que esta sección es como para la de rml-star, repetir o referenciar?}
+%\ana{ojo que esta sección es como para la de rml-star, repetir o referenciar?}
 
-We use the Semantic MEDLINE Database (SemMedDB)~\parencite{SemMedDB} in the experimental evaluation. This database consists of a repository with biomedical entities and relationships (subject-predicate-object) extracted from biomedical texts.
+We use the Semantic MEDLINE Database (SemMedDB)~\parencite{SemMedDB} in the experimental evaluation. This database consists of a repository with biomedical entities and relationships (subject-predicate-object) extracted from biomedical texts. The complete description of this dataset can be found in the \textit{Biomedical Research Literature} use case in \cref{sec:chp4_star_usecases}. Listings~\ref{lst:chp6-1_semmeddb_entity},~\ref{lst:chp6-1_semmeddb_pred} and~\ref{lst:chp6-1_semmeddb_predaux} illustrate the columns used from the files with synthetic data.
+We use the CSV files to model the dataset as five annotated statements: 
+Three assign \textit{semantic types} to \textit{subjects}, \textit{objects}, and \textit{entities} with a confidence score; and two provide the timestamp for the extraction of \textit{subjects} and \textit{objects} from text. 
 %, mainly titles and abstracts from PubMed citations. 
-This dataset is available as a relational database and CSV files.\footnote{\url{https://lhncbc.nlm.nih.gov/ii/tools/SemRep\_SemMedDB\_SKR/SemMedDB\_down\-load.html}}
-It is licensed under the UMLS - Metathesaurus License Agreement,\footnote{\url{https://www.nlm.nih.gov/research/umls/knowledge\_sources/metathesaurus/release\-/license\_agreement.html}} which does not allow its distribution, but it may be accessed with an account with the UMLS license.\footnote{An account with the UMLS license can be requested at \url{https://www.nlm.nih.gov/databases/umls.html}.}
+%This dataset is available as a relational database and CSV files.\footnote{\url{https://lhncbc.nlm.nih.gov/ii/tools/SemRep\_SemMedDB\_SKR/SemMedDB\_down\-load.html}}
+%It is licensed under the UMLS - Metathesaurus License Agreement,\footnote{\url{https://www.nlm.nih.gov/research/umls/knowledge\_sources/metathesaurus/release\-/license\_agreement.html}} which does not allow its distribution, but it may be accessed with an account with the UMLS license.\footnote{An account with the UMLS license can be requested at \url{https://www.nlm.nih.gov/databases/umls.html}.}
 
 
-We use the CSV files for (i)~\textit{entity} predictions (from ENTITY.csv), and (ii)~\textit{predication} predictions (from PREDICATION.csv and PREDICATION\_AU\-X.csv). Listings~\ref{lst:chp6-1_semmeddb_entity},~\ref{lst:chp6-1_semmeddb_pred} and~\ref{lst:chp6-1_semmeddb_predaux} illustrate the columns used from the files with synthetic data.
-For \textit{predications}, only data for \textit{subjects} is shown; the missing columns regarding \textit{objects} follow the same structure as \textit{subjects}.
+%We use the CSV files for (i)~\textit{entity} predictions (from ENTITY.csv), and (ii)~\textit{predication} predictions (from PREDICATION.csv and PREDICATION\_AU\-X.csv). Listings~\ref{lst:chp6-1_semmeddb_entity},~\ref{lst:chp6-1_semmeddb_pred} and~\ref{lst:chp6-1_semmeddb_predaux} illustrate the columns used from the files with synthetic data.
+%For \textit{predications}, only data for \textit{subjects} is shown; the missing columns regarding \textit{objects} follow the same structure as \textit{subjects}.
 %This data contains information on predicted entities and predicted subject-predicate-object predications.
-\textit{Subjects} and \textit{objects} (from \textit{predications}), and \textit{entities} are assigned a \textit{semantic type} with a confidence score.
-These \textit{semantic types} categorize the extracted concept in the biomedical domain.\footnote{\url{https://www.nlm.nih.gov/research/umls/new\_users/online\_learning/SEM\_003.html}}
-In addition, the extraction of \textit{subjects} and \textit{objects} is assigned a timestamp on when it took place. 
-Thus, the score and timestamp represent metadata about other statements, which are fit to represent using reification.
+%\textit{Subjects} and \textit{objects} (from \textit{predications}), and \textit{entities} are assigned a \textit{semantic type} with a confidence score.
+%These \textit{semantic types} categorize the extracted concept in the biomedical domain.\footnote{\url{https://www.nlm.nih.gov/research/umls/new\_users/online\_learning/SEM\_003.html}}
+%In addition, the extraction of \textit{subjects} and \textit{objects} is assigned a timestamp on when it took place. 
+%Thus, the score and timestamp represent metadata about other statements, which are fit to represent using reification.
 
-We model this tabular dataset as five annotated statements: 
-Three assign \textit{semantic types} to \textit{subjects}, \textit{objects}, and \textit{entities} with a confidence score; and two provide the timestamp for the extraction of \textit{subjects} and \textit{objects} from text.  
+%We model this tabular dataset as five annotated statements: 
+%Three assign \textit{semantic types} to \textit{subjects}, \textit{objects}, and \textit{entities} with a confidence score; and two provide the timestamp for the extraction of \textit{subjects} and \textit{objects} from text.  
 
 
 \noindent\begin{minipage}{0.42\linewidth}
@@ -120,6 +122,7 @@ PREDICATION_ID , SUBJ_SEMTYPE , SUBJ_NAME
 \end{tabular}
 \end{captionedlisting}
 \end{minipage}
+
 
 \noindent\hspace{0.23\linewidth}\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp6-1_semmeddb_predaux}{PREDICATION\_AUX.csv snippet.}
