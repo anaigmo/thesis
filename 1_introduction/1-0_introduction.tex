@@ -110,7 +110,7 @@ In addition, since each language is processed by different engines with differen
 Hence, \textbf{it is required to improve the interoperability between existing mapping languages} and bridge the gap between user-friendly mapping creation and existing KG construction implementations. 
 
 
-\ana{orientar a: si se ha estudiado como mejoran el proceso desde este ey este sentido, pero no si intervienen en la evolución}
+%\ana{orientar a: si se ha estudiado como mejoran el proceso desde este ey este sentido, pero no si intervienen en la evolución}
 
 The technologies revolving mappings are a suitable for composing modular, automated approaches to be integrated into larger pipelines that manage knowledge graphs~\parencite{simsek2021knowledge,cimmino2022helio,grassi2023composable}. 
 However, these declarative approaches can play an important role in other different tasks of the life cycle apart from the construction. 
@@ -118,14 +118,13 @@ For instance, they enable metadata annotation about the data sources, which can 
 data processing and cleaning, thanks to the inclusion of data transformation functions in the language~\parencite{debruyne2016r2rmlf,junior2016funul,jozashoori2020funmap,DeMeester2017fno_dbpedia}.
 However, \textbf{ there is a lack of research to assess how these technologies can be involved not only the construction of knowledge graphs, but also the beneficial role they can play in their evolution}.
 
-\ana{terminar con un párrafo (como patri): In general, this thesis aims to ... Eso o que sea el que inicie la siguiente sección.}
 
 %\textcolor{red}{However, these technologies are relatively recent, and as mentioned before, struggle with a wider adoption. Still, the last few years have witnessed an increased effort for being refined and optimized~\parencite{calvanese2017ontop,chaves2019parameters,arenas2022morphkgc,iglesias2023scaling}, to reduce the learning curve and to prove their benefits with respect to ad-hoc approaches~\parencite{iglesias2019bio2rdf}. }
 
 
 \section{Main contributions}
 
-The contributions of this thesis are listed below, organized according to the main thesis objectives:
+The overall objective of this thesis is advance the state of the art of declarative knowledge graph construction technologies regarding support in language expressiveness, mapping writing and their role in the evolution of knowledge graphs. The contributions of this thesis are listed below, organized according to the main thesis sub-objectives:
 
 \begin{enumerate}
     \item The first objective consists of gathering, understanding and implementing the current needs for knowledge graph construction from heterogeneous data sources with mapping languages. 
@@ -146,10 +145,10 @@ The contributions of this thesis are listed below, organized according to the ma
         \item \textbf{The update of the user-friendly serialization YARRRML for RML}, incorporating the latest features of the language, along with the compliant tool Yatter to translate them into readable [R2]RML mapping files. 
     \end{itemize}
 
-    \item The third objective consists of assessing the role of mapping-compliant technologies to support the evolution of knowledge graphs.
+    \item The third objective consists of assessing the role of declarative KG construction technologies to support the evolution of knowledge graphs.
 
     \begin{itemize}
-        \item \textbf{An evaluation of mapping-compliant systems with well-known triplestores performing re-construction of knowledge graphs} with different metadata representation models. We test the performance of each approach and the features needed for re-constructing each representation to evaluate which approach is more suitable in each case. 
+        \item \textbf{An evaluation of declarative KG construction technologies with well-known triplestores performing re-construction of knowledge graphs} with different metadata representation models. We test the performance of each approach and the features needed for re-constructing each representation to evaluate which approach is more suitable in each case. This study sheds light on how KG construction technologies can be beneficial in supporting the evolution of knowledge graphs.
     \end{itemize}
 \end{enumerate}
 

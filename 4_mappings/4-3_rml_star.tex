@@ -316,7 +316,7 @@ Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{l
 For \textit{predications}, only data for \textit{subjects} is shown; the missing columns regarding \textit{objects} follow the same structure as \textit{subjects}.
 %This data contains information on predicted entities and predicted subject-predicate-object predications.
 \textit{Subjects} and \textit{objects} (from \textit{predications}), and \textit{entities} are assigned a \textit{semantic type} with a confidence score.
-These \textit{semantic types} categorize the extracted concept in the biomedical domain.\footnote{\url{https://www.nlm.nih.gov/research/umls/new\_users/online\_learning/SEM\_003.html}}
+These \textit{semantic types} categorize the extracted concept in the biomedical domain\footnote{\url{https://www.nlm.nih.gov/research/umls/new\_users/online\_learning/SEM\_003.html}}.
 In addition, the extraction of \textit{subjects} and \textit{objects} is assigned a timestamp on when it took place. 
 Thus, the score and timestamp represent metadata about other statements, which are fit to represent using reification.
 We created an RML-star mapping with 5 triples maps quoting triples:
@@ -328,14 +328,14 @@ the remaining 2 provide the timestamps for the extraction of \textit{subjects} a
 
 
 \noindent\begin{minipage}{0.42\linewidth}
-\begin{captionedlisting}{lst:chp4_semmeddb_entity}{ENTITY.csv snippet.}
+\begin{captionedlisting}{lst:chp4_semmeddb_entity}{ENTITY table snippet.}
 \centering
 \begin{tabular}{c}
 \hspace{-0.7em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={lst:chp6-1_semmeddb_entity},columns=flexible]
 ENTITY_ID , SEMTYPE , SCORE
-12345      , orga     , 790
+12345     , orga    , 790
 \end{lstlisting}
 }
 \end{tabular}
@@ -343,14 +343,14 @@ ENTITY_ID , SEMTYPE , SCORE
 \end{minipage}
 \,\,\,\,\hfill
 \begin{minipage}{0.58\linewidth}
-\begin{captionedlisting}{lst:chp4_semmeddb_pred}{PREDICATION.csv snippet.}
+\begin{captionedlisting}{lst:chp4_semmeddb_pred}{PREDICATION table snippet.}
 \centering
 \begin{tabular}{c}
 \hspace{-1em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={lst:chp6-1_semmeddb_pred},columns=flexible]
 PREDICATION_ID , SUBJ_SEMTYPE , SUBJ_NAME
-13579            , Semtype       , SubjName
+13579          , Semtype      , SubjName
 \end{lstlisting}
 }
 \end{tabular}
@@ -359,14 +359,14 @@ PREDICATION_ID , SUBJ_SEMTYPE , SUBJ_NAME
 
 
 \noindent\hspace{0.23\linewidth}\begin{minipage}{\linewidth}
-\begin{captionedlisting}{lst:chp4_semmeddb_predaux}{PREDICATION\_AUX.csv snippet.}
+\begin{captionedlisting}{lst:chp4_semmeddb_predaux}{PREDICATION\_AUX table snippet.}
 \centering
 \begin{tabular}{c}
-\hspace{-7em}
+\hspace{-5em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={lst:chp6-1_semmeddb_predaux},columns=flexible]
 PREDICATION_AUX_ID , PREDICATION_ID , SUBJ_SCORE , TIMESTAMP
-67890                , 13579            , 800         , 1651740766
+67890              , 13579          , 800        , 1651740766
 \end{lstlisting}
 }
 \end{tabular}
@@ -374,11 +374,11 @@ PREDICATION_AUX_ID , PREDICATION_ID , SUBJ_SCORE , TIMESTAMP
 \end{minipage}
 
 
-\begin{minipage}{\linewidth}
+\noindent\hspace{0.04\linewidth}\begin{minipage}{\linewidth}
 \begin{captionedlisting}{lst:chp4_semmeddb_triples}{RDF-star triples generated from data in Listings \ref{lst:chp4_semmeddb_entity}, \ref{lst:chp4_semmeddb_pred} and \ref{lst:chp4_semmeddb_predaux}.}
 \centering
 \begin{tabular}{c}
-%\hspace{-1.5em}
+\hspace{1em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 << ex:12345 sem:semanticType "orga" >> sem:score "790" .
