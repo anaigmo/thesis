@@ -8,11 +8,11 @@
 %\textit{Primera parte: un overview de los lyfe cycles/dev processes propuestos hasta ahora? Comentar las fases comunes, y decidirse por una: que sería una mezcla entre umut's y groth's. Las aprtes que interesan al final van a ser la de knowledge creation/KGconstruction; y la iteración en el mantenimiento, porque son las que involucran los declarative approaches pero se pueden comentar más.  }
 
 
-A high number of knowledge graphs has been released over the years. Along with this adoption, the question arose about which is are processes involved in their life cycle.
+A high number of knowledge graphs has been released over the years. Along with this adoption, the question arose about which are the processes involved in their life cycle.
 \cite{ngomo2014LD-lifecycle} proposed a series of steps that define the life cycle of Linked Data (\cref{fig:chp2_LD-lifecycle}), the term used at the time for referring to knowledge graphs before this term was coined with the release of the Google knowledge graph\footnote{\url{https://blog.google/products/search/introducing-knowledge-graph-things-not/}}. 
 These steps include 
 (i) \textit{Extraction} of information from (semi-)structured and unstructured data sources mapping them to an RDF schema; 
-(ii) \textit{Storage and Querying} of the graph in a graph store; 
+(ii) \textit{Storage and Querying} the graph in a graph store; 
 (iii) \textit{Authoring} for users to create, modify or extend the information in the graph;
 (iv) \textit{Linking} to external related resources;
 (v) \textit{Enrichment} with higher-level structures to aggregate and query data more efficiently;
@@ -65,7 +65,7 @@ All these proposed life cycles share common stages and consider the main similar
     \item \textbf{Maintenance.} The tasks that takes place in this phase tackle the management over time of the knowledge graph, and may involve iterations over any of the tasks previously carried out for their creation and deployment. The objective of this phase is to curate the graph, detect and correct errors and implement new features according to new needs or requirements for evolving the knowledge graph.
 \end{itemize}
 
-The use of declarative mapping approaches have proven valuable for different tasks within the knowledge graph life cycle. The main task for which they were develop is for the \textit{construction} task, relating the input data sources with the target schema to produce the knowledge graph. For this task, a high amount of effort has been made to improve the process (as has been detailed explained over this chapter), for increasing mapping expressiveness (see \cref{sec:chp2_declarative_kgc}), facilitating their creation (see \cref{sec:chp2_easy_kgc}) and for optimizing the use of resources by transformation engines~\parencite{arenas2022morphkgc,iglesias2023scaling,xiao2020virtual,iglesias2022empowering,jozashoori2019mapsdi}. 
+The use of declarative mapping approaches have proven valuable for different tasks within the knowledge graph life cycle. The main task for which they were developed is for \textit{construction}, relating the input data sources with the target schema to produce the knowledge graph. For this task, a high amount of effort has been made to improve the process (as has been detailed explained over this chapter), for increasing mapping expressiveness (see \cref{sec:chp2_declarative_kgc}), facilitating their creation (see \cref{sec:chp2_easy_kgc}) and for optimizing the use of resources by transformation engines~\parencite{arenas2022morphkgc,iglesias2023scaling,xiao2020virtual,iglesias2022empowering,jozashoori2019mapsdi}. 
 
 Apart from the \textit{construction} task, these declarative approaches can play an important role in other different tasks of the life cycle. They enable \textit{metadata annotation} about the data sources (e.g. DCAT in RML, CSVW for tabular files), which can help enhance the process in terms of transparency, completeness and performance~\parencite{chaves2021morph-csv,vidal2023knowledge}. 
 They also allow for \textit{data processing and cleaning}, thanks to the increasing integration of data transformation functions into the languages' features~\parencite{debruyne2016r2rmlf,junior2016funul,jozashoori2020funmap,DeMeester2017fno_dbpedia}.
