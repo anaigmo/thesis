@@ -39,7 +39,7 @@ In order to achieve the second objective, the following research problem must be
 From a technological perspective, the following problem must be solved:
 \begin{itemize}
 
-    \item User-friendly approaches usually involve developing new syntaxes or approaches that are not always directly compliant with KGC systems, what ultimately process mappings and data to produce graphs. In addition, different KGC systems are usually compliant with one single language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages and reduce the barrier adoption enhancing the communication between user-friendly syntaxes and existing KGC implementations.   
+    \item User-friendly approaches usually involve developing new syntaxes or approaches that cannot always be directly process by with KGC systems. In addition, different KGC systems are usually compliant with one single language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages and reduce the barrier adoption enhancing the communication between user-friendly syntaxes and existing KGC implementations.   
 
 \end{itemize}
 
@@ -60,7 +60,7 @@ In this work, we describe the solutions corresponding to the objectives and open
     
     \item[\textbf{C2}] \textbf{Identification, definition and implementation of requirements for knowledge graph construction} from heterogeneous data sources. Based on the analysis performed on the comparison framework, we are able to extract what are the needs for building knowledge graphs, which are possible to achieve with the current languages and which need to be addressed yet. We implement these requirements in a formal language. 
     
-    \item[\textbf{C3}] \textcolor{red}{\textbf{Development of new features for the RML mapping language}} to address the limitations of the language according to the new needs in knowledge graph construction identified. We focus on the development of the extension to create RDF-star graphs. 
+    \item[\textbf{C3}] \textbf{Development of new features for the RML mapping language} to address the limitations of the language according to the new needs in knowledge graph construction identified. We focus on the development of the extension to create RDF-star graphs. 
 \end{enumerate}
 
 Regarding the second objective (to help knowledge engineers and domain experts to build mappings), we present new advances with the following contributions:
@@ -86,7 +86,8 @@ Our work is based on the assumptions listed below. These assumptions provide a b
     \item[\textbf{A1}] Mapping languages provide human readable documentation available online.
     \item[\textbf{A2}] Mapping languages are declarative.
     \item[\textbf{A3}] The schema of knowledge graphs (ontology) used for creating mapping documents is available and implemented in OWL or RDF(S). 
-    \item[\textbf{A4}] Mapping rules can be translated into different languages with information preservation.
+    \item[\textbf{A4}] Mapping rules can be translated into different languages with information preservation. 
+    \item[\textbf{A5}] The evolution of a schema of KGs does not involve changes in the data.
     %\item[\textbf{moar?}] KGs refer to RDF graphs?
 \end{enumerate}
 
@@ -100,7 +101,7 @@ After the identification of the assumptions, we can describe the research hypoth
     \item[\textbf{H1}] Current mapping languages do not cover the entire extension of features required to construct knowledge graphs from heterogeneous data sources.
     \item[\textbf{H2}] It is possible to update  current mapping languages with new features that address the evolving needs in construction of knowledge graphs.
     \item[\textbf{H3}] Writing the mapping rules in spreadsheet environments can improve the user experience for practitioners of different backgrounds for writing mappings reducing errors. 
-    \item[\textbf{H4}] Mapping-compliant technologies can bring benefits in the evolution of knowledge graphs within their life cycle, not only in their construction.
+    \item[\textbf{H4}] Declarative KG construction technologies can bring benefits in the evolution of knowledge graphs within their life cycle.
 \end{enumerate}
 
 
