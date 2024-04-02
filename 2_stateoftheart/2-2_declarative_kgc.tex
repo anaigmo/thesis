@@ -8,7 +8,7 @@ Knowledge graphs can be constructed in diverse manners. One way comprises collec
 %\ana{RAW} In this section, the current scene of mapping languages is described first, regardless of the approach they follow, i.e., RDF materialization or virtualization. Then, previous works comparing mapping languages are surveyed. 
 
 
-Constructing RDF knowledge graphs from heterogeneous data sources involve a schema transformation of the data to the desired graph structure. This transformation may be done in different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises an agnostic approach that can (and has been) applied to multiple different use cases, such as agriculture~\parencite{bilbao2022practical}, public procurement~\parencite{soylu2022theybuyforyou}, biomedicine~\parencite{iglesias2019bio2rdf,michel2020covid,aisopos2023knowledge}, cultural heritage~\parencite{calvanese2016culturalheritage}, IoT~\parencite{cimmino2020ewot,gonzalezgerpe2022extension}, among others.
+Constructing RDF knowledge graphs from heterogeneous data sources involves a schema transformation of the data to the desired graph structure. This transformation may be done in different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises an agnostic approach that can (and has been) applied to multiple different use cases, such as agriculture~\parencite{bilbao2022practical}, public procurement~\parencite{soylu2022theybuyforyou}, biomedicine~\parencite{iglesias2019bio2rdf,michel2020covid,aisopos2023knowledge}, cultural heritage~\parencite{calvanese2016culturalheritage}, IoT~\parencite{cimmino2020ewot,gonzalezgerpe2022extension}, among others.
 
 The usual workflow in which declarative approaches are involved is depicted in \cref{fig:chp2_kgc-workflow}. They enable both materialization and virtualization of knowledge graphs. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source. %\ana{mention OBDA?}
 
@@ -104,9 +104,7 @@ or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms ar
 
 \begin{minipage}{\textwidth}
 \begin{captionedlisting}{lst:chp2_r2rml-result-rdf}{RDF graph resulting from transforming data from the database table shown in \cref{fig:chp2_database-example} using the R2RML mapping in \cref{lst:chp2_r2rml-mapping}.}
-\centering
-\begin{multicols}{2}
-{\begin{lstlisting}[language=r2rml]
+\centering\begin{lstlisting}[language=r2rml]
 ex:athlete/1 a ex:Athlete ;
     ex:name "Armand Duplantis" ;
     ex:rank "1"^^xsd:integer ;
@@ -119,8 +117,7 @@ ex:athlete/3 a ex:Athlete ;
     ex:name "Menno Vloon" ;
     ex:rank "3"^^xsd:integer ;
     ex:mark "5.91"^^xsd:float .
-\end{lstlisting}}
-\end{multicols}
+\end{lstlisting}
 \end{captionedlisting}
 \end{minipage}
 
@@ -149,8 +146,7 @@ The main differences between RML and R2RML~\parencite{dimou2020rml-r2rml-diffs} 
 \begin{captionedlisting}{lst:chp2_json-example}
 {Input "Athletes.json" file with names, ranks and marks for athletes.}
 \centering
-\begin{multicols}{2}
-{\begin{lstlisting}[]
+\begin{lstlisting}[]
 [ { "NAME": "Duplantis",
     "RANK": "1",
     "MARK": "6.22"},
@@ -160,8 +156,7 @@ The main differences between RML and R2RML~\parencite{dimou2020rml-r2rml-diffs} 
   { "NAME": "Vloon",
     "RANK": "3",
     "MARK": "5.91"} ]
-\end{lstlisting}}
-\end{multicols}
+\end{lstlisting}
 \end{captionedlisting}
 \end{minipage}
 
@@ -341,12 +336,14 @@ The results lead authors to divide the mappings into four categories (direct map
 
 More recently, two related systematic reviews were published. \cite{vanassche2023survey} focused specifically on declarative KG construction. This survey analyses the characteristics of mapping languages assessing 15 characteristics for schema transformations and 5 for data transformation; as well as of compliant systems with 14 characteristics. It provides a more in-depth and systematic analysis than previous studies, but it is limited to reviewing peer-reviewed publications. Then, the expressiveness of languages such as R2RML, CSVW or TARQL that lack this kind of publication are not included. The review presented by \cite{ryen2022kgreview} was more limited in extension with respect to \cite{vanassche2023survey}, but broader in scope considering knowledge graph generation and publication. %Finally, \cite{tamavsauskaite2023defining} defines a common set of steps for developing knowledge graphs, based on the processes followed for building and deploying existing knowledge graphs. 
 
+\ana{add takeaway}
+
 \subsection{Interoperability for Mapping Languages}
 \label{sec:chp2_interoperability}
 
-The large amount of mapping languages presented in this section opens the door to a wide range of possibilities for KG construction. The downside of this situation comes with the general lack of interoperability among them. Each mapping processor usually implements one mapping language, therefore, forcing the user to learn different languages depending on the features that the language and compliant engine can provide to tackle the needs of each use case. 
+The large amount of mapping languages presented in this section opens the door to a wide range of possibilities for KG construction. The downside of this situation comes with the general lack of interoperability among them. Each mapping processor usually implements one mapping language, therefore, forcing users to learn different languages depending on the features that the language and compliant engine can provide to tackle the needs of each use case. 
 
-We can find some examples of unidirectional pairwise translations between these languages. 
+We find some examples of unidirectional pairwise translations between these languages. 
 Helio and SPARQL-Generate, with the aim of extending their outreach, implement a plugin to translate from RML to their corresponding compliant language\footnote{\url{https://github.com/oeg-upm/helio/wiki/Streamlined-use-cases\#materialising-rdf-from-csv--xml-and-json-files-using-rml}}$^,$\footnote{\url{https://helio-playground.linkeddata.es/tour}}$^,$\footnote{\url{https://github.com/sparql-generate/rml-to-sparql-generate}}. Inversely, ShExML provides translation to RML in its playground\footnote{\url{https://shexml.herminiogarcia.com/editor/}}, thus presenting the language also as a user-friendly syntax for RML~\parencite{Garcia-Gonzalez2020shexml}. 
 
 There are also examples of tools that provide a set of optimizations for KG construction exploiting the translation of mapping rules. This is the case of Morph-CSV~\parencite{chaves2021morph-csv} and FunMap~\parencite{jozashoori2020funmap}. Morph-CSV performs a transformation over the tabular data with RML+FnO mappings and CSVW annotations, and outputs a database and R2RML mappings. FunMap takes an RML+FnO mapping, performs the transformation functions indicated, outputs the parsed data and generates a function-free RML mapping.
@@ -354,5 +351,6 @@ There are also examples of tools that provide a set of optimizations for KG cons
 Lastly, the user-friendly serializations presented later in the chapter are always supported with translations to a mapping language, which is explained in detail in \cref{sec:chp2_easy_kgc}.
 
 
+\ana{add takeaway}
 
 %Another case is when tools implement RML/R2RML mapping translation into the language they are designed to parse; such as Helio\footnote{\url{https://github.com/oeg-upm/helio/wiki/Streamlined-use-cases\#materialising-rdf-from-csv--xml-and-json-files-using-rml}} and SPARQL-Generate\footnote{\url{https://github.com/sparql-generate/rml-to-sparql-generate}}, that translate from RML to their respective language; and Ontop~\cite{calvanese2017ontop}, that translates R2RML into its compliant language
