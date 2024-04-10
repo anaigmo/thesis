@@ -16,14 +16,14 @@ The general objective of this thesis is to \textit{advance the current state of 
 
 \begin{enumerate}
     %\item[\textbf{O1.}] To analyse, understand and gather the capabilities of the mapping languages for KG construction from heterogeneous data sources.
-    \item[\textbf{O1}] To understand and gather the necessities for knowledge graph construction from heterogeneous data sources, thus supporting the evolution of mapping languages to address them. 
-    \item[\textbf{O2}] To help knowledge engineers and domain experts to build mapping documents providing the means for a user-friendly experience.
-    \item[\textbf{O3}] To assess the value of declarative knowledge graph construction technologies for supporting the evolution of knowledge graphs. 
+    \item[\textbf{O1}] To understand and gather the necessities for knowledge graph construction from heterogeneous data sources, thus supporting the evolution of existing mapping languages to address the most relevant ones. 
+    \item[\textbf{O2}] To help knowledge engineers and domain experts to build declarative mappings in a user-friendly manner.
+    \item[\textbf{O3}] To assess the value of declarative knowledge graph construction technologies for supporting the creation and evolution of knowledge graphs. 
 \end{enumerate}
 
 In order to achieve the first objective, the following open research problem must be solved:
 \begin{itemize}
-    \item Ever since the first mapping languages began to be developed, many more have been proposed and released over the years. These languages address different necessities and propose diverse features, but they share some characteristics, as in the end they all serve the same purpose of constructing KGs. In order to keep improving the KG construction from heterogeneous sources, we need to understand which are the needs and the current challenges to improve them, and facilitate their choice according to their capabilities for addressing different needs. However, there is a lack of a fine-grained analysis of the competences and expressiveness of these mapping languages. %, as well as a formalization of their derived requirements. 
+    \item Ever since the first mapping languages began to be developed, many more have been proposed and released over the years. These languages address different necessities and propose diverse features, but they share some characteristics, as in the end they all serve the same purpose of constructing KGs. In order to keep improving the KG construction process from heterogeneous sources, we need to understand which are the needs and the current challenges to improve them, and facilitate their choice according to their capabilities for addressing different needs. However, there is a lack of a fine-grained analysis of the competences and expressiveness of these mapping languages. %, as well as a formalization of their derived requirements. 
 \end{itemize}
 
 From a technological perspective, the following problem must be solved:
@@ -33,20 +33,20 @@ From a technological perspective, the following problem must be solved:
 
 In order to achieve the second objective, the following research problem must be solved:
 \begin{itemize}
-    \item Most mapping languages are formalized as ontologies, and they are required to be written in an RDF syntax, usually Turtle (TTL). Other common languages extend SPARQL to write the transformation rules. This supposes a double obstacle for new users, to learn the language and the language's syntax (i.e. TTL or SPARQL) in case they are not familiar with them. There is a lack of user-friendly environments that can support the writing process for both expert practitioners and new users to speed-up the process and become less error-prone, while being up-to-date to the current needs in KG construction.
+    \item Most mapping languages are formalized as ontologies, and they are required to be written in an RDF serialization. Other common languages extend SPARQL to write the transformation rules. This supposes a double obstacle for new users, to learn the language and the language's syntax (i.e. TTL or SPARQL) in case they are not familiar with them. There is a lack of user-friendly environments that can support the writing process for both expert practitioners and new users to speed-up the process and become less error-prone, while being up-to-date to the current needs in KG construction.
 \end{itemize}
 
 From a technological perspective, the following problem must be solved:
 \begin{itemize}
 
-    \item User-friendly approaches usually involve developing new syntaxes or approaches that cannot always be directly process by with KGC systems. In addition, different KGC systems are usually compliant with one single language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages and reduce the barrier adoption enhancing the communication between user-friendly syntaxes and existing KGC implementations.   
+    \item User-friendly approaches usually involve developing new syntaxes that cannot always be directly process by with KGC systems. In addition, different KGC systems are usually compliant with only one language. There is currently little interoperability among the existing languages, which limits the possibilities for users to use a wider variety of systems with different capabilities. Hence, new technological support is needed to allow translations among current mapping languages and reduce the barrier adoption enhancing the communication between user-friendly syntaxes and existing KGC implementations.   
 
 \end{itemize}
 
 Finally, for achieving the third objective, the following open research problem must be solved:
 
 \begin{itemize}
-    \item Knowledge Graphs undergo a complex process from creation to consumption that comprise their life cycle. Declarative mapping rules and their compliant supporting technologies are a key in the construction step, but can play a beneficial role in other steps, such as data pre-processing and metadata annotation for transparency. However, there is a lack of research on whether their support in the KG evolution.
+    \item Knowledge Graphs undergo a complex process from creation to consumption that comprise their life cycle. Declarative mapping rules and their supporting technologies are a key in the construction step, but can also play a beneficial role in other steps, such as data pre-processing and metadata annotation for transparency. However, there is a lack of research on whether their support in the KG evolution.
     %\textcolor{red}{Knowledge graphs are modeled according to schemes that are subject to changes over time. These modifications can be triggered by different factors, such as new requirements or error fixing, that can help improve the quality of the KG and the performance of downstream tasks that consume it. Graph re-construction can be achieved in different manners, but it is not known which approach perform best this task in different situations.} Thus, there is a lack of research on how mapping languages and compliant technology can assist this task to improve KG evolution. 
 \end{itemize}
 
@@ -79,7 +79,7 @@ Finally, with regard to the third objective (to assess the role of mapping techn
 
 \section{Assumptions}
 \label{sec:chp3-assumptions}
-Our work is based on the assumptions listed below. These assumptions provide a background to facilitate the comprehension of the decisions taken during the development of this work. 
+Our work is based on the set of assumptions listed below. These assumptions provide a background to facilitate the comprehension of the decisions taken during the development of this work. 
 
 
 \begin{enumerate}
@@ -98,10 +98,10 @@ Our work is based on the assumptions listed below. These assumptions provide a b
 After the identification of the assumptions, we can describe the research hypotheses  of this thesis. They cover the general characteristics of the contributions:
 
 \begin{enumerate}
-    \item[\textbf{H1}] Current mapping languages do not cover the entire extension of features required to construct knowledge graphs from heterogeneous data sources.
+    \item[\textbf{H1}] Current mapping languages lack some expressiveness to construct knowledge graphs from heterogeneous data sources for all use cases.
     \item[\textbf{H2}] It is possible to update  current mapping languages with new features that address the evolving needs in construction of knowledge graphs.
-    \item[\textbf{H3}] Writing the mapping rules in spreadsheet environments can improve the user experience for practitioners of different backgrounds for writing mappings reducing errors. 
-    \item[\textbf{H4}] Declarative KG construction technologies can bring benefits in the evolution of knowledge graphs within their life cycle.
+    \item[\textbf{H3}] Writing the mapping rules in spreadsheet environments can improve the user experience for practitioners of different backgrounds for writing mappings, whilst reducing errors. 
+    \item[\textbf{H4}] Declarative KG construction technologies can bring benefits in the evolution of knowledge graphs within their full life cycle.
 \end{enumerate}
 
 

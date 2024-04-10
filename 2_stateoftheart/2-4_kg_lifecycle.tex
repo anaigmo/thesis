@@ -9,7 +9,8 @@
 
 
 A high number of knowledge graphs has been released over the years. Along with this adoption, the question arose about which are the processes involved in their life cycle.
-\cite{ngomo2014LD-lifecycle} proposed a series of steps that define the life cycle of Linked Data (\cref{fig:chp2_LD-lifecycle}), the term used at the time for referring to knowledge graphs before this term was coined with the release of the Google knowledge graph\footnote{\url{https://blog.google/products/search/introducing-knowledge-graph-things-not/}}. 
+\cite{ngomo2014LD-lifecycle} proposed a series of steps that define the life cycle of Linked Data (\cref{fig:chp2_LD-lifecycle}). 
+%, the term used at the time for referring to knowledge graphs before this term was coined with the release of the Google knowledge graph\footnote{\url{https://blog.google/products/search/introducing-knowledge-graph-things-not/}}. 
 These steps include 
 (i) \textit{Extraction} of information from (semi-)structured and unstructured data sources mapping them to an RDF schema; 
 (ii) \textit{Storage and Querying} the graph in a graph store; 
@@ -56,7 +57,7 @@ and (vi) \textit{Knowledge Graph Maintenance} for evaluating the knowledge graph
 \label{fig:chp2_kg-dev-process}
 \end{figure*}
 
-All these proposed life cycles share common stages and consider the main similar aspects. We can group the particular tasks and stages of each proposed life cycle in tree main categories, (i) \textit{Creation}, (ii) \textit{Deployment} and (iii) \textit{Maintenance} of knowledge graphs. 
+All these proposed life cycles share common stages and consider similar aspects. We can group the particular tasks and stages of each proposed life cycle in tree main categories, (i) \textit{Creation}, (ii) \textit{Deployment} and (iii) \textit{Maintenance} of knowledge graphs. 
 \begin{itemize}
     \item \textbf{Creation.} This phase comprises the tasks dedicated to ultimately produce a high-quality knowledge graph. Examples of tasks in this phase are knowledge extraction, data cleaning and processing, data mapping and transformation, validation, quality assessment, enrichment, linking and completion.
 
@@ -69,7 +70,7 @@ The use of declarative mapping approaches have proven valuable for different tas
 
 Apart from the \textit{construction} task, these declarative approaches can play an important role in other different tasks of the life cycle. They enable \textit{metadata annotation} about the data sources (e.g. DCAT in RML, CSVW for tabular files), which can help enhance the process in terms of transparency, completeness and performance~\parencite{chaves2021morph-csv,vidal2023knowledge}. 
 They also allow for \textit{data processing and cleaning}, thanks to the increasing integration of data transformation functions into the languages' features~\parencite{debruyne2016r2rmlf,junior2016funul,jozashoori2020funmap,DeMeester2017fno_dbpedia}.
-The possibility of expressing how the output graph is generated (e.g. serialization, compression) and managing streams of data can help the \textit{deployment} phase as well (e.g. RML Target, SPARQL-Generate). However, there is no analysis so far looking into the role that these approaches into the \textit{evolution and maintenance} of knowledge graphs. 
+The possibility of expressing how the output graph is generated (e.g. serialization, compression) and managing streams of data can help the \textit{deployment} phase as well (e.g. RML Target, SPARQL-Generate). However, there is no analysis so far looking into the role of these approaches in the \textit{evolution and maintenance} of knowledge graphs. 
 
 
 %\textit{ºcontinuando con la de antes: enmarcado dentro de este life cycle dónde intervendrían los mappings: en la creación y en cada iteración que haya que hacer (cuadra más groth's aquí eso sí). Señalar paper de benchmark de todas las fases en algún momento. Dentro de la creación de cero, por supuesto porque esa es su función principal. Ahí qué hay de mejora: el de bio2rdf contra php, y todas las optimizaciones del proceso, comentar si acaso del paper de vir vs mat de dylan si está publicado. }

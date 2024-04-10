@@ -372,7 +372,8 @@ For small data sizes, GraphDB and Fuseki perform similar, while Oxigraph reports
 \caption[Execution time results for re-construction evaluation with triplestores]{Geometric mean of the query result times (s) from all triplestores grouping by \textit{source} representation and \textit{target} representation. The lowest times are highlighted in \textbf{bold}, while the highest are \underline{underlined}.}
 \centering
 \label{tab:chp6-1_closeup-queries}
-\begin{tabular}{cccccc}
+\resizebox{0.6\columnwidth}{!}
+{\begin{tabular}{cccccc}
     \cmidrule{2-6}
  & \textbf{Representation} & \textbf{1K} & \textbf{10K} & \textbf{100K} & \textbf{1M} \\ \midrule
 \multirow{5}{*}{\textbf{Source}} & \textbf{Std. Reif.} & \underline{0.283} & \underline{4.126} & \underline{56.612} & \underline{1085.228} \\ \cmidrule{2-6}
@@ -383,7 +384,7 @@ For small data sizes, GraphDB and Fuseki perform similar, while Oxigraph reports
 & \textbf{RDF-Star}  & 0.199 & 1.366 & 14.066 & 180.384 \\ \cmidrule{2-6}
 & \textbf{Named Graphs} & \textbf{0.126} & \textbf{0.836} & \textbf{8.524} & \textbf{158.678} \\ \cmidrule{2-6} 
 & \textbf{N-Ary Rel.} & \underline{0.365} & \underline{7.896} & \underline{67.886} & \underline{2351.176}   \\   \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 Looking into the particular differences of the pairs of translation performed with triplestores, we can observe how the different representations affect the performance of the graph re-construction with \texttt{CONSTRUCT} queries. \cref{fig:chp6-1_queries} present the results grouping the queries in the legend by the \textit{source} representation (i.e. from which representation the dataset is transformed). 

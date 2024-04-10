@@ -1,7 +1,7 @@
 \section{Knowledge Graph Construction with Declarative Mapping Rules}
 \label{sec:chp2_declarative_kgc}
 
-Knowledge graphs can be constructed in diverse manners. One way comprises collecting knowledge from contributions of the community, such as Wikidata. Another way involves transforming data from heterogeneous formats and sources, unstructured or (semi-)structured, into RDF. This section focuses on providing an overview of the latter, to declaratively construct knowledge graphs from heterogeneous data sources.
+Knowledge graphs can be constructed in diverse manners. Some KGs are constructed natively in RDF by collecting knowledge from contributions of the community, such as Wikidata. Other KGs are constructed by transforming data from heterogeneous formats and sources, unstructured or (semi-)structured, into RDF. This section provides an overview of the latter, with a focus on declarative KG construction from heterogeneous data sources.
 
 %\ana{overview de distintas formas y métodos en general de construir KGs. Debería ser algo larga, ampliando lo que hay en la intro. Luego terminar con enfocarse en los approaches declarativos, que se extienden en la siguiente subsección}
 
@@ -194,9 +194,9 @@ The main differences between RML and R2RML~\parencite{dimou2020rml-r2rml-diffs} 
 \end{lstlisting}}
 \end{captionedlisting}
 
-There have been several proposals for RML in the following years after its release to extend its capabilities. The initial features for addressing heterogeneous data sources were expanded by~\cite{Dimou2015Machine}, allowing more diverse data accesses and fine-grained description of the data sources. \cite{DeMeester2017fno_dbpedia} proposed \textbf{RML+FnO}, which provided RML with a connector to the Function Ontology~\parencite{demeester2016fno} to include data transformation functions in the mappings. \cite{delva2021rml-fields} introduced the \textbf{RML Fields}, that addressed several challenges to accurately access nested data. \textbf{RML Target} was developed by \cite{VanAssche2021LeveragingWebThings} to specify how to create the output triples regarding, for instance, RDF serialization, compression format or encoding. Lastly, \textbf{RML-star} was proposed by \cite{delva2021rml-star}, and later refined by \cite{arenas2023morphstar}, to allow the construction of RDF-star graphs. 
+There are several proposals to extend the capabilities of RML. The initial features for addressing heterogeneous data sources were expanded by~\cite{Dimou2015Machine}, allowing more diverse data accesses and fine-grained description of the data sources. \cite{DeMeester2017fno_dbpedia} proposed \textbf{RML+FnO}, which provided RML with a connector to the Function Ontology~\parencite{demeester2016fno} to include data transformation functions in the mappings. \cite{delva2021rml-fields} introduced  \textbf{RML Fields}, that addressed several challenges to accurately access nested data. \textbf{RML Target} was developed by \cite{VanAssche2021LeveragingWebThings} to specify how to create the output triples regarding, for instance, RDF serialization, compression format or encoding. Lastly, \textbf{RML-star} was proposed by \cite{delva2021rml-star}, and later refined by \cite{arenas2023morphstar}, to allow the construction of RDF-star graphs. 
 
-Recently, the Knowledge Graph Construction W3C Community Group\footnote{\url{https://www.w3.org/community/kg-construct/}} gathered these variety of specifications and released a new version of RML~\parencite{iglesias2023rml}, which includes several of these extensions, overcoming the identified limitations for declarative knowledge graph construction.
+Recently, the Knowledge Graph Construction W3C Community Group\footnote{\url{https://www.w3.org/community/kg-construct/}} gathered these variety of specifications and released a new version of RML~\parencite{iglesias2023rml}, which includes several of these extensions, overcoming the identified limitations for declarative knowledge graph construction. This version is under standardisation.
 
 
 
@@ -341,7 +341,7 @@ More recently, two related systematic reviews were published. \cite{vanassche202
 \subsection{Interoperability for Mapping Languages}
 \label{sec:chp2_interoperability}
 
-The large amount of mapping languages presented in this section opens the door to a wide range of possibilities for KG construction. The downside of this situation comes with the general lack of interoperability among them. Each mapping processor usually implements one mapping language, therefore, forcing users to learn different languages depending on the features that the language and compliant engine can provide to tackle the needs of each use case. 
+The large amount of mapping languages presented in this section opens the door to a wide range of possibilities for KG construction. The downside of this situation comes with the general lack of interoperability among them~\parencite{corcho2020towards}. Each mapping processor usually provides support for one mapping language, therefore, forcing users to learn different languages depending on the features that the language and compliant engine can provide to tackle the needs of each use case. 
 
 We find some examples of unidirectional pairwise translations between these languages. 
 Helio and SPARQL-Generate, with the aim of extending their outreach, implement a plugin to translate from RML to their corresponding compliant language\footnote{\url{https://github.com/oeg-upm/helio/wiki/Streamlined-use-cases\#materialising-rdf-from-csv--xml-and-json-files-using-rml}}$^,$\footnote{\url{https://helio-playground.linkeddata.es/tour}}$^,$\footnote{\url{https://github.com/sparql-generate/rml-to-sparql-generate}}. Inversely, ShExML provides translation to RML in its playground\footnote{\url{https://shexml.herminiogarcia.com/editor/}}, thus presenting the language also as a user-friendly syntax for RML~\parencite{Garcia-Gonzalez2020shexml}. 
