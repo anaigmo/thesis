@@ -133,7 +133,7 @@
 }
 
 \lstdefinelanguage{yarrrml}{
-	keywords=[1]{mappings, sources, s, po, function, parameters, value, parameter, prefixes, athletes},	% types; money and time units
+	keywords=[1]{mappings, sources, s, po, function, parameters, value, parameter, prefixes, athletes, quoted},	% types; money and time units
 	keywordstyle=[1]\color{violet}\bfseries,
 	identifierstyle=\color{black},
 	sensitive=true,
@@ -146,6 +146,18 @@
      *{[}{{{\color{violet}{[}}}}{1}
       {]}{{{\color{violet}{]}}}}{1}
        {-}{{{\color{violet}\bfseries{-}}}}{1},
+}
+
+\lstdefinelanguage{yarrrmlstar}{
+	keywords=[1]{quoted},	
+	keywordstyle=[1]\color{fulvous}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=true,
+	comment=[l]{//},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{black}\ttfamily,
+	morestring=[b]',
+	morestring=[b]",
 }
 
 \lstdefinelanguage{sparql}{
@@ -188,6 +200,19 @@
 	keywordstyle=[1]\color{steelblue}\bfseries,
 	keywords=[2]{rml:logicalSource, rml:source, rml:referenceFormulation, rml:iterator, rml:reference},	
 	keywordstyle=[2]\color{shamrockgreen}\bfseries,
+	identifierstyle=\color{black},
+	sensitive=false,
+	comment=[l]{@},
+	morecomment=[s]{/*}{*/},
+	commentstyle=\color{gray}\ttfamily,
+	morestring=[b]',
+	morestring=[b]",
+}
+
+\lstdefinelanguage{rmlstar}{
+        alsoletter=:-,
+	keywords=[1]{rml:datatypeMap, rml:languageMap, rml:quotedTriplesMap, rml:AssertedTriplesMap},	
+	keywordstyle=[1]\color{fulvous}\bfseries,
 	identifierstyle=\color{black},
 	sensitive=false,
 	comment=[l]{@},

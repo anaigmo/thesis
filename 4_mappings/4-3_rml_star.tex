@@ -90,7 +90,7 @@ The mapping rules use an asserted triples map (\texttt{<\#jumpTM>}) within the s
 \begin{captionedlisting}{lst:chp4_rml-star}{Example RML-star mapping that transforms data in Listing~\ref{lst:chp4_csv_star}.}
 \centering
 \begin{tabular}{cc}
-\hspace{-2em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1}]
+\hspace{-2em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},language=rmlstar]
 <#jumpTM> 
   a rml:AssertedTriplesMap ;
   rml:logicalSource :marks ;
@@ -102,7 +102,7 @@ The mapping rules use an asserted triples map (\texttt{<\#jumpTM>}) within the s
       rml:reference "MARK" ] ] ;
 \end{lstlisting}}
 &
-\hspace{3em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},firstnumber=14]
+\hspace{3em}{\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},firstnumber=14,language=rmlstar]
 <#dateTM> 
   a rml:TriplesMap ;
   rml:logicalSource :marks ;
@@ -192,7 +192,7 @@ and can be reused by any engine to test its conformance with respect to \mbox{RM
 \label{sec:chp4_star_usecases}
 
 We create RML-star mappings for in two real-world use cases. 
-The first generates \mbox{RDF-star} graphs from scientific software documentation~\parencite{iglesias2017fair-software-bp}, 
+The first generates \mbox{RDF-star} graphs from scientific software documentation~\parencite{iglesias2023fair-software-bp}, 
 and the second annotates statements extracted from biomedical research publications. 
 For both use cases, we use the tool \mbox{Morph-KGC$^{star}$}. 
 

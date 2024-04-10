@@ -215,6 +215,7 @@ RML extends the R2RML Recommendation~\parencite{das2012r2rml} to describe more d
     \caption[Characteristics of evaluation mapping]{Characteristics of mappings in RML and SPARQL-Anything. \#TM stands for number of Triples Map, \#POM for Predicate Object Map, and \#TP for Triple Patterns. The shown operators appear usually in the \texttt{WHERE} clause; the ones marked with $^c$ appear in the \texttt{CONSTRUCT} clause. }
     \label{tab:chp6-1_mapping-char}
     \centering
+    \resizebox{0.7\columnwidth}{!}{
     \begin{tabular}{ccc|cc}
         \cmidrule{2-5}
          & \multicolumn{2}{c|}{\textbf{RML}} & \multicolumn{2}{c}{\textbf{SPARQL-Anything}}  \\ \midrule
@@ -224,7 +225,7 @@ RML extends the R2RML Recommendation~\parencite{das2012r2rml} to describe more d
          \textbf{N-Ary Relationships} & 13 & 15 & 15 & UNION, BIND  \\ \midrule
          \textbf{RDF-star} & 10 & 10 & 10 & UNION, BIND  \\  \midrule
          
-    \end{tabular}
+    \end{tabular}}
 \end{table}
 
 SPARQL-Anything heavily relies on the SPARQL syntax, overriding the \texttt{SERVICE} operator while leveraging the rest of its features. This operator is then always present in the queries and hence is not shown in the table. The graphs are built with \texttt{CONSTRUCT} clauses. \cref{lst:chp6-1_sparql-anything} shows a mapping example that generates in RDF-star the annotation of the semantic types of \textit{entities} with a score from the CSV file shown in \cref{lst:chp6-1_semmeddb_entity}.

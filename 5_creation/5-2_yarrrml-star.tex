@@ -69,7 +69,7 @@ The triple that the rule set \texttt{jumpTM} creates is used as subject in the r
 \begin{captionedlisting}{lst:chp5_mapping-star}{YARRRML-star mapping rules. }
 \centering
 \begin{multicols}{2}
-{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,]
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,language=yarrrmlstar]
 mappings:
  jumpTM:
   sources: jump-source
@@ -93,9 +93,9 @@ mappings:
 \begin{captionedlisting}{lst:chp5_mapping-rml-star}{RML-star mapping rules translated from \cref{lst:chp5_mapping-star}. }
 \centering
 \begin{multicols}{2}
-{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,]
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,language=rmlstar]
 <#jumpTM> 
-  a rr:TriplesMap ;
+  a rml:AssertedTriplesMap ;
   rml:logicalSource :jump-source;
   rml:subjectMap [ 
     rr:template ":{ID}" ] ;
@@ -142,8 +142,8 @@ They are generated with the data values, in the following examples the datatype 
 \begin{tabular}{c}
 \hspace{-3em}
 {
-\begin{lstlisting}[basicstyle=\ttfamily\small,columns=flexible]
-  - [:date, $\dollar$(DATE), xsd:$\dollar$(DATE-TYPE)]
+\begin{lstlisting}[basicstyle=\ttfamily\small,columns=flexible,language=yarrrmlstar]
+- [:date, $\dollar$(DATE), xsd:$\dollar$(DATE-TYPE)]
 \end{lstlisting}
 }
 \end{tabular}
@@ -156,8 +156,8 @@ They are generated with the data values, in the following examples the datatype 
 \begin{tabular}{c}
 \hspace{-2.5em}
 {
-\begin{lstlisting}[basicstyle=\ttfamily\small,columns=flexible]
- - [:name, $\dollar$(PERSON), $\dollar$(COUNTRY)~lang]
+\begin{lstlisting}[basicstyle=\ttfamily\small,columns=flexible,language=yarrrmlstar]
+- [:name, $\dollar$(PERSON), $\dollar$(COUNTRY)~lang]
 \end{lstlisting}
 }
 \end{tabular}
@@ -177,7 +177,7 @@ They are generated with the data values, in the following examples the datatype 
 \begin{tabular}{c}
 \hspace{-1em}
 {
-\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,language=rmlstar]
 rr:predicateObjectMap [ 
  rr:predicate :jumpsOnDate ;
  rml:objectMap [
@@ -196,7 +196,7 @@ rr:predicateObjectMap [
 \begin{tabular}{c}
 \hspace{0.5em}
 {
-\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,language=rmlstar]
 rr:predicateObjectMap [ 
  rr:predicate :name ;
  rml:objectMap [
@@ -223,7 +223,7 @@ All the described updates have been proposed for the YARRRML specification and i
 \begin{captionedlisting}{lst:chp5_join}{Abbreviated syntax for join conditions.}
 \centering
 %\begin{multicols}{2}
-{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible,language=yarrrmlstar]
 - predicates: :jumps
   objects:
    - function: join(mapping=jumpTM, equal(str1=$\dollar$(ID), str2=$\dollar$(ID)))
@@ -269,7 +269,7 @@ Moreover, we ensure that functions, targets, and databases appear first, while f
 The source code of Yatter is openly available under Apache 2.0 license\cref{foot:yatter}.
 Following open science best practices, each release automatically generates a dedicated DOI to ensure reproducibility in any experimental evaluation\footnote{\url{https://doi.org/10.5281/zenodo.7024500}}. 
 The development is under continuous integration using GitHub Actions and the YARRRML test-cases (Section \ref{sec:chp5_yarrrml-validation}) have more than 80\% code coverage. 
-Yatter is available through PyPi as a module\footnote{\url{https://pypi.org/project/yatter/}} to be easily integrated in any Python development. % (e.g., providing RML to a KG construction system implemented in this language).
+Yatter is available through PyPi as a module\footnote{\url{https://pypi.org/project/yatter/}}~\parencite{david_chaves_2024_yatter} to be easily integrated in any Python development. % (e.g., providing RML to a KG construction system implemented in this language).
 %such as SDM-RDFizer~\parencite{iglesias2020sdm} or Morph-KGC~\parencite{arenas2022morph}.
 
 
