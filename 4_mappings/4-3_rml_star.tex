@@ -5,7 +5,7 @@ As the technologies revolving around knowledge graphs advance, so do the needs a
 
 As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the widely adopted RML mapping language. The result of this efforts is materialized in the recently published new version of RML~\parencite{iglesias2023rml}. The language is published as a modular ontology, and implements most of the requirements proposed by the Conceptual Mapping (see \cref{sec:chp4_cm-reqs}), integrating: (i) extended possibilities in triple generation (RML-Core)~\parencite{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\parencite{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\parencite{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\parencite{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\parencite{star_ontology}.
 
-Hence, this language is implemented in five different modules. 
+This language is implemented in five different modules. 
 For each module, there are more resources associated besides the ontology: its requirements, an specification with the module's details with examples and the restrictions written in SHACL shapes to validate mapping documents. 
 All associated resources of this new version of RML are gathered in the ontology portal\footnote{\url{https://w3id.org/rml/portal}}. 
 In addition, the semantics of the relationships between the old and this new specification are defined and available online\footnote{\url{https://w3id.org/rml/portal/backwards-compatibility}} to facilitate backwards compatibility.
@@ -164,7 +164,7 @@ In addition, RML-star is implemented by Morph-KGC$^star$~\parencite{arenas2023mo
 \subsection{Validation}
 \label{sec:chp4_validation}
 
-We present the development of the RML star test-cases (\cref{sec:chp4_star_testcases}), that enables new implementations to check their conformance to RML-star; and create RML-star mappings for two real-world use cases (in \cref{sec:chp4_star_usecases}): software metadata extraction~\parencite{kelley2021framework} (SoMEF) and biomedical research literature~\parencite{SemMedDB} (SemMedDB). 
+This section validates RML-star with (i) the development of the RML-star test-cases, that enables new implementations to check their conformance to RML-star; and (ii) the creation of RML-star mappings for two real-world use cases: software metadata extraction~\parencite{kelley2021framework} (SoMEF) and biomedical research literature~\parencite{SemMedDB} (SemMedDB). 
 %We use for both cases \mbox{Morph-KGC$^{star}$}, an implementation of RML-star.
 
 

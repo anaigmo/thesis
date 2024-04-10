@@ -2,9 +2,11 @@
 \label{sec:chp4_framework}
 
 
-This section presents a comparison framework that collects and analyzes the main features included in mapping language descriptions. The diversity of the languages that have been analyzed is crucial for understanding the needs for constructing knowledge graphs from heterogeneous data sources. Thus, we can extract relevant shared features and requirements along with the peculiarities and innovations of each language. 
+This section presents a comparison framework that collects and analyzes the main features included in mapping languages. The diversity of the languages that have been analyzed is crucial for understanding the needs for constructing knowledge graphs from heterogeneous data sources. Thus, we can extract relevant shared features and requirements along with the peculiarities of each language. 
 
-The framework presented in this section analyzes languages from the three categories identified in \cref{sec:chp2_declarative_kgc}. The selected languages fulfill the following requirements: (1) widely used, relevant and/or include novel or unique features; (2) currently maintained, and not deprecated; (3) not a serialization or a user-friendly representation of another language. For instance, D2RQ~\parencite{bizer2004d2rq} and R$_2$O~\parencite{barrasa2004r2o} were superseded by R2RML, which is included in the comparison. YARRRML~\parencite{Heyvaert2018yarrrml} and XRM~\parencite{xrm} are not included either, due to the fact that they provide a syntax for other already included languages (RML and R2RML; CSVW also for XRM).
+\ana{igual los siguientes tres párrafos pueden componer la 'metodología' de la que habla oscar?}
+
+The framework presented in this section analyzes languages from the three categories identified in \cref{sec:chp2_declarative_kgc}. The selected languages fulfill the following requirements: (1) widely used, relevant and/or include novel or unique features; (2) currently maintained, and not deprecated; (3) not a serialization or a user-friendly representation of another language. For instance, D2RQ~\parencite{bizer2004d2rq} and R$_2$O~\parencite{barrasa2004r2o} are not included since they were superseded by R2RML, which is analysed in the comparison. YARRRML~\parencite{Heyvaert2018yarrrml} and XRM~\parencite{xrm} are not included either, due to the fact that they provide a syntax for other already included languages (RML and R2RML; CSVW also for XRM).
 
 
 The following RDF-based languages are included: R2RML~\parencite{das2012r2rml}, RML~\parencite{Dimou2014rml}, KR2RML~\parencite{slepicka2015kr2rml}, xR2RML~\parencite{michel2015xr2rml}, R2RML-F~\parencite{debruyne2016r2rmlf}, FunUL~\parencite{junior2016funul},  XLWrap~\parencite{langegger2009xlwrap}, CSVW~\parencite{Tennison2015csvw}, and D2\-RML~\parencite{chortaras2018d2rml}. The analyzed SPARQL-based languages are: XSPARQL~\parencite{Bischof2012xsparql}, TARQL~\parencite{tarql},  SPARQL-Gene\-rate~\parencite{Lefrancois2017sparqlgenerate} and Facade-X~\parencite{daga2021facade}. Finally, we selected the following languages based on other formats: ShExML~\parencite{Garcia-Gonzalez2020shexml}, Helio Mappings~\parencite{cimmino2022helio} and D-REPR~\parencite{Vu2019d-repr}.  
@@ -21,7 +23,7 @@ The framework has been built as a result of analyzing the common features of the
 \subsection{Data Sources Description}
 
 
-\cref{tab:chp4_sources} shows the ability of each mapping language to describe a data source in terms of retrieval, features, security, data format and protocol. 
+\cref{tab:chp4_sources} shows the ability of each mapping language to describe a data source in terms of retrieval, description, security, data format and protocol. 
 
 
 \noindent\paragraph{\textbf{Data Retrieval.}} Data from data sources may be retrieved in a continuous manner (e.g., \textit{Streams}),  periodically (e.g., \textit{Asynchronous sources}), or just once, when the mapping is executed (e.g., \textit{Synchronous sources}). As shown in \cref{tab:chp4_sources}, all mapping languages are able to represent synchronous data sources. Additionally, SPARQL-Generate and Helio are able to represent periodical data sources, and SPARQL-Generate also represents continuous data sources (e.g. \texttt{it:WebSocket()} in SPARQL-Generate). Other languages do not explicitly express that feature in the language, but a compliant engine may implement it.
@@ -30,7 +32,7 @@ The framework has been built as a result of analyzing the common features of the
 
 Half of the languages do not allow the definition of security terms. Some languages are specific for RDB terms (R2RML and extensions, with \texttt{rr:logical\-Table}), and only Helio can define security terms. These two languages are also the only ones that allow the specification of MIME Types, and can also specify the encoding along with TARQL and CSVW (e.g. \texttt{csvw:encoding} attribute of \texttt{csvw:Dialect} in CSVW). 
 
-Regarding protocols, all languages consider local files. It is highly usual to consider HTTP(s) and database access (especially with the ODBC and JDBC protocols). Only XSPARQL, TARQL, D-REPR, and XLWrap describe exclusively local files. 
+Regarding protocols, all languages consider the use of local files. It is highly usual to consider HTTP(s) and database access (especially with the ODBC and JDBC protocols). Only XSPARQL, TARQL, D-REPR, and XLWrap describe exclusively local files. 
 
 The features provided by each language are closely related to the data formats that are covered. Queries are usual for relational databases and NoSQL document stores and iterators for tree-like formats. Some languages also enable the description of delimiters and separators for tabular formats (e.g., CSVW defines the class \texttt{Dialect} to describe these features; this class is reused by RML), and finally, less common Regular Expressions can be defined to match specific parts of the data in languages such as CSVW, SPARQL-Generate, Helio, D-REPR, and D2RML (e.g., \texttt{RegexHandler} in Helio, \texttt{format} in CSVW). 
 
