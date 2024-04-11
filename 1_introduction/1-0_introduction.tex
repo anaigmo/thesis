@@ -12,7 +12,7 @@ The nature of the World Wide Web has made it possible for every user and organiz
 The size of the data available on the web has increased hand-in-hand with its heterogeneity. 
 These data are often provided in different formats (e.g., plain text, CSV or JSON) and with diverse entry points, (e.g., data portals, APIs, or databases). 
 This diversity makes it increasingly difficult to enable large-scale data access and processing for both humans and machines.
-The semantic web~\parencite{berners2001semantic} was envisioned to represent information in the form of knowledge graphs that can be automatically exploited, becoming a remarkably active research field in the last decades.
+The semantic web~\parencite{berners2001semantic} was envisioned to represent information as \textit{Linked Data} or \textit{Knowledge Graphs} that can be automatically exploited, becoming a remarkably active research field in the last decades.
 Multiple recommendations have been released from the World Wide Web Consortium (W3C) for modelling data in a uniform model (i.e., RDF~\parencite{rdf}), querying (i.e., SPARQL~\parencite{harris2013sparql}), constructing from other data sources (i.e., R2RML~\parencite{das2012r2rml}) and validating against a set of restrictions (i.e., SHACL~\parencite{SHACL}) among others. 
 
 %Knowledge graphs (KGs) can be defined as ``graphs of data intended to accumulate and convey knowledge of the real world, whose nodes represent entities of interest and whose edges represent relations between these entities"~\parencite{hogan2021kg}. 
@@ -89,7 +89,8 @@ The use of mapping languages over this decade has proven to be a suitable approa
  The extent, level of detail and variability on how to perform this task is related to the heterogeneity of the proposed languages. 
  They were developed taking into account different needs and use cases, resulting in diverse features, therefore providing a wide set of possibilities for users.
  Knowing the capabilities of each language can help users decide which one to use depending on their needs. 
- Moreover, despite the efforts over the years to improve and refine the languages, there are still use cases that cannot be solved using them. For instance, datatypes or language tags can only be generated as constant values, not dynamically from the source data; and there is not much support for generating RDF-star graphs~\parencite{hartig2017foundations}, an RDF extension for allowing triples to be placed as subjects and/or objects of other triples. 
+ Moreover, despite the efforts over the years to improve and refine the languages, there are still use cases that cannot be solved using them. 
+ For instance, in RML, datatypes or language tags can only be generated as constant values, not dynamically from the source data; and there is not much support for generating RDF-star graphs~\parencite{hartig2017foundations}, an RDF extension for allowing triples to be placed as subjects and/or objects of other triples. 
  Understanding their limitations and open issues to address these uncovered use cases can help develop further features for an enhanced KG construction process.
  However, \textbf{there is a lack of comprehensive and extensive studies analyzing the expressiveness of mapping languages in fine-grain detail}, which can greatly help in (i) the choice of a language depending on the use case requirements, and (ii) identifying the challenges and open issues to further improve the languages. 
  
@@ -114,7 +115,7 @@ For this reason, to help in the adoption of these technologies and make them mor
 While these syntaxes present a wide adoption by more experienced practitioners, they still pose a barrier for learning the language's grammar, which may hinder its use by novel users. 
 In addition, visual approaches are limited for complex or large use cases. 
 Hence, further research is needed to \textbf{identify approaches that facilitate the writing of mappings, reducing the need to learn a language or syntax, while remaining scalable for large use cases}, in order to facilitate their adoption. 
-In addition, each language is processed by different engines with different capabilities. When dealing with complex use cases or KGs with evolving needs, it is sometimes necessary to use different engines, which may not implement the same language. This kind of situations forces the user to learn more than one single language, as there is little support for translating mapping rules among different mapping languages~\parencite{corcho2020towards}. 
+In addition, each language is processed by different engines with different capabilities. When dealing with complex use cases or evolving KGs, it is sometimes necessary to use different engines, which may not implement the same language. This kind of situations forces the user to learn more than one single language, as there is little support for translating mapping rules among different mapping languages~\parencite{corcho2020towards}. 
 Hence, \textbf{it is required to improve the interoperability between existing mapping languages} and bridge the gap between user-friendly mapping creation and existing KG construction implementations. 
 
 
@@ -142,9 +143,9 @@ The overall objective of this thesis is to improve the understanding and operati
     \begin{itemize}
         \item \textbf{A comparison framework with a fine-grained analysis of the characteristics of current mapping languages.} We design a framework with the features that a mapping language may provide, from data source description to triple transformation and additional rules that apply to triple creation, and check whether current mapping languages provide such features in the language itself or supported by a compliant engine. 
 
-        \item \textbf{A set of requirements for knowledge graph construction}, extracted from the comparison framework and the needs of the community of practitioners. These requirements are implemented in a formal language as an ontology. 
+        \item \textbf{A set of requirements for declarative mapping languages}, extracted from the comparison framework and the needs of the community of practitioners. These requirements are implemented in a formal language as an ontology. 
 
-        \item \textbf{Feature update of the RML mapping language with new requirements.} We present how some of these requirements have served to update RML, focusing on its extension to enable the construction of RDF-star graphs.
+        \item \textbf{Feature update of the RML mapping language with new requirements.} We present how some of these requirements have served to update RML, providing a novel solution for constructing RDF-star graphs.
         
         %\item \textcolor{red}{\textbf{The implementation of these new requirements in the RML mapping language.}} The requirements gathered in previous contributions are implemented in RML, a widely adopted language, focusing on the update that involves enabling the construction of RDF-star graphs.
     \end{itemize}
@@ -196,7 +197,7 @@ This section lists the publications derived from the work in this thesis.
 \begin{itemize}
     \item \textbf{Journal Publications}
     \begin{itemize}
-        \item Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Garijo, D., Corcho, O. and Dimou, A. (2024) Declarative generation of RDF-star graphs from heterogeneous data. \textit{Semantic Web}, in press. This work presents and validates the latest version of RML-star described in \cref{chapter:mappings}.
+        \item Arenas-Guerrero, J.*, \textbf{Iglesias-Molina, A.}*, Chaves-Fraga, D., Garijo, D., Corcho, O. and Dimou, A. (2024) Declarative generation of RDF-star graphs from heterogeneous data. \textit{Semantic Web}, in press. This work presents and validates the latest version of RML-star described in \cref{chapter:mappings}.
         
         \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Ruckhaus, E., Chaves-Fraga, D., García-Castro, R., Corcho, O. (2024) An Ontological Approach for Representing Declarative Mapping Languages. \textit{Semantic Web}, \textit{5} (1), 191–221. This work analyzes the mapping languages capabilities and limitations, gathers the requirements for KG construction and presents their formalization as an ontology described in \cref{chapter:mappings}.
     \end{itemize}
@@ -258,15 +259,15 @@ As part of the research activity and interest in contributing further to this co
     All tutorials focused on explaining in detail, from a practical perspective, the process of constructing knowledge graphs, from writing mappings to their execution, publication and validation with suitable tools. The number of attendees in all tutorials was around 20-30 people. 
 \end{itemize}
 
-\section{Projects}
-During the development of this thesis, the author participated in the following research and innovation projects:
+%\section{Projects}
+%During the development of this thesis, the author participated in the following research and innovation projects:
 
-\begin{itemize}
-    \item \textit{SolarChem 5.0: Towards Digital Transition in Solar Chemistry: AI-assisted robotized platform for the development of efficient photoelectrodes}, reference TED2021-130173B-C41, within the State Program to Promote Scientific-Technical Research and its Transfer (Strategic Projects Oriented to Ecological Transition and Digital Transition).
+%\begin{itemize}
+%    \item \textit{SolarChem 5.0: Towards Digital Transition in Solar Chemistry: AI-assisted robotized platform for the development of efficient photoelectrodes}, reference TED2021-130173B-C41, within the State Program to Promote Scientific-Technical Research and its Transfer (Strategic Projects Oriented to Ecological Transition and Digital Transition).
 
-    \item \textit{DRUGS4COVID++: Servicios de Inteligencia Artificial para la creación de un grafo de conocimientos sobre fármacos usados en el control clínico de la enfermedad, a partir de la explotación de grandes corpus de documentación científica sobre SARS-COV-2 y COV}, funded by BBVA grants for Teams of Scientific Research on SARS-CoV-2 and COVID-19.
+%    \item \textit{DRUGS4COVID++: Servicios de Inteligencia Artificial para la creación de un grafo de conocimientos sobre fármacos usados en el control clínico de la enfermedad, a partir de la explotación de grandes corpus de documentación científica sobre SARS-COV-2 y COV}, funded by BBVA grants for Teams of Scientific Research on SARS-CoV-2 and COVID-19.
 
-    \item \textit{Ontology Extension about Insurances and Construction of Knowledge Graphs}, funded by REALE. 
+%    \item \textit{Ontology Extension about Insurances and Construction of Knowledge Graphs}, funded by REALE. 
     
-    \item \textit{Governance Model, Best Practices and Standards for BASF Ontologies}, funded by BASF. 
-\end{itemize}
+%    \item \textit{Governance Model, Best Practices and Standards for BASF Ontologies}, funded by BASF. 
+%\end{itemize}
