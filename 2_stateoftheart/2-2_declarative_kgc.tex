@@ -10,7 +10,7 @@ Knowledge graphs can be constructed in diverse manners. Some KGs are constructed
 
 Constructing RDF knowledge graphs from heterogeneous data sources involves a schema transformation of the data to the desired graph structure. This transformation may be done in different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises an agnostic approach that can (and has been) applied to multiple different use cases, such as agriculture~\parencite{bilbao2022practical}, public procurement~\parencite{soylu2022theybuyforyou}, biomedicine~\parencite{iglesias2019bio2rdf,michel2020covid,aisopos2023knowledge}, cultural heritage~\parencite{calvanese2016culturalheritage}, IoT~\parencite{cimmino2020ewot,gonzalezgerpe2022extension}, among others.
 
-The usual workflow in which declarative approaches are involved is depicted in \cref{fig:chp2_kgc-workflow}. They enable both materialization and virtualization of knowledge graphs. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source. %\ana{mention OBDA?}
+The usual workflow in which declarative approaches are involved is depicted in \cref{fig:chp2_kgc-workflow}. They enable both materialization and virtualization of knowledge graphs~\parencite{Poggi2008}. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology~\parencite{arenas2022morphkgc,iglesias2020rdfizer,Lefrancois2017sparqlgenerate}. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source~\parencite{calvanese2017ontop,priyatna2014formalisation,rodriguez2015efficient}. 
 
 \begin{figure*}[h]
 \centering
@@ -196,7 +196,7 @@ The main differences between RML and R2RML~\parencite{dimou2020rml-r2rml-diffs} 
 
 There are several proposals to extend the capabilities of RML. The initial features for addressing heterogeneous data sources were expanded by~\cite{Dimou2015Machine}, allowing more diverse data accesses and fine-grained description of the data sources. \cite{DeMeester2017fno_dbpedia} proposed \textbf{RML+FnO}, which provided RML with a connector to the Function Ontology~\parencite{demeester2016fno} to include data transformation functions in the mappings. \cite{delva2021rml-fields} introduced  \textbf{RML Fields}, that addressed several challenges to accurately access nested data. \textbf{RML Target} was developed by \cite{VanAssche2021LeveragingWebThings} to specify how to create the output triples regarding, for instance, RDF serialization, compression format or encoding. Lastly, \textbf{RML-star} was proposed by \cite{delva2021rml-star}, and later refined by \cite{arenas2023morphstar}, to allow the construction of RDF-star graphs. 
 
-Recently, the Knowledge Graph Construction W3C Community Group\footnote{\url{https://www.w3.org/community/kg-construct/}} gathered these variety of specifications and released a new version of RML~\parencite{iglesias2023rml}, which includes several of these extensions, overcoming the identified limitations for declarative knowledge graph construction. This version is under standardisation.
+%Recently, the Knowledge Graph Construction W3C Community Group\footnote{\url{https://www.w3.org/community/kg-construct/}} gathered these variety of specifications and released a new version of RML~\parencite{iglesias2023rml}, which includes several of these extensions, overcoming the identified limitations for declarative knowledge graph construction. This version is under standardisation.
 
 
 
@@ -231,8 +231,9 @@ Following, we present an overview of existing mapping languages, listed in \cref
                               \parencite{Lefrancois2017sparqlgenerate,sparqlgenerate}\\ %\cmidrule{2-3} 
                               & Facade-X        & \parencite{daga2021facade,sparqlanything}\\ %\cmidrule{2-3}
                               & NORSE            & \parencite{stadler2023spark}\\ \midrule
-\multirow{4}{*}{\textbf{Alternative schema}}       & R$_2$O          & \parencite{barrasa2004r2o}\\ %\cmidrule{2-3}
+\multirow{5}{*}{\textbf{Alternative schema}}       & R$_2$O          & \parencite{barrasa2004r2o}\\ %\cmidrule{2-3}
                               & D-REPR          & \parencite{Vu2019d-repr}\\ %\cmidrule{2-3} 
+                              & T2WML           & \parencite{szekely2019t2wml}\\ %\cmidrule{2-3} 
                               & ShExML          & \parencite{Garcia-Gonzalez2020shexml,shexml}\\ %\cmidrule{2-3} 
                               & Helio mappings  & \parencite{cimmino2022helio}\\ 
                               \bottomrule
@@ -244,7 +245,7 @@ Following, we present an overview of existing mapping languages, listed in \cref
 \begin{figure*}[t]
 \centering
 \includegraphics[width=1\linewidth]{figures/chp2_mapping_languages}
-\caption[Existing mapping languages and the relationships among them]{Mapping languages developed in the last two decades, classified according to the schema they are based on, and the relationships among them.}
+\caption[Existing mapping languages and the relationships among them]{Mapping languages release and extensions in the last two decades and relationships among them, classified according to the schema they are based on. Adapted and extended from \cite{chaves2021thesis} and \cite{iglesias2022cm}.}
 \label{fig:chp2_mapping_languages}
 \end{figure*}
 
@@ -263,7 +264,7 @@ and \cref{sec:chp2_RML} respectively, also belong to this group of languages.
 
 \noindent\textbf{XLWrap}~\parencite{langegger2009xlwrap} enables the transformation of spreadsheets to RDF. These mappings are written using the TriG syntax. They contain a graph instance of \texttt{xl:Mapping}, that describes the input file (workbook) (\texttt{xl:fileName}) and worksheet (\texttt{xl:sheetName}), a constant graph with information about the mapping (\texttt{xl:constantGraph}), references to \textit{Template Graphs} (\texttt{xl:templateGraph}) and \textit{Transformation Operations} (\texttt{xl:transformationOperation}). The \textit{Template Graphs} specify how to create the desired RDF graphs with references from the spreadsheet's cells and XLWrap expressions. This language provides further features to accurately access data in spreadsheets, described in the specification~\parencite{xlwrap}.  
 
-\noindent\textbf{CSV on the Web (CSVW)}~\parencite{Tennison2015csvw} is a W3C Recommendation that enables a fine-grained annotation of CSV files and other tabular data formats, such as datatypes, valid values, data transformations, and primary and foreign key constraints. 
+\noindent\textbf{CSV on the Web (CSVW)}~\parencite{Tennison2015csvw} is a W3C Recommendation that enables RDF generation providing a fine-grained annotation of CSV files and other tabular data formats, such as datatypes, valid values, data transformations, and primary and foreign key constraints. 
 
 \noindent\textbf{KR2RML}~\parencite{slepicka2015kr2rml} extended R2RML to: (i) address multiple input data formats, such as CSV, JSON and XML; (ii) select the RDF serialization to create the output graph and (iii) integrate data transformation functions for pre-processing messy data without relying on SQL queries or views. To this end, the authors developed the nested Relational Model (NRM), as an intermediate form to represent data. NRM allowed the unification of the way to access data without loosing expressiveness. 
 
@@ -315,6 +316,8 @@ An R$_2$O mapping consists on the following components: description of the datab
 
 \noindent\textbf{D-REPR}~\parencite{Vu2019d-repr}, Dataset REPResentation language, can be written as YAML or JSON files, providing a user-friendly approach to describe the transformation rules from a wide range of data source formats. This language requires four components: dataset resources, attributes of data sources, a semantic model to map the attributes to the ontology classes, and rules for the values of the attributes. This language also enables the use of data transformation functions. 
 
+\noindent\textbf{T2WML}~\parencite{szekely2019t2wml}, Table to Wikidata Mapping Language, is a YAML-based language that enables the mapping of CSV and Excel files to graphs following the Wikidata data model~\parencite{vrandevcic2014wikidata}. It allows for a more flexible description of tables. While other languages process tabular data in a row-wise manner, T2WML is a cell-centric model. Thus, this language can create, for instance, statements by referring to cells in distant rows. Cells can be linked to entities and property nodes in Wikidata.
+
 \noindent\textbf{ShExML}~\parencite{Garcia-Gonzalez2020shexml,shexml} proposes a mapping language based on the ShEx validation language for knowledge graphs~\parencite{prud2014shex}. This language enables the access to heterogeneous data sources, such as JSON, XML, CSV, RDBs and RDF with SPARQL queries. A ShExML mapping is divided in a declaration and a generation part. The declaration part provides the specification of prefixes, data sources, iterators, fields and expressions for merging or transforming data. The generation part describes how to generate triples and graphs with the fields and expressions defined in the declaration part. 
 
 \noindent\textbf{Helio}~\parencite{cimmino2022helio} is a JSON-based language that provides a variety of possibilities for heterogeneous data formats and accesses, as well as for extended functions for linking resources further than left joins, and data transformation functions. A Helio mapping is composed of a \textit{data source} description, defining also its provider and handler; a set of \textit{resource rules} that conform the triple generation rules; and optionally a set of \textit{linking rules} to be applied over the resource rules. 
@@ -346,7 +349,7 @@ The large amount of mapping languages presented in this section opens the door t
 We find some examples of unidirectional pairwise translations between these languages. 
 Helio and SPARQL-Generate, with the aim of extending their outreach, implement a plugin to translate from RML to their corresponding compliant language\footnote{\url{https://github.com/oeg-upm/helio/wiki/Streamlined-use-cases\#materialising-rdf-from-csv--xml-and-json-files-using-rml}}$^,$\footnote{\url{https://helio-playground.linkeddata.es/tour}}$^,$\footnote{\url{https://github.com/sparql-generate/rml-to-sparql-generate}}. Inversely, ShExML provides translation to RML in its playground\footnote{\url{https://shexml.herminiogarcia.com/editor/}}, thus presenting the language also as a user-friendly syntax for RML~\parencite{Garcia-Gonzalez2020shexml}. 
 
-There are also examples of tools that provide a set of optimizations for KG construction exploiting the translation of mapping rules. This is the case of Morph-CSV~\parencite{chaves2021morph-csv} and FunMap~\parencite{jozashoori2020funmap}. Morph-CSV performs a transformation over the tabular data with RML+FnO mappings and CSVW annotations, and outputs a database and R2RML mappings. FunMap takes an RML+FnO mapping, performs the transformation functions indicated, outputs the parsed data and generates a function-free RML mapping.
+There are also examples of tools that provide a set of optimizations for KG construction exploiting the translation of mapping rules. This is the case of Morph-CSV~\parencite{chaves2021morph-csv} and FunMap~\parencite{jozashoori2020funmap}. Morph-CSV performs a transformation over the tabular data with RML+FnO mappings and CSVW annotations, and outputs a SQL database and R2RML mappings. FunMap takes an RML+FnO mapping, performs the transformation functions indicated, outputs the parsed data and generates a function-free RML mapping.
 
 Lastly, the user-friendly serializations presented later in the chapter are always supported with translations to a mapping language, which is explained in detail in \cref{sec:chp2_easy_kgc}.
 
