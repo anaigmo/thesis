@@ -13,12 +13,12 @@ Each serialization is accompanied by a system that translates their rules into m
 %These serializations and translators were not compared with each other in terms of serializations' features and system's characteristics, even though it would help to decide which serialization fits each use case.
 
 This section describes YARRRML-star, the extension of YARRRML to support RML-star~\parencite{delva2021rml-star} to construct RDF-star graphs.
-We also improve the serialization it to adhere with the latest RML updates
-(e.g., datatypes, joins, etc.), and develope a translator system --Yatter-- that implements the new features, and validate our proposal with test cases and compared it to other user-friendly serializations.
+We also improve the serialization to adhere with the latest RML updates
+(e.g., datatypes, joins, etc.), and develop a translator system --Yatter-- that implements the new features, and validate our proposal with test cases and compared it to other user-friendly serializations.
 
 \subsection{User-friendly Syntax for Mapping Rules}
 \label{sec:chp5_yarrrml-desc}
-We extend the YARRRML serialization to support the RDF-star construction and two updates: the dynamic datatypes and language tags, and a shortcut for join conditions. These are recent features in RML that so far were not considered in YARRRML.
+We extend the YARRRML serialization to support the RDF-star construction, two updates (dynamic datatypes and language tags), and a shortcut for join conditions. These are recent features in RML that so far were not considered in YARRRML.
 To illustrate the extensions,
 we use a CSV file as input (\cref{lst:chp5_csv}) with information about pole vaulters: an identifier, name, language of the country, height of the jump, date when the jump takes place, and type of date format specified.
 
@@ -127,11 +127,11 @@ mappings:
 %We add a new feature to comment terms in the mapping. These comments can be added to sources, subjects and predicate-object maps. 
 %Comments start with ``\texttt{\#}" and contain a \texttt{TITLE} and \texttt{COMMENT} separated by ``\texttt{|}" (Listing \ref{lst:chp5_mapping-comment}). 
 %They are translated into RML to two properties: \texttt{rdfs:label} for \texttt{TITLE} and \texttt{rdfs:comment}  for \texttt{COMMENT} (Listing \ref{lst:chp5_rml-comment}).
-We enable YARRRML-star with other new features that have been incorporated into RML in the last years. 
+We enable YARRRML-star with other new features that have been incorporated into RML in recent years. 
 %Listing \ref{lst:chp5_yarrrml-updates} shows the updates and the translation to RML is shown in Listing \ref{lst:chp5_rml-updates}. 
 %The first additional update we highlight is the possibility of 
 We extend YARRRML to assign datatypes and language tags dynamically to objects. 
-They are generated with the data values, in the following examples the datatype is generated dynamically with the data field \texttt{DATA-TYPE} (\cref{lst:chp5_dyn_datatype}), and the language tag with \texttt{COUNTRY} (\cref{lst:chp5_dyn_lang}). They translates into RML as Lists \ref{lst:chp5_dyn_datatype_rml} and \ref{lst:chp5_dyn_lang_rml} show.
+They are generated with the data values, in the following examples the datatype is generated dynamically with the data field \texttt{DATA-TYPE} (\cref{lst:chp5_dyn_datatype}), and the language tag with \texttt{COUNTRY} (\cref{lst:chp5_dyn_lang}). They translate into RML as Listings \ref{lst:chp5_dyn_datatype_rml} and \ref{lst:chp5_dyn_lang_rml} show.
 
 
 
@@ -212,11 +212,11 @@ rr:predicateObjectMap [
 
 We also incorporate a shortcut for specifying join conditions (\cref{lst:chp5_join}). This shortcut follows the functions' syntax\footnote{\url{https://rml.io/yarrrml/spec/\#functions}}. %, and translates to normal join conditions in RML (\cref{lst:chp5_rml-mapping} lines 16-22)
 It is specified as the function \texttt{join} that takes as parameters the mapping identifier (with the \texttt{mapping=} parameter key) and the similarity function to perform the join. 
-This function can, in turn, take as parameters data values. 
+This function can, in turn, take data values as parameters. 
 Quoted and non-asserted triples can also be generated within join conditions by using the parameter keys \texttt{quoted=} and \texttt{quotedNonAsserted=} respectively.
 In the example, the join condition is performed using the \texttt{equal} function to create as objects the subjects of the mapping set \texttt{jumpTM} if the values of the fields \texttt{ID} from source and \texttt{ID} from target mapping set are the same.
 
-All the described updates have been proposed for the YARRRML specification and is currently under review by the KG Construction Community Group\footnote{\url{https://github.com/kg-construct/yarrrml-spec/pull/4}}.
+All the described updates have been proposed for the YARRRML specification and are currently under review by the KG Construction Community Group\footnote{\url{https://github.com/kg-construct/yarrrml-spec/pull/4}}.
 
 \begin{minipage}{\linewidth}
 \centering
@@ -239,7 +239,7 @@ All the described updates have been proposed for the YARRRML specification and i
 \subsection{Implementation: Yatter}
 
 %In this section, we describe 
-Yatter\footnote{\label{foot:yatter}\url{https://github.com/oeg-upm/yatter/}} is a new open-source bi-directional YARRRML translator that supports the aforementioned new features. 
+Yatter\footnote{\label{foot:yatter}\url{https://github.com/oeg-upm/yatter/}} is a bi-directional YARRRML translator that supports the features described in previous sections. 
 Yatter receives as input a mapping document in the YARRRML serialization and the desirable output format (R2RML or RML), or the other way around.
 
 
@@ -263,10 +263,10 @@ Before returning the mapping rules, Yatter validates that the generated output i
 
 \input{algorithms/algorithm_yatter}
 
-Although YARRRML leaves the RDF-based syntax of the mapping rules to be processed only by the knowledge graph construction systems, we also provide a human-readable output in the same way as does Mapeathor (see \cref{sec:chp5_mapeathor_tool}). 
+Although YARRRML leaves the RDF-based syntax of the mapping rules to be processed only by the knowledge graph construction systems, we also provide a human-readable output in the same way as Mapeathor does (see \cref{sec:chp5_mapeathor_tool}). 
 Moreover, we ensure that functions, targets, and databases appear first, while for each \texttt{rr:TriplesMap}, the sequence is: source, subject map, and the set of predicate object maps.
 
-The source code of Yatter is openly available under Apache 2.0 license\cref{foot:yatter}.
+The source code of Yatter is openly available under an Apache 2.0 license\cref{foot:yatter}.
 Following open science best practices, each release automatically generates a dedicated DOI to ensure reproducibility in any experimental evaluation\footnote{\url{https://doi.org/10.5281/zenodo.7024500}}. 
 The development is under continuous integration using GitHub Actions and the YARRRML test-cases (Section \ref{sec:chp5_yarrrml-validation}) have more than 80\% code coverage. 
 Yatter is available through PyPi as a module\footnote{\url{https://pypi.org/project/yatter/}}~\parencite{david_chaves_2024_yatter} to be easily integrated in any Python development. % (e.g., providing RML to a KG construction system implemented in this language).
