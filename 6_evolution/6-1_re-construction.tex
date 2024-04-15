@@ -2,9 +2,29 @@
 \section{Motivation}
 \label{sec:chp6-1_mot-example}
 
+\subsection{Re-construction example}
+
+
+Consider the SemMedDB dataset, that contains entities extracted from biomedical texts, as well as the semantic types of these concepts and a timestamp of when they were extracted. A stable version of a knowledge graph represents this information, where the timestamp and semantic type are related to its correspondent entity with an N-Ary relationship. However, the maintainers of this knowledge graph want to reduce the size of the graph by reducing the number of nodes, as well as to represent this information with RDF-star to start adopting the RDF 1.2 specification.
+
+The graph maintainers have access to the original source data, so they can change the original KG construction pipeline, that uses declarative mappings to construct the graph. However, since this graph is not going to be updated with new data, it is also possible to change the structure of the graph with queries within the triplestore where it is maintained. They know the time it takes to generate the graph in its original representation. However, they are not certain whether generating the graph in the new representation using this pipeline will take more time, or if with queries the transformation could be performed faster (\cref{fig:chp6-1_mot-example}). Hence, the objective of this work consist of assessing the aspects that influence this situation to help in making an informed decision.
+
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figures/chp6-1_motivating-example.pdf}
+    \caption[KG re-construction alternatives]{Alternatives for refactoring a pre-existing knowledge graph.}
+    \label{fig:chp6-1_mot-example}
+\end{figure}
+
+
+
 \subsection{KG Representation impact on its consumption}
 
-Previous studies comparing knowledge representations have focused primarily on query performance~\parencite{das2014tale,nguyen2014don,alocci2015property,hernandez2015reifying,frey2019evaluation,orlandi2021benchmarking} and graph interoperability~\parencite{angles2019rdf,angles2020mapping}. For this scenario, the representations need to ensure efficiency to minimize performance time. 
+
+The different representations for adding additional information to triples have an impact on the performance of different KG consumption tasks. Thus, it becomes important to understand their differences and implications to choose the most suitable one depending on the particular needs. 
+
+Previous studies comparing knowledge representations have focused primarily on query performance~\parencite{das2014tale,nguyen2014don,alocci2015property,hernandez2015reifying,frey2019evaluation,orlandi2021benchmarking} and graph interoperability~\parencite{angles2019rdf,angles2020mapping}. For this scenario, the representations need to ensure efficiency to maximize performance. 
 However, applications relating to exploration by end users and machine learning over KGs have not been taken into account~\parencite{karger2014semantic,hogan2020twodecades}. 
 Knowledge exploration scenarios, e.g., browsing, are impacted by representational choices, and therefore the selected representations should reduce the cognitive load and user expertise needed to explore, access, and acquire knowledge.
 Similarly, many embedding models-based tasks such as knowledge graph completion~\parencite{ren2022smore} require adequate representations to maximize the performance of the models on downstream predictive tasks.
@@ -24,7 +44,7 @@ This study found significant differences for particular scenarios, summarized in
     \item Promoting the use of interfaces such as browsers highly improves the user experience in knowledge exploration. These interfaces help mask the representation complexity and differences, which directly influences the adoption and usability of semantic resources, an aspect usually overlooked.
 \end{enumerate}
 
-Overall, the lack of a good-for-all solution raises the need of improving the interoperability among representations, especially in cases where knowledge graphs are consumed for very different purposes.
+Overall, the lack of a good-for-all solution raises the need of improving the interoperability among representations, especially in cases where knowledge graphs are consumed for very different purposes. The study presented in this chapter looks into this interoperability issue when refactoring a KG in different representations.
 
 \begin{table}[t]
     \centering
@@ -40,20 +60,11 @@ Overall, the lack of a good-for-all solution raises the need of improving the in
 \end{table}
 
 
-\subsection{Re-construction example}
 
 
-Consider the SemMedDB dataset, that contains entities extracted from biomedical texts, as well as the semantic types of these concepts and a timestamp of when they were extracted. A stable version of a knowledge graph represents this information, where the timestamp and semantic type are related to its correspondent entity with an N-Ary relationship. However, the maintainers of this knowledge graph want to reduce the size of the graph by reducing the number of nodes, as well as to represent this information with RDF-star to start adopting the RDF 1.2 specification.
-
-The graph maintainers have access to the original source data, so they can change the original KG construction pipeline, that uses declarative mappings to construct the graph. However, since this graph is not going to be updated with new data, it is also possible to change the structure of the graph with queries within the triplestore where it is maintained. They know the time it takes to generate the graph in its original representation. However, they are not certain whether generating the graph in the new representation using this pipeline will take more time, or if with queries the transformation could be performed faster (\cref{fig:chp6-1_mot-example}). Hence, the objective of this work consist of assessing the aspects that influence this situation to help in making an informed decision.
 
 
-\begin{figure}[t!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/chp6-1_motivating-example.pdf}
-    \caption[KG re-construcion alternatives]{Alternatives for re-constructing a pre-existing knowledge graph.}
-    \label{fig:chp6-1_mot-example}
-\end{figure}
+
 
 \section{Methodology}
 \label{sec:chp6-1_methodology}
@@ -73,7 +84,7 @@ All resources to reproduce the experiments are available on GitHub\footnote{\url
 
 %\ana{ojo que esta sección es como para la de rml-star, repetir o referenciar?}
 
-We use the Semantic MEDLINE Database (SemMedDB)~\parencite{SemMedDB} in the experimental evaluation. This database consists of a repository with biomedical entities and relationships (subject-predicate-object) extracted from biomedical texts. The complete description of this dataset can be found in the \textit{Biomedical Research Literature} use case in \cref{sec:chp4_star_usecases}. Listings~\ref{lst:chp6-1_semmeddb_entity},~\ref{lst:chp6-1_semmeddb_pred} and~\ref{lst:chp6-1_semmeddb_predaux} illustrate the columns used from the files with synthetic data.
+We use the Semantic MEDLINE Database (SemMedDB)~\parencite{SemMedDB} in the experiments. This database consists of a repository with biomedical entities and relationships (subject-predicate-object) extracted from biomedical texts. The complete description of this dataset can be found in the \textit{Biomedical Research Literature} use case in \cref{sec:chp4_star_usecases}. Listings~\ref{lst:chp6-1_semmeddb_entity},~\ref{lst:chp6-1_semmeddb_pred} and~\ref{lst:chp6-1_semmeddb_predaux} illustrate the columns used from the files with synthetic data.
 We use the CSV files to model the dataset as five annotated statements: 
 Three assign \textit{semantic types} to \textit{subjects}, \textit{objects}, and \textit{entities} with a confidence score; and two provide the timestamp for the extraction of \textit{subjects} and \textit{objects} from text. 
 %, mainly titles and abstracts from PubMed citations. 
@@ -164,10 +175,10 @@ To test the scalability of the evaluated approaches, we subset this dataset into
 The following resources are used: 
 (i)~a set of declarative mappings that are used for constructing the knowledge graph from the SemMedDB tabular files in the four selected reification representations; and (ii)~a set of SPARQL queries that are used for re-constructing the graph within different triplestores. A summary of their characteristics is shown in \cref{tab:chp6-1_mapping-char}.
 
-We use two sets of mappings, one set written in the RML mapping language~\parencite{iglesias2023rml}, and the other in SPARQL-Anything~\parencite{asprino2023sparql-anything}. These languages allow describing transformation of heterogeneous data sources into RDF following the schema provided by an ontology or vocabulary, and are processed by different engines (see \cref{sec:chp6-1_engines}). Each set of mappings is comprised of four mappings, to construct the knowledge graphs in the four representations selected (i.e. Standard Reification, N-Ary Relationships, Named Graphs and RDF-star).
+We use two sets of mappings, one set written in the RML mapping language~\parencite{iglesias2023rml}, and the other in SPARQL-Anything~\parencite{asprino2023sparql-anything}. Each set of mappings is comprised of four mapping files, to construct the knowledge graphs in the four representations selected (i.e. Standard Reification, N-Ary Relationships, Named Graphs and RDF-star).
+Listings \ref{lst:chp6-1_rml-star} and \ref{lst:chp6-1_sparql-anything} show an RML and SPARQL-Anything mapping respectively that generates in RDF-star the annotation of the semantic types of \textit{entities} with a score from the CSV file shown in \cref{lst:chp6-1_semmeddb_entity}. These RML mappings use the RML-star module (described in \cref{sec:chp4_rml_star}). For these mappings, we show the number of sets of rules (i.e. \textit{Triples Map}) and  \textit{Predicate Object Maps} specified (\cref{tab:chp6-1_mapping-char}). For the SPARQL-Anything mappings, we show the number of triple patterns in this clause and additional SPARQL clauses (\cref{tab:chp6-1_mapping-char}). All mappings contain the same number of triple patterns in the \texttt{WHERE} clause.
 
 
-RML extends the R2RML Recommendation~\parencite{das2012r2rml} to describe more data sources besides Relational Databases. RML rules are grouped within \textit{Triples Maps}, which contain one \textit{Logical Source}, one \textit{Subject Map} and zero to multiple \textit{Predicate Object Maps}. \textit{Logical Sources} describe the input data to be transformed. \textit{Subject Maps} indicates how the subjects of the triples are created, while \textit{Predicate Object Maps} specify how the predicates and objects of the triples are created. \cref{lst:chp6-1_rml-star} shows an example of a mapping that generates in RDF-star the annotation of the semantic types of \textit{entities} with a score from the CSV file shown in \cref{lst:chp6-1_semmeddb_entity}. This mapping uses the RML-star module~\parencite{delva2021rml-star,iglesias2023rml} to generate RDF-star graphs, which allows RML to quote \textit{Triples Map} with the \texttt{rml:quotedTriplesMap} property. For these mappings, we show the number of sets of rules (i.e. \textit{Triples Map}) and  \textit{Predicate Object Maps} specified (\cref{tab:chp6-1_mapping-char}).
 
 \noindent\begin{minipage}{1\linewidth}
 \begin{captionedlisting}{lst:chp6-1_rml-star}{RML-star mapping snippet to create the RDF-star graph for \textit{entity} from data in \cref{lst:chp6-1_semmeddb_entity}. }
@@ -228,8 +239,6 @@ RML extends the R2RML Recommendation~\parencite{das2012r2rml} to describe more d
     \end{tabular}}
 \end{table}
 
-SPARQL-Anything heavily relies on the SPARQL syntax, overriding the \texttt{SERVICE} operator while leveraging the rest of its features. This operator is then always present in the queries and hence is not shown in the table. The graphs are built with \texttt{CONSTRUCT} clauses. \cref{lst:chp6-1_sparql-anything} shows a mapping example that generates in RDF-star the annotation of the semantic types of \textit{entities} with a score from the CSV file shown in \cref{lst:chp6-1_semmeddb_entity}.
-For each mapping, we show the number of triple patterns in this clause and additional SPARQL clauses (\cref{tab:chp6-1_mapping-char}). All mappings contain the same number of triple patterns in the \texttt{WHERE} clause.
 
 
 
@@ -351,7 +360,7 @@ We run all experiments over an Ubuntu 20.04 server with
     \label{fig:chp6-1_queries}
 \end{figure}
 
-The evaluation results are presented in this section. \cref{fig:chp6-1_map-queries} reports the comparison between (KGC) systems using declarative mappings, and triplestores with SPARQL queries. 
+The evaluation aims at assessing which is the re-construction approach that performs best for refactoring KGs, and to extract some insights about the impact of the different representations selected in the process. \cref{fig:chp6-1_map-queries} reports the comparison between (KGC) systems using declarative mappings, and triplestores with SPARQL queries. 
 %For the latter, the geometric mean of the query execution time for all queries that generate each representation is provided. 
 \cref{fig:chp6-1_queries} reports a fine-grained comparison of each triplestore performance on the proposed queries performing translations between each pair of representations.
 
