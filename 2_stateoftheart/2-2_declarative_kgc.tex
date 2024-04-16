@@ -223,8 +223,9 @@ Following, we present an overview of existing mapping languages, listed in \cref
                               & xR2RML          & \parencite{michel2015xr2rml,xr2rml}\\ %\cmidrule{2-3} 
                               & R2RML-F         & \parencite{debruyne2016r2rmlf}\\ %\cmidrule{2-3} 
                               & FunUL           & \parencite{junior2016funul}\\ %\cmidrule{2-3} 
-                              & R2RML for collections & \parencite{debruyne2017R2RML-collections}\\ %\cmidrule{2-3}   
-                              & D2RML           & \parencite{chortaras2018d2rml}\\  \midrule
+                              & R2RMLcc & \parencite{debruyne2017R2RML-collections}\\ %\cmidrule{2-3}   
+                              & D2RML           & \parencite{chortaras2018d2rml}\\ 
+                              & WoT mappings    & \parencite{cimmino2020ewot}\\ \midrule
 \multirow{5}{*}{\textbf{SPARQL-based}} & XSPARQL         & \parencite{Bischof2012xsparql,xsparql}\\ %\cmidrule{2-3} 
                               & TARQL           & \parencite{tarql}\\ %\cmidrule{2-3}
                               & SPARQL-Generate &     
@@ -272,11 +273,11 @@ and \cref{sec:chp2_RML} respectively, also belong to this group of languages.
 
 \noindent\textbf{R2RML-F}~\parencite{debruyne2016r2rmlf} is a dedicated extension of R2RML to include data transformation functions, later refined in \textbf{FunUL}~\parencite{junior2016funul}. It introduces the \textit{Function} class (\texttt{rrf:Function}), which defines a data transformation function with name and body. An additional type of \textit{Term Map} is defined, the \textit{Function Valued Term Map}, which connects with the \textit{Function} and supplies it with parameter bindings. 
 
-\noindent\textbf{R2RML for collections and containers}~\parencite{debruyne2017R2RML-collections} is another R2RML extensions focused on the generation of RDF lists and containers. These terms are created with \textit{Gather Maps}, that create a group of \textit{Object Maps} within an \textit{Object Map} with the \texttt{rrf:gather} property. 
+\noindent\textbf{R2RML for collections and containers}~\parencite{debruyne2017R2RML-collections} (henceforth, R2RMLcc) is another R2RML extensions focused on the generation of RDF lists and containers. These terms are created with \textit{Gather Maps}, that create a group of \textit{Object Maps} within an \textit{Object Map} with the \texttt{rrf:gather} property. 
 
 \noindent\textbf{D2RML}~\parencite{chortaras2018d2rml} proposes a vocabulary extension to R2RML and RML with a large amount of features to describe in detail different heterogeneous data formats (e.g., JSON, CSV, XML) and accesses (e.g., RESTful APIs, SPARQL endpoints, documents) with a high level of detail. For instance, it adds to R2RML's \textit{Logical Table} and RML's \textit{Logical Source} the \textit{SQL Tables}, \textit{SPARQL Tables}, \textit{CSV Tables} and \textit{Information Source}. This proposal also includes data transformation functions to be used within the data source descriptions, and enables conditional generation of \textit{Term Maps}. 
 
-
+\noindent\textbf{WoT mappings}~\parencite{cimmino2020ewot} specify how data from IoT (Internet of Things) devices can be translated to RDF. It is an extension of the WoT (Web of Things) Thing Descriptions~\parencite{wot-td} designed to deal with the heterogeneity of the IoT devices. 
 
 
 \subsubsection{SPARQL-based Mapping Languages.}
