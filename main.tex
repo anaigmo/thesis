@@ -38,10 +38,10 @@ titlepage=on            % own page for each title page
 \frontmatter
 \pagestyle{empty}				    % no header nor footer
 \input{0_frontmatter/1_cover}
-\newpage
+\cleardoublepage
 
 \input{0_frontmatter/2_frontpage}
-\newpage
+\cleardoublepage
 
 \pagenumbering{roman}			    % roman page numbering 
 \pagestyle{plain}				    % empty header, just page number in footer
@@ -52,10 +52,10 @@ titlepage=on            % own page for each title page
 \cleardoublepage
 
 \input{0_frontmatter/5_acknowledgement}  % acknowledgement (optional)
-\newpage
+\cleardoublepage
 
 \input{0_frontmatter/6_abstract}		% abstract (in English and Spanish)
-\newpage
+\cleardoublepage
 
 \selectlanguage{english}
 
@@ -88,7 +88,7 @@ titlepage=on            % own page for each title page
 % Chapters
 %%\include{mainmatter/chapter1}
 
-%\input{1_introduction/1-0_introduction}
+\input{1_introduction/1-0_introduction}
 
 %\input{2_stateoftheart/2-0_stateofart}
 
@@ -100,7 +100,7 @@ titlepage=on            % own page for each title page
 
 %\input{6_evolution/6-0_evolution}
 
-%\input{7_conclusions/7-0_conclusions}
+\input{7_conclusions/7-0_conclusions}
 
 \cleardoublepage
 

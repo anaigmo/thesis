@@ -5,14 +5,62 @@
 \addcontentsline{toc}{section}{Abstract}
 \label{sec::abstract}
 
-<Abstract in English: maximum of 4000 characters, plain text (without symbols), structured summary of the thesis (introduction or motivation, objectives, findings and conclusions)>
+%<Abstract in English: maximum of 4000 characters, plain text (without symbols), structured summary of the thesis (introduction or motivation, objectives, findings and conclusions)>
 
 
-\newpage
+% contexto
+%\textit{knowledge graphs, cada vez más adopción. Una parte importante clave para la adopción y uso es como construir estos kgs}
+
+Knowledge graphs have gained momentum in the past few decades, becoming evermore a key asset for data interoperability, management, analysis and exploitation. 
+An aspect that plays an essential role in their uptake and use is the ease to construct them. 
+There are several ways in which knowledge graphs can be constructed, ranging from ad-hoc scripting to  declaratively defining the transformation rules.
+
+The use of these declarative approaches enable a reusable, maintainable and understandable manner for a seamless knowledge graph construction.
+They rely on languages for expressing the transformation rules that, while widely used and adopted, they still lack some expressiveness for the increasing complexity of available data. 
+Therefore, this thesis analyses the expressiveness of these languages, extracts and defines the requirements for constructing knowledge graphs with the current needs. 
+In addition, it extends a well-known language with features to generate knowledge graphs enriched with annotations, following the latest developments in the area.
+
+In order to facilitate the creation of the transformation rules for users with different backgrounds and expertise, this thesis proposes a spreadsheet-based approach to write them, providing a familiar environment and suppressing the need of learning the language's syntax.
+It also updates a user-friendly serialization with the latest additions from its target language, for users with more technical profiles. 
+Both this approaches are supported by implementations able to interoperate with different languages. 
+
+Finally, this thesis evaluates the role that these declarative approaches can play in different tasks involved in the knowledge graph life cycle. 
+More specifically, it assesses how they can be beneficial when refactoring the schema of knowledge graphs. 
+
+Overall, this thesis contributes to the understanding of the capabilities that declarative languages for knowledge graph construction and refactoring, while providing extended support for their creation and interoperability. 
+
+% problema
+%\textit{los metodos actuales de construcción tienen limitaciones. Cuando más expresivos, más conocimiento y skills se requiren del usuario; y cuanto más friendly para el usuario, hay menos expresividad o posibilidades en los metodos para tratar la heterogeneidad d elos datos. }
+%However, these approaches present some limitations. The more expressive they are, the more skills and expertise are required from the user. On the contrary, the more user-friendly they are, the least possibilities for expressing the transformation are provided to deal with data heterogeneity. 
+
+%objetivo
+%\textit{entonces, lo que la tesis propone es analizar y comprender mejor los métodos declarativos para ¿mejorarlos? jeje, (parafrasear el obj general), con las siguientes contribuciones}
+
+% contribuciones
+%\textit{1) analisis  y extracción de limitaciones de approaches actuales para extraer los requisitos de los para un full-fletched? KGC, actualizando un lenguaje actual con algunos de estos requisots para que puedan expresar la transformación de nuevos casos de uso
+%2) mejorar la creación de los mappings para distintos perfiles e incorporando las actualizaciones de los lenguajes según evolucionan
+%3) demostrar la versatilidad de declarative approaches para soportar otras tareas del ciclo de vida de los KGs aparte de la construcción.}
+
+
+% conclusiones
+% o no
+
+
+
+\cleardoublepage
 \section*{Resumen}
 \addcontentsline{toc}{section}{Resumen}
 \label{sec::resumen}
 
 
-<Resumen en español: máximo de 4000 caracteres, texto plano (sin símbolos), resumen estructurado de la tesis (introducción o motivación, objetivos, hallazgos y conclusiones)>
+%<Resumen en español: máximo de 4000 caracteres, texto plano (sin símbolos), resumen estructurado de la tesis (introducción o motivación, objetivos, hallazgos y conclusiones)>
 
+Los grafos the conocimiento han ganado impulso en las últimas décadas, posicionándose como un recurso clave para potenciar la interoperabilidad entre datos, su gestión, análisis y explotación. Un aspecto esencial para incrementar su acogida y uso es asegurar que se pueden construir fácilmente. Hay muchas maneras en las que los grafos de conocimiento se pueden construir, desde usar \textit{scripts} ad hoc hasta definir reglas de transformación declarativas. 
+
+El uso de los métodos declarativos posibilitan la construcción de grafos de conocimiento de manera reusable, mantenible y entendible. Estos métodos se basan en lenguajes que permiten expresar las reglas de transformación. Aunque se usan de manera extendida, hay casos para los que su expresividad no es suficiente para lidiar con la complejidad de los datos. Por ello, esta tesis analiza la expresividad de estos lenguajes, extrae y define los requisitos para construir grafos de conocimiento acorde a las necesidades actuales. Además, extiende un conocido lenguaje para posibilitar la creación de grafos enriquecidos con anotaciones, siguiendo los últimos avances en el área.
+
+Para facilitar la creación de las reglas de transformación con estos lenguajes para usuarios con distintos perfiles y experiencia, esta tesis propone un método basado en hojas de cálculo para escribir las reglas. Este método provee un entorno familiar para su escritura, así como evitar que los usuarios tengan que aprender la sintaxis de los lenguajes. Además, esta tesis propone una actualización de una serialización amigable acorde a los últimos avances en los lenguages. Ambas propuestas se proponen con un servicio que permite respectivamente la generación de reglas en varios lenguajes, asímismo facilitando interoperabilidad entre ellos.
+
+Finalmente, esta tesis evalúa el rol que los métodos declarativos pueden jugar en fases distintas del ciclo de vida de los grafos de conocimiento. Más específicamente, se valora cómo pueden beneficiar al proceso de cambio de estructura de los grafos. 
+
+En general, esta tesis contribuye al mejor entendimiento de las capacidades de los lenguajes declarativos para la construcción y evolución de grafos de conocimiento, al tiempo que propone un soporte extendido para facilitar su creación e interoperabilidad. 
