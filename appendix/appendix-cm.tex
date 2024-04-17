@@ -1,2 +1,43 @@
-\section{Conceptual Mapping Requirements?}
+\section{Conceptual Mapping Requirements}
 \label{sec:appendix-cm}
+%%\begin{tabular}[l]{@{}l@{}}   \end{tabular}
+\begin{table}[b!]
+    \caption{Requirements identified for declarative knowledge graph construction.}
+    \label{tab:annex-cm_reqs}
+    \centering
+    \resizebox{0.75\columnwidth}{!}{
+    \begin{tabular}{r|l}
+        \toprule
+        \textbf{Identifier} & \textbf{Requirement} \\ \midrule
+        cm-r1 & \begin{tabular}[l]{@{}l@{}}  A mapping can describe data sources retrieved synchronously, asynchronously\\and as streams  \end{tabular} \\ 
+        cm-r2 & A data source can describe data in different formats specifying its Media Type \\ 
+        cm-r3 & A data source may have a specified data access service \\ 
+        cm-r4 & A data access service can specify security terms \\ 
+        cm-r5 & A data access service can specify up to one retrieval protocol \\ 
+        cm-r6 & A data source can specify the encoding \\ 
+        cm-r7 & A mapping can describe data sources and their access \\ 
+        cm-r8 & \begin{tabular}[l]{@{}l@{}} A mapping specifies statement maps to declare the transformation of frames \\ into RDF triples  \end{tabular} \\ 
+        cm-r9 & \begin{tabular}[l]{@{}l@{}} Multiple data sources can be described with combined frames and nested \\ frames \end{tabular} \\ 
+        cm-r10 & A source frame describes exactly one data source \\ 
+        cm-r11 & \begin{tabular}[l]{@{}l@{}} A statement map can describe constant and dynamic subjects, predicates \\ and objects \end{tabular} \\ 
+        cm-r12 & \begin{tabular}[l]{@{}l@{}} A statement map can describe constant and dynamically up to 1 named \\ graph, datatype and language tag \end{tabular} \\ 
+        cm-r13 & \begin{tabular}[l]{@{}l@{}} A resource map can reference one or more data fields from one or more \\ data sources   \end{tabular} \\ 
+        cm-r14 & A resource map may contain data with different levels of iteration of a source \\ 
+        cm-r15 & A resource map may contain functions \\ 
+        cm-r16 & A subject can only be expressed as a blank node or an IRI \\ 
+        cm-r17 & A predicate can only be expressed as an IRI \\ 
+        cm-r18 & \begin{tabular}[l]{@{}l@{}}  An object can only be expressed as a blank node, an IRI, a literal, a \\ container or a list \end{tabular} \\ 
+        cm-r19 & A named graph can only be expressed as an IRI or blank node \\ 
+        cm-r20 & A datatype tag can only be expressed as an IRI or a List \\ 
+        cm-r21 & A language tag can only be expressed as a Literal or a List \\ 
+        cm-r22 & A statement map can be subject to a condition \\ 
+        cm-r23 & \begin{tabular}[l]{@{}l@{}} A statement map can be linked to another statement map with none, one \\ or several conditions  \end{tabular} \\ 
+        cm-r24 & The condition to link statements may be any boolean condition \\ 
+        cm-r25 & A function may have nested functions \\ 
+        cm-r26 & A frame can have nested frames to access multi-value references \\ 
+        cm-r27 & \begin{tabular}[l]{@{}l@{}} A statement map can have objects of type literal using data from different \\ sources using combined frames  \end{tabular} \\ 
+        cm-r28 & \begin{tabular}[l]{@{}l@{}} A statement map can have datatype and language tags using data from \\ different sources using combined frames  \end{tabular} \\ \bottomrule
+    \end{tabular}}
+\end{table}
+
+\newpage

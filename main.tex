@@ -94,7 +94,7 @@ titlepage=on            % own page for each title page
 
 %\input{3_objectives/3-0_objectives}
 
-\input{4_mappings/4-0_mappings}
+%\input{4_mappings/4-0_mappings}
 
 %\input{5_creation/5-0_creation}
 
@@ -114,6 +114,8 @@ titlepage=on            % own page for each title page
 \chapter*{Annexes}  
 \addcontentsline{toc}{chapter}{Annexes}
 \renewcommand{\thesection}{\Alph{section}}
+\counterwithin{table}{section}
+\counterwithin{captionedlistingcounter}{section}
 \input{appendix/appendix-cm}
 \input{appendix/appendix-mapeathor}
 
