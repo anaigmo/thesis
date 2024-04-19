@@ -1,4 +1,4 @@
-\section{Easing the mapping rule creation with spreadsheets}
+\section{Easing Mapping Rule Creation with Spreadsheets}
 \label{sec:chp5_mapeathor}
 
 Ever since the adoption of mapping languages increased, multiple editors and user-friendly serializations were developed to ease the mapping writing process and assist the needs of mapping developers. Some of the developed approaches enable editing through graphical visualization~\parencite{heyvaert2016rmleditor,sicilia2017map}, while others provide a writing environment (e.g. Ontop for Protege\footnote{\url{https://ontop-vkg.org/tutorial/basic/setup.html\#ontop-protege-setup}}). 
@@ -13,7 +13,7 @@ These spreadsheets contain the essential elements of the mapping rules without a
 We choose spreadsheets as they are very widely used for data management~\cite{birch2018spreadsheets,bradbard2014spreadsheet,pemberton2000spreadsheets}.
 The purpose of this approach is to ease the mapping writing process for users with heterogeneous backgrounds, as well as to increase the interoperability among mapping languages~\parencite{corcho2020towards, iglesias2022devising}. 
 This proposal is implemented in Mapeathor~\parencite{iglesias-molina_2023_5973906}, a tool able to parse the spreadsheets and generate the corresponding mappings in R2RML, RML and YARRRML.
-We evaluate the proposal and how it can improve the mapping writing process for users with heterogeneous backgrounds and expertise performing a user study, which is described in the remainings of this section.
+We evaluate the proposal and how it can improve the mapping writing process for users with heterogeneous backgrounds and expertise performing a user study.
 
 %This section presents an approach to generate mapping documents leveraging the specification of mapping rules in spreadsheets. These spreadsheets contain the essential elements of the mapping rules without any additional syntax, and are later translated into a mapping document. The purpose of this approach is to ease the mapping writing process for users, as well as to increase the interoperability among mapping languages~\parencite{corcho2020towards, iglesias2022devising}. This approach is implemented in Mapeathor~\parencite{iglesias-molina_2023_5973906}, a tool able to parse the spreadsheets and generate the corresponding mappings in R2RML, RML and YARRRML. Following, we present the structure of the spreadsheet to write the mapping rules, the implementation and an evaluation with a user study to analyse the fitness of our approach.
 
@@ -75,7 +75,7 @@ id , name  , birthdate , sport_id
 \end{captionedlisting}
 \end{minipage}
 
-\subsubsection{Prefix sheet} 
+\subsubsection{Prefix Sheet} 
 
 \begin{table}[h!]
 \caption{Prefix sheet.}
@@ -96,9 +96,9 @@ This sheet contains the namespaces and corresponding prefixes used in the creati
 It is composed of two columns: \texttt{Prefix} for the prefix and \texttt{URI} for the corresponding namespace. The base namespace can be specified writing ``@base'' in the \texttt{Prefix} column. 
 The example shown in \cref{tab:chp5-1_prefix_sheet} presents how three namespaces and the base namespace are written in this template. 
 
-\subsubsection{Subject sheet} 
+\subsubsection{Subject Sheet} 
 
-\begin{table}[h!]
+\begin{table}[h]
 \caption{Subject sheet.}
 \label{tab:chp5-1_subject_sheet}
 \centering
@@ -120,7 +120,7 @@ Finally, \texttt{Graph} is an optional column that enables the assignation of a 
 The example shown in \cref{tab:chp5-1_subject_sheet} presents how to write two subjects, each with a different identifier and URI for the instances. Within the \texttt{URI} field, what is written between ``\{" and ``\}" references a field in the source data. The instances of the subject with the \texttt{PERSON} ID are type of two classes, (\texttt{ex:Person} and \texttt{ex:Athlete}), while all the triples of the instances of the subject identified with the \texttt{SPORT} ID are assigned to a named graph (\texttt{ex:SportsGraph}). 
 
 
-\subsubsection{Source sheet} 
+\subsubsection{Source Sheet} 
 
 \begin{table}[h!]
 \caption{Source sheet.}
@@ -145,7 +145,7 @@ Then, in the \texttt{Value} column, the corresponding values of each specified \
 
 \cref{tab:chp5-1_source_sheet} shows the data source description for the \texttt{PERSON} and \texttt{SPORT} IDs. The former describes as input data the CSV file shown in \cref{lst:chp5-1_mapeathor_input_people}, while the latter describes the JSON file in \cref{lst:chp5-1_mapeathor_input_sport}, for which the iterator is also written (\texttt{\$.*}). 
 
-\subsubsection{Predicate\_Object sheet} 
+\subsubsection{Predicate\_Object Sheet} 
 
 \begin{table}[h!]
 \caption{Predicate\_Object sheet.}
@@ -177,7 +177,7 @@ They specify which is the ID of the referred subject  (\texttt{ReferenceID}), an
 
 \cref{tab:chp5-1_po_sheet} shows five predicate-object pairs created for both sets of rules (\texttt{PERSON} and \texttt{SPORT}. Three of these rules produce literals with datatypes and two additionally specify a language tag. The rule set identified as \texttt{PERSON} generates a link to the subject of the \texttt{SPORT} rule set using the predicate \texttt{ex:name}, and joining by equal values of the field \texttt{sport\_id} from \texttt{people.csv} and the field \texttt{id} from \texttt{sport.json}. This rule set also calls a function for generating the object for the predicate \texttt{ex:birthdate}, which is identified by being enclosed by ``$<>$''.
 
-\subsubsection{Function sheet}
+\subsubsection{Function Sheet}
 \hspace{0.1cm}
 
 \begin{table}[h]

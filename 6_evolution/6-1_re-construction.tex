@@ -2,7 +2,7 @@
 \section{Motivation}
 \label{sec:chp6-1_mot-example}
 
-\subsection{Re-construction example}
+\subsection{Re-construction Example}
 
 
 Consider the SemMedDB dataset, that contains entities extracted from biomedical texts, as well as the semantic types of these concepts and a timestamp of when they were extracted. A stable version of a knowledge graph represents this information, where the timestamp and semantic type are related to its correspondent entity with an N-Ary relationship. However, the maintainers of this knowledge graph want to reduce the size of the graph by reducing the number of nodes, as well as to represent this information with RDF-star to start adopting the RDF 1.2 specification.
@@ -19,7 +19,7 @@ The graph maintainers have access to the original source data, so they can chang
 
 
 
-\subsection{KG Representation impact on its consumption}
+\subsection{Representation Impact on Knowledge Graph Consumption}
 
 
 The different representations for adding additional information to triples have an impact on the performance of different KG consumption tasks. Thus, it becomes important to understand their differences and implications to choose the most suitable one depending on the particular needs. 
@@ -321,7 +321,7 @@ does not implement RDF-star yet, and cannot produce named graphs declared inside
 
 
 
-\subsection{Experimental setup and Metrics}
+\subsection{Experimental Setup and Metrics}
 \label{sec:chp6-1_exp-setup}
 We perform the evaluation in two steps. First, the KG construction system evaluation is run, taking as input the SemMedDb dataset in CSV format and the mappings, and producing the corresponding RDF datasets in the four selected representations. Then, the triplestore evaluation is carried out, taking as input the produced datasets in the KG construction system evaluation, and producing RDF datasets in another representation. We perform a validation step afterwards to verify that the output graphs do not lack information.
 

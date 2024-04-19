@@ -1,4 +1,4 @@
-\section{Featuring new mapping needs in RML: Language evolution for RDF-star}
+\section{Featuring New Mapping Needs in RML: Support for RDF-star Construction}
 \label{sec:chp4_rml_star}
 
 As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance the W3C Recommendation R2RML~\parencite{das2012r2rml}, on its release in 2012 it was only focused on RDF construction from relational databases. A growing number of extensions raised with the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\parencite{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\parencite{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\parencite{DBLP:conf/webist/MichelDFM15,debruyne2017R2RML-collections} and RDF-star graphs~\parencite{delva2021rml-star,sundqvist2022extending}. 
@@ -32,11 +32,6 @@ This section focuses on presenting one of the abovementioned modules, RML-star, 
 %Standard reification and singleton properties are considered in Section \ref{sec:chp4_validation}, showing that \mbox{Morph-KGC$^{star}$} does not add any overhead in the time required to generate the \mbox{RDF-star} triples compared to them.
 
 
-\subsection{Reification with RML-star}
-\label{sec:chp4_reif_mappings}
-
-As introduced in \cref{sec:chp4_cm-star}, RDF-star has gained adoption over the years since its inception. We introduce RML-star as a module of RML to enable the generation of \mbox{RDF-star} graphs (\cref{fig:chp4-3_rml-star}). 
-
 
 \begin{figure*}[!t]
 \centering
@@ -44,6 +39,12 @@ As introduced in \cref{sec:chp4_cm-star}, RDF-star has gained adoption over the 
 \caption[RML-star module]{The \mbox{RML-star} module (represented using the Chowlk notation~\parencite{feria2022chowlk}). The RML-star resources are highlighted in orange, while the rest of the represented ontology belongs to the RML-Core module.}
 \label{fig:chp4-3_rml-star}
 \end{figure*}
+
+\subsection{Reification with RML-star}
+\label{sec:chp4_reif_mappings}
+
+%RDF-star has gained adoption over the years since its inception~\parencite{hartig2017foundations}. We propose RML-star as a module of RML to enable the generation of \mbox{RDF-star} graphs (\cref{fig:chp4-3_rml-star}). 
+
 
 \mbox{RML-star} (\cref{fig:chp4-3_rml-star}) adds a new kind of term map, the \texttt{rml:StarMap}, that allows using triples maps to generate quoted triples. 
 Following the \mbox{RDF-star} data model,
@@ -73,9 +74,9 @@ an identifier of the jump (\texttt{ID}).
 \begin{tabular}{c}
 \hspace{3em}
 {\begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-ID  , DATE       , MARK ,   PERSON   , SCORE
-1   , 2022-03-21 , 4.80 ,   Angelica , 1211
-2   , 2022-03-19 , 4.85 ,   Katerina , 1224
+ID ,  DATE       ,  MARK ,  PERSON   ,  SCORE
+1  ,  2022-03-21 ,  4.80 ,  Angelica ,  1211
+2  ,  2022-03-19 ,  4.85 ,  Katerina ,  1224
 \end{lstlisting}}
 \end{tabular}
 \end{captionedlisting}
@@ -223,21 +224,19 @@ software, its source code, its released versions, and their corresponding author
 with the \emph{technique} used and the \emph{confidence} value. 
 The complete mapping and all input examples and results are available online\footnote{\url{https://github.com/oeg-upm/rdf-star-generation}}.
  
-\noindent\hspace{0.1\linewidth}\begin{minipage}{0.8\linewidth}
+\noindent\hspace{0.07\linewidth}\begin{minipage}{0.9\linewidth}
 \begin{captionedlisting}{lst:JSONsnippet}{JSON snippet showing the description metadata field extracted by SoMEF on a code repository using the GitHub API as extraction technique.}
 \centering
 \hspace{3em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-"codeRepository": "https://github.com/oeg-upm/Widoco",
+"codeRepository": "https://github.com/oeg-upm/Chowlk",
 "description": [ 
-  {
-    "confidence": [
-      1.0
-    ],
-    "excerpt": "Wizard for documenting ontologies. WIDOCO is ...",
-    "technique": "GitHub API"
-  }
+ {
+  "confidence": 1.0,
+  "excerpt": "Tool to transform an ontology diagram into OWL code.",
+  "technique": "GitHub API"
+ }
 ]  
 \end{lstlisting}
 }
@@ -272,11 +271,11 @@ Capturing the technique used and the confidence obtained for each extracted meta
 \centering
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-ex:oeg-upm/Widoco :description "Wizard for documenting ontologies. WIDOCO is ..." .
-<<ex:oeg-upm/Widoco :description "Wizard for documenting ontologies. WIDOCO is ...">> 
+ex:oeg-upm/Chowlk :description "Tool to transform an ontology diagram into OWL code." .
+<<ex:oeg-upm/Chowlk :description "Tool to transform an ontology diagram into OWL code.">> 
     :technique "GitHub API" .
-<<ex:oeg-upm/Widoco :description "Wizard for documenting ontologies. WIDOCO is ...">> 
-    :confidence "1.0" .
+<<ex:oeg-upm/Chowlk :description "Tool to transform an ontology diagram into OWL code.">> 
+    :confidence "1.0"^^xsd:float .
 \end{lstlisting}
 }
 \end{captionedlisting}

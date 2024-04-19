@@ -1,4 +1,4 @@
-\section{Mapping Rules for RDF: Conceptual Mapping}
+\section{A Unified Model to Represent Mapping Rules: Conceptual Mapping}
 \label{sec:chp4_cm_ontology}
 
 Based on the analysis performed in \cref{sec:chp4_framework}, we abstract the features and limitations present in current mapping languages to represent them in an ontology. This ontology aims at gathering the expressiveness of current mapping languages, and is called the Conceptual Mapping\footnote{\label{foot:cmportal}\url{https://w3id.org/conceptual-mapping/portal}}~\parencite{iglesias2022cm}. The methodology followed to build this ontology is first presented, and then each step of its construction is described in detail.
@@ -37,7 +37,7 @@ Finally, the last stage of the development process, maintenance, refers to ontol
 %\ana{añadir requisitos en anexo?}
 This section presents the purpose, scope, and requirements of the Conceptual Mapping Ontology. In addition, it also describes from where and how the requirements are extracted: analysing the mapping languages (presented as a comparative framework in \cref{sec:chp4_framework}) and the Mapping Challenges proposed by the community.
 
-\subsubsection{Purpose and scope}
+\subsubsection{Purpose and Scope}
 
 The Conceptual Mapping ontology aims at gathering the expressiveness of declarative mapping languages that describe the transformation of heterogeneous data sources into RDF. This ontology-based language settles on the assumption that all mapping languages used for the same basic purpose of describing data sources in terms of an ontology to create RDF, must share some basic patterns and inherent characteristics. Inevitably, not all features are common. As described in previous sections, some languages were developed for specific purposes, others extend existing languages to cover additional use cases, and others are in turn based in languages that already provide them with certain capabilities. The Conceptual Mapping ontology is designed to represent and articulate these core features, which are extracted from two sources: (i) the analysis of current mapping languages, and (ii) the limitations of current languages identified by the community. These limitations, proposed by the W3C Knowledge Graph Construction Community Group\footnote{\label{foot:kgc}\url{https://www.w3.org/community/kg-construct/}}, are referred to as Mapping Challenges\footnote{\label{foot:challenges}\url{https://w3id.org/kg-construct/workshop/2021/challenges.html}} and have been partially implemented by some languages. %Both sources are described throughout this section.
 
@@ -126,7 +126,7 @@ The following ontology design patterns \textcolor{black}{have been applied in th
     \item The class \texttt{ExpressionList} uses the \textcolor{black}{design} pattern for lists developed in RDF where the properties \texttt{rdf:first} and \texttt{rdf:rest} are used to represent a linked list. The base case (first) is an evaluable expression whereas the rest of the list is (recursively)  an \texttt{ExpressionList}.
 \end{itemize}
 
-\subsubsection{Ontology evaluation}
+\subsubsection{Ontology Evaluation}
 \label{sec:chp4_cm-eval}
 
 
@@ -168,10 +168,10 @@ The Conceptual Mapping ontology has been designed as a core ontology. However, a
 \end{figure}
 
 
-\subsubsection{CSV description: CM-CSV}
+\subsubsection{CSV Description: CM-CSV}
 The core module of the Conceptual Mapping includes limited possibilities for describing CSV files in depth. The extension CM-CSV\footnote{\url{https://w3id.org/conceptual-mapping/csv}} provides extended features to this end. Thus, the CSVW~\parencite{Tennison2015csvw} proposal has been blended as an ontology module linked to the core Conceptual Mapping ontology. The class \texttt{CSVSourceFrame} is created as a subclass of \texttt{SourceFrame} and \texttt{csvw:Dialect} to inherit their characteristics. This module is depicted in \cref{fig:chp4-2_cm-csv}. Thus, this extension allows to describe CSV characteristics such as if the file contains headers (\texttt{csvw:header}), its delimiter (\texttt{csvw:delimiter}), separator (\texttt{csvw:separator}), among many others. 
 
-\subsubsection{RDF-star generation: CM-star}
+\subsubsection{RDF-star Generation: CM-star}
 \label{sec:chp4_cm-star}
 RDF-star~\parencite{hartig2017foundations} was recently proposed as a compact alternative for reification in RDF. It extends the RDF syntax introducing the notion of \textit{Quoted triples}, i.e. triples that can be placed in the position of objects and/or subjects. These triples can be inserted in the graph outside the quoted triple (i.e. they are \textit{asserted}), or appear only inside another triples (i.e. they are \textit{non-asserted}).
 
@@ -193,7 +193,7 @@ As a result, we developed a module to cover this new feature. The Conceptual Map
 
 
 
-\subsection{Ontology usage example}\label{sec:cm_example} 
+\subsection{Ontology Usage Example}\label{sec:cm_example} 
 
 
 
