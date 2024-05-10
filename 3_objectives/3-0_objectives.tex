@@ -16,7 +16,7 @@ The general objective of this thesis is to \textit{improve the understanding (fe
 
 \begin{enumerate}
     %\item[\textbf{O1.}] To analyse, understand and gather the capabilities of the mapping languages for KG construction from heterogeneous data sources.
-    \item[\textbf{O1}]  To analyze the needs for declarative knowledge graph construction from heterogeneous data sources, in order to facilitate the support of advances in existing mapping languages to address the most relevant ones. 
+    \item[\textbf{O1}] To analyze the needs for declarative knowledge graph construction from heterogeneous data sources, in order to facilitate the support of advances in existing mapping languages to address the most relevant ones. 
     \item[\textbf{O2}] To help knowledge engineers and domain experts build declarative mappings in a user-friendly manner.
     \item[\textbf{O3}] To assess declarative knowledge graph construction technologies in terms of their benefits for supporting the creation and evolution of knowledge graphs. 
 \end{enumerate}
@@ -69,13 +69,13 @@ Regarding the second objective (to help knowledge engineers and domain experts t
 
 \begin{enumerate}
     \item[\textbf{C4}] \textbf{Design of a user-friendly approach for writing mapping rules based on spreadsheets}. We propose this approach as a way of writing mappings by only specifying the essential information, reducing learning curve of the language constructs and the syntax's peculiarities. We also develop an implementation of this approach to translate the mapping rules in spreadsheets into different mapping languages. 
-    \item[\textbf{C5}] \textbf{Update of the YARRRML syntax for RML with new features}. We include in a new version of this syntax the features incorporated in the evolucion of the RML mapping language, to keep this language accessible for a broader community of users that already use YARRRML. We also provide an implementation to translate between the updated YARRRML version into other mapping languages to facilitate its adoption.
+    \item[\textbf{C5}] \textbf{Update of the YARRRML syntax for RML with new features}. We include in a new version of this syntax the features incorporated in the evolution of the RML mapping language, to keep this language accessible for a broader community of users that already use YARRRML. We also provide an implementation to translate between the updated YARRRML version into other mapping languages to facilitate its adoption.
 \end{enumerate}
 
 Finally, with regard to the third objective (to assess the role of mapping technologies in KG evolution), this work presents the following contribution:
 
 \begin{enumerate}
-    \item[\textbf{C6}]\textbf{Analysis of the scenarios in which declarative KG construction technologies can play a valuable role in the evolution of knowledge graphs}. We conduct an evaluation to study how mapping-based processes be beneficial when the schema used in a knowledge graph changes with respect to other established methods.  %can not only be useful for KG construction, but also for facilitating the evolution of knowledge graphs that need a change in their schema. 
+    \item[\textbf{C6}]\textbf{Analysis of the scenarios in which declarative KG construction technologies can play a valuable role in the refactoring of knowledge graphs}. We conduct an evaluation to study how mapping-based processes be beneficial when the schema used in a knowledge graph changes with respect to other established methods.  %can not only be useful for KG construction, but also for facilitating the evolution of knowledge graphs that need a change in their schema. 
 \end{enumerate}
 
 
@@ -89,7 +89,7 @@ Our work is based on the set of assumptions listed below. These assumptions prov
     \item[\textbf{A2}] Mapping languages provide human readable documentation available online.
     \item[\textbf{A3}] The schema of knowledge graphs (ontology) used for creating mapping documents is available and implemented in OWL or RDF(S). 
     \item[\textbf{A4}] Mapping rules can be translated into different languages with information preservation. 
-    \item[\textbf{A5}] The evolution of the schema used in a KG does not involve changes in the data.
+    \item[\textbf{A5}] The refactoring of the schema used in a KG does not involve changes in the data.
     %\item[\textbf{moar?}] KGs refer to RDF graphs?
 \end{enumerate}
 
@@ -103,7 +103,7 @@ After the identification of the assumptions, we can describe the research hypoth
     \item[\textbf{H1}] Current mapping languages lack some expressiveness to construct knowledge graphs from heterogeneous data sources for all use cases.
     \item[\textbf{H2}] It is possible to update  current mapping languages with new features that address the current needs in construction of knowledge graphs.
     \item[\textbf{H3}] Writing mapping rules in spreadsheet environments improves the user experience for practitioners of different backgrounds for writing mappings, whilst reducing errors. 
-    \item[\textbf{H4}] Declarative KG construction technologies brings benefits in the evolution of knowledge graphs within their full life cycle.
+    \item[\textbf{H4}] Declarative KG construction technologies brings benefits in the refactoring of knowledge graphs within their life cycle.
 \end{enumerate}
 
 
@@ -115,10 +115,10 @@ Finally, there is a set of restrictions that describe the limitations and define
 \begin{enumerate}
     \item[\textbf{R1}] Requirements for KG construction are considered up to January 2023, since it is an issue that is evolving during the time of writing this thesis.
     \item[\textbf{R2}] The reference for the RML specification in the mapping languages analysis is the release on 2014~\parencite{Dimou2014rml}.
-    \item[\textbf{R3}] Features specific of non RDF-based mapping languages are not ensured to be modelled in an ontology (e.g. SPARQL recursive clauses, FILTER).
+    \item[\textbf{R3}] Features specific of non RDF-based mapping languages are not ensured to be modelled in an ontology (e.g. SPARQL recursive clauses and FILTER).
     \item[\textbf{R4}] The implementations proposed in contributions C4 and C5 are not fully compliant with all modules of the RML release on 2023~\parencite{iglesias2023rml}. 
-    \item[\textbf{R5}] The evaluation of the value of mappings in KG evolution considers only schema changes, not data changes.
-    \item[\textbf{R6}] The changes considered for KG evolution are schema changes for switching among metadata representation approaches for RDF graphs.
+    \item[\textbf{R5}] The evaluation of the value of mappings in KG refactoring considers only changes in the schema used in the KG, not in the data.
+    \item[\textbf{R6}] The changes considered for KG refactoring are schema changes for switching among metadata representation approaches for RDF graphs.
     %\item[\textbf{moar?}] algo de la selección de lenguajes? algo para mapeathor y yarrrml? The spreadsheet template consider the features of RML v2014 and the current RML-FNML spec. The YARRRML updates include all RMLv2 modules except for the RML-CC module.
 \end{enumerate}
 
