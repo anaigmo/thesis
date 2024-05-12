@@ -1,7 +1,104 @@
 \section{Mapeathor Mappings}
 \label{sec:appendix-mapeathor}
 
-\begin{captionedlisting}{lst:chp5-1_rml-output}{RML mapping generated with Mapeathor from the spreadsheet shown in Tables \ref{tab:chp5-1_prefix_sheet}, \ref{tab:chp5-1_subject_sheet}, \ref{tab:chp5-1_source_sheet}, \ref{tab:chp5-1_po_sheet} and \ref{tab:chp5-1_function_sheet}. }
+\begin{captionedlisting}{lst:chp5-1_rml-output}{RML mapping (2023 release) generated with Mapeathor from the spreadsheet shown in Tables \ref{tab:chp5-1_prefix_sheet}, \ref{tab:chp5-1_subject_sheet}, \ref{tab:chp5-1_source_sheet}, \ref{tab:chp5-1_po_sheet} and \ref{tab:chp5-1_function_sheet}. }
+\centering
+{\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rml: <https://w3id.org/rml/>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix ex: <http://ex.com/>.
+@prefix grel: <http://semweb.datasciencelab.be/ns/grel#>.
+@base <http://example.com/>.
+
+<#PERSON>
+    a rml:TriplesMap;
+    rml:logicalSource [
+    	rml:source "/home/user/data/people.csv";
+    	rml:referenceFormulation rml:CSV;
+    ];
+    rml:subjectMap [
+    	a rml:Subject ;
+    	rml:termType rml:IRI ;
+    	rml:template "http://ex.com/Person/{name}" ;
+    	rml:class ex:Person ;
+    	rml:class ex:Athlete ;
+    ];
+    rml:predicateObjectMap [
+    	rml:predicateMap	[ rml:constant ex:name];
+    	rml:objectMap	[ rml:reference "name";
+    		rml:termType rml:Literal;
+    		rml:datatype xsd:string;
+    		rml:language "en" ]
+    ];
+    rml:predicateObjectMap [
+    	rml:predicateMap	[ rml:constant ex:plays ];
+    	rml:objectMap	[
+    		rml:termType rml:IRI ;
+    		rml:parentTriplesMap	<#SPORT> ;
+    		rml:joinCondition	[
+    			rml:child	"sport_id" ;
+    			rml:parent	"id" ;
+    		];
+    	];
+    ];
+    rml:predicateObjectMap [
+      rml:predicateMap	[ rml:constant ex:birthdate] ;
+      rml:objectMap	[
+    	  rml:functionExecution <#Fun-date> ;
+    	  rml:return grel:dateOut ;
+    	];
+    ].
+
+<#SPORT>
+    a rml:TriplesMap;
+    rml:logicalSource [
+    	rml:source "/home/user/data/sports.json";
+    	rml:referenceFormulation rml:JSONPath;
+        rml:iterator "$\dollar$.*";
+    ];
+    rml:subjectMap [
+    	a rml:Subject ;
+    	rml:termType rml:IRI ;
+    	rml:template "http://ex.com/Sport/{sport}" ;
+    	rml:class ex:Sport ;
+    	rml:graphMap [ rml:constant "ex:SportsGraph" ] ;
+    ];
+    rml:predicateObjectMap [
+    	rml:predicateMap	[ rml:constant ex:name];
+    	rml:objectMap	[ rml:reference "sport";
+    		rml:termType rml:Literal;
+    		rml:datatype xsd:string;
+    		rml:language "en" ]
+    ];
+    rml:predicateObjectMap [
+    	rml:predicateMap	[ rml:constant ex:code];
+    	rml:objectMap	[ rml:reference "id";
+    		rml:termType rml:Literal;
+    		rml:datatype xsd:integer ]
+    ].
+
+<#Fun-date> a rml:FunctionExecution;
+    rml:function grel:toDate ;
+    rml:input [
+      a rml:Input ;
+      rml:parameter grel:valueParam1 ;
+      rml:inputValueMap [ rml:reference "birthdate" ];
+    ];
+    rml:input [
+      a rml:Input ;
+      rml:parameter grel:valueParam2 ;
+      rml:inputValueMap [ rml:constant "dd/MM/yyyy" ];
+    ];
+    rml:input [
+      a rml:Input ;
+      rml:parameter grel:valueParam3 ;
+      rml:inputValueMap [ rml:constant "yyyy-MM-dd" ];
+    ].
+\end{lstlisting}}
+\end{captionedlisting}
+
+\begin{captionedlisting}{lst:chp5-1_rml2014-output}{RML mapping (2014 release) generated with Mapeathor from the spreadsheet shown in Tables \ref{tab:chp5-1_prefix_sheet}, \ref{tab:chp5-1_subject_sheet}, \ref{tab:chp5-1_source_sheet}, \ref{tab:chp5-1_po_sheet} and \ref{tab:chp5-1_function_sheet}. }
 \centering
 {\begin{lstlisting}[numbers=left,basicstyle=\ttfamily\small,columns=flexible]
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
@@ -28,14 +125,12 @@
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant ex:name];
-    	rr:objectMap	[ rml:reference "name"; 
-                      rr:termType rr:Literal;  
-                      rr:datatype xsd:string;  
-                      rr:language "en" ]
+    	rr:objectMap	[ rml:reference "name"; rr:termType rr:Literal; rr:datatype xsd:string; rr:language "en" ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant ex:plays ];
     	rr:objectMap	[
+    		rr:termType rml:IRI ;
     		rr:parentTriplesMap	<#SPORT>;
     		rr:joinCondition	[
     			rr:child	"sport_id";
@@ -49,7 +144,7 @@
     	  rml:functionExecution <#Fun-date> ;
     	  rml:return grel:dateOut ;
     	];
-    ]; .
+    ].
 
 <#SPORT>
     a rr:TriplesMap;
@@ -67,17 +162,12 @@
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant ex:name];
-    	rr:objectMap	[ rml:reference "sport";  
-                      rr:termType rr:Literal;  
-                      rr:datatype xsd:string;  
-                      rr:language "en" ]
+    	rr:objectMap	[ rml:reference "sport"; rr:termType rr:Literal; rr:datatype xsd:string; rr:language "en" ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant ex:code];
-    	rr:objectMap	[ rml:reference "id";  
-                      rr:termType rr:Literal;  
-                      rr:datatype xsd:integer ]
-    ]; .
+    	rr:objectMap	[ rml:reference "id"; rr:termType rr:Literal; rr:datatype xsd:integer ]
+    ].
 
 <#Fun-date> a rml:FunctionExecution;
     rml:function grel:toDate ;
@@ -95,7 +185,7 @@
       a rml:Input ;
       rml:parameter grel:valueParam3 ;
       rml:inputValueMap [ rr:constant "yyyy-MM-dd" ];
-    ]; .
+    ].
 \end{lstlisting}}
 \end{captionedlisting}
 
@@ -177,29 +267,29 @@ mappings:
   PERSON:
     sources:
       - [/home/user/data/people.csv~csv]
-    subjects: http://ex.com/Person/$(name)
+    subjects: http://ex.com/Person/$\dollar$(name)
     graph: nan
     po:
       - [a, ex:Person]
       - [a, ex:Athlete]
-      - [ex:name, $(name), xsd:string, en~lang]
+      - [ex:name, $\dollar$(name), xsd:string, en~lang]
       - p: ex:plays
         o:
           - mapping: SPORT
             condition:
               function: equal
               parameters:
-                - [str1, $(sport_id)]
-                - [str2, $(id)]
+                - [str1, $\dollar$(sport_id)]
+                - [str2, $\dollar$(id)]
  
   SPORT:
     sources:
-      - [/home/user/data/sports.json~jsonpath, $.*]
-    subjects: http://ex.com/Sport/$(sport)
+      - [/home/user/data/sports.json~jsonpath, '$\dollar$.*']
+    subjects: http://ex.com/Sport/$\dollar$(sport)
     graph: ex:SportsGraph
     po:
       - [a, ex:Sport]
-      - [ex:name, $(sport), xsd:string, en~lang]
-      - [ex:code, $(id), xsd:integer]
+      - [ex:name, $\dollar$(sport), xsd:string, en~lang]
+      - [ex:code, $\dollar$(id), xsd:integer]
 \end{lstlisting}}
 \end{captionedlisting}
