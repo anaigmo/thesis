@@ -212,13 +212,13 @@ As a result, we developed a module to cover this new feature. The Conceptual Map
     \begin{subfigure}[b]{0.28\linewidth}
         \centering
     	\includegraphics[width=1\linewidth]{figures/chp4-2_example_json}
-    	\caption{Example input JSON file ```coordinates.json".}
+    	\caption{Example input JSON file ``coordinates.json".}
     	\label{fig:chp4-2_chp4_ex_json}
     \end{subfigure}
     \begin{subfigure}[b]{0.7\linewidth}
         \centering
     	\includegraphics[width=1\linewidth]{figures/chp4-2_example_rdb}
-    	\caption{Example input MySQL table ```cities".}
+    	\caption{Example input MySQL table ``cities".}
     	\label{fig:chp4-2_chp4_ex_rdb}
     \end{subfigure}
     \caption[Example data and ontology about cities for CM mapping]{Input source data and reference ontology that represents information on cities and their location.}
@@ -258,7 +258,7 @@ This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_
 \end{lstlisting}}
 \end{captionedlisting}
 
-\noindent\paragraph{\textbf{Data sources.}} \cref{lst:chp4_cm_sources} shows the description of the json file ``coordinates.json" indicating the protocol from the SKOS concept scheme (\texttt{cmp:https}), media type (``application/json"), JSONPath to extract data, access URL  ``https://ex.com/geodata/coordi\-nates.json", and  fields that are going to be used in the transformation. There is no security scheme. The MySQL table ``cities" also has no security scheme, the protocol needed is \texttt{cmp:jdbc}, the database access is specified in the endpoint URL, and the table as an SQL query. The fields are also specified, with the special case of ``zipcodes" that needs a \texttt{cm:hasNestedFrame} to extract multiple values inside the field.
+\noindent\paragraph{\textbf{Data sources.}} \cref{lst:chp4_cm_sources} shows the description of the JSON file ``coordinates.json" indicating the protocol from the SKOS concept scheme (\texttt{cmp:https}), media type (``application/json"), JSONPath to extract data, access URL  ``https://ex.com/geodata/coordi\-nates.json", and  fields that are going to be used in the transformation. There is no security scheme. The MySQL table ``cities" also has no security scheme, the protocol needed is \texttt{cmp:jdbc}, the database access is specified in the endpoint URL, and the table as an SQL query. The fields are also specified, with the special case of ``zipcodes" that needs a \texttt{cm:hasNestedFrame} to extract multiple values inside the field.
 
 \begin{captionedlisting}{lst:chp4_cm_sources}{Description with the Conceptual Mapping of two data sources (a JSON file and a relational database), their access and fields.}
 \centering
@@ -345,7 +345,7 @@ This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_
 # Cities
 :city_ns a cm:FunctionExpression ;
   cm:functionName cmf:replace ;
-  cm:hasInput (c_city " " "")
+  cm:hasInput (c_city " " "").
 
 :SubjectCities a cm:ReferenceNodeMap;
   cm:hasEvaluableExpression [
@@ -381,7 +381,7 @@ This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_
 \end{captionedlisting}
 
 
-\noindent\paragraph{\textbf{Special statements.}} \cref{lst:chp4_cm_general} describes how a conditional statement and a linking rule are generated. This description is represented by means of functions. With the property \texttt{cm:hasBooleanCondition}, the conditional statement declares that the field \texttt{:year} has to be greater than 2020. The linking rule performs the link between the instances of \texttt{eg:City} and \texttt{eg:Location} with the predicate \texttt{eg:location}, using a distance metric (levenshtein function) that has to be greater then a threshold of ``0.75". 
+\noindent\paragraph{\textbf{Special statements.}} \cref{lst:chp4_cm_general} describes how a conditional statement and a linking rule are generated. This description is represented by means of functions. With the property \texttt{cm:hasBooleanCondition}, the conditional statement declares that the field \texttt{:year} has to be greater than 2020. The linking rule performs the link between the instances of \texttt{eg:City} and \texttt{eg:Location} with the predicate \texttt{eg:location}, using a distance metric (Levenshtein function) that has to be greater then a threshold of ``0.75". 
 
 \begin{captionedlisting}{lst:chp4_cm_general}{Conditional and linking rules described with the Conceptual Mapping that complement the data source description and regular statements described in \cref{lst:chp4_cm_sources} and \cref{lst:chp4_cm_spo}.}
 \centering

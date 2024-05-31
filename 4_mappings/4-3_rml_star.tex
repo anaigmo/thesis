@@ -1,12 +1,15 @@
 \section{Featuring New Mapping Needs in RML: Support for RDF-star Construction}
 \label{sec:chp4_rml_star}
 
-As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance the W3C Recommendation R2RML~\parencite{das2012r2rml}, on its release in 2012 it was only focused on RDF construction from relational databases. A growing number of extensions raised with the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\parencite{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\parencite{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\parencite{DBLP:conf/webist/MichelDFM15,debruyne2017R2RML-collections} and RDF-star graphs~\parencite{delva2021rml-star,sundqvist2022extending}. 
+As the technologies revolving around knowledge graphs advance, so do the needs and requirements for their construction. Taking for instance the W3C Recommendation R2RML~\parencite{das2012r2rml}, it was only focused on RDF construction from relational databases on its release in 2012. A growing number of extensions were published over the years to widen its possibilities. These proposals only extended its features to describe additional data sources~\parencite{DBLP:conf/webist/MichelDFM15,VanAssche2021LeveragingWebThings}, but also to increase its expressiveness regarding the inclusion of data transformation functions~\parencite{de2020implementation,debruyne2016r2rmlf,junior2016funul,kyzirakos2018geotriples}, the generation of more RDF terms (e.g. collections and containers)~\parencite{DBLP:conf/webist/MichelDFM15,debruyne2017R2RML-collections} and RDF-star graphs~\parencite{delva2021rml-star,sundqvist2022extending}. 
 
-As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the widely adopted RML mapping language. The result of this efforts is materialized in the recently published new version of RML~\parencite{iglesias2023rml}. The language is published as a modular ontology, and implements most of the requirements proposed by the Conceptual Mapping (see \cref{sec:chp4_cm-reqs}), integrating: (i) extended possibilities in triple generation (RML-Core)~\parencite{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\parencite{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\parencite{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\parencite{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\parencite{star_ontology}.
+As a consequence of these growing needs, the W3C Knowledge Graph Construction Community Group was launched\cref{foot:kgc}. 
+Since its inception, this community has gathered the new requirements for KG construction, published them as Mapping Challenges (see \cref{sec:chp4_mapping_challenges}), and started implementing them in the widely adopted RML mapping language. 
+The result of these efforts is materialized in a new revision of RML~\parencite{iglesias2023rml}. 
+The language is now published as a modular ontology, integrating: (i) extended possibilities in triple generation (RML-Core)~\parencite{core_ontology}; (ii) enriched description of data sources and output targets (RML-IO)~\parencite{io_ontology}; (iii) generation of RDF collections and containers (RML-CC)~\parencite{cc_ontology}; (iv) accurate description of data transformation functions (RML-FNML)~\parencite{fnml_ontology}; and (v) generation of RDF-star graphs (RML-star)~\parencite{star_ontology}.
 
-This language is implemented in five different modules. 
-For each module, there are more resources associated besides the ontology: its requirements, an specification with the module's details with examples and the restrictions written in SHACL shapes to validate mapping documents. 
+Thus, this language is comprised of five different modules. 
+For each module, there are more resources associated besides the ontology: its requirements, a specification with the module's details with examples and the restrictions written in SHACL shapes to validate mapping documents. 
 All associated resources of this new version of RML are gathered in the ontology portal\footnote{\url{https://w3id.org/rml/portal}}. 
 In addition, the semantics of the relationships between the old and this new specification are defined and available online\footnote{\url{https://w3id.org/rml/portal/backwards-compatibility}} to facilitate backwards compatibility.
 
@@ -157,7 +160,7 @@ For instance, the latest \mbox{RML-star} releases update the term ``embedded'' t
 according to the modifications in \mbox{RDF-star}.
 %that occurred after the first release of RML-star~\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}}. 
 This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:quotedTriplesMap}.
-In addition, RML-star is implemented by Morph-KGC$^star$~\parencite{arenas2023morphstar} and the SDM-RDFizer~\footnote{\url{https://github.com/SDM-TIB/SDM-RDFizer-Star}}~\parencite{iglesias2020rdfizer} at the moment of writing this document.
+In addition, RML-star is implemented by Morph-KGC$^star$~\parencite{arenas2023morphstar} and the SDM-RDFizer~\footnote{\url{https://github.com/SDM-TIB/SDM-RDFizer-Star}}~\parencite{iglesias2020rdfizer} at the time of writing this document.
 
 
 
@@ -271,10 +274,10 @@ Capturing the technique used and the confidence obtained for each extracted meta
 \centering
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-ex:oeg-upm/Chowlk :description "Tool to transform an ontology diagram into OWL code." .
-<<ex:oeg-upm/Chowlk :description "Tool to transform an ontology diagram into OWL code.">> 
+<oeg-upm/Chowlk> :description "Tool to transform an ontology diagram into OWL code." .
+<< <oeg-upm/Chowlk> :description "Tool to transform an ontology diagram into OWL code.">> 
     :technique "GitHub API" .
-<<ex:oeg-upm/Chowlk :description "Tool to transform an ontology diagram into OWL code.">> 
+<< <oeg-upm/Chowlk> :description "Tool to transform an ontology diagram into OWL code.">> 
     :confidence "1.0"^^xsd:float .
 \end{lstlisting}
 }
@@ -380,9 +383,9 @@ PREDICATION_AUX_ID , PREDICATION_ID , SUBJ_SCORE , TIMESTAMP
 \hspace{1em}
 {
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
-<< ex:12345 sem:semanticType "orga" >> sem:score "790" .
+<< ex:12345 sem:semanticType "orga" >> sem:score 790 .
 << ex:13579 sem:subject ex:SubjName >> sem:timestamp "1651740766" .
-<< ex:SubjName sem:semanticType "Semtype" >> sem:score "800" .
+<< ex:SubjName sem:semanticType "Semtype" >> sem:score 800 .
 \end{lstlisting}
 }
 \end{tabular}
