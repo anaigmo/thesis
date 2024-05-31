@@ -8,7 +8,7 @@ Knowledge graphs can be constructed in diverse manners. Some KGs are constructed
 %\ana{RAW} In this section, the current scene of mapping languages is described first, regardless of the approach they follow, i.e., RDF materialization or virtualization. Then, previous works comparing mapping languages are surveyed. 
 
 
-Constructing RDF knowledge graphs from heterogeneous data sources involves a schema transformation of the data to the desired graph structure. This transformation may be done in different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises an agnostic approach that can (and has been) applied to multiple different use cases, such as agriculture~\parencite{bilbao2022practical}, public procurement~\parencite{soylu2022theybuyforyou}, biomedicine~\parencite{iglesias2019bio2rdf,michel2020covid,aisopos2023knowledge}, cultural heritage~\parencite{calvanese2016culturalheritage}, IoT~\parencite{cimmino2020ewot,gonzalezgerpe2022extension}, among others.
+Constructing RDF knowledge graphs from heterogeneous data sources involves a schema transformation of the data to the desired graph structure. This transformation may be done in different ways, usually involving mapping languages that allow expressing the transformation rules to create the target graphs. Hence, these mappings hold declaratively the relationships between the source and target data schemas. This comprises a domain-agnostic approach that can (and has been) applied to multiple different use cases, such as agriculture~\parencite{bilbao2022practical}, public procurement~\parencite{soylu2022theybuyforyou}, biomedicine~\parencite{iglesias2019bio2rdf,michel2020covid,aisopos2023knowledge}, cultural heritage~\parencite{calvanese2016culturalheritage}, IoT~\parencite{cimmino2020ewot,gonzalezgerpe2022extension}, among others.
 
 The usual workflow in which declarative approaches are involved is depicted in \cref{fig:chp2_kgc-workflow}. They enable both materialization and virtualization of knowledge graphs~\parencite{Poggi2008}. In materialization scenarios, data is transformed into the target graph, usually following the schema provided by an ontology~\parencite{arenas2022morphkgc,iglesias2020rdfizer,Lefrancois2017sparqlgenerate}. In virtualization scenarios, data is not transformed; instead, the original data source is accessed also following the schema of the target (virtual) graph. This process requires translating the original query into the language of the original data source~\parencite{calvanese2017ontop,priyatna2014formalisation,rodriguez2015efficient}. 
 
@@ -19,7 +19,7 @@ The usual workflow in which declarative approaches are involved is depicted in \
 \label{fig:chp2_kgc-workflow}
 \end{figure*}
 
-This section presents an overview of existing mapping languages. We first show two well known RDF-based mapping languages that are widely adopted: the W3C Recommendation R2RML (\cref{sec:chp2_R2RML}), and its most relevant extension, RML (\cref{sec:chp2_RML}); and then other relevant languages (\cref{sec:chp2_more-languages}). Lastly, we discuss the approaches that compare the diversity and expressiveness of these mapping languages (\cref{sec:chp2_language-comparison}), and the current interoperability among them (\cref{sec:chp2_interoperability}).
+This section presents an overview of existing mapping languages. We first show two well known RDF-based mapping languages that are widely adopted: the W3C Recommendation R2RML (\cref{sec:chp2_R2RML}), its extension, RML (\cref{sec:chp2_RML}); and then other relevant languages (\cref{sec:chp2_more-languages}). Lastly, we discuss the approaches that compare the diversity and expressiveness of these mapping languages (\cref{sec:chp2_language-comparison}), and the current interoperability among them (\cref{sec:chp2_interoperability}).
 
 
 
@@ -105,15 +105,15 @@ or (iii) \textit{template-valued} (\texttt{rr:template}), i.e., the RDF terms ar
 \begin{minipage}{\textwidth}
 \begin{captionedlisting}{lst:chp2_r2rml-result-rdf}{RDF graph resulting from transforming data from the database table shown in \cref{fig:chp2_database-example} using the R2RML mapping in \cref{lst:chp2_r2rml-mapping}.}
 \centering\begin{lstlisting}[language=r2rml]
-ex:athlete/1 a ex:Athlete ;
+<athlete/1> a ex:Athlete ;
     ex:name "Armand Duplantis" ;
     ex:rank "1"^^xsd:integer ;
     ex:mark "6.22"^^xsd:float .
-ex:athlete/2 a ex:Athlete ;
+<athlete/2> a ex:Athlete ;
     ex:name "Sondre Guttormsen" ;
     ex:rank "2"^^xsd:integer ;
     ex:mark "6.00"^^xsd:float .
-ex:athlete/3 a ex:Athlete ;
+<athlete/3> a ex:Athlete ;
     ex:name "Menno Vloon" ;
     ex:rank "3"^^xsd:integer ;
     ex:mark "5.91"^^xsd:float .
@@ -126,7 +126,9 @@ ex:athlete/3 a ex:Athlete ;
  
 \subsection{RML: RDF Mapping Language}
 \label{sec:chp2_RML}
-RML~\parencite{Dimou2014rml} extends R2RML to address the transformation of heterogeneous data formats, such as CSV, XML or JSON. It broadens the possibilities for KG construction with minimal changes in the vocabulary with respect to the standard. This language rapidly gained importance, and currently gathers an active community of users and developers. 
+RML~\parencite{Dimou2014rml} extends R2RML to address the transformation of heterogeneous data formats, such as CSV, XML or JSON. 
+It broadens the possibilities for KG construction with minimal changes to R2RML's vocabulary.
+This language rapidly gained importance, and currently gathers an active community of users and developers. 
 
 The main differences between RML and R2RML~\parencite{dimou2020rml-r2rml-diffs} are listed as follows:
 \begin{itemize}
@@ -134,7 +136,7 @@ The main differences between RML and R2RML~\parencite{dimou2020rml-r2rml-diffs} 
 
     \item \textbf{Data source language}. In R2RML, the data source language is implicitly assumed to be SQL. To address heterogeneous data formats, RML uses the \textit{Reference Formulation} (\texttt{rml:ReferenceFormulation}) to indicate which formulation is suitable to parse data in a specific format. For instance, the JSONPath formulation can be used for parsing data in a JSON file. 
 
-    \item \textbf{Iteration}. For tabular data sources, the iteration of the data source is per row. This strategy is followed by every R2RML processor to construct RDF graphs from RDBs. For non-tabular data sources, the iteration cannot always be implicitly assumed. For this reason, RML introduces the \textit{Iterator} (\texttt{rml:iterator})enabling the explicit determination of the iteration pattern to specify the specific data used in each iteration to build the RDF triples. The use of the \textit{Iterator} is optional, its use relies on the needs and particularities of each data source and use case.
+    \item \textbf{Iteration}. For tabular data sources, the iteration of the data source is per row. This strategy is followed by every R2RML processor to construct RDF graphs from RDBs. For non-tabular data sources, the iteration cannot always be implicitly assumed. For this reason, RML introduces the \textit{Iterator} (\texttt{rml:iterator}) enabling the explicit determination of the iteration pattern to specify the specific data used in each iteration to build the RDF triples. The use of the \textit{Iterator} is optional, its use relies on the needs and particularities of each data source and use case.
 
     \item \textbf{Value reference}. R2RML relies on column names when referring to values in a table or view of a RDB (\texttt{rr:column}). RML broadens the scope of this concept using \textit{References} (\texttt{rml:reference}), that may refer to columns, objects (such as in the case of XML and JSON) or other elements valid with respect to the used \textit{Reference Formulation}. 
 \end{itemize}
@@ -168,6 +170,7 @@ The main differences between RML and R2RML~\parencite{dimou2020rml-r2rml-diffs} 
 @prefix rml: <http://semweb.mmlab.be/ns/rml#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix ex: <http://example.com/ns#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
 
 <#TriplesMapAthletes>
   rml:logicalSource [
