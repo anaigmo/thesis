@@ -41,7 +41,7 @@ ID , PERSON         , COUNTRY , MARK , DATE                       , DATE-TYPE
 
  %\ana{ojo con repetir de qué va RDF-star, que en relwork y RML-star ya se dirá también)
 
-RDF-star introduces the notion of RDF-star triples, i.e. triples that are subjects or objects of another triple. These triples are enclosed using ``\texttt{<<}'' and ``\texttt{>>}'', and can be (1) quoted, if they only appear in a graph embedded by another triple (List~\ref{lst:chp5_res-rdf-star} lines 2,4); or (2) asserted, if the quoted triple is also generated outside the triple where it is quoted (lines 1-4).
+RDF-star introduces the notion of RDF-star triples, i.e., triples that are subjects or objects of another triple. These triples are enclosed using ``\texttt{<<}'' and ``\texttt{>>}'', and can be (1) quoted, if they only appear in a graph embedded by another triple (List~\ref{lst:chp5_res-rdf-star} lines 2,4); or (2) asserted, if the quoted triple is also generated outside the triple where it is quoted (lines 1-4).
 We extend YARRRML to specify how we can construct RDF-star graphs, aligned with the RML-star specification~\parencite{iglesias2022rmlstar}.
 
 \begin{minipage}{\linewidth}
@@ -327,7 +327,7 @@ All serializations enable the creation of subjects at least as IRIs, SMS2 and YA
 
 \textbf{LF2. Subject Generation.} 
 This feature indicates if subjects can be generated as constant or dynamic values; and how many subject declarations are allowed at a time. In dynamically generated values, the subject value changes with a field in the data source. In our example, the subject uses the field ``\texttt{ID}" to generate different subject for each row of input data. %(\cref{lst:chp5_yarrrml-mapping} line 6) . Esto viene de la sección de background, que por ahora no voy a incluir
-All serializations can generate constant and dynamic subjects. For each set of rules, exactly one subject declaration is expected, i.e. one subject for predicate-object pairs. YARRRML can also accept no subject declaration, producing a blank node. % as default behavior.
+All serializations can generate constant and dynamic subjects. For each set of rules, exactly one subject declaration is expected, i.e., one subject for predicate-object pairs. YARRRML can also accept no subject declaration, producing a blank node. % as default behavior.
 %whose default behavior generates a blank node when a subject is not described.
 
 
@@ -388,19 +388,19 @@ This feature indicates if named graphs can be assigned to the generated statemen
 All serializations enable their optional declaration as constant IRI. XRM and YARRRML also enable more than one graph assignation, and allow dynamic values. 
 
 \textbf{LF10. Data references.} 
-This features indicates how many data references a term can contain when generated dynamically (i.e. when its value changes with the input data). It applies to subjects, predicates, objects, datatypes, language tags and named graphs when the serialization allows dynamic generation. All serializations allow more than one data reference for dynamic generation.
+This features indicates how many data references a term can contain when generated dynamically (i.e., when its value changes with the input data). It applies to subjects, predicates, objects, datatypes, language tags and named graphs when the serialization allows dynamic generation. All serializations allow more than one data reference for dynamic generation.
 
 \textbf{LF11. Data Description.}
 This feature indicates if the input or output data (e.g., format, iteration, name, path, etc.) can be described. All serializations can describe input data source, and YARRRML also provides the output data source.
 
 \textbf{LF12. Data Linking.}
-This feature indicates if explicit data linking (e.g. join, fuzzy linking, etc) can be performed with mapping rules. ShExML and YARRRML provide specific features for this end; in XRM and SMS2, however, it is not explicit, but it is possible by using SQL queries. 
+This feature indicates if explicit data linking (e.g., join, fuzzy linking, etc) can be performed with mapping rules. ShExML and YARRRML provide specific features for this end; in XRM and SMS2, however, it is not explicit, but it is possible by using SQL queries. 
 
 \textbf{LF13. Nested Hierarchies.}
 This feature indicates if different levels of a hierarchy source can be accessed in the same data iteration. ShExML is the only language that implements this feature. It is not implemented in YARRRML since is not supported in RML either as a language feature in the time of writing. 
 
 \textbf{LF14. Functions.}
-This indicates if data transformations are applicable to input data (e.g. lowercase). XRM is the only serialization not supporting it. 
+This indicates if data transformations are applicable to input data (e.g., lowercase). XRM is the only serialization not supporting it. 
 
 \textbf{LF15. Conditions.}
 This feature indicates if a statement is generated or not depending on a condition. Only ShExML and YARRRML implement this.
