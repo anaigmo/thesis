@@ -15,7 +15,9 @@
 \label{fig:chp2_LD-lifecycle}
 \end{figure*}
 
-A high number of knowledge graphs has been released over the years. Along with this adoption, the question arose about which are the processes involved in their life cycle. As a result, different proposals for life cycles have been published of Linked Data and knowledge graphs.
+A high number of knowledge graphs has been released over the years. 
+Along with this adoption, the question arose about which are the processes involved in their life cycle. 
+As a result, different proposals for life cycles have been published for Linked Data and knowledge graphs.
 
 \cite{ngomo2014LD-lifecycle} proposed a series of steps that define the life cycle of Linked Data (\cref{fig:chp2_LD-lifecycle}). 
 %, the term used at the time for referring to knowledge graphs before this term was coined with the release of the Google knowledge graph\footnote{\url{https://blog.google/products/search/introducing-knowledge-graph-things-not/}}. 
@@ -29,7 +31,7 @@ These steps include
 (vii) \textit{Evolution and Repair} to address issues and errors detected;
 (viii) \textit{Search, Browse and Exploration} for users to navigate the graph in a user-friendly manner. 
 
-\cite{radulovic2015guidelinesLD} proposed a series of interconnected tasks for generating and publishing Linked Data (\cref{fig:chp2_LD-radulovic}). Is is oriented to the domain of energy consumption in buildings, but the steps proposed can be applicable to other domains. These steps are: (i) \textit{Selecting data sources}, (ii) \textit{Obtaining access} to data sources, (iii) \textit{Analyzing licensing} of data sources, (iv) \textit{Analyzing data sources}, (v) \textit{Defining resource naming strategy}, (vi) \textit{Developing an ontology}, (vii)\textit{Transforming the data sources}, and (ix) \textit{Linking} with other datasets. 
+\cite{radulovic2015guidelinesLD} proposed a series of interconnected tasks for generating and publishing Linked Data (\cref{fig:chp2_LD-radulovic}). Is is oriented to the domain of energy consumption in buildings, but the steps proposed can be applied to other domains. These steps are: (i) \textit{Selecting data sources}, (ii) \textit{Obtaining access} to data sources, (iii) \textit{Analyzing licensing} of data sources, (iv) \textit{Analyzing data sources}, (v) \textit{Defining resource naming strategy}, (vi) \textit{Developing an ontology}, (vii)\textit{Transforming the data sources}, and (viii) \textit{Linking} with other datasets. 
 
 \begin{figure*}[]
 \centering
@@ -76,11 +78,11 @@ All these proposed life cycles share common stages and consider similar aspects.
     \item \textbf{Maintenance.} The tasks that takes place in this phase tackle the management over time of the knowledge graph, and may involve iterations over any of the tasks previously carried out for their creation and deployment. The objective of this phase is to curate the graph, detect and correct errors and implement new features according to new needs or requirements for evolving the knowledge graph.
 \end{itemize}
 
-The use of declarative mapping approaches have proven valuable for different tasks within the knowledge graph life cycle. The main task for which they were developed is for \textit{construction}, relating the input data sources with the target schema to produce the knowledge graph. For this task, a high amount of effort has been made to improve the process (as has been detailed explained over this chapter), for increasing mapping expressiveness (see \cref{sec:chp2_declarative_kgc}), facilitating their creation (see \cref{sec:chp2_easy_kgc}) and for optimizing the use of resources by transformation engines~\parencite{arenas2022morphkgc,iglesias2023scaling,xiao2020virtual,iglesias2022empowering,jozashoori2019mapsdi}. 
+The use of declarative mapping approaches have proven to be valuable for different tasks within the knowledge graph life cycle. The main task for which they were developed is \textit{construction}, relating the input data sources with the target schema to produce the knowledge graph. For this task, a high amount of effort has been made to improve the process (as has been explained in detail over this chapter), for increasing mapping expressiveness (see \cref{sec:chp2_declarative_kgc}), facilitating their creation (see \cref{sec:chp2_easy_kgc}) and for optimizing the use of resources by transformation engines~\parencite{arenas2022morphkgc,iglesias2023scaling,xiao2020virtual,iglesias2022empowering,jozashoori2019mapsdi}. 
 
 Apart from the \textit{construction} task, these declarative approaches can play an important role in other different tasks of the life cycle. They enable \textit{metadata annotation} about the data sources (e.g. DCAT in RML, CSVW for tabular files), which can help enhance the process in terms of transparency, completeness and performance~\parencite{chaves2021morph-csv,vidal2023knowledge}. 
 They also allow for \textit{data processing and cleaning}, thanks to the increasing integration of data transformation functions into the languages' features~\parencite{debruyne2016r2rmlf,junior2016funul,jozashoori2020funmap,DeMeester2017fno_dbpedia}.
-The possibility of expressing how the output graph is generated (e.g. serialization, compression) and managing streams of data can help the \textit{deployment} phase as well (e.g. RML Target, SPARQL-Generate). However, there is no analysis so far looking into the role of these approaches in the \textit{evolution and maintenance} of knowledge graphs. 
+The possibility of expressing how the output graph is generated (e.g. serialization, compression) and managing streams of data can help the \textit{deployment} phase as well (e.g., RML Target and SPARQL-Generate). However, there is no analysis so far looking into the role of these approaches in the \textit{evolution and maintenance} of knowledge graphs. 
 
 
 %\textit{ºcontinuando con la de antes: enmarcado dentro de este life cycle dónde intervendrían los mappings: en la creación y en cada iteración que haya que hacer (cuadra más groth's aquí eso sí). Señalar paper de benchmark de todas las fases en algún momento. Dentro de la creación de cero, por supuesto porque esa es su función principal. Ahí qué hay de mejora: el de bio2rdf contra php, y todas las optimizaciones del proceso, comentar si acaso del paper de vir vs mat de dylan si está publicado. }
