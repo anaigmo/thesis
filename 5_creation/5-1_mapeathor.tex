@@ -3,14 +3,14 @@
 
 Ever since the adoption of mapping languages increased, multiple editors and user-friendly serializations were developed to ease the mapping writing process and assist the needs of mapping developers. Some of the developed approaches enable editing through graphical visualization~\parencite{heyvaert2016rmleditor,sicilia2017map}, while others provide a writing environment (e.g. Ontop for Protege\footnote{\url{https://ontop-vkg.org/tutorial/basic/setup.html\#ontop-protege-setup}}). 
 These proposals present different limitations. 
-Visual approaches do not usually scale well for big use cases.
+Visual approaches do not usually scale well for complex use cases with a high amount of mapping rules.
 The serializations, despite being easier than the original languages, still require users to learn and follow a syntax. 
 In addition, both alternatives are generally oriented to a single language. 
 This situation, taking also into account the general lack of interoperability (described in \cref{sec:chp2_interoperability}), forces users to learn more than one language to write the same conceptual mapping rules when one approach does not fully cover their needs.
 
 To overcome this limitations, we devise a spreadsheet-based approach aiming to be (i) syntax independent, (ii) able to generate rules in more than one mapping language and (iii) that leverages a familiar environment for writing  mapping rules.
 These spreadsheets contain the essential elements of the mapping rules without any additional syntax, and are later translated into a mapping document.
-We choose spreadsheets as they are very widely used for data management~\parencite{birch2018spreadsheets,bradbard2014spreadsheet,pemberton2000spreadsheets}.
+We choose spreadsheets as they are widely used for data management~\parencite{birch2018spreadsheets,bradbard2014spreadsheet,pemberton2000spreadsheets}.
 The purpose of this approach is to ease the mapping writing process for users with heterogeneous backgrounds, as well as to increase the interoperability among mapping languages~\parencite{corcho2020towards, iglesias2022devising}. 
 This proposal is implemented in Mapeathor~\parencite{iglesias-molina_2023_5973906}, a tool able to parse the spreadsheets and generate the corresponding mappings in R2RML, RML (both the release on 2014 by \cite{Dimou2014rml} and the release on 2023 by \cite{iglesias2023rml}) and YARRRML.
 We evaluate the proposal and how it can improve the mapping writing process for users with heterogeneous backgrounds and expertise performing a user study.
@@ -34,10 +34,10 @@ We evaluate the proposal and how it can improve the mapping writing process for 
 
 This section presents the design of the spreadsheet template to write mapping rules. 
 This template contains only the essential information that needs to be used in order to generate the mapping correctly formatted in a language's syntax. 
-This design is devised to represent the rules in a compact and understandable manner, using a format widely used by the scientific community (i.e. Google spreadsheets, MS Excel).
+This design is devised to represent the rules in a compact and understandable manner, using a format widely used by the scientific community (i.e. Google Spreadsheets, MS Excel).
 Thus, this approach prevents users from learning the particular syntax of each language (e.g. keywords, semicolons, brackets, etc.) while using a familiar environment for writing in the spreadsheets. 
 
-The spreadsheet template consists of five different sheets, which are described below: \textit{Prefix sheet}, \textit{Source sheet}, \textit{Subject sheet}, \textit{Predicate\_Object sheet} and \textit{Function sheet}. We illustrate this section with a running example to describe in detail the expressiveness capabilities of each spreadsheet. This example uses the data represented in the CSV file \texttt{people.csv}(\cref{lst:chp5-1_mapeathor_input_people}) and the JSON file \texttt{sport.json} (\cref{lst:chp5-1_mapeathor_input_sport}).
+The spreadsheet template consists of five different sheets, which are described below: \textit{Prefix sheet}, \textit{Source sheet}, \textit{Subject sheet}, \textit{Predicate\_Object sheet} and \textit{Function sheet}. We illustrate this section with a running example to describe in detail the expressiveness capabilities of each spreadsheet. This example uses the data represented in the CSV file \texttt{people.csv} (\cref{lst:chp5-1_mapeathor_input_people}) and the JSON file \texttt{sport.json} (\cref{lst:chp5-1_mapeathor_input_sport}).
 
 \begin{minipage}{0.48\linewidth}
 \begin{captionedlisting}{lst:chp5-1_mapeathor_input_people}{ Contents of \texttt{people.csv}.}
@@ -56,7 +56,7 @@ id , name  , birthdate , sport_id
 \end{minipage}
 \,\,\,\,\hfill
 \begin{minipage}{0.52\linewidth}
-\begin{captionedlisting}{lst:chp5-1_mapeathor_input_sport}{Contents of \texttt{sport.csv}.}
+\begin{captionedlisting}{lst:chp5-1_mapeathor_input_sport}{Contents of \texttt{sport.json}.}
 \centering
 \begin{tabular}{c}
 \hspace{1.5em}
@@ -64,10 +64,10 @@ id , name  , birthdate , sport_id
 \begin{lstlisting}[basicstyle=\ttfamily\small,label={list:example1},columns=flexible]
 [ {
    "id": 1,
-   "sport": " Ice Skating"
+   "sport": "Ice Skating"
  },{
    "id": 2,
-   "sport": " Rugby"
+   "sport": "Rugby"
  } ]
 \end{lstlisting}
 }
@@ -166,7 +166,7 @@ SPORT & ex:code & \{id\} & integer & & & & \\ \midrule
 \end{table}
 
 
-This sheet allows specifying how to generate the triples, that is, predicate-object pairs for the subjects defined in the \textit{Subject sheet}. This sheet contains up to 8 columns: \texttt{ID}, \texttt{Predicate}, \texttt{Object}, \texttt{DataType}, \texttt{Language}, \texttt{ReferenceID}, \texttt{InnerRef} and \texttt{OuterRef}.
+This sheet allows specifying how to generate the triples, that is, predicate-object pairs for the subjects defined in the \textit{Subject sheet}. This sheet contains up to eight columns: \texttt{ID}, \texttt{Predicate}, \texttt{Object}, \texttt{DataType}, \texttt{Language}, \texttt{ReferenceID}, \texttt{InnerRef} and \texttt{OuterRef}.
 
 The column \texttt{ID} indicates the set of rules which the triples belong to, that has been previously defined in the \textit{Subject} and \textit{Source sheets}.
 The columns \texttt{Predicate} and \texttt{Object} specify the predicate and object of the triple respectively. 
@@ -176,7 +176,7 @@ When the object refers to a subject defined in another mapping rule, the rule is
 There are three columns that allow the specification of the linking condition between the object of the current triple and the referenced subject. 
 They specify which is the ID of the referred subject  (\texttt{ReferenceID}), and the ``join'' fields in the source data: (i) \texttt{InnerRef} for the field of the object of the current triple, and (ii) \texttt{OuterRef} for the field of the referred subject. These three fields can be blank when a regular triple is produced. 
 
-\cref{tab:chp5-1_po_sheet} shows five predicate-object pairs created for both sets of rules (\texttt{PERSON} and \texttt{SPORT}. Three of these rules produce literals with datatypes and two additionally specify a language tag. The rule set identified as \texttt{PERSON} generates a link to the subject of the \texttt{SPORT} rule set using the predicate \texttt{ex:name}, and joining by equal values of the field \texttt{sport\_id} from \texttt{people.csv} and the field \texttt{id} from \texttt{sport.json}. This rule set also calls a function for generating the object for the predicate \texttt{ex:birthdate}, which is identified by being enclosed by ``$<>$''.
+\cref{tab:chp5-1_po_sheet} shows five predicate-object pairs created for both sets of rules (\texttt{PERSON} and \texttt{SPORT}). Three of these rules produce literals with datatypes, and two specify a language tag as well. The rule set identified as \texttt{PERSON} generates a link to the subject of the \texttt{SPORT} rule set using the predicate \texttt{ex:name}, and joining by equal values of the field \texttt{sport\_id} from \texttt{people.csv} and the field \texttt{id} from \texttt{sport.json}. This rule set also calls a function for generating the object for the predicate \texttt{ex:birthdate}, which is identified by being enclosed by ``$<$'' and ``$>$''.
 
 \subsubsection{Function Sheet}
 \hspace{0.1cm}
@@ -314,7 +314,7 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 \begin{itemize}
     \item \textbf{Tool familiarity bias.} Practitioners tend to be more expert in some specific technologies and languages that they use more frequently. Thus, in the sample it is possible to have participants that have used one of the tested approaches, which in turn can influence the results. For creating the groups, participants' experience was inquired to avoid assigning them a tool that they had previously used. There was no participant that had prior knowledge of all tested approaches.
     \item \textbf{Selection bias.} The sample includes participants with different range of skills and previous knowledge about linked data and mappings. We mitigate this threat by defining groups that were  homogeneous w.r.t. range of expertise in mappings and linked data, considering also the mitigation measures for the \textit{tool familiarity} threat. That is to say, all groups included from beginner users to knowledgeable practitioners. 
-    \item \textbf{Instruction bias.} One of the evaluated approaches is designed by the conductors of the user study. This situation could incur in bias on information delivery. To mitigate this threat, we provided participants with the same instruction guidelines for each tool. Three sessions were conducted subsequently to provide the same explanations and attention to each tool. During each sessions, all questions were answered with equal level of detail and guidance for all tools and participants.
+    \item \textbf{Instruction bias.} One of the evaluated approaches is designed by the conductors of the user study. This situation could incur in bias on information delivery. To mitigate this threat, we provided participants with instruction guidelines equally detailed for each tool. Three sessions were conducted subsequently to provide the same explanations and attention to each tool. During each sessions, all questions were answered with equal level of detail and guidance for all tools and participants.
 \end{itemize}
 
 \textbf{External validity threats} occur when wrong inferences from sample data are made beyond the studied sample or experimental setup. We identify two external threats: \textit{background of participants sample} and \textit{environment}.
@@ -388,7 +388,7 @@ RML presents the worst results in this case, as the specification of this elemen
 \end{table}
 
 %% no significance, but tendencies in differences in parts
-However, none of the differences in the results for any type of mapping rule is significant (p-value $>$ 0.05, see \cref{tab:chp5-1_summary_results}), but we can observe some tendencies. The results for which the p-value is closer to being significant is for the total accuracy of the complete mapping, and for the subjects (specially its local accuracy). In this cases, it can be stated with more confidence that the spreadsheet-based approach proposed in this contribution can help the writing process, improving the baseline and other graphical approaches. 
+However, none of the differences in the results for any type of mapping rule is significant (p-value $>$ 0.05, see \cref{tab:chp5-1_summary_results}), but we can observe some tendencies. The results for which the p-value is closer to being significant is for the total accuracy of the complete mapping, and for the subjects (specially its local accuracy). In these cases, it can be stated with some confidence that the spreadsheet-based approach proposed in this contribution can help the writing process, improving the baseline and other graphical approaches. 
 %\textit{sin embargo, ninguno de los resultados es significativo (p-value $<$ 0.05), pero sí se pueden observar tendencias. Los resultados donde más se acerca el p-value a ser significativo es para el total accuracy del mapping completo, y para la escritura de los sujetos, especialmente en el local accuracy. En estos casos se puede afirmar con más seguridad que Mapeathor va bien encaminado a mejorar la escritura de las mapping rules.}  \ana{de donde rmleditor supera a rml tb?}
 
 
@@ -410,7 +410,16 @@ However, none of the differences in the results for any type of mapping rule is 
 
 In general, the results obtained in the user study show that there is still plenty of room for improvement for facilitating the adoption and use of mappings by a broader community of users. In each group, there were participants able to completely finish the exercise on time. In addition, plenty other participants claimed (in the feedback space left in the questionnaire) that, without the time limit, it would have been possible for them to complete the mappings. However, the reported local accuracy indicates that, even complete, the mapping would not have been entirely valid. This success rate holds true both for new users as well as for people with expertise on other mapping technologies. 
 
-The results obtained for the RMLEditor are specially remarkable. Overall, this approach does not improve the results of RML. This seems to be a product of the technological support rather than the visual notation. Multiple participants using the RMLEditor stress the lack of certain functionalities, like the impossibility of copying and pasting sections of the created mapping, and the difficulty of finding created mapping constructs in the working space. The contrary was reported for RML, where participants, once they understood the parts that they had to copy and modify, it got easier for them to complete the mapping rules. Regarding Mapeathor, multiple participants highlighted that using spreadsheets was convenient for them to carry out the exercise. The most mentioned flaw, however, was the need to separate the rules in different sheets. Especially for the creation and tracking of the rule set's \texttt{ID}, participants missed an automated way of filling this ID with the ones created in other sheets. As the process is currently manual, it can induce to errors.
+The results obtained for the RMLEditor are specially notable. 
+Overall, this approach does not improve the results of RML. 
+This seems to be a product of the technological support rather than the visual notation. 
+Multiple participants using the RMLEditor stress the lack of certain functionalities, such as the impossibility of copying and pasting sections of the created mapping, and the difficulty of finding created mapping constructs in the working space. 
+The contrary was reported for RML, where the writing got easier for participants once they understood the parts of the mapping the had to copy and modify to produce correct rules.
+%where participants, once they understood the parts that they had to copy and modify, it got easier for them to complete the mapping rules. 
+Regarding Mapeathor, multiple participants highlighted that using spreadsheets was convenient for them to carry out the exercise. 
+The most mentioned flaw, however, was the need to separate the rules in different sheets. 
+Especially for the creation and tracking of the rule set's \texttt{ID}, participants missed an automated way of filling this ID with the ones created in other sheets. 
+As the process is currently manual, it can induce to errors.
 
 Hence, we can observe that developing tools that aid the mapping writing is generally desired, and can improve the process by speeding up the writing and ensuring that the rules written produce correct mapping documents. Additionally, the higher accuracy reported by the participants using Mapeathor suggests that the spreadsheet-based approach is useful for this aim. Yet, there is still room for improvement regarding (i) the cohesion of the sheets and the shared \texttt{IDs} across them, (ii) the potential for hosting more expressiveness from the ever-evolving mapping languages~\parencite{iglesias2023rml} (see \cref{sec:chp4_rml_star} and \cref{sec:chp5_yarrrml_star}) and (iii) the possibility of leveraging more spreadsheet editors features to improve the user experience. 
 %, and forces users to be constantly checking in other sheets these \texttt{IDs}.

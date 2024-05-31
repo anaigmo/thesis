@@ -8,7 +8,7 @@ to offer a user-friendly representation to define mapping rules, while
 ShExML~\parencite{Garcia-Gonzalez2020shexml} extends the syntax of the ShEx constraint language~\parencite{prud2014shex}.
 XRM~\parencite{xrm}
 provides an abstract syntax that simulates programming languages and 
-SMS2~\parencite{sms2}, proposed by Stardog,\footnote{\label{foot:stardog}\url{https://www.stardog.com/}} is loosely based on the SPARQL query language and extends the features of R2RML to create virtual KGs.
+SMS2~\parencite{sms2}, proposed by Stardog\footnote{\label{foot:stardog}\url{https://www.stardog.com/}}, is loosely based on the SPARQL query language and extends the features of R2RML to create virtual KGs.
 Each serialization is accompanied by a system that translates their rules into mapping languages, such as RML or R2RML (henceforth abbreviated as [R2]RML). 
 %These serializations and translators were not compared with each other in terms of serializations' features and system's characteristics, even though it would help to decide which serialization fits each use case.
 
@@ -216,7 +216,7 @@ This function can, in turn, take data values as parameters.
 Quoted and non-asserted triples can also be generated within join conditions by using the parameter keys \texttt{quoted=} and \texttt{quotedNonAsserted=} respectively.
 In the example, the join condition is performed using the \texttt{equal} function to create as objects the subjects of the mapping set \texttt{jumpTM} if the values of the fields \texttt{ID} from source and \texttt{ID} from target mapping set are the same.
 
-All the described updates have been proposed for the YARRRML specification and are currently under review by the KG Construction Community Group\footnote{\url{https://github.com/kg-construct/yarrrml-spec/pull/4}}.
+%All the described updates have been proposed for the YARRRML specification and are currently under review by the KG Construction Community Group\footnote{\url{https://github.com/kg-construct/yarrrml-spec/pull/4}}.
 
 \begin{minipage}{\linewidth}
 \centering
@@ -286,7 +286,7 @@ Test cases are a common method to evaluate the conformance of a system~\parencit
 To the best of our knowledge, previous R2RML~\parencite{boris2012r2rml} and RML~\parencite{heyvaert2019conformance} test cases were not translated to any human-friendly serialization (e.g., YARRRML).
 Relying on [R2]RML test cases, we propose a set of representative test cases (including also the new features presented in this work) to assess the conformance of any YARRRML translator system.
 %In this way, practitioners can easier understand the coverage of these systems with respect to the proposed language/syntax and select the one that fits better to their own use cases.
-The proposed test cases require to be two-fold defined: to cover the complete vocabulary of the serialization, and also have the flexibility to declare the rules (e.g., shortcuts or location of the keys). 
+The proposed test cases serve two objectives, (i) to cover the complete vocabulary of the serialization, and (ii) to have the flexibility to declare the rules (e.g., shortcuts or location of the keys). 
 %To avoid starting from scratch, we rely on the test cases proposed by R2RML~\parencite{R2RML_test_cases} first, that were also extended for RML~\parencite{heyvaert2019conformance}. 
 
 We follow a systematic methodology for creating the YARRRML test cases. 
@@ -300,9 +300,9 @@ We propose 8 new test cases to cover these features.
 For features not covered by the RML test cases, we follow a similar procedure. 
 We inspected the RML-star test cases~\parencite{david_chaves_2022_6518802}, and translated to YARRRML the ones that provide a complete coverage of this extension. 
 From the 16 test cases proposed to assess the conformance of RML-star, we adapt 6. 
-Finally, as there are still no test cases proposed for RML-Target, RML-FNML, RML dynamic language tags and datatypes, we 
+Finally, we propose 21 test cases to cover RML-Target, RML-FNML, RML dynamic language tags and datatypes. 
 %analyze both of each specifications (RML and YARRRML) and 
-proposed another 21 test cases to cover them.
+%we proposed another 21 test cases to cover them.
 
 In total, we defined 50 YARRRML test cases and their corresponding translation to RML or R2RML. 
 They are openly available\footnote{\label{foot:yarrrml-resources}\url{https://github.com/oeg-upm/yarrrml-validation}} to be used by any YARRRML-compliant system.
@@ -406,7 +406,7 @@ This indicates if data transformations are applicable to input data (e.g. lowerc
 This feature indicates if a statement is generated or not depending on a condition. Only ShExML and YARRRML implement this.
 
 \textit{Discussion.} 
-All serializations offer a rich variety of mapping features, but ShExML and YARRRML have a richer selection. SMS2 leverages the SPARQL syntax, lowering the learning curve for SPARQL users. At the same time, data processing is limited to basic SPARQL functions and the user is unable to integrate custom ones. 
+All serializations offer a rich variety of mapping features, but ShExML and YARRRML offer a richer selection with respct to the selected test cases. SMS2 leverages the SPARQL syntax, lowering the learning curve for SPARQL users. At the same time, data processing is limited to basic SPARQL functions and the user is unable to integrate custom ones. 
 XRM is designed to mimic natural language and adds minimal overhead with its own syntax keywords, which also makes it easy-to-learn, but provides a more limited variety of features.
 
 
