@@ -212,13 +212,13 @@ As a result, we developed a module to cover this new feature. The Conceptual Map
     \begin{subfigure}[b]{0.28\linewidth}
         \centering
     	\includegraphics[width=1\linewidth]{figures/chp4-2_example_json}
-    	\caption{Example input JSON file ``coordinates.json".}
+    	\caption{Example input JSON file ``coordinates.json''.}
     	\label{fig:chp4-2_chp4_ex_json}
     \end{subfigure}
     \begin{subfigure}[b]{0.7\linewidth}
         \centering
     	\includegraphics[width=1\linewidth]{figures/chp4-2_example_rdb}
-    	\caption{Example input MySQL table ``cities".}
+    	\caption{Example input MySQL table ``cities''.}
     	\label{fig:chp4-2_chp4_ex_rdb}
     \end{subfigure}
     \caption[Example data and ontology about cities for CM mapping]{Input source data and reference ontology that represents information on cities and their location.}
@@ -229,7 +229,7 @@ As a result, we developed a module to cover this new feature. The Conceptual Map
 
 %\ana{no sé si dejar esto o rehacer y poner de drugs4covid, para que no sean datos de juguete. O si acaso poner que sea un use case, eso requeriría de hacer el mapping también en otros lenguajes. Por ahora dejar como está}
 
-This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_sources}, triples in \cref{lst:chp4_cm_spo} and special statements in \cref{lst:chp4_cm_general}) to represent how the proposed language can describe data with different features. The mapping uses the data sources ``coordinates.json" (\cref{fig:chp4-2_chp4_ex_json}) and ``cities" (\cref{fig:chp4-2_chp4_ex_rdb}) as input and the ontology depicted in  \cref{fig:chp4-2_chp4_ex_onto} as reference, to create the output RDF shown in \cref{lst:chp4_output}. 
+This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_sources}, triples in \cref{lst:chp4_cm_spo} and special statements in \cref{lst:chp4_cm_general}) to represent how the proposed language can describe data with different features. The mapping uses the data sources ``coordinates.json'' (\cref{fig:chp4-2_chp4_ex_json}) and ``cities'' (\cref{fig:chp4-2_chp4_ex_rdb}) as input and the ontology depicted in  \cref{fig:chp4-2_chp4_ex_onto} as reference, to create the output RDF shown in \cref{lst:chp4_output}. 
 %Additionally, \cref{appendix2}\ana{APENDIX!!} contains a second example to illustrate different features than the ones represented in the example of this section, to provide more insights about the expressiveness of this language.
 
 \begin{captionedlisting}{lst:chp4_output}{Expected RDF output for the data sources and the ontology in \cref{fig:chp4-2_chp4_ex_input}.}
@@ -258,7 +258,7 @@ This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_
 \end{lstlisting}}
 \end{captionedlisting}
 
-\noindent\paragraph{\textbf{Data sources.}} \cref{lst:chp4_cm_sources} shows the description of the JSON file ``coordinates.json" indicating the protocol from the SKOS concept scheme (\texttt{cmp:https}), media type (``application/json"), JSONPath to extract data, access URL  ``https://ex.com/geodata/coordi\-nates.json", and  fields that are going to be used in the transformation. There is no security scheme. The MySQL table ``cities" also has no security scheme, the protocol needed is \texttt{cmp:jdbc}, the database access is specified in the endpoint URL, and the table as an SQL query. The fields are also specified, with the special case of ``zipcodes" that needs a \texttt{cm:hasNestedFrame} to extract multiple values inside the field.
+\noindent\paragraph{\textbf{Data sources.}} \cref{lst:chp4_cm_sources} shows the description of the JSON file ``coordinates.json'' indicating the protocol from the SKOS concept scheme (\texttt{cmp:https}), media type (``application/json''), JSONPath to extract data, access URL  ``https://ex.com/geodata/coordi\-nates.json'', and  fields that are going to be used in the transformation. There is no security scheme. The MySQL table ``cities'' also has no security scheme, the protocol needed is \texttt{cmp:jdbc}, the database access is specified in the endpoint URL, and the table as an SQL query. The fields are also specified, with the special case of ``zipcodes'' that needs a \texttt{cm:hasNestedFrame} to extract multiple values inside the field.
 
 \begin{captionedlisting}{lst:chp4_cm_sources}{Description with the Conceptual Mapping of two data sources (a JSON file and a relational database), their access and fields.}
 \centering
@@ -308,7 +308,7 @@ This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_
 
 %\noindent{\textbf{Locations.}} Sarah is working at the National Geographic Institute from Spain, and manages everyday information about places and locations. She wants to create a knowledge graph with the geographical data that she usually manages. She starts writing a mapping (\cref{lst:uc1}) to represent cities from a local JSON file, \texttt{Venue.json} (\cref{lst:data_venues}). This data will be transformed into instances of the class \texttt{City}. 
 
-\noindent\paragraph{\textbf{Statements.}} \cref{lst:chp4_cm_spo} contains the rules needed to create instances of the classes \texttt{eg:Location} and \texttt{eg:City}; and their following attributes: \texttt{eg:lat} and \texttt{eg:long} for the former; \texttt{eg:zipcode} for the latter. To correctly generate the URI for the instances of \texttt{eg:City}, a replace function inside a concatenate function is needed to (1) remove the blank spaces in the field ``city" and (2) add the field to the base URI ``http://ex.com/city/".
+\noindent\paragraph{\textbf{Statements.}} \cref{lst:chp4_cm_spo} contains the rules needed to create instances of the classes \texttt{eg:Location} and \texttt{eg:City}; and their following attributes: \texttt{eg:lat} and \texttt{eg:long} for the former; \texttt{eg:zipcode} for the latter. To correctly generate the URI for the instances of \texttt{eg:City}, a replace function inside a concatenate function is needed to (1) remove the blank spaces in the field ``city'' and (2) add the field to the base URI ``http://ex.com/city/''.
 
 \begin{captionedlisting}{lst:chp4_cm_spo}{Description with the Conceptual Mapping of the creation of regular statements from the data sources described in \cref{lst:chp4_cm_sources}.}
 \centering
@@ -381,7 +381,7 @@ This section builds a mapping in three steps (data sources in \cref{lst:chp4_cm_
 \end{captionedlisting}
 
 
-\noindent\paragraph{\textbf{Special statements.}} \cref{lst:chp4_cm_general} describes how a conditional statement and a linking rule are generated. This description is represented by means of functions. With the property \texttt{cm:hasBooleanCondition}, the conditional statement declares that the field \texttt{:year} has to be greater than 2020. The linking rule performs the link between the instances of \texttt{eg:City} and \texttt{eg:Location} with the predicate \texttt{eg:location}, using a distance metric (Levenshtein function) that has to be greater then a threshold of ``0.75". 
+\noindent\paragraph{\textbf{Special statements.}} \cref{lst:chp4_cm_general} describes how a conditional statement and a linking rule are generated. This description is represented by means of functions. With the property \texttt{cm:hasBooleanCondition}, the conditional statement declares that the field \texttt{:year} has to be greater than 2020. The linking rule performs the link between the instances of \texttt{eg:City} and \texttt{eg:Location} with the predicate \texttt{eg:location}, using a distance metric (Levenshtein function) that has to be greater then a threshold of ``0.75''. 
 
 \begin{captionedlisting}{lst:chp4_cm_general}{Conditional and linking rules described with the Conceptual Mapping that complement the data source description and regular statements described in \cref{lst:chp4_cm_sources} and \cref{lst:chp4_cm_spo}.}
 \centering
