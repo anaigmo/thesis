@@ -1,0 +1,95 @@
+\section{Supplementary Tables for KG Refactoring Evaluation}
+\label{sec:appendix-reconstruct}
+
+\hspace{0pt}
+\vfill
+\begin{table}[h]
+    \centering
+    \caption[Execution times of KG re-construction in KG construction engines]{Execution time of KG construction engines with the declarative mappings. Values corresponding to \cref{fig:chp6-1_map-queries}.}
+    \label{tab:annex-mappingschp6}
+    \resizebox{0.6\textwidth}{!}{%
+    \begin{tabular}{c|c|cc}
+        \toprule
+        Size & Target & Morph-KGC & SPARQL-Anything \\ \midrule
+         & Std. Reif. & 1.424 & 1.439 \\
+        1K & RDF-star  & 1.180 & 1.370 \\
+         & Named Graphs & 1.134 & 1.391 \\
+         & N-Ary Rel. & 1.233 & 1.373 \\ \midrule
+         & Std. Reif. & 2.324 & 3.631 \\
+        10K & RDF-star  & 1.736 & 3.105 \\
+         & Named Graphs & 1.550 & 3.598 \\
+         & N-Ary Rel. & 1.753 & 3.507 \\ \midrule
+         & Std. Reif. & 12.291 & 22.162 \\
+        100K & RDF-star  & 8.121 & 22.205 \\
+         & Named Graphs & 6.286 & 21.913 \\
+         & N-Ary Rel. & 8.070 & 23.386 \\ \midrule
+         & Std. Reif. & 121.845 & 234.606 \\
+        1M & RDF-star  & 78.476 & 214.874 \\
+         & Named Graphs & 57.861 & 214.738 \\
+         & N-Ary Rel. & 76.821 & 238.764 \\ \bottomrule
+    \end{tabular}
+    }
+\end{table}
+\vfill
+\hspace{2pt}
+
+
+\begin{table}[]
+    \centering
+    \caption[Execution times of KG re-construction in triplestores]{Execution time of triplestores with the SPARQL queries that perform translations for pairs of representations. Values corresponding to \cref{fig:chp6-1_queries}.}
+    \label{tab:annex-querieschp6}
+    \resizebox{0.75\textwidth}{!}{%
+    \begin{tabular}{c|c|c|c|ccc}
+    \toprule
+    Size & Source & Target & Query & Oxigraph & Fuseki & GraphDB \\ \midrule
+     & & Std. Reif. & Q1 & 0.531 & 0.140 & 0.233 \\
+     & N-Ary Rel.  & RDF-Star & Q2 & 0.491 & 0.099 & 0.131 \\
+     &  & Named Graphs & Q3 & - & 0.133 & - \\ \cmidrule{2-7}
+     & & RDF-Star & Q4 & 0.632 & 0.133 & 0.131 \\
+     & Std. Reif.  & N-Ary Rel. & Q5 & 1.116 & 0.333 & 0.275 \\
+    1K &  & Named Graphs & Q6 & - & 0.130 & - \\ \cmidrule{2-7}
+     & & Std. Reif. & Q7 & 0.577 & 0.150 & 0.254 \\
+     & RDF-Star  & N-Ary Rel. & Q8 & 0.481 & 0.183 & 0.253 \\
+     &  & Named Graphs & Q9 & - & 0.117 & - \\  \cmidrule{2-7}
+     & & Std. Reif. & Q10 & 0.477 & 0.124 & 0.252 \\ 
+     & Named Graphs & RDF-Star & Q11 & 0.413 & 0.121 & 0.142 \\
+     &  & N-Ary Rel. & Q12 & 0.868 & 0.231 & 0.254 \\ \midrule \midrule
+     & & Std. Reif. & Q1 & 4.172 & 0.931 & 2.007 \\ 
+     & N-Ary Rel.  & RDF-Star & Q2 & 3.687 & 0.659 & 0.927 \\
+     &  & Named Graphs & Q3 & - & 0.995 & - \\ \cmidrule{2-7}
+     & & RDF-Star & Q4 & 5.144 & 0.758 & 0.944 \\
+     & Std. Reif.  & N-Ary Rel. & Q5 & 55.225 & 14.946 & 9.186 \\
+    10K &  & Named Graphs & Q6 & - & 0.729 & - \\ \cmidrule{2-7}
+     & & Std. Reif. & Q7 & 4.250 & 0.992 & 1.986 \\
+     & RDF-Star  & N-Ary Rel. & Q8 & 3.151 & 1.002 & 1.328 \\
+     &  & Named Graphs & Q9 & - & 0.806 & - \\ \cmidrule{2-7}
+     & & Std. Reif. & Q10 & 3.879 & 0.990 & 2.088 \\
+     & Named Graphs  & RDF-Star & Q11 & 2.851 & 0.690 & 1.011 \\
+     &  & N-Ary Rel. & Q12 & 52.019 & 9.311 & 7.749 \\ \midrule \midrule
+     & & Std. Reif. & Q1 & 43.932 & 12.347 & 20.366 \\
+     & N-Ary Rel. & RDF-Star & Q2 & 39.344 & 7.392 & 9.021 \\
+     &  & Named Graphs & Q3 & - & 9.424 & - \\ \cmidrule{2-7}
+     & & RDF-Star & Q4 & 48.300 & 8.286 & 8.949 \\
+     & Std. Reif.  & N-Ary Rel. & Q5 & Out-of-Memory & 1408.531 & 844.092 \\
+    100K &  & Named Graphs & Q6 & - & 7.731 & - \\ \cmidrule{2-7}
+     & & Std. Reif. & Q7 & 39.500 & 10.953 & 18.791 \\
+     & RDF-Star  & N-Ary Rel. & Q8 & 28.758 & 11.145 & 11.862 \\
+     &  & Named Graphs & Q9 & - & 8.500 & - \\ \cmidrule{2-7}
+     & & Std. Reif. & Q10 & 36.160 & 12.108 & 22.210 \\
+     & Named Graphs  & RDF-Star & Q11 & 29.420 & 8.094 & 9.635 \\
+     &  & N-Ary Rel. & Q12 & Out-of-Memory & 890.306 & 676.530 \\ \midrule \midrule
+     & & Std. Reif. & Q1 & 606.011 & 185.208 & 216.501 \\
+     & N-Ary Rel. & RDF-Star & Q2 & 533.988 & 99.838 & 91.876 \\
+     & & Named Graphs & Q3 & - & 129.621 & - \\ \cmidrule{2-7}
+     & & RDF-Star & Q4 & 622.131 & 115.130 & 85.698 \\
+     & Std. Reif.  & N-Ary Rel. & Q5 & Out-of-Memory & Timeout & Timeout \\
+    1M &  & Named Graphs & Q6 & - & 142.600 & - \\ \cmidrule{2-7}
+     & & Std. Reif. & Q7 & 388.227 & 237.749 & 181.685 \\
+     & RDF-Star  & N-Ary Rel. & Q8 & 285.841 & 223.663 & 120.688 \\
+     &  & Named Graphs & Q9 & - & 216.149 & - \\ \cmidrule{2-7}
+     & & Std. Reif. & Q10 & 443.620 & 101.384 & 227.556 \\
+     & Named Graphs  & RDF-Star & Q11 & 353.570 & 197.742 & 96.191 \\
+     &  & N-Ary Rel. & Q12 & Out-of-Memory & Timeout & Timeout \\ \bottomrule
+    \end{tabular}
+    }
+\end{table}

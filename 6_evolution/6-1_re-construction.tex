@@ -351,7 +351,7 @@ We run all experiments over an Ubuntu 20.04 server with
 \begin{figure}[t!]
     \centering
     \includegraphics[width=\linewidth]{figures/chp6-1_results-map-queries.pdf}
-    \caption[Overall execution times of KG re-construction evaluation]{Execution time for KG construction engines with declarative mappings, and triplestores with SPARQL queries. The results of the triplestores are grouped by the \textit{target} representation representing their geometric mean. Bars with diagonal pattern do no include some target representation times, as they report out-of-memory errors (details in \cref{fig:chp6-1_queries}).}
+    \caption[Overall execution times of KG re-construction evaluation]{Execution time for KG construction engines with declarative mappings, and triplestores with SPARQL queries. The results of the triplestores are grouped by the \textit{target} representation representing their geometric mean. Bars with diagonal pattern do no include some target representation times, as they report out-of-memory errors (details in \cref{fig:chp6-1_queries}). See values in detail in \cref{tab:annex-mappingschp6} and \cref{tab:annex-querieschp6}.}
     \label{fig:chp6-1_map-queries}
 \end{figure}
 
@@ -359,13 +359,14 @@ We run all experiments over an Ubuntu 20.04 server with
 \begin{figure}[t!]
     \centering
     \includegraphics[width=\linewidth]{figures/chp6-1_results-queries.pdf}
-    \caption[Execution times of KG re-construction in triplestores]{Execution time of triplestores with the SPARQL queries that perform translations for pairs of representations.}
+    \caption[Execution times of KG re-construction in triplestores]{Execution time of triplestores with the SPARQL queries that perform translations for pairs of representations. See values in detail in \cref{tab:annex-querieschp6}.}
     \label{fig:chp6-1_queries}
 \end{figure}
 
 The evaluation aims at assessing which is the re-construction approach that performs best for refactoring KGs, and to extract some insights about the impact of the different representations selected in the process. \cref{fig:chp6-1_map-queries} reports the comparison between (KGC) systems using declarative mappings, and triplestores with SPARQL queries. 
 %For the latter, the geometric mean of the query execution time for all queries that generate each representation is provided. 
 \cref{fig:chp6-1_queries} reports a fine-grained comparison of each triplestore performance on the proposed queries performing translations between each pair of representations.
+The reported results in detailed can be seen in \cref{tab:annex-mappingschp6} and \cref{tab:annex-querieschp6}.
 
 Focusing on the comparison between triplestores and KGC systems (\cref{fig:chp6-1_map-queries}), we generally observe that for small data sizes, triplestores obtain better results, while KGC systems scale better as data size increases. 
 However, except for producing N-Ary Relationships, Fuseki and GraphDB are competitive w.r.t. SPARQL-Anything or Morph-KGC. These triplestores obtain better results for the scales 1K and 10K, and similar ones for 100K and 1M. 
