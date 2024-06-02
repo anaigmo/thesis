@@ -160,7 +160,7 @@ For instance, the latest \mbox{RML-star} releases update the term ``embedded'' t
 according to the modifications in \mbox{RDF-star}.
 %that occurred after the first release of RML-star~\footnote{\url{https://kg-construct.github.io/rml-star-spec/20210706/}}. 
 This update renamed the property \texttt{rml:embeddedTriplesMap} to \texttt{rml:quotedTriplesMap}.
-In addition, RML-star is implemented by Morph-KGC$^{star}$~\parencite{arenas2023morphstar} and the SDM-RDFizer\footnote{\url{https://github.com/SDM-TIB/SDM-RDFizer-Star}}~\parencite{iglesias2020rdfizer} at the time of writing this document.
+In addition, RML-star is implemented by Morph-KGC$^{star}$~\parencite{arenas2023morphstar} and the SDM-RDFizer\footnote{\url{https://github.com/SDM-TIB/SDM-RDFizer/}}~\parencite{eiglesias34_2024_11191586} at the time of writing this document.
 
 
 
@@ -168,8 +168,7 @@ In addition, RML-star is implemented by Morph-KGC$^{star}$~\parencite{arenas2023
 \subsection{Validation}
 \label{sec:chp4_validation}
 
-This section validates RML-star with (i) the development of the RML-star test-cases, that enables new implementations to check their conformance to RML-star; and (ii) the creation of RML-star mappings for two real-world use cases: software metadata extraction~\parencite{kelley2021framework} (SoMEF) and biomedical research literature~\parencite{SemMedDB} (SemMedDB). 
-%We use for both cases \mbox{Morph-KGC$^{star}$}, an implementation of RML-star.
+This section validates RML-star with (i) the development of the RML-star test-cases, that enables new implementations to check their conformance to RML-star; and (ii) the creation of RML-star mappings for two real-world use cases: software metadata extraction~\parencite{kelley2021framework} (SoMEF) and biomedical research literature~\parencite{SemMedDB} (SemMedDB). In addition, RML-star is used for the evaluations performed in \cref{chapter:evolution}.
 
 
 
@@ -226,6 +225,8 @@ SoMEF extracts more than 30 different metadata fields about
 software, its source code, its released versions, and their corresponding authors. For transforming the output of SoMEF into RDF-star, we used a total of 35 triples maps to annotate software metadata fields and an additional triples map to annotate source code descriptions. All reified triples follow the same structure (Listings \ref{lst:JSONsnippet} \& \ref{lst:TTLsnippet}), i.e., the standard RDF triple contains the excerpt of the extracted feature, and it is annotated
 with the \emph{technique} used and the \emph{confidence} value. 
 The complete mapping and all input examples and results are available online\footnote{\url{https://github.com/oeg-upm/rdf-star-generation}}.
+
+Capturing the technique used and the confidence obtained for each extracted metadata field is key for obtaining an accurate representation of the result. Hence, the \mbox{RDF-star} representation corresponding to the JSON in \cref{lst:JSONsnippet} includes this information, as depicted in \cref{lst:TTLsnippet}.
  
 \noindent\hspace{0.07\linewidth}\begin{minipage}{0.9\linewidth}
 \begin{captionedlisting}{lst:JSONsnippet}{JSON snippet showing the description metadata field extracted by SoMEF on a code repository using the GitHub API as extraction technique.}
@@ -245,8 +246,6 @@ The complete mapping and all input examples and results are available online\foo
 }
 \end{captionedlisting}
 \end{minipage}
-
-Capturing the technique used and the confidence obtained for each extracted metadata field is key for obtaining an accurate representation of the result. Hence, the \mbox{RDF-star} representation corresponding to the JSON in \cref{lst:JSONsnippet} includes this information, as depicted in \cref{lst:TTLsnippet}.
 
 %\begin{minipage}{0.9\linewidth}
 %\begin{captionedlisting}{lst:TTLsnippet}{N-Triples-star snippet showing the results generated for the %description field shown in \cref{lst:JSONsnippet}. Each asserted triple is annotated with its %corresponding confidence and technique.}
