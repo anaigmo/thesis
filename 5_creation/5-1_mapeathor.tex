@@ -317,6 +317,10 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
     \item \textbf{Instruction bias.} One of the evaluated approaches is designed by the conductors of the user study. This situation could incur in bias on information delivery. To mitigate this threat, we provided participants with instruction guidelines equally detailed for each tool. Three sessions were conducted subsequently to provide the same explanations and attention to each tool. During each sessions, all questions were answered with equal level of detail and guidance for all tools and participants.
 \end{itemize}
 
+
+
+
+
 \textbf{External validity threats} occur when wrong inferences from sample data are made beyond the studied sample or experimental setup. We identify two external threats: \textit{background of participants sample} and \textit{environment}.
 \begin{itemize}
     \item \textbf{Background of participants sample.} This threat concerns the generalization to individuals outside the study criteria. The sample of participants include a wide range in the variety of backgrounds, from not very familiar with linked data and mappings, to expert practitioners. We deliberately choose to have this variety for each group so that the results can be generalized to a broader sample, while mitigating the risks of internal threats described above that this choice poses. 
@@ -324,23 +328,28 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
 \end{itemize}
 
 
-
-
 \subsubsection{Results}
 \label{sec:chp5_mapeathor_results}
 
 %\noindent\textit{\textbf{Subjective evaluation results}}
+%\noindent\textit{\textbf{Objective evaluation results}}
+
+%\ana{e ir intercalando opiniones sobre cada approach para apoyar los resultados, ambas buenas y malas}
+%\ana{de rmleditor fallos a nivel técnicos, opiniones divididas entre intuitivo/antiintuitivo, hay constructos que hay que explicar, pero una vez superada esa barrera medianamente bien. Remarcan que faltan funcionalidades como copy/paste de secciones enteras, y buscar mejor lo creado en el espacio de trabajo (a muchos se les perdían las cosas y había que volver a empezar)}
+%\ana{de rml igual hay mejores resultados porque una vez se entienden las partes del mapping y partiendo de un ejemplo, qué hay que copiar y cambiar, eso agiliza el proceso. Más indicado para desarrolladores (más acostumbrados a escribir código), se señala que no es excesivamente complejo pero con alguna herramienta se haría mejor.}
+%\ana{curva de aprendizaje de la herramienta, como todos, pero en general gusta que se pueda usar algo tan común como excel, que facilita mucho la escritura de reglas. El punto negativo viene por el tema de los IDs, que al no aparecer automáticos en las subsecuentes pestañas induce a errores.}
 
 
-\begin{figure}[t!]
+
+\begin{figure}[t]
     \centering
-    \begin{subfigure}[b]{\linewidth}
+    \begin{subfigure}[b]{0.85\linewidth}
     	\includegraphics[width=\linewidth]{figures/chp5-1_rel-acc.pdf}
     	\caption{Local accuracy.}
     	\label{fig:chp5_mapeathor_relacc}
     \end{subfigure}
    %\hspace{0.05\textwidth}
-    \begin{subfigure}[b]{\linewidth}
+    \begin{subfigure}[b]{0.85\linewidth}
     	\includegraphics[width=\linewidth]{figures/chp5-1_total-acc.pdf}
     	\caption{Total accuracy.}
     	\label{fig:chp5_mapeathor_totacc}
@@ -349,15 +358,15 @@ We divide the mapping in four components: \textit{Subject}, \textit{Source}, \te
     \label{fig:chp5-1_accuracy}
 \end{figure}
 
-%\noindent\textit{\textbf{Objective evaluation results}}
-
-%\ana{e ir intercalando opiniones sobre cada approach para apoyar los resultados, ambas buenas y malas}
-%\ana{de rmleditor fallos a nivel técnicos, opiniones divididas entre intuitivo/antiintuitivo, hay constructos que hay que explicar, pero una vez superada esa barrera medianamente bien. Remarcan que faltan funcionalidades como copy/paste de secciones enteras, y buscar mejor lo creado en el espacio de trabajo (a muchos se les perdían las cosas y había que volver a empezar)}
-%\ana{de rml igual hay mejores resultados porque una vez se entienden las partes del mapping y partiendo de un ejemplo, qué hay que copiar y cambiar, eso agiliza el proceso. Más indicado para desarrolladores (más acostumbrados a escribir código), se señala que no es excesivamente complejo pero con alguna herramienta se haría mejor.}
-%\ana{curva de aprendizaje de la herramienta, como todos, pero en general gusta que se pueda usar algo tan común como excel, que facilita mucho la escritura de reglas. El punto negativo viene por el tema de los IDs, que al no aparecer automáticos en las subsecuentes pestañas induce a errores.}
 
 %% In general
 \cref{fig:chp5-1_accuracy} shows the results obtained from the user study. In general, it can be observed that Mapeathor obtains the highest accuracy rate in all cases. Surprisingly, RMLEditor struggles with the base approach, RML, obtaining in general slightly worse results. Between these two approaches, participants using RML were able to complete a higher number of mapping rules, while for RMLEditor the written rules were more accurate. 
+
+
+
+
+
+
 
 %% analysis of parts of mappings
 Looking at the details of each of the mapping parts, in general the writing of \textit{Sources}, \textit{Subjects} and \textit{Predicate-Object} pairs (\textit{PO}) is mostly successful. 
@@ -371,11 +380,21 @@ RML presents the worst results in this case, as the specification of this elemen
 
 %\textit{mirando más en detalle a cada una de las partes del mapping, se puede ver que en general la escritura de sujetos, sources y poms es muy exitosa, sobre todo de los sources, donde el local accuracy de todos los approaches es cercanoa 1. regarding el total accuracy, los resultados no son tan buenos, en parte puede ser por el tiempo dado, y en parte por la complejidad incremental del mapping. que había dos sujetos creados a partir del mismo archivo, y dos archivos que servian para crear el mismo sujeto. Donde todas las herramientas fallan estrepitosamente es en la creación de joins, llevandose la palma RML. Aquí si se puede ver que los user-friendly approaches si apoyan a la escritura, pero sin mucho éxito tampoco.}
 
-\begin{table}[!t]
+
+
+%% no significance, but tendencies in differences in parts
+However, none of the differences in the results for any type of mapping rule is significant (p-value $>$ 0.05, see \cref{tab:chp5-1_summary_results}), but we can observe some tendencies. The results for which the p-value is closer to being significant is for the total accuracy of the complete mapping, and for the subjects (specially its local accuracy). In these cases, it can be stated with some confidence that the spreadsheet-based approach proposed in this contribution can help the writing process, improving the baseline and other graphical approaches. 
+%\textit{sin embargo, ninguno de los resultados es significativo (p-value $<$ 0.05), pero sí se pueden observar tendencias. Los resultados donde más se acerca el p-value a ser significativo es para el total accuracy del mapping completo, y para la escritura de los sujetos, especialmente en el local accuracy. En estos casos se puede afirmar con más seguridad que Mapeathor va bien encaminado a mejorar la escritura de las mapping rules.}  \ana{de donde rmleditor supera a rml tb?}
+
+
+%% en general
+
+
+\begin{table}[t]
 \caption[Accuracy results and significance of user study]{Results of the user study, showing the mean of the local accuracy (LA), total accuracy (TA) and p-value of the submitted responses per mapping feature and tool. }
 \label{tab:chp5-1_summary_results}
 \centering
-\resizebox{\columnwidth}{!}
+\resizebox{0.8\columnwidth}{!}
 {\begin{tabular}{ccc|cc|cc|cc|cc}
     \cmidrule{2-11}
     & \multicolumn{2}{c|}{\textbf{Subject}} & \multicolumn{2}{c|}{\textbf{Source}} & \multicolumn{2}{c|}{\textbf{PO}} & \multicolumn{2}{c|}{\textbf{Join}} & \multicolumn{2}{c}{\textbf{Total}} \\ \cmidrule{2-11}
@@ -386,16 +405,6 @@ RML presents the worst results in this case, as the specification of this elemen
     \textbf{p-value} & 0.090 & 0.295 & 0.596 & 0.890 & 0.777 & 0.337 & 0.746 & 0.881 & 0.476 &  0.264 \\ \bottomrule
 \end{tabular}}
 \end{table}
-
-%% no significance, but tendencies in differences in parts
-However, none of the differences in the results for any type of mapping rule is significant (p-value $>$ 0.05, see \cref{tab:chp5-1_summary_results}), but we can observe some tendencies. The results for which the p-value is closer to being significant is for the total accuracy of the complete mapping, and for the subjects (specially its local accuracy). In these cases, it can be stated with some confidence that the spreadsheet-based approach proposed in this contribution can help the writing process, improving the baseline and other graphical approaches. 
-%\textit{sin embargo, ninguno de los resultados es significativo (p-value $<$ 0.05), pero sí se pueden observar tendencias. Los resultados donde más se acerca el p-value a ser significativo es para el total accuracy del mapping completo, y para la escritura de los sujetos, especialmente en el local accuracy. En estos casos se puede afirmar con más seguridad que Mapeathor va bien encaminado a mejorar la escritura de las mapping rules.}  \ana{de donde rmleditor supera a rml tb?}
-
-
-%% en general
-
-
-
 
 
 

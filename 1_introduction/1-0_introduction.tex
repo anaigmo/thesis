@@ -130,7 +130,7 @@ The technologies revolving mappings are suitable for composing declarative, modu
 Additionally, these declarative approaches can play an important role in other different tasks of the life cycle apart from the construction. 
 For instance, they enable metadata annotation about the data sources, which can help enhance the process in terms of transparency, completeness and performance~\parencite{chaves2021morph-csv,vidal2023knowledge}; as well as 
 data processing and cleaning, thanks to the inclusion of data transformation functions in the language~\parencite{debruyne2016r2rmlf,junior2016funul,jozashoori2020funmap,DeMeester2017fno_dbpedia}.
-However, \textbf{there is a lack of research to assess how these technologies can play a beneficial role in the evolution of knowledge graphs}, apart from their construction.
+However, \textbf{there is a lack of research to assess how these technologies can play a beneficial role in the evolution of knowledge graphs}, beyond their construction.
 
 %involved not only the construction of knowledge graphs, but also the beneficial role they can play in their evolution}.
 
@@ -184,7 +184,7 @@ The remainder of this thesis is structured as follows:
     
     \item In \cref{chapter:mappings}, we define a comparison framework to analyze the features of current mapping languages. This framework helps to extract a set of requirements for knowledge graph construction, that are gathered and represented in an ontology. Additionally, we present a particular case of the update of the RML mapping language to address some of the extracted requirements, specifically the RML-star module to construct RDF-star graphs.
     
-    \item In \cref{chapter:creation}, we present two approaches to facilitate the creation of mapping documents for users. The first relies on spreadsheets to write mapping rules, and it is tested with users with different backgrounds to evaluate its usability. The second supposes an update on the YARRRML user-friendly syntax with respect to recent modifications in the RML language. Both approaches are supported by tools to create mapping documents in target languages. 
+    \item In \cref{chapter:creation}, we present two approaches to facilitate the creation of mapping documents for users. The first relies on spreadsheets to write mapping rules, and it is tested with users with different backgrounds to evaluate its usability. The second proposes an update on the YARRRML user-friendly syntax with respect to recent modifications in the RML language. Both approaches are supported by tools to create mapping documents in a set of target languages. 
     
     \item In \cref{chapter:evolution}, we assess the role that mapping-compliant technologies can play in knowledge graph evolution. We conduct an empirical evaluation performing schema changes with KG construction engines that use mappings, and SPARQL \texttt{CONSTRUCT} queries, and evaluate which approach is more suitable in different situations. 
     
@@ -201,9 +201,9 @@ This section lists the publications derived from the work in this thesis.
 \begin{itemize}
     \item \textbf{Journal Publications}
     \begin{itemize}
-        \item Arenas-Guerrero, J.*, \textbf{Iglesias-Molina, A.}*, Chaves-Fraga, D., Garijo, D., Corcho, O. and Dimou, A. (2024) Declarative generation of RDF-star graphs from heterogeneous data. \textit{Semantic Web}, in press. This work presents and validates the latest version of RML-star described in \cref{chapter:mappings}.
+        \item Arenas-Guerrero, J.*, \textbf{Iglesias-Molina, A.}*, Chaves-Fraga, D., Garijo, D., Corcho, O. and Dimou, A. (2024) Declarative generation of RDF-star graphs from heterogeneous data. \textit{Semantic Web}, in press. This work presents and validates the latest version of RML-star, described in \cref{chapter:mappings}.
         
-        \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Ruckhaus, E., Chaves-Fraga, D., García-Castro, R., Corcho, O. (2024) An Ontological Approach for Representing Declarative Mapping Languages. \textit{Semantic Web}, \textit{5} (1), 191–221. This work analyzes the mapping languages capabilities and limitations, gathers the requirements for KG construction and presents their formalization as an ontology described in \cref{chapter:mappings}.
+        \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Ruckhaus, E., Chaves-Fraga, D., García-Castro, R., Corcho, O. (2024) An Ontological Approach for Representing Declarative Mapping Languages. \textit{Semantic Web}, \textit{5} (1), 191–221. This work analyzes the mapping languages capabilities and limitations, gathers the requirements for KG construction and presents their formalization as an ontology, described in \cref{chapter:mappings}.
     \end{itemize}
 \end{itemize}
 
@@ -213,13 +213,13 @@ This section lists the publications derived from the work in this thesis.
 \begin{itemize}
     \item \textbf{Conference Publications}
     \begin{itemize}
-        \item \textbf{Iglesias-Molina A.}, Toledo J., Corcho O. and Chaves-Fraga D. (2023) Re-Construction Impact on Metadata Representation Models. In \textit{Proceedings of The Twelfth International Conference on Knowledge Capture (K-CAP23)}, December 5--7, Pensacola. This work assesses the value of declarative KG construction in the evolution of the KG's schemas described in \cref{chapter:evolution}.
+        \item \textbf{Iglesias-Molina A.}, Toledo J., Corcho O. and Chaves-Fraga D. (2023) Re-Construction Impact on Metadata Representation Models. In \textit{Proceedings of The Twelfth International Conference on Knowledge Capture (K-CAP23)}, December 5--7, Pensacola. This work assesses the value of declarative KG construction in the evolution of the KG's schemas, described in \cref{chapter:evolution}.
     
-        \item \textbf{Iglesias-Molina, A.}, Van Assche, D., Arenas-Guerrero, J., De Meester, B., Debruyne, C., Jozashoori, S., Maria, P., Michel, F., Chaves-Fraga, D. and Dimou, A. (2023) The RML Ontology: A Community-Driven Modular Redesign After a Decade of Experience in Mapping Heterogeneous Data to RDF. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens. This work presents the updates in RML with the new needs and requirements identified for declarative KG construction described in \cref{chapter:mappings}. 
+        \item \textbf{Iglesias-Molina, A.}, Van Assche, D., Arenas-Guerrero, J., De Meester, B., Debruyne, C., Jozashoori, S., Maria, P., Michel, F., Chaves-Fraga, D. and Dimou, A. (2023) The RML Ontology: A Community-Driven Modular Redesign After a Decade of Experience in Mapping Heterogeneous Data to RDF. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens. This work presents the updates in RML with the new needs and requirements identified for declarative KG construction, described in \cref{chapter:mappings}. 
     
-        \item \textbf{Iglesias-Molina, A.}, Ahrabian, K., Ilievski, F., Pujara, J. and Corcho, O. (2023) Comparison of Knowledge Graph Representations for Consumer Scenarios. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens. This work motivates the contribution presented in \cref{chapter:evolution}.
+        \item \textbf{Iglesias-Molina, A.}, Ahrabian, K., Ilievski, F., Pujara, J. and Corcho, O. (2023) Comparison of Knowledge Graph Representations for Consumer Scenarios. In \textit{Proceedings of the 22nd International Semantic Web Conference (ISWC2023)}, November 6--10, Athens. This work motivates the contribution, presented in \cref{chapter:evolution}.
     
-        \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Dasoulas, I. and Dimou, A. (2023) Human-Friendly RDF Graph Construction: Which One Do You Chose?. In \textit{Proceedings of the 23rd International Conference on Web Engineering 2023 (ICWE2023)}, June 6--9, Alicante. This work updates the YARRRML syntax with the new features described in \cref{chapter:creation}.
+        \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Dasoulas, I. and Dimou, A. (2023) Human-Friendly RDF Graph Construction: Which One Do You Chose?. In \textit{Proceedings of the 23rd International Conference on Web Engineering 2023 (ICWE2023)}, June 6--9, Alicante. This work updates the YARRRML syntax with the new features, described in \cref{chapter:creation}.
     \end{itemize}
 \end{itemize}
 
@@ -228,16 +228,16 @@ This section lists the publications derived from the work in this thesis.
     \begin{itemize}
         \item \textbf{Iglesias-Molina, A.}, Cimmino, A., Corcho, O. (2022) Devising Mapping Interoperability with Mapping Translation. In \textit{Proceedings of the Third International Workshop on Knowledge Graph Construction, co-located with the 19th Extended Semantic Web Conference}, May 29 -- June 2, Hersonissos. This works looks into the interoperability status of current mapping languages, presented in \cref{chapter:sota}.
         
-        \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Priyatna, F. and Corcho, O. (2019) Towards the Definition of a Language-independent Mapping Template for Knowledge Graph Creation. In \textit{Proceedings of the Third International Workshop on Capturing Scientific Knowledge co-located with the Eleventh International Conference on Knowledge Capture}, November 19--21, Marina del Rey. This work presents the first version of the spreadsheet-based approach for writing declarative mapping rules described in \cref{chapter:creation}.
+        \item \textbf{Iglesias-Molina, A.}, Chaves-Fraga, D., Priyatna, F. and Corcho, O. (2019) Towards the Definition of a Language-independent Mapping Template for Knowledge Graph Creation. In \textit{Proceedings of the Third International Workshop on Capturing Scientific Knowledge co-located with the Eleventh International Conference on Knowledge Capture}, November 19--21, Marina del Rey. This work presents the first version of the spreadsheet-based approach for writing declarative mapping rules, described in \cref{chapter:creation}.
     \end{itemize}
 \end{itemize}
 
 \begin{itemize}
     \item \textbf{Posters and demos}
     \begin{itemize}
-        \item \textbf{Iglesias-Molina, A.} and Garijo D. (2023) Towards Assessing FAIR Research Software Best Practices in an Organization Using RDF-star. In \textit{Proceedings of the Semantics 2023 Posters and Demos Track}, September 19--22, Leipzig. This work presents a use case that uses RML-star.
+        \item \textbf{Iglesias-Molina, A.} and Garijo D. (2023) Towards Assessing FAIR Research Software Best Practices in an Organization Using RDF-star. In \textit{Proceedings of the Semantics 2023 Posters and Demos Track}, September 19--22, Leipzig. This work presents a use case that uses RML-star, described in \cref{chapter:mappings}.
         
-        \item Delva, T., Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Corcho, O., Chaves-Fraga, D., and Dimou, A. (2021) RML-star: A declarative mapping language for RDF-star generation. In \textit{Proceedings of the ISWC 2021 Posters, Demos and Industry Tracks}, October 24--28, online. This work presents the first version of RML-star described in \cref{chapter:mappings}.
+        \item Delva, T., Arenas-Guerrero, J., \textbf{Iglesias-Molina, A.}, Corcho, O., Chaves-Fraga, D., and Dimou, A. (2021) RML-star: A declarative mapping language for RDF-star generation. In \textit{Proceedings of the ISWC 2021 Posters, Demos and Industry Tracks}, October 24--28, online. This work presents the first version of RML-star, described in \cref{chapter:mappings}.
     
         \item \textbf{Iglesias-Molina, A.}, Pozo-Gilo, L., Dona, D., Ruckhaus, E., Chaves-Fraga, D. and Corcho, O. (2020) Mapeathor: Simplifying the Specification of Declarative Rules for Knowledge Graph Construction. In \textit{Proceedings of the ISWC 2020 Demos and Industry Tracks}, November 2--6, online. This work refines the spreadsheet-based approach for writing declarative mapping rules and presents its implementation in a tool described in \cref{chapter:creation}.
     \end{itemize}
@@ -251,7 +251,7 @@ This section lists the publications derived from the work in this thesis.
 During the development of this thesis, one research stay took place in the following institution:
 
 \begin{itemize}
-    \item 06/07/2022 -- 06/10/2022. Research stay at the \textbf{Information Sciences Institute of the University of Southern California}, supervised by Prof. Dr. Filip Ilievski. During this stay, we analyzed the differential impact of diverse knowledge graph representation over different consumption scenarios: knowledge exploration performed by users, systematic query performance and graph completion tasks. This stay was funded by a scholarship from Programa Propio I+D+i of UPM, oriented to research personnel in predoctoral formation for doing an international research stay equal to or superior to three months. This stay lead to the publication "Comparison of Knowledge Graph Representations for Consumer Scenarios", presented in the International Semantic Web Conference (ISWC) 2023~\parencite{iglesias2023kgconsumption}.
+    \item 06/07/2022 -- 06/10/2022. Research stay at the \textbf{Information Sciences Institute of the University of Southern California}, supervised by Prof. Dr. Filip Ilievski. During this stay, we analyzed the differential impact of diverse knowledge graph representation over different consumption scenarios: knowledge exploration performed by users, systematic query performance and graph completion tasks. This stay was funded by a scholarship from Programa Propio I+D+i of UPM, oriented to research personnel in predoctoral formation for doing an international research stay. This stay lead to the publication "Comparison of Knowledge Graph Representations for Consumer Scenarios", presented in the International Semantic Web Conference (ISWC) 2023~\parencite{iglesias2023kgconsumption}.
 \end{itemize}
 
 \subsection*{Organization of Workshops and Tutorials}
